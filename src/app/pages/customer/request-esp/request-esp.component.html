@@ -1,0 +1,326 @@
+<div id="content-wrapper">
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <form [formGroup]="form">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center">Orden de servicio</h4>
+          </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="nombre" class="col-sm-3 col-form-label">Nombre del Evaluado</label>
+              <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="nombre"
+                       name="nombre"
+                       required="required"
+                       placeholder="Nombre del evaluado"
+                       formControlName="nombre">
+                <div [hidden]="form.controls['nombre'].valid || form.controls['nombre'].pristine">
+                  <div class="ng-invalid-feedback">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="documento" class="col-sm-3 col-form-label">Documento de identidad</label>
+              <div class="col-sm-9">
+                <input type="number"
+                       class="form-control"
+                       id="documento"
+                       name="documento"
+                       placeholder="Documento de indentidad"
+                       required="required"
+                       formControlName="documento">
+                <div [hidden]="form.controls['documento'].valid || form.controls['documento'].pristine">
+                  <div class="ng-invalid-feedback">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="departamento" class="col-sm-3 col-form-label">Departamento</label>
+              <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="departamento"
+                       name="departamento"
+                       placeholder="Departamento"
+                       required="required"
+                       formControlName="departamento">
+                <div [hidden]="form.controls['departamento'].valid || form.controls['departamento'].pristine">
+                  <div class="ng-invalid-feedback">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="ciudad" class="col-sm-3 col-form-label">Ciudad</label>
+              <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="ciudad"
+                       name="ciudad"
+                       placeholder="Ciudad"
+                       required="required"
+                       formControlName="ciudad">
+                <div [hidden]="form.controls['ciudad'].valid  || form.controls['ciudad'].pristine">
+                  <div class="ng-invalid-feedback">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+              <div class="col-sm-9">
+                <input type="number"
+                       class="form-control"
+                       id="telefono"
+                       name="telefono"
+                       required="required"
+                       placeholder="Telefono"
+                       formControlName="telefono">
+                <div [hidden]="form.controls['telefono'].valid  || form.controls['telefono'].pristine ">
+                  <div class="ng-invalid-feedback">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="correo" class="col-sm-3 col-form-label">Correo electronico</label>
+              <div class="col-sm-9">
+                <input type="email"
+                       class="form-control"
+                       id="correo"
+                       name="correo"
+                       required="required"
+                       placeholder="Correo electronico"
+                       formControlName="correo">
+                <div [hidden]="form.controls['correo'].valid  || form.controls['correo'].pristine ">
+                  <div class="ng-invalid-feedback">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="ciudadDesarrollo" class="col-sm-3 col-form-label">Ciudad de desarrollo de la prueba</label>
+              <div class="col-sm-9">
+                <input type="email"
+                       class="form-control"
+                       id="ciudadDesarrollo"
+                       name="ciudadDesarrollo"
+                       required="required"
+                       placeholder="Ciudad de desarrollo de la prueba"
+                       formControlName="ciudadDesarrollo">
+                <div [hidden]="form.controls['ciudadDesarrollo'].valid  || form.controls['ciudadDesarrollo'].pristine">
+                  <div class="ng-invalid-feedback">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="contacto" class="col-sm-3 col-form-label">
+                Adjunto
+              </label>
+              <div class="col-sm-9">
+                <input type="file" id="contacto" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="observaciones" class="col-sm-3 col-form-label">Observaciones</label>
+              <div class="col-sm-9">
+                <textarea
+                      cols="30" rows="5"
+                      class="form-control"
+                      id="observaciones"
+                      name="observaciones"
+                      placeholder="Observaciones"
+                      formControlName="observaciones">
+                </textarea>
+              </div>
+            </div>
+
+            <div class="form-group row"  formGroupName="actividades">
+              <label class="col-sm-3 col-form-label">Servicios</label>
+              <div class="col-sm-4">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         id="historial-judicial"
+                         formControlName="HJ">
+                  <label class="form-check-label" for="historial-judicial">
+                    Historial judicial
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="visita-domiciliaria"
+                         formControlName="VDS">
+                  <label class="form-check-label" for="visita-domiciliaria">
+                    Visita domiciliaria
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="v-laboral"
+                         formControlName="VL">
+                  <label class="form-check-label" for="v-laboral">
+                    Verificacion laboral
+                  </label>
+                </div>
+                <!--<div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="due-dilligence"
+                         formControlName="dueDilligence">
+                  <label class="form-check-label" for="due-dilligence">
+                    Due Dilligence
+                  </label>
+                </div>-->
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="e-financiero"
+                         formControlName="EF">
+                  <label class="form-check-label" for="e-financiero">
+                    Estudio financiero
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="verificacion-academica"
+                         formControlName="VA">
+                  <label class="form-check-label" for="verificacion-academica">
+                    Verificación académica
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="poligrafia"
+                         formControlName="PL">
+                  <label class="form-check-label" for="poligrafia">
+                    Poligrafia
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="d-grafologico"
+                         formControlName="DG">
+                  <label class="form-check-label" for="d-grafologico">
+                    Dictamen grafologico
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="decadactilar"
+                         formControlName="Dd">
+                  <label class="form-check-label" for="decadactilar">
+                    Decadactilar
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox" value=""
+                         id="p-psicotecnica"
+                         formControlName="PP">
+                  <label class="form-check-label" for="p-psicotecnica">
+                    Prueba psicotecnica
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mx-auto">
+            <button *ngIf="!updateServicioEsp.update"
+              class="btn btn-primary"
+              [disabled]="form.status == 'INVALID'"
+              (click)="onCreateServiceEsp()">
+              <i class="fa fa-plus"></i>
+              Agregar
+            </button>
+            <button *ngIf="updateServicioEsp.update"
+              class="btn btn-primary"
+              [disabled]="form.status == 'INVALID'"
+              (click)="onUpdate(updateServicioEsp.id)">
+              Actualizar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="formatDataTable().length > 0">
+  <div class="col-md-10 mx-auto col-sm-12 mt-3">
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Servicios solicitados</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Evaluado</th>
+              <th>Ciudad de desarrollo</th>
+              <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let item of formatDataTable(); index as i">
+              <th *ngFor="let col of colums">
+                <span *ngIf="col == 'fecha'">{{ item[col] | date }}</span>
+                <span *ngIf="col != 'fecha'">{{ item[col] }}</span>
+
+                <div class="mx-auto" *ngIf="col == 'acciones'">
+                  <div class="custom-control-inline" >
+                    <button class="btn btn-sm btn-primary"
+                            (click)="onRollback(i)">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                  </div>
+                  <div class="custom-control-inline">
+                    <button class="btn btn-sm btn-danger"
+                            (click)="onDelete(i)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <div class="form-group text-center">
+          <button class="btn btn-primary" (click)="onSaveServicesEsp()">
+            <i class="fa fa-save"></i>
+            Guardar servicios
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

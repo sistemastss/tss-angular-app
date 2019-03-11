@@ -1,0 +1,500 @@
+<!-- seleccionar al funcionario -->
+<app-asignar-funcionario
+  *ngIf="actividad.estado == 'cargado'"
+  (event)="asignarFuncionario($event)">
+</app-asignar-funcionario>
+
+
+<!-- cuando la actividad a sido asignada y esta en espera de aceptacion-->
+<ng-template [ngxPermissionsOnly]="['ADG', 'DOPE', 'AESP']">
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad Asignada
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            Pendiente por: <b>{{ actividad.actividadAsignada.usuarioNombre }}</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- freelance view -->
+<ng-template ngxPermissionsOnly="FRCE">
+
+
+  <!-- alerta -->
+  <div *ngIf="actividad.estado == 'alerta'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Alerta
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <div class="alert alert-danger" role="alert">
+              <span class="text-danger d-block">El evaluado no cumple con las condiciones para continuar con el estudio</span>
+              <span class="text-danger d-block">Fecha de alerta: {{ actividad.actividadAsignada.timestamps.fechaActualizacion }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- aceptar actividad freelance -->
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Aceptar Actividad
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">Fecha de asignacion: {{ actividad.actividadAsignada.timestamps.fechaCreacion}}</span>
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onAceptarActividad()">
+              <i class="fa fa-check"></i>
+              Aceptar actividad
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- cuando el freelance finaliza la actividad y la notifica al analista esp -->
+  <div *ngIf="actividad.estado == 'notificado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad notificada al analista de servicios esp
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">
+              Fecha de notificacion:
+              <b>{{ actividad.timestamps.fechaActualizacion }}</b>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- formularo -->
+<div *ngIf="(actividad.estado == 'aceptado' || actividad.estado == 'proceso' && permissions.FRCE) || ((permissions.ADG || permissions.DOPE || permissions.AESP) && (actividad.estado == 'aceptado' || actividad.estado == 'proceso' || actividad.estado == 'notificado' || actividad.estado == 'completado'))">
+  <form [formGroup]="form" class="mx-auto animated fade-in">
+    <div class="card">
+      <div class="card-header bg-white">
+        <h4>Historial judicial</h4>
+      </div>
+      <div class="card-body bg-light">
+        <div class="card">
+          <div class="card-body ">
+            <b class="card-title">Tiene algun proceso:</b>
+            <hr>
+            <!-- proceso juridico -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Juridico</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoJuridico" [value]="true" formControlName="procesoJuridico">
+                  <label class="form-check-label" for="procesoJuridico">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoJuridico!" [value]="false" formControlName="procesoJuridico">
+                  <label class="form-check-label" for="procesoJuridico!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- proceso procuraduria -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Procuraduría</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoProcuraduria" [value]="true" formControlName="procesoProcuraduria">
+                  <label class="form-check-label" for="procesoProcuraduria">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoProcuraduria!" [value]="false" formControlName="procesoProcuraduria">
+                  <label class="form-check-label" for="procesoProcuraduria!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- proceso contraloria -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Contraloría</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoContraloria" [value]="true" formControlName="procesoContraloria">
+                  <label class="form-check-label" for="procesoContraloria">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoContraloria!" [value]="false" formControlName="procesoContraloria">
+                  <label class="form-check-label" for="procesoContraloria!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- proceso fiscalia -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Fiscalía</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoFiscalia" [value]="true" formControlName="procesoFiscalia">
+                  <label class="form-check-label" for="procesoFiscalia">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoFiscalia!" [value]="false" formControlName="procesoFiscalia">
+                  <label class="form-check-label" for="procesoFiscalia!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- proceso policia -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Policia</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoPolicia" [value]="true" formControlName="procesoPolicia">
+                  <label class="form-check-label" for="procesoPolicia">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoPolicia!" [value]="false" formControlName="procesoPolicia">
+                  <label class="form-check-label" for="procesoPolicia!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- proceso trancito -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Transito</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoTransito" [value]="true" formControlName="procesoTransito">
+                  <label class="form-check-label" for="procesoTransito">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="procesoTransito!" [value]="false" formControlName="procesoTransito">
+                  <label class="form-check-label" for="procesoTransito!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- verificacion -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Verificación</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="verificacion" [value]="true" formControlName="verificacion">
+                  <label class="form-check-label" for="verificacion">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="verificacion!" [value]="false" formControlName="verificacion">
+                  <label class="form-check-label" for="verificacion!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- proceso DIJIN - SIJIN - INTERPOL-->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Orden de captura internacional</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="ordenCapturaInternacional" [value]="true" formControlName="ordenCapturaInternacional">
+                  <label class="form-check-label" for="ordenCapturaInternacional">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="ordenCapturaInternacional!" [value]="false" formControlName="ordenCapturaInternacional">
+                  <label class="form-check-label" for="ordenCapturaInternacional!">No</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <b class="card-title">Procuraduría General de la Nación</b>
+            <hr>
+            <!-- Sanciones penales  -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="sancionesPenales">Sanciones Penales	</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="sancionesPenales"
+                          name="sancionesPenales" formControlName="sancionesPenales"
+                          rows="3" placeholder="Ingresé las sanciones penales">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls.sancionesPenales.invalid && form.controls.sancionesPenales.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Sanciones delito  -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="delitoProcuraduria">Delito</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="delitoProcuraduria" name="delitoProcuraduria" formControlName="delitoProcuraduria" rows="3" placeholder="Ingresé el delito"></textarea>
+                <div class="ng-invalid-feedback" *ngIf="(form.controls.delitoProcuraduria.invalid && form.controls.delitoProcuraduria.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <!-- procuraduria inhabilidades  -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="inhabilidadesProcuraduria">Inhabilidades</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="inhabilidadesProcuraduria" name="inhabilidadesProcuraduria" formControlName="inhabilidadesProcuraduria" rows="3" placeholder="Ingresé las inhabilidades"></textarea>
+                <div class="ng-invalid-feedback" *ngIf="(form.controls.inhabilidadesProcuraduria.invalid && form.controls.inhabilidadesProcuraduria.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <!-- procuradurida fecha  -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="fechaInhabilidad">Fecha</label>
+              <div class="col-sm-9">
+                <input type="date" class="form-control" id="fechaInhabilidad" name="fechaInhabilidad" formControlName="fechaInhabilidad">
+                <div class="ng-invalid-feedback" *ngIf="(form.controls.fechaInhabilidad.invalid && form.controls.fechaInhabilidad.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <b class="card-title">Contraloría General de la Nación</b>
+            <hr>
+            <!-- antecedentes fiscales -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Fiscalia</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="antecedentesFiscales" [value]="true" formControlName="antecedentesFiscales">
+                  <label class="form-check-label" for="antecedentesFiscales">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="antecedentesFiscales!" [value]="false" formControlName="antecedentesFiscales">
+                  <label class="form-check-label" for="antecedentesFiscales!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- procuradurida fecha  -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="fechaAntecedente">Fecha</label>
+              <div class="col-sm-9">
+                <input type="date" class="form-control" id="fechaAntecedente" name="fechaAntecedente" formControlName="fechaAntecedente">
+                <div class="ng-invalid-feedback" *ngIf="(form.controls.fechaAntecedente.invalid && form.controls.fechaAntecedente.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <b class="card-title">C.S.J. Rama Judicial</b>
+            <hr>
+            <!-- clase de proceso  -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="claseProceso">Clase de proceso</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="claseProceso" name="claseProceso" formControlName="claseProceso" rows="3" placeholder="Ingresé la clase de proceso"></textarea>
+                <div class="ng-invalid-feedback" *ngIf="(form.controls.claseProceso.invalid && form.controls.claseProceso.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <!-- Datos de la sentencia	 -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="datosSentencia">Datos de la sentencia</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="datosSentencia" name="datosSentencia" formControlName="datosSentencia" rows="3" placeholder="Ingresé los datos de la sentencia"></textarea>
+                <div class="ng-invalid-feedback" *ngIf="(form.controls.datosSentencia.invalid && form.controls.datosSentencia.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <!-- delito	 -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="delitoJudicial">Delito</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="delitoJudicial" name="delitoJudicial" formControlName="delitoJudicial" rows="3" placeholder="Ingresé el delito"></textarea>
+                <div class="ng-invalid-feedback" *ngIf="(form.controls.delitoJudicial.invalid && form.controls.delitoJudicial.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <!-- situacion juridica	 -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="situacionJuridica">Situación Jurídica</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="situacionJuridica" name="situacionJuridica" formControlName="situacionJuridica" rows="3" placeholder="Ingresé la situacion juridica"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <!-- F.G.N. - NS	TODO agregar validacion	 -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="fgnNs">F.G.N. - NS</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="fgnNs" name="fgnNs" formControlName="fgnNs" rows="3" placeholder="Ingresé la información"></textarea>
+              </div>
+            </div>
+
+
+            <!-- Lista Clinton OFAC	-->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Lista Clinton OFAC	</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="listaOfac" [value]="true" formControlName="listaOfac">
+                  <label class="form-check-label" for="listaOfac">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="listaOfac!" [value]="false" formControlName="listaOfac">
+                  <label class="form-check-label" for="listaOfac!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- LISTA ONU // Terroristas		-->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">LISTA ONU - Terroristas		</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="listaOnu" [value]="true" formControlName="listaOnu">
+                  <label class="form-check-label" for="listaOnu">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="listaOnu!" [value]="false" formControlName="listaOnu">
+                  <label class="form-check-label" for="listaOnu!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- Vínculos subversion		-->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">LISTA ONU - Terroristas		</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="vinculosSubversion" [value]="true" formControlName="vinculosSubversion">
+                  <label class="form-check-label" for="vinculosSubversion">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="vinculosSubversion!" [value]="false" formControlName="vinculosSubversion">
+                  <label class="form-check-label" for="vinculosSubversion!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- Antecedentes Policia			-->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Antecedentes Policia	</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="antecedentesPolicia" [value]="true" formControlName="antecedentesPolicia">
+                  <label class="form-check-label" for="antecedentesPolicia">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="antecedentesPolicia!" [value]="false" formControlName="antecedentesPolicia">
+                  <label class="form-check-label" for="antecedentesPolicia!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- Vínculos Paramilitarismo -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Vínculos Paramilitarismo</label>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="paramilitarismo" [value]="true" formControlName="paramilitarismo">
+                  <label class="form-check-label" for="paramilitarismo">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="paramilitarismo!" [value]="false" formControlName="paramilitarismo">
+                  <label class="form-check-label" for="paramilitarismo!">No</label>
+                </div>
+              </div>
+            </div>
+            <!-- SIMIT - Movilidad Y RUNT		todo agregar validacion	 -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="movilidad">SIMIT - Movilidad Y RUNT	</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="movilidad" name="movilidad" formControlName="movilidad" rows="3" placeholder="Ingresé el movilidad"></textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls.movilidad.invalid && form.controls.movilidad.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <!-- Total adeudado todo agregar validacion -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="totalAdeudado">Total adeudado</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" name="totalAdeudado" id="totalAdeudado" formControlName="totalAdeudado" placeholder="Ingrese el total adeudado">
+              </div>
+            </div>
+            <!-- Observaciones		 -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="observaciones">Observaciones</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="observaciones" name="observaciones" formControlName="observaciones" rows="3" placeholder="Ingresé las observaciones"></textarea>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white">
+        <div class="form-group text-center">
+          <div class="row">
+              <div class="col-md-6 mx-auto">
+                <button *ngIf="permissions.FRCE && actividad.estado == 'aceptado'"
+                        class="btn btn-danger"
+                        [disabled]="form.invalid"
+                        (click)="onSubmit()">
+                  <i class="fa fa-save"></i>
+                  Guardar
+                </button>
+                <button *ngIf="(permissions.FRCE && actividad.estado == 'proceso') || (permissions.AESP || permissions.ADG && actividad.estado == 'notificado')"
+                        class="btn btn-warning"
+                        [disabled]="form.invalid"
+                        (click)="onUpdate()">
+                  <i class="fa fa-edit"></i>
+                  Actualizar
+                </button>
+              </div>
+          </div>
+        </div>
+        <div *ngIf="permissions.AESP || permissions.ADG && actividad.estado == 'notificado'">
+          <span class="text-primary d-block">Fecha de notificacion: {{ actividad.timestamps.fechaActualizacion }}</span>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="col-md-12 m-3 text-right">
+    <button class="btn btn-danger mr-2 ml-2"
+            *ngIf="permissions.FRCE && ( actividad.estado == 'proceso' || actividad.estado == 'aceptado')"
+            (click)="reportarCliente()">
+      <i class="fa fa-message"></i>
+     Alerta
+    </button>
+    <button class="btn btn-success"
+            *ngIf="permissions.FRCE && actividad.estado == 'proceso'"
+            [disabled]="form.invalid"
+            (click)="notificarAnalista()">
+      <i class="fa fa-message"></i>
+      Notificar a analista Esp
+    </button>
+  </div>
+</div>

@@ -1,0 +1,427 @@
+<app-asignar-funcionario
+  [funcionario]="3"
+  *ngIf="actividad['estado'] == 'cargado'"
+  (event)="asignarFuncionario($event)">
+</app-asignar-funcionario>
+
+
+<div class="col-md-8 mx-auto" *ngIf="actividad['estado'] == 'asignado'">
+  <div class="card">
+    <div class="card-header">
+      Esperado por aceptacion
+    </div>
+    <div class="card-body">
+      <div class="card-title">
+        Actividad asignada a {{ funcionario }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="actividad['estado'] == 'aceptado'" class="mx-auto animated fade-in">
+  <form [formGroup]="form">
+    <div class="card">
+      <div class="card-header bg-white">
+        <h4>Consolidado</h4>
+      </div>
+      <div class="card-body bg-light">
+        <div class="card">
+          <div class="card-body ">
+
+            <!--  -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Antecedentes</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="exampleRadios"
+                         formControlName="antecedentes"
+                         id="antecedentes" [value]="true">
+                  <label class="form-check-label" for="antecedentes">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="antecedentes"
+                         id="antecedentesn" [value]=false
+                         formControlName="antecedentes">
+                  <label class="form-check-label" for="antecedentesn">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+
+            <!--  -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="antecedentesObs">
+                Tiempo de permanencia
+              </label>
+              <div class="col-sm-8">
+                <textarea name="antecedentesObs" id="antecedentesObs"
+                          rows="3" class="form-control"
+                          formControlName="antecedentesObs"
+                          placeholder="Ingrese las observaciones">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['conclusion'].invalid &&
+                   form.controls['conclusion'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!--  -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Poligrafia</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="poligrafia"
+                         formControlName="poligrafia"
+                         id="poligrafia" [value]="true">
+                  <label class="form-check-label" for="poligrafia">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="poligrafia"
+                         id="poligrafian" [value]=false
+                         formControlName="poligrafia">
+                  <label class="form-check-label" for="poligrafia">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+
+            <!--  -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="poligrafiaObs">
+                Observaciones
+              </label>
+              <div class="col-sm-8">
+                <textarea name="poligrafiaObs" id="poligrafiaObs"
+                          rows="3" class="form-control"
+                          formControlName="poligrafiaObs"
+                          placeholder="Ingrese las observaciones">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['poligrafiaObs'].invalid &&
+                   form.controls['poligrafiaObs'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+
+            <!--  -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Antecedentes</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="exampleRadios"
+                         formControlName="antecedentes"
+                         id="financiero" [value]="true">
+                  <label class="form-check-label" for="financiero">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="antecedentes"
+                         id="financieron" [value]=false
+                         formControlName="financiero">
+                  <label class="form-check-label" for="financieron">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+
+            <!--  -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="financieroObs">
+                Tiempo de permanencia
+              </label>
+              <div class="col-sm-8">
+                <textarea name="financieroObs" id="financieroObs"
+                          rows="3" class="form-control"
+                          formControlName="financieroObs"
+                          placeholder="Ingrese las observaciones">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['conclusion'].invalid &&
+                   form.controls['conclusion'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Cedula</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="cedula"
+                         formControlName="cedula"
+                         id="cedula" [value]="true">
+                  <label class="form-check-label" for="cedula">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="cedula"
+                         id="cedulan" [value]=false
+                         formControlName="cedula">
+                  <label class="form-check-label" for="cedulan">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">libretaMilitar</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="libretaMilitar"
+                         formControlName="libretaMilitar"
+                         id="libretaMilitar" [value]="true">
+                  <label class="form-check-label" for="libretaMilitar">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="libretaMilitar"
+                         id="libretaMilitarn" [value]=false
+                         formControlName="libretaMilitarn">
+                  <label class="form-check-label" for="antecedentesn">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">licenciaConduccion</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="licenciaConduccion"
+                         formControlName="licenciaConduccion"
+                         id="licenciaConduccion" [value]="true">
+                  <label class="form-check-label" for="licenciaConduccion">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="licenciaConduccion"
+                         id="licenciaConduccionn" [value]=false
+                         formControlName="antecedentes">
+                  <label class="form-check-label" for="licenciaConduccionn">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">tarjetaProfecional</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="tarjetaProfecional"
+                         formControlName="tarjetaProfecional"
+                         id="tarjetaProfecional" [value]="true">
+                  <label class="form-check-label" for="tarjetaProfecional">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="tarjetaProfecional"
+                         id="tarjetaProfecionaln" [value]=false
+                         formControlName="antecedentes">
+                  <label class="form-check-label" for="tarjetaProfecional">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">diplomaBachiller</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaBachiller"
+                         formControlName="diplomaBachiller"
+                         id="diplomaBachiller" [value]="true">
+                  <label class="form-check-label" for="diplomaBachiller">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaBachiller"
+                         id="diplomaBachillern" [value]=false
+                         formControlName="diplomaBachiller">
+                  <label class="form-check-label" for="diplomaBachillern">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">diplomatecnico</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomatecnico"
+                         formControlName="diplomatecnico"
+                         id="diplomatecnico" [value]="true">
+                  <label class="form-check-label" for="diplomatecnico">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomatecnico"
+                         id="diplomatecnicon" [value]=false
+                         formControlName="diplomatecnicon">
+                  <label class="form-check-label" for="diplomatecnicon">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">diplomaTecnologico</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaTecnologico"
+                         formControlName="diplomaTecnologico"
+                         id="diplomaTecnologico" [value]="true">
+                  <label class="form-check-label" for="diplomaTecnologico">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaTecnologico"
+                         id="diplomaTecnologicon" [value]=false
+                         formControlName="diplomaTecnologico">
+                  <label class="form-check-label" for="diplomaTecnologicon">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">diplomaPregrado</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaPregrado"
+                         formControlName="diplomaPregrado"
+                         id="diplomaPregrado" [value]="true">
+                  <label class="form-check-label" for="diplomaPregrado">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaPregrado"
+                         id="diplomaPregradon" [value]=false
+                         formControlName="diplomaPregrado">
+                  <label class="form-check-label" for="diplomaPregradon">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">diplomaPostgrado</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaPostgrado"
+                         formControlName="diplomaPostgrado"
+                         id="diplomaPostgrado" [value]="true">
+                  <label class="form-check-label" for="diplomaPostgrado">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaPostgrado"
+                         id="diplomaPostgradon" [value]=false
+                         formControlName="antecedentes">
+                  <label class="form-check-label" for="diplomaPostgradon">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">diplomaCursos</label>
+              <div class="col-sm-8">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaCursos"
+                         formControlName="diplomaCursos"
+                         id="diplomaCursos" [value]="true">
+                  <label class="form-check-label" for="diplomaCursos">
+                    Si
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" name="diplomaCursos"
+                         id="diplomaCursosn" [value]=false
+                         formControlName="diplomaCursos">
+                  <label class="form-check-label" for="diplomaCursosn">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white">
+        <div class="form-group text-center">
+          <button class="btn btn-primary" [disabled]="!form.valid" (click)="onSubmit()">
+            <i class="fa fa-save"></i>
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

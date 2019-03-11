@@ -1,0 +1,222 @@
+<div id="content-wrapper">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <form [formGroup]="form">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="text-center">Orden de servicio</h4>
+            </div>
+            <div class="card-body">
+
+              <div class="form-group row">
+                <label for="ciudad" class="col-sm-3 col-form-label">Ciudad</label>
+                <div class="col-sm-9">
+                  <input type="text"
+                         class="form-control"
+                         id="ciudad"
+                         name="ciudad"
+                         placeholder="Ciudad"
+                         required="required"
+                         formControlName="ciudad">
+                  <div [hidden]="form.controls['ciudad'].valid  || form.controls['ciudad'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label for="anexo" class="col-sm-3 col-form-label">
+                  Anexo
+                </label>
+                <div class="col-sm-9">
+                  <input type="file" formControlName="anexo" id="anexo" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="descripcion" class="col-sm-3 col-form-label">Descripcion</label>
+                <div class="col-sm-9">
+                  <textarea
+                    cols="30" rows="5"
+                    class="form-control"
+                    id="descripcion"
+                    name="descripcion"
+                    placeholder="Descripción de la investigacion"
+                    formControlName="descripcion">
+                  </textarea>
+                  <div [hidden]="form.controls['descripcion'].valid  || form.controls['descripcion'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="form-group row"  formGroupName="actividades">
+                <label class="col-sm-3 col-form-label">Servicios</label>
+                <div class="col-sm-4">
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="historial-judicial"
+                           formControlName="HJ">
+                    <label class="form-check-label" for="historial-judicial">
+                      Historial judicial
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="visita-domiciliaria"
+                           formControlName="VDS">
+                    <label class="form-check-label" for="visita-domiciliaria">
+                      Visita domiciliaria
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="v-laboral"
+                           formControlName="VL">
+                    <label class="form-check-label" for="v-laboral">
+                      Verificacion laboral
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="e-financiero"
+                           formControlName="EF">
+                    <label class="form-check-label" for="e-financiero">
+                      Estudio financiero
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="verificacion-academica"
+                           formControlName="VA">
+                    <label class="form-check-label" for="verificacion-academica">
+                      Verificación académica
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="poligrafia"
+                           formControlName="PL">
+                    <label class="form-check-label" for="poligrafia">
+                      Poligrafia
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="d-grafologico"
+                           formControlName="DG">
+                    <label class="form-check-label" for="d-grafologico">
+                      Dictamen grafologico
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="decadactilar"
+                           formControlName="Dd">
+                    <label class="form-check-label" for="decadactilar">
+                      Decadactilar
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" value=""
+                           id="p-psicotecnica"
+                           formControlName="PP">
+                    <label class="form-check-label" for="p-psicotecnica">
+                      Prueba psicotecnica
+                    </label>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+            <div class="form-group mx-auto">
+              <button *ngIf="!esActualizarInvestigacion"
+                      class="btn btn-primary"
+                      [disabled]="form.status == 'INVALID'"
+                      (click)="crearInvestigacion()">
+                <i class="fa fa-plus"></i>
+                Agregar
+              </button>
+              <button *ngIf="esActualizarInvestigacion"
+                      class="btn btn-primary"
+                      [disabled]="form.status == 'INVALID'"
+                      (click)="cambiarIvestigacion()">
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="(investigaciones$ | async).length > 0">
+    <div class="col-md-10 mx-auto col-sm-12 mt-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          Servicios solicitados</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+                <th>Ciudad</th>
+                <th>Descripcion</th>
+                <th>Anexo</th>
+                <th>Acciones</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let item of investigaciones$ | async; index as i">
+                <td>{{ item.ciudad }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td>{{ item.anexo }}</td>
+                <td>
+                  <div class="mx-auto">
+                    <div class="custom-control-inline" >
+                      <button class="btn btn-sm btn-primary"
+                              (click)="actualizarInvestigacion(item, i)">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                    </div>
+                    <div class="custom-control-inline">
+                      <button class="btn btn-sm btn-danger"
+                              (click)="eliminarInvestigacion(i)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="guardarInvestigaciones()">
+              <i class="fa fa-save"></i>
+              Guardar servicios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

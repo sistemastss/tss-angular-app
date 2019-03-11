@@ -1,0 +1,193 @@
+<!-- seleccionar al funcionario -->
+<app-asignar-funcionario
+  *ngIf="actividad.estado == 'cargado'"
+  (event)="asignarFuncionario($event)">
+</app-asignar-funcionario>
+
+
+<!-- cuando la actividad a sido asignada y esta en espera de aceptacion-->
+<ng-template [ngxPermissionsOnly]="['ADG', 'DOPE', 'AESP']">
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad Asignada
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            Pendiente por: <b>{{ actividad.actividadAsignada.usuarioNombre }}</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- freelance view -->
+<ng-template ngxPermissionsOnly="FRCE">
+
+
+  <!-- cuando la actividad se ha vencido -->
+  <div *ngIf="actividad.estado == 'alerta'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad vencida
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <div class="alert alert-danger" role="alert">
+              <span class="text-danger d-block">La actividad se ha vencido. por favor pongase en contacto con Total Security Services</span>
+              <span class="text-danger d-block">Fecha de vencimiento: {{ actividad.actividadAsignada.timestamps.fechaActualizacion }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- aceptar actividad freelance -->
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Aceptar Actividad
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">Fecha de asignacion: {{ actividad.actividadAsignada.timestamps.fechaCreacion}}</span>
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onAceptarActividad()">
+              <i class="fa fa-check"></i>
+              Aceptar actividad
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- cuando el freelance finaliza la actividad y la notifica al analista esp -->
+  <div *ngIf="actividad.estado == 'notificado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad notificada al analista de servicios esp
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">
+              Fecha de notificacion:
+              <b>{{ actividad.timestamps.fechaActualizacion }}</b>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<div *ngIf="(actividad.estado == 'aceptado' || actividad.estado == 'proceso' && permissions.FRCE) || ((permissions.ADG || permissions.DOPE || permissions.AESP) && (actividad.estado == 'aceptado' || actividad.estado == 'proceso' || actividad.estado == 'notificado' || actividad.estado == 'completado'))">
+  <form [formGroup]="form">
+    <div class="card">
+      <div class="card-header bg-white">
+        <h4>Deca dactilar</h4>
+      </div>
+      <div class="card-body bg-light">
+        <div class="card">
+          <div class="card-body ">
+
+            <!-- file -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="adjunto">Adjunto</label>
+              <div class="col-sm-8">
+                <div *ngIf="checkFile()">
+                  <a [href]="apiUrl + form.get('adjunto').value" class="btn btn-primary">
+                    <i class="fa fa-download"></i>
+                    Descargar adjunto
+                  </a>
+                  <button class="btn btn-danger" (click)="removeFile()">
+                    <i class="fa fa-trash"></i>
+                    Eliminar
+                  </button>
+                </div>
+                <div *ngIf="checkTypeFile()">
+                  <input type="file" name="adjunto" id="adjunto" (change)="setFileToForm($event)">
+                </div>
+
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['adjunto'].invalid &&
+                   form.controls['adjunto'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Tiempo de permanencia -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="conclusion">Tiempo de permanencia</label>
+              <div class="col-sm-8">
+                <textarea name="conclusion" id="conclusion"
+                          rows="3" class="form-control"
+                          formControlName="conclusion"
+                          placeholder="Ingrese la conclusión">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['conclusion'].invalid &&
+                   form.controls['conclusion'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+            <!---->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer bg-white">
+        <div class="form-group text-center">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <button *ngIf="permissions.FRCE && actividad.estado == 'aceptado'"
+                      class="btn btn-danger"
+                      [disabled]="form.invalid"
+                      (click)="onSubmit()">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <button *ngIf="(permissions.FRCE && actividad.estado == 'proceso') || (permissions.AESP || permissions.ADG && actividad.estado == 'notificado')"
+                      class="btn btn-warning"
+                      [disabled]="form.invalid"
+                      (click)="onUpdate()">
+                <i class="fa fa-edit"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="permissions.AESP || permissions.ADG && actividad.estado == 'notificado'">
+          <span class="text-primary d-block">Fecha de notificacion: {{ actividad.timestamps.fechaActualizacion }}</span>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="col-md-12 m-3 text-right">
+    <button class="btn btn-success"
+            *ngIf="permissions.FRCE && actividad.estado == 'proceso'"
+            [disabled]="form.invalid"
+            (click)="notificarAnalista()">
+      <i class="fa fa-message"></i>
+      Notificar a analista Esp
+    </button>
+  </div>
+</div>

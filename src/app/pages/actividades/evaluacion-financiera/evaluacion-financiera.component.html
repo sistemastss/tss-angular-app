@@ -1,0 +1,1048 @@
+<!-- seleccionar al funcionario -->
+<app-asignar-funcionario
+  *ngIf="actividad.estado == 'cargado'"
+  (event)="asignarFuncionario($event)">
+</app-asignar-funcionario>
+
+
+<!-- cuando la actividad a sido asignada y esta en espera de aceptacion-->
+<ng-template [ngxPermissionsOnly]="['ADG', 'DOPE', 'AESP']">
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad Asignada
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            Pendiente por: <b>{{ actividad.actividadAsignada.usuarioNombre }}</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- freelance view -->
+<ng-template ngxPermissionsOnly="FRCE">
+
+
+  <!-- cuando la actividad se ha vencido -->
+  <div *ngIf="actividad.estado == 'alerta'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad vencida
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <div class="alert alert-danger" role="alert">
+              <span class="text-danger d-block">La actividad se ha vencido. por favor pongase en contacto con Total Security Services</span>
+              <span class="text-danger d-block">Fecha de vencimiento: {{ actividad.actividadAsignada.timestamps.fechaActualizacion }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- aceptar actividad freelance -->
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Aceptar Actividad
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">Fecha de asignacion: {{ actividad.actividadAsignada.timestamps.fechaCreacion}}</span>
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onAceptarActividad()">
+              <i class="fa fa-check"></i>
+              Aceptar actividad
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- cuando el freelance finaliza la actividad y la notifica al analista esp -->
+  <div *ngIf="actividad.estado == 'notificado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad notificada al analista de servicios esp
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">
+              Fecha de notificacion:
+              <b>{{ actividad.timestamps.fechaActualizacion }}</b>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<div *ngIf="(actividad.estado == 'aceptado' || actividad.estado == 'proceso' && permissions.FRCE) || ((permissions.ADG || permissions.DOPE || permissions.AESP) && (actividad.estado == 'aceptado' || actividad.estado == 'proceso' || actividad.estado == 'notificado' || actividad.estado == 'completado'))">
+  <form [formGroup]="form">
+    <div class="card">
+      <div class="card-header bg-white">
+        <h4>Evaluacion Financiera</h4>
+      </div>
+      <div class="card-body bg-light">
+
+
+        <!-- cuentas bancarias -->
+        <div class="card mt-3">
+          <div class="card-body ">
+
+            <div class="form-group row">
+              <label class="col-sm-6 col-form-label">
+                <b>Cuentas bancarias</b>
+              </label>
+              <div class="col-sm-6">
+                <div class="form-group text-right">
+                  <button (click)="cbModal.showModal = true" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <hr>
+              </div>
+              <div class="col-sm-12 mt-2">
+                <table class="table table-bordered">
+                  <thead class="text-capitalize">
+                  <th>tipo cuenta</th>
+                  <th>Entidad</th>
+                  <th>Ciudad</th>
+                  <th>Fecha de apertura</th>
+                  <th>Estado</th>
+                  <th class="acciones">acciones</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let value of cuentaBancaria">
+                    <td>{{ value.tipoCuenta }}</td>
+                    <td>{{ value.entidad }}</td>
+                    <td>{{ value.ciudad }}</td>
+                    <td>{{ value.fechaApertura | date }}</td>
+                    <td>{{ value.estado }}</td>
+                    <td class="acciones">
+                      <div class="text-center">
+                        <button class="btn btn-primary mr-2" (click)="updateCuentaBancaria(value.id)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+
+                        <button class="btn btn-danger ml-2" (click)="deleteCuentaBancaria(value.id)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <hr>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Obligaciones vigentes -->
+        <div class="card mt-3">
+          <div class="card-body ">
+            <!-- bienes Inmuebles -->
+            <div class="form-group row">
+              <label class="col-sm-6 col-form-label">
+                <b>Obligaciones vigentes en el sector financiero, asegurador y solidario</b>
+              </label>
+              <div class="col-sm-6">
+                <div class="form-group text-right">
+                  <button (click)="ovModal.showModal = true" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <hr>
+              </div>
+              <div class="col-sm-12 mt-2">
+                <table class="table table-bordered">
+                  <thead class="text-capitalize">
+                    <th>Entidad</th>
+                    <th>Tipo de crédito</th>
+                    <th>Valor aprobado</th>
+                    <th>Saldo a la fecha</th>
+                    <th>Valor cuota</th>
+                    <th class="acciones">acciones</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let value of obligacionVigente">
+                    <td> {{ value.entidad }} </td>
+                    <td> {{ value.tipoCredito }} </td>
+                    <td> {{ value.valorAprobado }} </td>
+                    <td> {{ value.saldoActual }} </td>
+                    <td> {{ value.valorCuota }} </td>
+                    <td class="acciones">
+                      <div class="text-center">
+                        <button class="btn btn-primary mr-2" (click)="updateObligacionVigente(value.id)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+
+                        <button class="btn btn-danger ml-2" (click)="deleteObligacionVigente(value.id)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <hr>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Obligaciones vigentes en el sector real -->
+        <div class="card mt-3">
+          <div class="card-body ">
+            <!-- bienes Inmuebles -->
+            <div class="form-group row">
+              <label class="col-sm-6 col-form-label">
+                <b>Obligaciones vigentes en el sector real</b>
+              </label>
+              <div class="col-sm-6">
+                <div class="form-group text-right">
+                  <button (click)="ovrModal.showModal = true" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <hr>
+              </div>
+              <div class="col-sm-12 mt-2">
+                <table class="table table-bordered">
+                  <thead class="text-capitalize">
+                  <th>Entidad</th>
+                  <th>Línea de crédito</th>
+                  <th>Fecha apertura</th>
+                  <th>Valor cargo fijo</th>
+                  <th class="acciones">acciones</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let value of obligacionVigenteReal">
+                    <td>{{ value.entidad }}</td>
+                    <td>{{ value.lineaCredito }}</td>
+                    <td>{{ value.fechaApertura }}</td>
+                    <td>{{ value.valorCargoFijo }}</td>
+                    <td class="acciones">
+                      <div class="text-center">
+                        <button class="btn btn-primary mr-2" (click)="updateObligacionVigenteReal(value.id)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+
+                        <button class="btn btn-danger ml-2" (click)="deleteObligacionVigenteReal(value.id)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <hr>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!--Obligaciones en mora -->
+        <div class="card mt-3">
+          <div class="card-body ">
+            <!-- bienes Inmuebles -->
+            <div class="form-group row">
+              <label class="col-sm-6 col-form-label">
+                <b>Obligaciones en mora</b>
+              </label>
+              <div class="col-sm-6">
+                <div class="form-group text-right">
+                  <button (click)="omModal.showModal = true" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <hr>
+              </div>
+              <div class="col-sm-12 mt-2">
+                <table class="table table-bordered">
+                  <thead class="text-capitalize">
+                    <th>Entidad</th>
+                    <th>Tipo de crédito</th>
+                    <th>Tiempo en mora</th>
+                    <th>Monto en mora</th>
+                    <th class="acciones">acciones</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let value of obligacionMora">
+                    <td> {{ value.entidad }} </td>
+                    <td> {{ value.tipoCredito }} </td>
+                    <td> {{ value.tiempoMora }} </td>
+                    <td> {{ value.montoMora }} </td>
+                    <td class="acciones">
+                      <div class="text-center">
+                        <button class="btn btn-primary mr-2" (click)="updateObligacionMora(value.id)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+
+                        <button class="btn btn-danger ml-2" (click)="deleteObligacionMora(value.id)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <hr>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Obligaciones Extinguidas -->
+        <div class="card mt-3">
+          <div class="card-body ">
+            <div class="form-group row">
+              <label class="col-sm-6 col-form-label">
+                <b>Obligaciones Extinguidas</b>
+              </label>
+              <div class="col-sm-6">
+                <div class="form-group text-right">
+                  <button (click)="oeModal.showModal = true" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <hr>
+              </div>
+              <div class="col-sm-12 mt-2">
+                <table class="table table-bordered">
+                  <thead class="text-capitalize">
+                    <th>Entidad</th>
+                    <th>Fecha de apertura</th>
+                    <th>Fecha de cierre</th>
+                    <th>Tipo de crédito</th>
+                    <th>Valor</th>
+                    <th class="acciones">acciones</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let value of obligacionExtinguida">
+                    <td> {{ value.entidad }} </td>
+                    <td> {{ value.fechaApertura | date }} </td>
+                    <td> {{ value.fechaCierre | date }} </td>
+                    <td> {{ value.tipoCredito }} </td>
+                    <td> {{ value.valor }} </td>
+                    <td class="acciones">
+                      <div class="text-center">
+                        <button class="btn btn-primary mr-2" (click)="updateObligacionExtinguida(value.id)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+
+                        <button class="btn btn-danger ml-2" (click)="deleteObligacionExtinguida(value.id)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <!--<td>
+
+                      <div class="form-group">
+                        <input type="text" class="form-control"
+                               name="entidad" formControlName="entidad"
+                               placeholder="Entidad">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="date" class="form-control"
+                               name="fechaApertura" formControlName="fechaApertura"
+                               placeholder="Fecha apertura">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="date" class="form-control"
+                               name="fechaCierre" formControlName="fechaCierre"
+                               placeholder="Fecha cierre">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="text" class="form-control"
+                               name="tipoCredito" formControlName="tipoCredito"
+                               placeholder="Tipo credito">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <input type="number" class="form-control"
+                               name="valor" formControlName="valor"
+                               placeholder="Valor">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group text-center">
+                        <button class="btn btn-danger" (click)="deleteObligacionesExtinguidas(i)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>-->
+                  </tr>
+                  </tbody>
+                </table>
+                <hr>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-body ">
+            <div [formGroup]="form" class="form-group row">
+              <label class="col-sm-3 col-form-label" for="conclusion">Conclusiones</label>
+              <div class="col-sm-9">
+              <textarea class="form-control" id="conclusion"
+                        name="conclusion" formControlName="conclusion"
+                        rows="3" placeholder="Ingresé la conclusion">
+              </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls.conclusion.invalid && form.controls.conclusion.dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+      <div class="card-footer bg-white">
+        <div class="form-group text-center">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <button *ngIf="permissions.FRCE && actividad.estado == 'aceptado'"
+                      class="btn btn-danger"
+                      [disabled]="form.invalid"
+                      (click)="onSubmit()">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <button *ngIf="(permissions.FRCE && actividad.estado == 'proceso') || (permissions.AESP || permissions.ADG && actividad.estado == 'notificado')"
+                      class="btn btn-warning"
+                      [disabled]="form.invalid"
+                      (click)="onUpdate()">
+                <i class="fa fa-edit"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="permissions.AESP || permissions.ADG && actividad.estado == 'notificado'">
+          <span class="text-primary d-block">Fecha de notificacion: {{ actividad.timestamps.fechaActualizacion }}</span>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="col-md-12 m-3 text-right">
+    <button class="btn btn-success"
+            *ngIf="permissions.FRCE && actividad.estado == 'proceso'"
+            [disabled]="form.invalid"
+            (click)="notificarAnalista()">
+      <i class="fa fa-message"></i>
+      Notificar a analista Esp
+    </button>
+  </div>
+</div>
+
+
+
+<!-- Modal cuenta bancaria -->
+<div class="d-none" [ngClass]="{'modal-backdrop show fade': cbModal.showModal, 'd-none': !cbModal.showModal}"></div>
+<div  class="d-none" [ngClass]="{'modal fade modal-container show d-block': cbModal.showModal, 'd-none': !cbModal.showModal}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Información familiar</h5>
+        <button type="button" class="close" (click)="closeModalCuentaBancaria()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="cuentaBancariaForm">
+
+          <!-- tipocuenta -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="cb-tipocuenta">Tipo cuenta</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="cb-tipocuenta"
+                     name="tipoCuenta"
+                     formControlName="tipoCuenta"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(cuentaBancariaForm.get('tipoCuenta').invalid &&
+                     cuentaBancariaForm.get('tipoCuenta').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- entidad -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="cb-entidad">Entidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="cb-entidad"
+                     name="entidad"
+                     formControlName="entidad"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(cuentaBancariaForm.get('entidad').invalid &&
+                     cuentaBancariaForm.get('entidad').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ciudad -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="cb-ciudad">ciudad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="cb-ciudad"
+                     name="ciudad"
+                     formControlName="ciudad"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(cuentaBancariaForm.get('ciudad').invalid &&
+                     cuentaBancariaForm.get('ciudad').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- fechaApertura -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="cb-fechaApertura">Fecha Apertura</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control"
+                     id="cb-fechaApertura"
+                     name="fechaApertura"
+                     formControlName="fechaApertura"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(cuentaBancariaForm.get('fechaApertura').invalid &&
+                     cuentaBancariaForm.get('fechaApertura').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- estado -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="cb-estado">Estado</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="cb-estado"
+                     name="estado"
+                     formControlName="estado"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(cuentaBancariaForm.get('estado').invalid &&
+                     cuentaBancariaForm.get('estado').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModalCuentaBancaria()">Cerrar</button>
+        <button type="button" class="btn btn-warning" [disabled]="cuentaBancariaForm.invalid" (click)="refreshCuentaBancaria()" *ngIf="cbModal.isUpdate">Actualizar</button>
+        <button type="button" class="btn btn-primary" [disabled]="cuentaBancariaForm.invalid" (click)="addCuentaBancaria()" *ngIf="!cbModal.isUpdate">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal obligacion vigente -->
+<div class="d-none" [ngClass]="{'modal-backdrop show fade': ovModal.showModal, 'd-none': !ovModal.showModal}"></div>
+<div  class="d-none" [ngClass]="{'modal fade modal-container show d-block': ovModal.showModal, 'd-none': !ovModal.showModal}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Información familiar</h5>
+        <button type="button" class="close" (click)="closeModalObligacionVigente()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="obligacionVigenteForm">
+
+          <!-- entidad -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ov-entidad">entidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="ov-entidad"
+                     name="entidad"
+                     formControlName="entidad"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteForm.get('entidad').invalid &&
+                     obligacionVigenteForm.get('entidad').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- tipoCredito -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ov-tipoCredito">Tipo de Credito</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="ov-tipoCredito"
+                     name="tipoCredito"
+                     formControlName="tipoCredito"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteForm.get('tipoCredito').invalid &&
+                     obligacionVigenteForm.get('tipoCredito').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- valorAprobado -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ov-valorAprobado">Valor Aprobado</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control"
+                     id="ov-valorAprobado"
+                     name="valorAprobado"
+                     formControlName="valorAprobado"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteForm.get('valorAprobado').invalid &&
+                     obligacionVigenteForm.get('valorAprobado').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- saldoActual -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ov-saldoActual">Saldo Fecha</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control"
+                     id="ov-saldoActual"
+                     name="saldoActual"
+                     formControlName="saldoActual"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteForm.get('saldoActual').invalid &&
+                     obligacionVigenteForm.get('saldoActual').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- valorCuota -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ov-valorCuota">Valor Cuota</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control"
+                     id="ov-valorCuota"
+                     name="valorCuota"
+                     formControlName="valorCuota"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteForm.get('valorCuota').invalid &&
+                     obligacionVigenteForm.get('valorCuota').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModalObligacionVigente()">Cerrar</button>
+        <button type="button" class="btn btn-warning" [disabled]="obligacionVigenteForm.invalid" (click)="refreshObligacionVigente()" *ngIf="ovModal.isUpdate">Actualizar</button>
+        <button type="button" class="btn btn-primary" [disabled]="obligacionVigenteForm.invalid" (click)="addObligacionVigente()" *ngIf="!ovModal.isUpdate">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal obligacion vigente real -->
+<div class="d-none" [ngClass]="{'modal-backdrop show fade': ovrModal.showModal, 'd-none': !ovrModal.showModal}"></div>
+<div  class="d-none" [ngClass]="{'modal fade modal-container show d-block': ovrModal.showModal, 'd-none': !ovrModal.showModal}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Obligacion vigente real</h5>
+        <button type="button" class="close" (click)="closeModalObligacionVigenteReal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="obligacionVigenteRealForm">
+
+          <!-- entidad -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ovr-entidad">Entidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="ovr-entidad"
+                     name="entidad"
+                     formControlName="entidad"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteRealForm.get('entidad').invalid &&
+                     obligacionVigenteRealForm.get('entidad').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- lineaCredito -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ovr-lineaCredito">Linea Credito</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="ovr-lineaCredito"
+                     name="lineaCredito"
+                     formControlName="lineaCredito"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteRealForm.get('lineaCredito').invalid &&
+                     obligacionVigenteRealForm.get('lineaCredito').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- fechaApertura -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ovr-fechaApertura">Fecha apertura</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control"
+                     id="ovr-fechaApertura"
+                     name="fechaApertura"
+                     formControlName="fechaApertura"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteRealForm.get('fechaApertura').invalid &&
+                     obligacionVigenteRealForm.get('fechaApertura').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- valorCargoFijo -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ovr-valorCargoFijo">valorCargoFijo</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control"
+                     id="ovr-valorCargoFijo"
+                     name="valorCargoFijo"
+                     formControlName="valorCargoFijo"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionVigenteRealForm.get('valorCargoFijo').invalid &&
+                     obligacionVigenteRealForm.get('valorCargoFijo').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModalObligacionVigenteReal()">Cerrar</button>
+        <button type="button" class="btn btn-warning" [disabled]="obligacionVigenteRealForm.invalid" (click)="refreshObligacionVigenteReal()" *ngIf="ovrModal.isUpdate">Actualizar</button>
+        <button type="button" class="btn btn-primary" [disabled]="obligacionVigenteRealForm.invalid" (click)="addObligacionVigenteReal()" *ngIf="!ovrModal.isUpdate">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal obligacion mora -->
+<div class="d-none" [ngClass]="{'modal-backdrop show fade': omModal.showModal, 'd-none': !omModal.showModal}"></div>
+<div  class="d-none" [ngClass]="{'modal fade modal-container show d-block': omModal.showModal, 'd-none': !omModal.showModal}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Obligacion vigente real</h5>
+        <button type="button" class="close" (click)="closeModalObligacionVigenteReal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="obligacionMoraForm">
+
+          <!-- entidad -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="om-entidad">Entidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="om-entidad"
+                     name="entidad"
+                     formControlName="entidad"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionMoraForm.get('entidad').invalid &&
+                     obligacionMoraForm.get('entidad').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- tipoCredito -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="om-tipoCredito">Tipo Credito</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="om-tipoCredito"
+                     name="tipoCredito"
+                     formControlName="tipoCredito"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionMoraForm.get('tipoCredito').invalid &&
+                     obligacionMoraForm.get('tipoCredito').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- tiempoMora -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="om-tiempoMora">Tiempo Mora</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="om-tiempoMora"
+                     name="tiempoMora"
+                     formControlName="tiempoMora"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionMoraForm.get('tiempoMora').invalid &&
+                     obligacionMoraForm.get('tiempoMora').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- montoMora -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="om-montoMora">Monto Mora</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="om-montoMora"
+                     name="montoMora"
+                     formControlName="montoMora"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionMoraForm.get('montoMora').invalid &&
+                     obligacionMoraForm.get('montoMora').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModalObligacionMora()">Cerrar</button>
+        <button type="button" class="btn btn-warning" [disabled]="obligacionMoraForm.invalid" (click)="refreshObligacionMora()" *ngIf="omModal.isUpdate">Actualizar</button>
+        <button type="button" class="btn btn-primary" [disabled]="obligacionMoraForm.invalid" (click)="addObligacionMora()" *ngIf="!omModal.isUpdate">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal obligacion extinguida -->
+<div class="d-none" [ngClass]="{'modal-backdrop show fade': oeModal.showModal, 'd-none': !oeModal.showModal}"></div>
+<div  class="d-none" [ngClass]="{'modal fade modal-container show d-block': oeModal.showModal, 'd-none': !oeModal.showModal}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Obligacion vigente real</h5>
+        <button type="button" class="close" (click)="closeModalObligacionExtinguida()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="obligacionExtinguidaForm">
+
+          <!-- entidad -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="oe-entidad">Entidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="oe-entidad"
+                     name="entidad"
+                     formControlName="entidad"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionExtinguidaForm.get('entidad').invalid &&
+                     obligacionExtinguidaForm.get('entidad').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- fechaApertura -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="oe-fechaApertura">Fecha Apertura</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control"
+                     id="oe-fechaApertura"
+                     name="fechaApertura"
+                     formControlName="fechaApertura"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionExtinguidaForm.get('fechaApertura').invalid &&
+                     obligacionExtinguidaForm.get('fechaApertura').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+          <!-- fechaCierre -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="oe-fechaCierre">Fecha Cierre</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control"
+                     id="oe-fechaCierre"
+                     name="fechaCierre"
+                     formControlName="fechaCierre"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionExtinguidaForm.get('fechaCierre').invalid &&
+                     obligacionExtinguidaForm.get('fechaCierre').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- tipoCredito -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="oe-tipoCredito">Tipo Credito</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="oe-tipoCredito"
+                     name="tipoCredito"
+                     formControlName="tipoCredito"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionExtinguidaForm.get('tipoCredito').invalid &&
+                     obligacionExtinguidaForm.get('tipoCredito').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+          <!-- valor -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="oe-valor">Valor</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control"
+                     id="oe-valor"
+                     name="valor"
+                     formControlName="valor"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(obligacionExtinguidaForm.get('valor').invalid &&
+                     obligacionExtinguidaForm.get('valor').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModalObligacionExtinguida()">Cerrar</button>
+        <button type="button" class="btn btn-warning" [disabled]="obligacionExtinguidaForm.invalid" (click)="refreshObligacionExtinguida()" *ngIf="oeModal.isUpdate">Actualizar</button>
+        <button type="button" class="btn btn-primary" [disabled]="obligacionExtinguidaForm.invalid" (click)="addObligacionExtinguida()" *ngIf="!oeModal.isUpdate">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

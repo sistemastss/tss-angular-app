@@ -1,0 +1,107 @@
+body {
+  overflow-x: hidden;
+}
+
+#wrapper {
+  padding-left: 0;
+  transition: all 0.1s ease;
+  color: #fff !important;
+}
+
+/* show side menu*/
+.toggled {
+  padding-left: 250px;
+}
+
+
+/* side menu container css */
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #1d1d1d;
+  transition: all 0.1s ease;
+}
+
+
+/* display the sidemenu when .togled is active*/
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 0;
+  }
+  #wrapper.toggled {
+    padding-left: 250px;
+  }
+  #sidebar-wrapper {
+    width: 0;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.menu-item {
+  color: white;
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  position: relative;
+  padding: 8px 30px 8px 20px;
+}
+
+.menu-item i {
+  padding: .5rem;
+  border-radius: .5rem;
+  background: #2b2b2b;
+}
+
+
+.submenu-container {
+  background: #2b2b2b;
+  transition:all 10s;
+}
+
+.submenu-item {
+  color: #bdbdbd;
+  font-size: 1rem;
+  padding: .4rem;
+}
+
+.menu-active {
+  background-color: #42a5f5;
+}
+
+.menu-active > i {
+  background-color: #1565c0;
+}

@@ -1,0 +1,46 @@
+<div class="">
+  <div class="card card-login mx-auto mt-5 w-50">
+    <div class="card-header mx-auto">
+      <div class="card-img w-100">
+        <img src="../../../assets/logo.png" class="img-fluid " alt="">
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="material-icons">account_circle</i>
+            </span>
+          </div>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Correo electronico"
+            formControlName="username"
+            required="required">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="material-icons">vpn_key</i>
+            </span>
+          </div>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Contraseña"
+            formControlName="password"
+            required="required">
+        </div>
+        <button (click)="onSubmit()"
+                class="btn btn-primary btn-block">
+          Ingresar
+        </button>
+      </form>
+      <div class="text-center">
+        <a class="d-block small" href="forgot-password.html">Olvido su contraseña?</a>
+      </div>
+    </div>
+  </div>
+</div>

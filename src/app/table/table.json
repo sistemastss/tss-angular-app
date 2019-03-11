@@ -1,0 +1,59 @@
+{
+  headers: [
+    'fecha',
+    'codigo',
+    'nombre'
+  ],
+  /**
+   * rows data
+   * this array contais each row of table
+   */
+  rows: [
+    /**
+     * this objet contais one row of the colum
+     */
+    {
+      columns: [
+        // fields
+        {
+          fieldTitle: 'fecha',
+          fieldType: 'text',
+          content: 'lorem imsum'
+        },
+        {
+          fieldTitle: 'codigo',
+          fieldType: 'text',
+          content: 'lorem imsum'
+        },
+        {
+          fieldTitle: 'nombre',
+          fieldType: 'text',
+          content: 'lorem imsum'
+        },
+      ]
+    },
+    {
+      columns: [
+        /**
+         * this object represents a one field of the column
+         */
+        {
+          fieldTitle: 'fecha',
+          fieldType: 'date',
+          content: new Date().getDate()
+        },
+        {
+          fieldTitle: 'codigo',
+          fieldType: 'input',
+          inputType: 'text',
+          placeholder: 'Ingrese el codigo',
+        },
+        {
+          fieldTitle: 'nombre',
+          fieldType: 'text',
+          content: 'lorem imsum'
+        },
+      ]
+    }
+  ]
+}

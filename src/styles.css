@@ -1,0 +1,133 @@
+/* You can add global styles to this file, and also import other style files */
+
+.ng-valid {
+    border-color: #28a745 !important;
+}
+
+.ng-valid:focus {
+  color: #495057;
+  border-color: #28a745 !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.ng-invalid {
+    border-color: #dc3545 !important;
+}
+
+.ng-pristine {
+    border-color: #ced4da !important;
+}
+
+.ng-invalid-feedback {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545 !important;
+}
+
+.puntero {
+  cursor: pointer;
+}
+
+.img-circle {
+  border-radius: 100%;
+  width: 150px;
+}
+
+.card-title,
+.card-text {
+  color: black;
+}
+
+.badge {
+  margin-left: 5px;
+}
+
+.btn-outline-success {
+  margin-left: 5px;
+}
+
+.img-thumb {
+  width: 50px;
+  height: 50px;
+}
+
+
+/* Animaciones */
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+
+.link {
+  cursor: pointer;
+  color: #1565c0 !important;
+}
+
+.link:hover {
+  border-bottom: 1px solid #1565c0;
+  text-underline: #1d1d1d;
+}
+
+.service-loaded {
+  color: #fff;
+  background-color:  #343a40;
+}
+
+.service-asigned {
+  color: #FFF;
+  background-color: #A349A4;
+}
+
+.service-acepted {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.service-process {
+  color: #212529;
+  background-color:  #FFCA01;
+}
+
+.service-finished {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 1000px !important;
+  }
+}
+
+
+

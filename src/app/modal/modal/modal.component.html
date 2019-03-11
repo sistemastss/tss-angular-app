@@ -1,0 +1,29 @@
+<div class="modal-backdrop fade" [ngClass]="{'show': toggle, 'd-none': !toggle}"></div>
+
+<div class="modal fade modal-container" [ngClass]="{'show d-block': toggle, 'd-none': !toggle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> {{ modal.title }}</h5>
+        <button type="button" class="close" (click)="closeModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group" *ngIf="isArray()">
+          <li class="list-group-item" *ngFor="let d of modal.body">
+            {{startCase(d)}}
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-secondary"
+                (click)="closeModal()">Cerrar</button>
+        <!--<button type="button" class="btn btn-primary">
+          Save chan(click)="closeModal()"ges
+        </button>-->
+      </div>
+    </div>
+  </div>
+</div>

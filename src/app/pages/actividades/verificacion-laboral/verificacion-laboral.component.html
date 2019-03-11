@@ -1,0 +1,535 @@
+<!-- seleccionar al funcionario -->
+<app-asignar-funcionario
+  *ngIf="actividad.estado == 'cargado'"
+  (event)="asignarFuncionario($event)">
+</app-asignar-funcionario>
+
+
+<!-- cuando la actividad a sido asignada y esta en espera de aceptacion-->
+<ng-template [ngxPermissionsOnly]="['ADG', 'DOPE', 'AESP']">
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad Asignada
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            Pendiente por: <b>{{ actividad.actividadAsignada.usuarioNombre }}</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- freelance view -->
+<ng-template ngxPermissionsOnly="FRCE">
+
+
+  <!-- alerta -->
+  <div *ngIf="actividad.estado == 'alerta'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Alerta
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <div class="alert alert-danger" role="alert">
+              <span class="text-danger d-block">El evaluado no cumple con las condiciones para continuar con el estudio</span>
+              <span class="text-danger d-block">Fecha de alerta: {{ actividad.actividadAsignada.timestamps.fechaActualizacion }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- aceptar actividad freelance -->
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Aceptar Actividad
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">Fecha de asignacion: {{ actividad.actividadAsignada.timestamps.fechaCreacion}}</span>
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onAceptarActividad()">
+              <i class="fa fa-check"></i>
+              Aceptar actividad
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- cuando el freelance finaliza la actividad y la notifica al analista esp -->
+  <div *ngIf="actividad.estado == 'notificado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad notificada al analista de servicios esp
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">
+              Fecha de notificacion:
+              <b>{{ actividad.timestamps.fechaActualizacion }}</b>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<!-- formularo -->
+<div *ngIf="(actividad.estado == 'aceptado' || actividad.estado == 'proceso' && permissions.FRCE) || ((permissions.ADG || permissions.DOPE || permissions.AESP) && (actividad.estado == 'aceptado' || actividad.estado == 'proceso' || actividad.estado == 'notificado' || actividad.estado == 'completado'))">
+
+<form [formGroup]="form" class="fade-in">
+    <div class="card">
+      <div class="card-header bg-white">
+        <h4>Verificacion Laboral</h4>
+      </div>
+      <div class="card-body bg-light">
+        <div class="card">
+          <div class="card-body ">
+
+
+            <!-- table component -->
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <div class="form-group text-right">
+                  <button (click)="verifLaboralModal.showModal = true" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-12"><hr></div>
+              <table class="table table-bordered">
+                <thead class="text-capitalize">
+                  <th>empresa</th>
+                  <th>cargo</th>
+                  <th>telefono</th>
+                  <th>periodo</th>
+                  <th>jefeInmediato</th>
+                  <th>cargoJefe</th>
+                  <th>ciudad</th>
+                  <th>motivoRetiro</th>
+                  <th>Confirmacion</th>
+                  <th>observaciones</th>
+                  <th class="acciones">acciones</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let value of verificacionLaboral">
+                  <td> {{ value.empresa }} </td>
+                  <td> {{ value.cargo }} </td>
+                  <td> {{ value.telefono }} </td>
+                  <td> {{ value.periodo }} </td>
+                  <td> {{ value.jefeInmediato }} </td>
+                  <td> {{ value.cargoJefe }} </td>
+                  <td> {{ value.ciudad }} </td>
+                  <td> {{ value.motivoRetiro }} </td>
+                  <td> {{ value.confirmacion === true ? 'Si' : 'No' }} </td>
+                  <td> {{ value.observaciones }} </td>
+                  <td class="acciones">
+                    <div class="text-center">
+                      <button class="btn btn-primary mr-2 ml-2" (click)="updateVerifLaboral(value.id)">
+                        <i class="fa fa-edit"></i>
+                      </button>
+
+                      <button class="btn btn-danger ml-2 mr-2" (click)="deleteVerifLaboral(value.id)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+
+                    <!--<div class="form-group">
+                      <input type="text" class="form-control"
+                             name="empresa" formControlName="empresa"
+                             placeholder="empresa">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             name="cargo" formControlName="cargo"
+                             placeholder="cargo">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="number" class="form-control"
+                             name="telefono" formControlName="telefono"
+                             placeholder="telefono">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             name="periodo" formControlName="periodo"
+                             placeholder="periodo">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             name="jefeInmediato" formControlName="jefeInmediato"
+                             placeholder="jefeInmediato">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             name="cargoJefe" formControlName="cargoJefe"
+                             placeholder="cargoJefe">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             name="ciudad" formControlName="ciudad"
+                             placeholder="Ciudad">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             name="motivoRetiro" formControlName="motivoRetiro"
+                             placeholder="motivoRetiro">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"
+                             type="radio"
+                             formControlName="confirmacion"
+                             [id]="'inlineRadio1' + i" [value]="true">
+                      <label class="form-check-label" [for]="'inlineRadio1' + i">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"
+                             type="radio"
+                             formControlName="confirmacion"
+                             [id]="'inlineRadio2' + i" [value]="false">
+                      <label class="form-check-label" [for]="'inlineRadio2' + i">No</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text" class="form-control"
+                             name="observaciones" formControlName="observaciones"
+                             placeholder="Observacion">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group text-center">
+                      <button class="btn btn-danger" (click)="deleteVericacionLaboral(i)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>-->
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white">
+        <div class="form-group text-center">
+          <!--<div class="row">
+            <div class="col-md-6 mx-auto">
+              <button *ngIf="permissions.FRCE && actividad.estado == 'aceptado'"
+                      class="btn btn-danger"
+                      [disabled]="form.invalid"
+                      (click)="onSubmit()">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <button *ngIf="(permissions.FRCE && actividad.estado == 'proceso') || (permissions.AESP || permissions.ADG && actividad.estado == 'notificado')"
+                      class="btn btn-warning"
+                      [disabled]="form.invalid"
+                      (click)="onUpdate()">
+                <i class="fa fa-edit"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>-->
+        </div>
+        <div *ngIf="permissions.AESP || permissions.ADG && actividad.estado == 'notificado'">
+          <span class="text-primary d-block">Fecha de notificacion: {{ actividad.timestamps.fechaActualizacion | date:'short' }}</span>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="col-md-12 m-3 text-right">
+    <button class="btn btn-danger mr-2 ml-2"
+            *ngIf="permissions.FRCE && ( actividad.estado == 'proceso' || actividad.estado == 'aceptado')"
+            (click)="reportarCliente()">
+      <i class="fa fa-message"></i>
+      Alerta
+    </button>
+    <button class="btn btn-success"
+            *ngIf="permissions.FRCE && actividad.estado == 'proceso'"
+            [disabled]="verificacionLaboral.length === 0"
+            (click)="notificarAnalista()">
+      <i class="fa fa-message"></i>
+      Notificar a analista Esp
+    </button>
+  </div>
+
+</div>
+
+
+<!-- Modal form -->
+
+<div class="d-none" [ngClass]="{'modal-backdrop show fade': verifLaboralModal.showModal, 'd-none': !verifLaboralModal.showModal}"></div>
+
+<div  class="d-none" [ngClass]="{'modal fade modal-container show d-block': verifLaboralModal.showModal, 'd-none': !verifLaboralModal.showModal}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Información familiar</h5>
+        <button type="button" class="close" (click)="closeModalVerifLaboral()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- empresa -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="empresa">Empresa</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="empresa"
+                         name="empresa"
+                         formControlName="empresa"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('empresa').invalid &&
+                     form.get('empresa').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- cargo -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="cargo">Cargo</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="cargo"
+                         name="cargo"
+                         formControlName="cargo"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('cargo').invalid &&
+                     form.get('cargo').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+
+              <!-- telefono -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="telefono">Telefono</label>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control"
+                         id="telefono"
+                         name="telefono"
+                         formControlName="telefono"
+                         placeholder="Ingrese un telefono valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('telefono').invalid &&
+                     form.get('telefono').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- periodo -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="periodo">Periodo</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="periodo"
+                         name="periodo"
+                         formControlName="periodo"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('periodo').invalid &&
+                     form.get('periodo').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- jefeInmediato -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="jefeInmediato">Jefe Inmediato</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="jefeInmediato"
+                         name="jefeInmediato"
+                         formControlName="jefeInmediato"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('jefeInmediato').invalid &&
+                     form.get('jefeInmediato').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <!-- cargoJefe -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="cargoJefe">Cargo del Jefe</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="cargoJefe"
+                         name="cargoJefe"
+                         formControlName="cargoJefe"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('cargoJefe').invalid &&
+                     form.get('cargoJefe').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+
+              <!-- ciudad -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="ciudad">Ciudad</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="ciudad"
+                         name="ciudad"
+                         formControlName="ciudad"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('ciudad').invalid &&
+                     form.get('ciudad').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- motivoRetiro -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="motivoRetiro">Motivo Retiro</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="motivoRetiro"
+                         name="motivoRetiro"
+                         formControlName="motivoRetiro"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('motivoRetiro').invalid &&
+                     form.get('motivoRetiro').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+
+              <!-- confirmacion -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="confirmacion">confirmacion</label>
+                <div class="col-sm-9">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                           type="radio"
+                           formControlName="confirmacion"
+                           id="confirmacion" [value]="true">
+                    <label class="form-check-label" for="confirmacion">Si</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                           type="radio"
+                           formControlName="confirmacion"
+                           id="confirmacion!" [value]="false">
+                    <label class="form-check-label" for="confirmacion!">No</label>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- observacion -->
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="observaciones">Observacion</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"
+                         id="observaciones"
+                         name="observaciones"
+                         formControlName="observaciones"
+                         placeholder="Ingrese un dato valido"
+                         required>
+                  <div class="ng-invalid-feedback"
+                       *ngIf="(form.get('observaciones').invalid &&
+                     form.get('observaciones').dirty)">
+                    El campo es requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- hipoteca -->
+          <!--<div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="bi-hipoteca">hipoteca</label>
+            <div class="col-sm-9">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       formControlName="hipoteca"
+                       id="bi-hipoteca" [value]="true">
+                <label class="form-check-label" for="bi-hipoteca">Si</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       formControlName="hipoteca"
+                       id="bi-hipoteca!" [value]="false">
+                <label class="form-check-label" for="bi-hipoteca!">No</label>
+              </div>
+            </div>
+          </div>-->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModalVerifLaboral()">Cerrar</button>
+        <button type="button" class="btn btn-warning" [disabled]="form.invalid" (click)="refreshVerifLaboral()" *ngIf="verifLaboralModal.isUpdate">Actualizar</button>
+        <button type="button" class="btn btn-primary" [disabled]="form.invalid" (click)="addVerifLaboral()" *ngIf="!verifLaboralModal.isUpdate">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

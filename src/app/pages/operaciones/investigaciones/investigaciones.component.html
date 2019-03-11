@@ -1,0 +1,195 @@
+<div class="container-fluid mt-3">
+
+  <div class="col-md-6 mx-auto" *ngIf="showError">
+    <div class="alert alert-danger" role="alert">
+      No existen registros.
+    </div>
+  </div>
+
+
+  <div class="card mb-3" *ngIf="!showError">
+
+    <div class="card-header">
+      <i class="fas fa-table"></i>
+      Servicios creados
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <!-- TABLE OF ESP_SERVICES -->
+
+        <div class="form-group mt-2 text-right">
+          <div class="input-group input-group-sm col-sm-6 offset-sm-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Filtrar por</span>
+            </div>
+            <select name="opciones" id="options" class="form-control text-capitalize" #filtro>
+              <option *ngFor="let e of options" [value]="e.value">{{ e.title }}</option>
+            </select>
+
+            <input type="text" class="form-control" placeholder="Busqueda" (keydown.enter)="filtrarServicios(filtro.value, busqueda.value)" #busqueda>
+
+            <button type="button" (click)="filtrarServicios(filtro.value, busqueda.value)" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Buscar</button>&nbsp;
+          </div>
+        </div>
+
+        <table class="table table-bordered table-hover table-sm">
+          <thead>
+          <tr>
+            <th *ngIf="permissions.ADG" class="text-capitalize">eliminar</th>
+            <th class="text-capitalize">centro de costo </th>
+            <th class="text-capitalize">fecha </th>
+            <th class="text-capitalize">ciudad</th>
+            <th class="text-capitalize">solicitante </th>
+            <th class="text-capitalize">servicio solicitado</th>
+            <th class="text-capitalize">estado </th>
+            <th class="text-capitalize">adjunto </th>
+            <th class="text-capitalize">informe</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of data">
+            <td *ngIf="permissions.ADG"><button (click)="eliminarInvestigacion(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+            <td> {{ item.centroCosto.id }} </td>
+            <td> {{ item.timestamps.fechaCreacion }} </td>
+            <td> {{ item.ciudad }} </td>
+            <td> {{ item.descripcion }} </td>
+            <td>
+              <div [ngSwitch]="item.estado">
+                <div *ngSwitchCase="'cargado'">
+                  <span class="badge badge badge-dark"> {{ item.estado }} </span>
+                </div>
+                <div *ngSwitchCase="'proceso'">
+                  <span class="badge badge badge-primary"> {{ item.estado }} </span>
+                </div>
+                <div *ngSwitchCase="'completado'">
+                  <span class="badge badge badge-warning"> {{ item.estado }} </span>
+                </div>
+                <div *ngSwitchCase="'notificado'">
+                  <span class="badge badge badge-danger"> {{ item.estado }} </span>
+                </div>
+                <div *ngSwitchCase="'finalizado'">
+                  <span class="badge badge badge-success"> {{ item.estado }} </span>
+                </div>
+              </div>
+            </td>
+
+            <td  *ngIf="(permissions.AESP || permissions.ADG)">
+              <div class="form-group text-center">
+                <button class="btn btn-warning" (click)="abrirModal(item)">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </div>
+            </td>
+            <td>
+              <button *ngIf="item.estado == 'completado' && (permissions.AESP || permissions.ADG)"
+                      (click)="notificarDirectorOperacion(item)" class="btn btn-success btn-sm">
+                <i class="fa fa-lightbulb"></i>
+              </button>
+              <button *ngIf="item.estado == 'notificado' && permissions.DOPE"
+                      (click)="notificarClienteAndFacturacion(item)" class="btn btn-danger btn-sm">
+                <i class="fa fa-lightbulb"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+  </div>
+</div>
+
+<!-- Modal -->
+
+<div class="modal-backdrop fade" [ngClass]="{'show': toggle, 'd-none': !toggle}"></div>
+
+<div  class="modal fade modal-container" [ngClass]="{'show d-block': toggle, 'd-none': !toggle}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalVerticalLabel">Asignar actividades</h5>
+        <button type="button" class="close" (click)="cerrarModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="modal-body" [formGroup]="form">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="controlLogistico" formControlName="CL">
+              <label class="form-check-label" for="controlLogistico">
+                Control Logistico
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="investCorporativo" formControlName="IC">
+              <label class="form-check-label" for="investCorporativo">
+                Investigación Corporativa
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="investMarcaria" formControlName="IM">
+              <label class="form-check-label" for="investMarcaria">
+                Investigación Marcaria
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="investperdidaTotalHurto" formControlName="PTH">
+              <label class="form-check-label" for="investperdidaTotalHurto">
+                Investigación Perdida Total Hurto
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="investperdidaParcialHurto" formControlName="PPH">
+              <label class="form-check-label" for="investperdidaParcialHurto">
+                Investigación Perdida Parcial Hurto
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="investperdidaTotalDatos" formControlName="PTD">
+              <label class="form-check-label" for="investperdidaTotalDatos">
+                Investigación Perdida Total Datos
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="investperdidaParcialDatos" formControlName="PPD">
+              <label class="form-check-label" for="investperdidaParcialDatos">
+                Investigación Perdida Parcial Datos
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox" [value]="false"
+                     id="investSiniestros" formControlName="IS">
+              <label class="form-check-label" for="investSiniestros">
+                Investigación Siniestros
+              </label>
+            </div>
+          </li>
+        </ul>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="guardarActividades()">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

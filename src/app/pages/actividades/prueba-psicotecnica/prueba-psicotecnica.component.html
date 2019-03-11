@@ -1,0 +1,115 @@
+<app-asignar-funcionario
+  [funcionario]="7"
+  *ngIf="actividad.estado == 'cargado'"
+  (event)="asignarFuncionario($event)">
+</app-asignar-funcionario>
+
+<ng-template [ngxPermissionsOnly]="['ADG', 'DOPE', 'AESP']">
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Esperado por aceptacion
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            Actividad asignada a {{ actividad.actividadAsignada.usuario.nombre }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template ngxPermissionsOnly="FRCE">
+  <div *ngIf="actividad.estado == 'asignado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Esperado por aceptacion
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">fecha de asignacion: {{ actividad.actividadAsignada.timestamps.fechaCreacion.date | date:'short' }}</span>
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onAceptarActividad()">
+              <i class="fa fa-check"></i>
+              Aceptar actividad
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="actividad.estado == 'notificado'">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          Actividad notificada al analista de servicios esp
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="text-info d-block">fecha de notificacion: {{ actividad.timestamps.fechaActualizacion.date | date:'short' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<div *ngIf="(actividad.estado == 'aceptado' && permissions.FRCE) || ((permissions.ADG || permissions.DOPE || permissions.AESP) && (actividad.estado == 'notificado' || actividad.estado == 'aceptado'))">
+  <form [formGroup]="form">
+    <div class="card">
+      <div class="card-header bg-white">
+        <h4>Prueba psicotécnica</h4>
+      </div>
+      <div class="card-body bg-light">
+        <div class="card">
+          <div class="card-body ">
+
+            <!-- Tiempo de permanencia -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="adjunto">Adjunto</label>
+              <div class="col-sm-8">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="adjunto" id="adjunto" formControlName="adjunto">
+                  <label class="custom-file-label" for="adjunto">Seleccione un archivo</label>
+                </div>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['tiempoPermanencia'].invalid &&
+                   form.controls['tiempoPermanencia'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Tiempo de permanencia -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="conclusion">Tiempo de permanencia</label>
+              <div class="col-sm-8">
+                <textarea name="conclusion" id="conclusion"
+                          rows="3" class="form-control"
+                          formControlName="conclusion"
+                          placeholder="Ingrese la conclusión">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['conclusion'].invalid &&
+                   form.controls['conclusion'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+            <!---->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,95 @@
+
+<div id="content-wrapper">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 text-center mt-3">
+
+      <div class="btn-group">
+        <button
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                [routerLink]="'../actividades/datos-personales'">
+          Datos personales
+        </button>
+
+        <button *ngFor="let actividad of actividades"
+                [hidden]="!isActividadAsignada(actividad.codigo)"
+                [ngClass]="(actividadesService.getEstadoActividad(actividad.codigo) == 'notificado') ? 'btn btn-danger' : 'btn btn-primary'"
+                type="button"
+                routerLinkActive="active"
+                [routerLink]="actividad.path">
+          {{ actividad.nombre}}
+        </button>
+
+        <ng-template ngxPermissionsOnly="ADG">
+          <button type="button" class="btn btn-primary"
+                  routerLinkActive="active"
+                  routerLink="../actividades/consolidado">
+            Consolidado
+          </button>
+        </ng-template>
+
+
+        <!--<button
+
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                [routerLink]="'../actividades/historial-judicial'">
+          Historial judicial
+        </button>
+        <button
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                [routerLink]="'../actividades/visita-domiciliaria'">
+          Visita Domiciliaria
+        </button>
+
+        <button
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                routerLink="../actividades/verificacion-academica">
+          Verificacion academica
+        </button>
+        <button
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                routerLink="../actividades/verificacion-laboral">
+          Verificacion laboral
+        </button>
+        <button
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                routerLink="../actividades/dictamen grafologico">
+          Dictamen grafologico
+        </button>
+        <button
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                routerLink="../actividades/decadactilar">
+          Decadactilar
+        </button>
+        <button *ngIf="isActividadAsignada('PP')"
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                routerLink="../actividades/prueba-psicotecnica">
+          Prueba psicotecnica
+        </button>
+        <button
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                routerLink="../actividades/evaluacion-financiera">
+          Evaluacion financiera
+        </button>
+        <button type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                routerLink="../actividades/consolidado">
+          Consolidado
+        </button>-->
+      </div>
+    </div>
+    <div class="col-md-12 mt-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+</div>
