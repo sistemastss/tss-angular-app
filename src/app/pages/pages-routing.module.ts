@@ -11,11 +11,15 @@ const routes: Routes = [
         loadChildren: './inicio/inicio.module#InicioModule'
       },
       {
+        path: 'servicios',
+        loadChildren: './servicios/servicios.module#ServiciosModule'
+      },
+      {
         path: 'operaciones',
         loadChildren: './operaciones/operaciones.module#OperacionesModule'
       },
       { path: 'clientes',
-        loadChildren: './customer/customer.module#CustomerModule'
+        loadChildren: './clientes/clientes.module#ClientesModule'
       },
       { path: 'actividades',
         loadChildren: './actividades/actividades.module#ActividadesModule'

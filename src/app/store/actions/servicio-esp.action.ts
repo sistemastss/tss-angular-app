@@ -2,16 +2,15 @@ import {Action} from '@ngrx/store';
 import {ServicioEsp} from '../../@models/servicio-esp';
 
 export enum ServicioEspActionTypes {
-  CREAR = 'CREAR',
-  EDITAR = 'EDITAR',
-  ELIMINAR = 'ELIMINAR'
+  CREAR = '[ESP] CREAR',
+  EDITAR = '[ESP] EDITAR',
+  ELIMINAR = '[ESP] ELIMINAR'
 }
 
 export class CrearServicioEsp implements Action {
   readonly type = ServicioEspActionTypes.CREAR;
   constructor(public payload: ServicioEsp) {}
 }
-
 
 export class EditarServicioEsp implements Action {
   readonly type = ServicioEspActionTypes.EDITAR;
@@ -23,4 +22,4 @@ export class EliminarServicioEsp implements Action {
   constructor(public id: number) {}
 }
 
-export type ServicioEspActions = CrearServicioEsp | EditarServicioEsp | EliminarServicioEsp;
+export type ServicioEspAction = CrearServicioEsp | EditarServicioEsp | EliminarServicioEsp;

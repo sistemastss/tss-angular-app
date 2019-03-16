@@ -69,7 +69,7 @@ export class EspComponent implements OnInit {
     { title: 'sin filtro', value: 'sinFiltro' },
     { title: 'centro de costo', value: 'centroCosto' },
     { title: 'ciudad', value: 'ciudad' },
-    { title: 'nombre del cliente', value: 'cliente' },
+    { title: 'nombre del clientes', value: 'cliente' },
     { title: 'identificacion de evaluado', value: 'identificacion' },
   ];
 
@@ -95,7 +95,7 @@ export class EspComponent implements OnInit {
         (err: any) => console.error(err.error.message)
       );
 
-      // servicios esp para cliente
+      // servicios esp para clientes
     } else if (this.permissions.CLI) {
 
       const clienteId = this.loginService.user.id;
@@ -318,7 +318,7 @@ export class EspComponent implements OnInit {
 
 
   notificarClienteAndFacturacion(item: any) {
-    const notificar = confirm('Desea notificar el servicio a facturacion y al cliente?');
+    const notificar = confirm('Desea notificar el servicio a facturacion y al clientes?');
 
     if (notificar) {
       const estado = 'finalizado';

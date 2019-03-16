@@ -10,14 +10,14 @@ export class SagService {
 
 
   /**
-   * Base api to realize request
+   * Base api to realize centro-costo
    * @var apiUrl
    */
   protected readonly apiUrl = 'http://127.0.0.1:8000/api/';
 
 
   /**
-   * Headers to send whit request
+   * Headers to send whit centro-costo
    * @var httpOptions
    */
   protected readonly httpOptions = {
@@ -34,7 +34,7 @@ export class SagService {
 
 
   /**
-   * Realize a get request to the api
+   * Realize a get centro-costo to the api
    * @param url resource url
    * @return Observable<any>
    */
@@ -44,7 +44,7 @@ export class SagService {
 
 
   /**
-   * Realize a post request to the api
+   * Realize a post centro-costo to the api
    * @param url: resource url
    * @param data: javascript object with information to be create
    * @return Observable<any>
@@ -55,7 +55,7 @@ export class SagService {
 
 
   /**
-   * Realize a put request to the api
+   * Realize a put centro-costo to the api
    * @param url: resource url
    * @param data: javascript object with information to be updated
    * @return Observable<any>
@@ -66,7 +66,7 @@ export class SagService {
 
 
   /**
-   * Realize a delete request to the api
+   * Realize a delete centro-costo to the api
    * @param url: resource url
    * @return Observable<any>
    */

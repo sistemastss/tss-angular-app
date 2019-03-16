@@ -14,13 +14,12 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { MailServiceService} from './services/mail-service.service';
 import { StoreModule } from '@ngrx/store';
 import { centroCostoReducer, investigacionReducer, servicioEspReducer } from './store/reducers/reducers';
-import { InvestigacionesComponent } from './src/app/pages/customer/investigaciones/investigaciones.component';
 import { WordsLimiterPipe } from './pipes/words-limiter.pipe';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {effects} from './store/effects';
-import { reducers, metaReducers } from './reducers';
-import { environment } from '../environments/environment';
+import {environment} from '../environments/environment';
+import {reducers} from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { environment } from '../environments/environment';
     VistaDomiciliariaComponent,
     VerificacionAcademitaComponent,
     DataTableComponent,
-    InvestigacionesComponent,
     WordsLimiterPipe,
   ],
   imports: [
@@ -39,17 +37,11 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     ModalModule,
     NavBarModule,
-    StoreModule.forRoot({
-      centroCosto: centroCostoReducer,
-      servicioEsp: servicioEspReducer,
-      investigacion: investigacionReducer
-    }),
-    EffectsModule.forRoot(effects),
-    StoreDevtoolsModule.instrument(),
-    // Specify your library as an import
     NgxPermissionsModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    // Specify your library as an import
+    StoreModule.forRoot(reducers),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot(effects)
   ],
   providers: [ActividadesService, MailServiceService],
   bootstrap: [AppComponent]

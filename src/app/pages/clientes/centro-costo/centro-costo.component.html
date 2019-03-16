@@ -14,74 +14,59 @@
                 <select name="cliente"
                         id="cliente"
                         class="form-control"
-                        formControlName="cliente">
-                  <option value="">Seleccione una opcion</option>
-                  <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.nombre}}</option>
+                        formControlName="clienteId">
+                  <option value="">Seleccione un cliente</option>
+                  <option *ngFor="let cliente of clientes"
+                          [value]="cliente.id">{{cliente.nombre}}
+                  </option>
                 </select>
               </div>
             </div>
             <div class="form-group row">
               <label for="contacto" class="col-sm-2 col-form-label">
-                Nombre de contacto
+                Solicitante
               </label>
               <div class="col-sm-10">
-                <input type="text" id="contacto" placeholder="Ingrese el contacto" class="form-control">
+                <input type="text" id="contacto"
+                       placeholder="Ingrese el nombre completo del solicitante"
+                       class="form-control" formControlName="solicitante">
               </div>
             </div>
             <div class="form-group row">
               <label for="contacto-mail" class="col-sm-2 col-form-label">
-                Correo electronico de contacto
+                Correo electronico del solicitante
               </label>
               <div class="col-sm-10">
-                <input type="text" id="contacto-mail" placeholder="Ingrese el correo del contacto" class="form-control">
+                <input type="text" id="contacto-mail"
+                       placeholder="Ingrese un correo valido"
+                       class="form-control"
+                       formControlName="correoSolicitante">
               </div>
             </div>
 
-            <!--<div class="form-group row">
-              <label class="col-sm-2 col-form-label">Facturar a</label>
-              <div class="col-sm-10">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio"
-                         [value]="true"
-                         id="facturar-true"
-                         name="facturar"
-                         formControlName="facturar">
-                  <label class="form-check-label" for="facturar-true"></label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio"
-                         [value]="false"
-                         id="facturar-false"
-                         name="facturar" [checked]="true"
-                         formControlName="facturar">
-                  <label class="form-check-label" for="facturar-false">No</label>
-                </div>
-              </div>
-            </div>-->
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Orden de compra</label>
               <div class="col-sm-10">
-                <div class="form-check form-check-inline"
-                     (click)="onChageOrdenCompra('yes')">
-                  <input class="form-check-input" type="radio"
-                         [value]="true"
+                <div class="form-check form-check-inline" >
+                  <input (click)="switchOrdenCompra(true)"
+                         class="form-check-input" type="radio"
+                         value="true"
                          id="orden-si"
-                         name="ordenCompra"
-                         formControlName="ordenCompra">
+                         name="ordenCompra">
                   <label class="form-check-label" for="orden-si">Si</label>
                 </div>
-                <div class="form-check form-check-inline"
-                     (click)="onChageOrdenCompra('no')">
-                  <input class="form-check-input" type="radio"
-                         [value]="false"
+                <div class="form-check form-check-inline">
+                  <input (click)="switchOrdenCompra(false)"
+                         class="form-check-input" type="radio"
+                         value="false"
                          id="orden-no"
-                         name="ordenCompra" [checked]="true"
-                         formControlName="ordenCompra">
+                         name="ordenCompra"
+                         checked>
                   <label class="form-check-label" for="orden-no">No</label>
                 </div>
               </div>
             </div>
-            <div *ngIf="isOrdenCompra">
+            <div *ngIf="ordenCompra" class="animated " [ngClass]="ordenCompra ? 'fade-in' : 'fade-out'">
               <div class="form-group row">
                 <label for="num-orden-compra" class="col-sm-2 col-form-label">Numero de la orden de compra</label>
                 <div class="col-sm-10">
@@ -116,3 +101,7 @@
   </div>
 </div>
 </div>
+
+<pre>
+  {{ form.value | json }}
+</pre>

@@ -132,7 +132,7 @@ export class RequestEspComponent implements OnInit, OnDestroy {
         const data = {
           mailTo: 'analistaEspToCliente',
           mailData: {
-            to: 'styven21121@gmail.com', // value.data[0].centroCosto.cliente.correo,
+            to: 'styven21121@gmail.com', // value.data[0].centroCosto.clientes.correo,
             personaDestino: value.data.clienteId,
             centroCostoId: value.data.id,
           }

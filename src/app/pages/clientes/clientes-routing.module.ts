@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CustomerComponent } from './customer.component';
-import { RequestComponent } from './request/request.component';
+import { ClientesComponent } from './clientes.component';
+import { CentroCostoComponent } from './centro-costo/centro-costo.component';
 import { RequestEspComponent } from './request-esp/request-esp.component';
 import { IndexComponent } from './index/index.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
@@ -11,7 +11,7 @@ import {RequestInvestigacionComponent} from './request-investigacion/request-inv
 const routes: Routes = [
   {
     path: '',
-    component: CustomerComponent,
+    component: ClientesComponent,
     children: [
       {
         path: 'index',
@@ -23,7 +23,7 @@ const routes: Routes = [
           }
         }
       },
-      { path: 'solicitud', component: RequestComponent },
+      { path: 'solicitud', component: CentroCostoComponent },
       {
         path: 'solicitud-servicios',
         component: SolicitudServiciosComponent,
@@ -43,4 +43,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CustomerRoutingModule { }
+export class ClientesRoutingModule { }

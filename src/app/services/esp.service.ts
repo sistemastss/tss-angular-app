@@ -7,7 +7,7 @@ import {Store} from '@ngrx/store';
 import { LoginService } from './login.service';
 import {ServicioEsp} from '../@models/servicio-esp';
 import {Observable} from 'rxjs';
-import {CrearServicioEsp} from '../store/actions/servicio-esp.actions';
+import {CrearServicioEsp} from '../store/actions/servicio-esp.action';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class EspService {
    * 2.1. actualizar servicio esp
    * 2.2. eliminar servicio esp
    * 3. guardar servicio esp en la base de datos
-   * 4.listar servicios esp creados por el cliente o
+   * 4.listar servicios esp creados por el clientes o
    * mostrar todos los servicios esp al adminstrador
    */
 

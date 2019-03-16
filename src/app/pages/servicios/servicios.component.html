@@ -4,9 +4,9 @@
     <div class="card-body">
 
       <div class="table-responsive">
-        <!-- TABLE OF ESP_SERVICES -->
+        <!-- tabla de servicios -->
 
-        <div class="form-group mt-2 text-right">
+        <!--<div class="form-group mt-2 text-right">
           <div class="input-group input-group-sm col-sm-6 offset-sm-6">
             <div class="input-group-prepend">
               <span class="input-group-text">Filtrar por</span>
@@ -19,55 +19,36 @@
 
             <button type="button" (click)="filtrarServicios(filtro.value, busqueda.value)" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Buscar</button>&nbsp;
           </div>
-        </div>
-
-        <!--<div class="form-group row mt-2">
-          <div class="input-group input-group-sm col-sm-4">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Fecha minima</span>
-            </div>
-            <input type="date" class="form-control" #minDate>
-          </div>
-          <div class="input-group input-group-sm col-sm-4">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Fecha Maxima</span>
-            </div>
-            <input type="date" class="form-control" #maxDate>
-          </div>
-          <div class="input-group col-sm-4">
-            <div class="d-block">
-              <button type="button" (click)="filterServicesEsp(minDate.value, maxDate.value)" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aplicar filtro</button>&nbsp;
-              <button (click)="loadServiciosEsp()" type="reset" class="btn btn-danger btn-sm"><i class="fa fa-sync"></i> Reiniciar</button>
-            </div>
-          </div>
         </div>-->
 
         <table class="table table-bordered table-hover table-sm">
           <thead>
-          <tr>
-            <th *ngIf="permissions.ADG" class="text-capitalize">eliminar</th>
-            <th class="text-capitalize">centro de costo </th>
-            <th class="text-capitalize">fecha </th>
-            <th class="text-capitalize">cliente </th>
-            <th class="text-capitalize">ciudad </th>
-            <th class="text-capitalize">evaluado </th>
-            <th class="text-capitalize">identificacion </th>
-            <th class="text-capitalize">estado de servicio </th>
-            <th class="text-capitalize">actividades solicitadas </th>
-            <th class="text-capitalize">adjunto</th>
-            <th class="text-capitalize">informe</th>
-            <th class="text-capitalize">notificación </th>
+          <tr class="text-capitalize">
+            <th [ngxPermissionsOnly]="ADG">eliminar</th>
+            <th>centro de costo </th>
+            <th>fecha </th>
+            <th>ciudad</th>
+            <th>solicitante</th>
+            <th>servicio solicitado</th>
+            <th>adjunto</th>
+            <th>informe</th>
+            <th>estado de servicio</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of data">
-            <td *ngIf="permissions.ADG"><button (click)="deleteEsp(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-            <td> {{ item.centroCosto.id }} </td>
-            <td> {{ item.timestamps.fechaCreacion }} </td>
-            <td> {{ item.centroCosto.cliente }} </td>
-            <td> {{ item.ciudadDesarrollo }} </td>
-            <td> {{ item.nombre }} </td>
-            <td> {{ item.documento }} </td>
+          <tr *ngFor="let item of servicios$ | async">
+            <td *ngIf="permissions.ADG">
+              <button (click)="eliminarServicio(item.id)" class="btn btn-danger">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+            <td> {{ item.centroCosto }} </td>
+            <td> {{ item.fecha }} </td>
+            <td> {{ item.ciudad }} </td>
+            <td> {{ item.solicitante }} </td>
+            <td> {{ item.servicioSolicitado }} </td>
+            <td> {{ item.adjunto }} </td>
+            <td> {{item.informe }} </td>
             <td>
               <div [ngSwitch]="item.estado">
                 <div *ngSwitchCase="'cargado'">
@@ -88,22 +69,14 @@
               </div>
             </td>
 
-            <td>
+            <!--<td>
               <div class="form-group text-center">
-                <button class="btn btn-warning" (click)="onShowModal(item)">
+                <button class="btn btn-warning" (click)="mostrarModal(item.id)">
                   <i class="fa fa-eye"></i>
                 </button>
               </div>
-            </td>
-            <td>
-              <div class="form-group text-center" *ngIf="item.documento">
-                <a [href]="url + item.documento" class="btn btn-primary">
-                  <i class="fa fa-file"></i>
-                </a>
-              </div>
-            </td>
-            <td></td>
-            <td>
+            </td>-->
+            <!--<td>
               <button *ngIf="item.estado == 'completado' && (permissions.AESP || permissions.ADG)"
                       (click)="notificarDirectorOperacion(item)" class="btn btn-success btn-sm">
                 <i class="fa fa-lightbulb"></i>
@@ -112,7 +85,7 @@
                       (click)="notificarClienteAndFacturacion(item)" class="btn btn-danger btn-sm">
                 <i class="fa fa-lightbulb"></i>
               </button>
-            </td>
+            </td>-->
           </tr>
           </tbody>
         </table>
@@ -125,14 +98,14 @@
 
 <!-- Modal -->
 
-<div class="modal-backdrop fade" [ngClass]="{'show': toggle, 'd-none': !toggle}"></div>
+<div class="modal-backdrop fade" [ngClass]="{'show': palancaModal, 'd-none': !palancaModal}"></div>
 
-<div  class="modal fade modal-container" [ngClass]="{'show d-block': toggle, 'd-none': !toggle}">
+<div  class="modal fade modal-container" [ngClass]="{'show d-block': palancaModal, 'd-none': !palancaModal}">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalVerticalLabel">Actividades Aplicadas</h5>
-        <button type="button" class="close" (click)="onCloseModal()">
+        <button type="button" class="close" (click)="cerrarModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -148,11 +121,11 @@
               </div>
             </div>
           </li>
-          <li class="list-group-item" *ngFor="let actividad of actividades">
+          <li class="list-group-item" *ngFor="let actividad of actividades$">
             <div class="row">
               <div class="col-sm-6">
                 <ng-template  [ngxPermissionsOnly]="['ADG', 'AESP', 'FRCE', 'DOPE']">
-                  <a  class="link" (click)="loadActividades(actividad)">
+                  <a  class="link" (click)="cargarActividad(actividad)">
                     {{ actividad.nombre }}
                   </a>
                 </ng-template>
@@ -201,7 +174,7 @@
         </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="onCloseModal()">Cerrar</button>
+        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
       </div>
     </div>
   </div>

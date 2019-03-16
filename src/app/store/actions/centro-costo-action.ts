@@ -2,8 +2,8 @@ import {Action} from '@ngrx/store';
 import {CentroCosto} from '../../@models/centro-costo';
 
 export enum CentroCostoActionTypes {
-  CREAR = 'CREAR',
-  ELIMINAR = 'ELIMINAR'
+  CREAR = '[CENTRO_COSTO] CREAR',
+  ELIMINAR = '[CENTRO_COSTO] ELIMINAR'
 }
 
 export class CrearCentroCosto implements Action {
@@ -15,4 +15,4 @@ export class EliminarCentroCosto implements Action {
   readonly type = CentroCostoActionTypes.ELIMINAR;
 }
 
-export type CentroCostoActions = CrearCentroCosto| EliminarCentroCosto;
+export type CentroCostoAction = CrearCentroCosto| EliminarCentroCosto;

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerRoutingModule } from './customer-routing.module';
-import { CustomerComponent } from './customer.component';
+import { ClientesRoutingModule } from './clientes-routing.module';
+import { ClientesComponent } from './clientes.component';
 import { IndexComponent } from './index/index.component';
-import { RequestComponent } from './request/request.component';
+import { CentroCostoComponent } from './centro-costo/centro-costo.component';
 import { RequestEspComponent } from './request-esp/request-esp.component';
 import { CardModule} from '../../card/card.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -14,20 +14,20 @@ import { SolicitudServiciosComponent } from './solicitud-servicios/solicitud-ser
 // @ts-ignore
 @NgModule({
   declarations: [
-    CustomerComponent,
+    ClientesComponent,
     IndexComponent,
-    RequestComponent,
+    CentroCostoComponent,
     RequestEspComponent,
     RequestInvestigacionComponent,
     SolicitudServiciosComponent
   ],
   imports: [
     CommonModule,
-    CustomerRoutingModule,
+    ClientesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     CardModule,
     NgxPermissionsModule.forChild()
   ]
 })
-export class CustomerModule { }
+export class ClientesModule { }

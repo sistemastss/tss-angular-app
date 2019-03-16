@@ -2,11 +2,11 @@ import {Action} from '@ngrx/store';
 import {Investigacion} from '../../@models/Investigacion';
 
 export enum InvestigacionActionTypes {
-  CREAR = 'CREAR',
-  ACTUALIZAR = 'ACTUALIZAR',
-  ELIMINAR = 'ELIMINAR',
-  GUARDAR = 'GUARDAR',
-  REMOVER = 'REMOVER'
+  CREAR = '[INVESTIGACION] CREAR',
+  ACTUALIZAR = '[INVESTIGACION] ACTUALIZAR',
+  ELIMINAR = '[INVESTIGACION] ELIMINAR',
+  GUARDAR = '[INVESTIGACION] GUARDAR',
+  REMOVER = '[INVESTIGACION] REMOVER'
 }
 
 export class CrearInvestigacion implements Action {

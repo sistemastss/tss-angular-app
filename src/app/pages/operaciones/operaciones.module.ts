@@ -9,7 +9,7 @@ import {CardModule} from '../../card/card.module';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import { InvestigacionesComponent } from './investigaciones/investigaciones.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ServiciosComponent } from './servicios/servicios.component';
+import { ServiciosComponent } from '../servicios/servicios.component';
 
 @NgModule({
   declarations: [

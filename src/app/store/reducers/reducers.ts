@@ -1,11 +1,13 @@
 import {ServicioEsp} from '../../@models/servicio-esp';
-import {ServicioEspActions, ServicioEspActionTypes} from '../actions/servicio-esp.actions';
+import {ServicioEspAction, ServicioEspActionTypes} from '../actions/servicio-esp.action';
 import {CentroCosto} from '../../@models/centro-costo';
-import {CentroCostoActions, CentroCostoActionTypes} from '../actions/centro-costo-actions';
+import {CentroCostoAction, CentroCostoActionTypes} from '../actions/centro-costo-action';
 import {Investigacion} from '../../@models/Investigacion';
 import {InvestigacionActions, InvestigacionActionTypes} from '../actions/investigacion.action';
+import {Servicio} from '../../@models/servicio';
+import {ServiciosAction, ServiciosActionTypes} from '../actions/servicios.action';
 
-export const servicioEspReducer = (state: ServicioEsp[] = [], action: ServicioEspActions): ServicioEsp[] => {
+export const servicioEspReducer = (state: ServicioEsp[] = [], action: ServicioEspAction): ServicioEsp[] => {
   switch (action.type) {
     case ServicioEspActionTypes.CREAR:
       return [...state, action.payload];
@@ -18,13 +20,16 @@ export const servicioEspReducer = (state: ServicioEsp[] = [], action: ServicioEs
   }
 };
 
-export const centroCostoReducer = (state: CentroCosto, action: CentroCostoActions): CentroCosto => {
+export const centroCostoReducer = (state: CentroCosto, action: CentroCostoAction): CentroCosto => {
   switch (action.type) {
     case CentroCostoActionTypes.CREAR:
       return action.payload;
 
     case CentroCostoActionTypes.ELIMINAR:
       return null;
+
+    default:
+      return state;
   }
 };
 
@@ -47,5 +52,16 @@ export const investigacionReducer = (state: Investigacion[] = [], action: Invest
 
     default:
       return state;
+  }
+};
+
+
+export const serviciosReducer = (state: Servicio[] = [], action: ServiciosAction) => {
+  switch (action.type) {
+    case ServiciosActionTypes.SOLICITAR:
+      return [...state];
+
+    case ServiciosActionTypes.ELIMINAR:
+      return [...state.filter(value => value.id !== action.id)];
   }
 };

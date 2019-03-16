@@ -36,7 +36,6 @@ export class InvestigacionesComponent implements OnInit {
 
   ngOnInit() {
     this.permissions = this._permission.getPermissions();
-    this._investigacion.obtenerInvestigaciones().subscribe(value => this.data = value.data);
   }
 
 
@@ -64,7 +63,6 @@ export class InvestigacionesComponent implements OnInit {
     console.log(this.filtrarActividades());
     const actividades = this.filtrarActividades();
     actividades.forEach(value => {
-      this._investigacion.aplicarActividades()
     })
 
   }

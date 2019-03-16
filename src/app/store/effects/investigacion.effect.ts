@@ -16,21 +16,4 @@ export class InvestigacionEffect {
     private _investigacion: InvestigacionService
   ) {}
 
-  @Effect()
-  guardarInvestigacaiones$: Observable<Action> = this.actions$.pipe(
-    ofType(InvestigacionActionTypes.GUARDAR),
-    mergeMap(() => this._investigacion.obtenerEstadoInvestigaciones()
-      .pipe(
-        map((data: Investigacion[]) => {
-          this._investigacion.almacenarInvestigaciones({data, centroCostoId: 1}).subscribe(
-            response => console.log(response),
-            error => console.log(error)
-          );
-          console.log('effect works');
-          return  new RemoverInvestigaciones();
-        }),
-        catchError(() => EMPTY)
-      ))
-  );
-
 }

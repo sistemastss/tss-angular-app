@@ -68,7 +68,7 @@ export class RequestInvestigacionComponent implements OnInit {
         this._investigacion.almacenarInvestigaciones(1,  value).subscribe(
           respose => {
             console.log(respose);
-            alert('Servicios de investigacion creados con exito');
+            alert('Servicio de investigacion creados con exito');
           },
           error => console.log(error)
         );

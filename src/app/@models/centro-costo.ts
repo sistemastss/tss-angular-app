@@ -1,8 +1,7 @@
 export interface CentroCosto {
   clienteId: number;
-  nombreContacto: string;
-  correo: string;
-  ordenCompra: boolean;
+  solicitante: string;
+  correoSolicitante: string;
   numeroOrdenCompra?: number;
   adjunto?: string;
 }

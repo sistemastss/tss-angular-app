@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BASE_API } from '../@models/app-settings';
+import {BASE_API, config} from '../@models/app-settings';
+import {map} from 'rxjs/operators';
+import {CentroCosto} from '../@models/centro-costo';
+import {Store} from '@ngrx/store';
+import {CrearCentroCosto} from '../store/actions/centro-costo-action';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +64,15 @@ export class DataService {
     },
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private store: Store<any>) {}
+
+
+
+  /*static almacenarCentroCosto(centroCosto: CentroCosto) {
+    localStorage.setItem('centroCosto', JSON.stringify(centroCosto));
+  }*/
+
 
   httpGet(url: string, baseApi = true) {
     if (baseApi) {
@@ -82,10 +94,6 @@ export class DataService {
     return this.httpGet('servicio-esp');
   }
 
-  getServicioEsp(servicioEspId: number) {
-    return this.httpGet(`servicio-esp/${servicioEspId}`);
-  }
-
   getUsuarioServiciosEsp(usuarioId: number) {
     return this.httpGet(`usuario/${usuarioId}/servicios-esp`);
   }
@@ -98,22 +106,6 @@ export class DataService {
     return this.httpGet(`freelance/${usuarioId}/servicios-esp/${servicioEspId}`);
   }
 
-  getServicioEspActividades(servicioEspId: number) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/actividades`);
-  }
-
-  getPersonasEvaluadas() {
-    return this.httpGet('persona_evaluada');
-  }
-
-  getPersonaEvaluada(id: number) {
-    return this.httpGet('persona_evaluada/' + id);
-  }
-
-  funcionarios(rolId) {
-    return this.httpGet('funcionarios/' + rolId);
-  }
-
   frelance() {
     return this.httpGet('freelance');
   }
@@ -121,24 +113,7 @@ export class DataService {
   asignarFuncionario(body: object) {
     return this.httpPost('asignar-actividad', body);
   }
-
-  asignarActividad(actividadId: number, body: object) {
-    const url = `actividad-aplicada/${actividadId}/actividad-asignada`;
-    return this.httpPost(url, body);
-  }
-
-  getActividadesAsignadas(userId: number) {
-    return this.httpGet('actividades-asignadas/' + userId);
-  }
-
-  updateEstadoActividad(actividadId, body: object) {
-    return this.httpPut('actividad-aplicada/' + actividadId, body);
-  }
-
-  updateEstadoVisitaDomciciliaria(servicioEspId, body) {
-    return this.httpPut(`servicio-esp/${servicioEspId}/visita-domiciliaria`, body);
-  }
-
+  
   getClientes() {
     return this.httpGet('clientes');
   }
@@ -149,14 +124,7 @@ export class DataService {
   getHistorialJudicial(servicioEspId: number) {
     return this.httpGet(`servicio-esp/${servicioEspId}/historial-judicial`);
   }
-
-  setHistorialJudicial(servicioEspId: number, body: any) {
-    return this.httpPost(`servicio-esp/${servicioEspId}/historial-judicial`, body);
-  }
-
-  updateHistorialJudicial(historialJudicialId: number, body: any) {
-    return this.httpPut('historial-judicial/' + historialJudicialId, body);
-  }
+  
 
 
   /**
@@ -168,85 +136,13 @@ export class DataService {
     return this.httpPut(`servicio-esp/${servicioEspId}`, body);
   }
 
-  /**
-   *
-   * Visita domiciliaria
-   */
-
-  getVerificacionDocumental(servicioEspId: number) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/verificacion-documental`);
-  }
-
-  setVerificacionDocumental(servicioEspId: number, body: any) {
-    return this.httpPost(`servicio-esp/${servicioEspId}/verificacion-documental`, body);
-  }
-
-  updateVerificacionDocumental(verificacionDocumentalId: number, body: any) {
-    return this.httpPut('verificacion-documental/' + verificacionDocumentalId, body);
-  }
+ 
 
 
-  getEstadoSalubridad(servicioEspId: any) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/estado-salubridad`);
-  }
-
+  
   setEstadoSalubridad(servicioEspId: number, body: any) {
     return this.httpPost(`servicio-esp/${servicioEspId}/estado-salubridad`, body);
   }
-
-  updateEstadoSalubridad(estadoSalubridadId: number, body: any) {
-    return this.httpPut('estado-salubridad/' + estadoSalubridadId, body);
-  }
-
-
-  getNucleoFamiliar(servicioEspId: any) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/nucleo-familiar`);
-  }
-
-  setNucleoFamiliar(servicioEspId: number, body: any) {
-    return this.httpPost(`servicio-esp/${servicioEspId}/nucleo-familiar`, body);
-  }
-
-  updateNucleoFamiliar(informacionFamiliarId: number, body: any) {
-    return this.httpPut('nucleo-familiar/' + informacionFamiliarId, body);
-  }
-
-
-  getEntornoHabitacional(servicioEspId: any) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/entorno-habitacional`);
-  }
-
-  setEntornoHabitacional(servicioEspId: number, body: any) {
-    return this.httpPost(`servicio-esp/${servicioEspId}/entorno-habitacional`, body);
-  }
-
-  updateEntornoHabitacional(entornoHabitacionalId: number, body: any) {
-    return this.httpPut('entorno-habitacional/' + entornoHabitacionalId, body);
-  }
-
-
-  getModusVivendi(servicioEspId: any) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/modus-vivendi`);
-  }
-
-  setModusVivendi(servicioEspId: number, body: any) {
-    return this.httpPost(`servicio-esp/${servicioEspId}/modus-vivendi`, body);
-  }
-
-  updateModusVivendi(entornoHabitacionalId: number, body: any) {
-    return this.httpPut('modus-vivendi/' + entornoHabitacionalId, body);
-  }
-
-
-  visitaDomiciliariaCompletada(servicioEspId) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/visita-domiciliaria`);
-  }
-
-
-  /**
-   * Verificacion laboral
-   */
-
 
   getVerificacionLaboral(servicioEspId: any) {
     return this.httpGet(`servicio-esp/${servicioEspId}/verificacion-laboral`);
@@ -260,44 +156,14 @@ export class DataService {
     return this.httpPut('verificacion-laboral/' + id, body);
   }
 
-  deleteVerificacionLaboral(id) {
-    return this.http.delete(BASE_API + 'verificacion-laboral/' + id);
+  obtenerServicios() {
+    const url = config.api + '/servicios';
+    return this.http.get(url, config.httpOpts).pipe(
+      map((value: any) => value.data)
+    );
   }
 
-
-
-  getDictamenGrafologico(servicioEspId: any) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/dictamen-grafologico`);
+  visitaDomiciliariaCompletada(servicioEsp: number) {
+    return this.httpGet(`servicio-esp/${servicioEsp}/verificacion-laboral`);
   }
-
-  setDictamenGrafologico(servicioEspId: number, body: any) {
-    return this.httpPost(`servicio-esp/${servicioEspId}/dictamen-grafologico`, body);
-  }
-
-  updateDictamenGrafologico(id: number, body: any) {
-    return this.httpPut('dictamen-grafologico/' + id, body);
-  }
-
-
-  /**
-   * Verificacion academica
-   */
-
-  getVerificacionAcademica(servicioEspId: any) {
-    return this.httpGet(`servicio-esp/${servicioEspId}/verificacion-academica`);
-  }
-
-  setVerificacionAcademica(servicioEspId: number, body: any) {
-    return this.httpPost(`servicio-esp/${servicioEspId}/verificacion-academica`, body);
-  }
-
-  updateVerificacionAcademica(id: number, body: any) {
-    return this.httpPut('verificacion-academica/' + id, body);
-  }
-
-  deleteVerificacionAcademica(id) {
-    return this.http.delete(BASE_API + 'verificacion-academica/' + id);
-  }
-
-
 }
