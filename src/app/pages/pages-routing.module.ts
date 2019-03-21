@@ -8,14 +8,10 @@ const routes: Routes = [
     children: [
       {
         path: 'inicio',
-        loadChildren: './inicio/inicio.module#InicioModule'
+        loadChildren: './servicio/servicio.module#ServicioModule'
       },
       {
         path: 'servicios',
-        loadChildren: './servicios/servicios.module#ServiciosModule'
-      },
-      {
-        path: 'operaciones',
         loadChildren: './operaciones/operaciones.module#OperacionesModule'
       },
       { path: 'clientes',
@@ -23,6 +19,10 @@ const routes: Routes = [
       },
       { path: 'actividades',
         loadChildren: './actividades/actividades.module#ActividadesModule'
+      },
+      {
+        path: 'investigacion',
+        loadChildren: './investigacion/investigacion.module#InvestigacionModule'
       },
       {
         path: '',

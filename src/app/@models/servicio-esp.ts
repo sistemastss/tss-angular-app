@@ -8,6 +8,6 @@ export interface ServicioEsp {
   correo: string;
   ciudadDesarrollo: string;
   anexo?: string;
-  observaciones: string;
+  descripcion: string;
   actividades: any[];
 }

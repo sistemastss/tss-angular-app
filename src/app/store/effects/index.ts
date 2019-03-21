@@ -1,5 +1,5 @@
-import {InvestigacionEffect} from './investigacion.effect';
+import {ServiciosEffect} from './servicios.effect';
 
 export const effects = [
-  InvestigacionEffect
+  ServiciosEffect
 ];

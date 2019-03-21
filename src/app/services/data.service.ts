@@ -1,10 +1,14 @@
+import { Servicio } from './../@models/servicio';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {BASE_API, config} from '../@models/app-settings';
 import {map} from 'rxjs/operators';
-import {CentroCosto} from '../@models/centro-costo';
 import {Store} from '@ngrx/store';
-import {CrearCentroCosto} from '../store/actions/centro-costo-action';
+import {Observable} from 'rxjs';
+import {CentroCosto} from '../@models/centro-costo';
+import {ServicioEsp} from '../@models/servicio-esp';
+import {Helper} from '../@classes/helper-class';
+import {Investigacion} from '../@models/Investigacion';
 
 @Injectable({
   providedIn: 'root'
@@ -68,11 +72,41 @@ export class DataService {
               private store: Store<any>) {}
 
 
+  almacenarCentroCosto(payload: CentroCosto) {
+    const url = config.api + '/centro-costo';
+    return this.http.post(url, payload);
+  }
 
-  /*static almacenarCentroCosto(centroCosto: CentroCosto) {
-    localStorage.setItem('centroCosto', JSON.stringify(centroCosto));
-  }*/
+  almacenarEsp(centroCosto: number, payload: ServicioEsp[]) {
+    const url = Helper.route(['centro-costo', 'servicio-esp'], centroCosto);
+    return this.http.post(url, payload, config.httpOpts);
+  }
 
+  almacenarInvestigaciones(centroCosto: number, payload: Investigacion[]) {
+    const url = Helper.route(['centro-costo', 'investigaciones'], centroCosto);
+    return this.http.post(url, payload, config.httpOpts);
+  }
+
+  cargarServicios() {
+    const url = config.api + '/servicios';
+    return this.http.get(url, config.httpOpts).pipe(
+      map((value: any) => value.data as any[])
+    );
+  }
+
+  cargarEsps() {
+    const url = config.api + '/servicio-esp';
+    return this.http.get(url, config.httpOpts).pipe(
+      map((value: any) => value.data as any[])
+    );
+  }
+
+  cargarInvestigaciones() {
+    const url = config.api + '/investigaciones';
+    return this.http.get(url, config.httpOpts).pipe(
+      map((value: any) => value.data as any[])
+    );
+  }
 
   httpGet(url: string, baseApi = true) {
     if (baseApi) {
@@ -113,7 +147,7 @@ export class DataService {
   asignarFuncionario(body: object) {
     return this.httpPost('asignar-actividad', body);
   }
-  
+
   getClientes() {
     return this.httpGet('clientes');
   }
@@ -124,11 +158,11 @@ export class DataService {
   getHistorialJudicial(servicioEspId: number) {
     return this.httpGet(`servicio-esp/${servicioEspId}/historial-judicial`);
   }
-  
+
 
 
   /**
-   * actualizar estado esp
+   * editarServicioEsp estado esp
    * @param servicioEspId
    * @param body
    */
@@ -136,10 +170,10 @@ export class DataService {
     return this.httpPut(`servicio-esp/${servicioEspId}`, body);
   }
 
- 
 
 
-  
+
+
   setEstadoSalubridad(servicioEspId: number, body: any) {
     return this.httpPost(`servicio-esp/${servicioEspId}/estado-salubridad`, body);
   }

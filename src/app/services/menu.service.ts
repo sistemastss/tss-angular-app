@@ -8,24 +8,10 @@ export class MenuService {
   menu = {
     administrador: [
       {
-        path: './operaciones',
-        title: 'Operaciones',
+        path: './servicios',
+        title: 'Servicios',
         icon: 'fa-tasks',
-        color: 'bg-primary',
-        children: [
-          {
-            path: './operaciones/esp',
-            title: 'E.S.P.',
-            color: 'bg-warning',
-            icon: 'fa-check'
-          },
-          {
-            path: './operaciones/investigaciones',
-            title: 'Investigaciones.',
-            color: 'bg-danger',
-            icon: 'fa-check'
-          },
-        ],
+        color: 'bg-primary'
       },
       {
         path: './clientes',
@@ -35,7 +21,7 @@ export class MenuService {
         children: [
           {
             path: './clientes/solicitud',
-            title: 'Nuevo servicio',
+            title: 'Solicitar servicio',
             color: 'bg-success',
             icon: 'fa-plus'
           },
@@ -44,30 +30,16 @@ export class MenuService {
     ],
     cliente: [
       {
-        path  : './clientes/solicitud',
-        title : 'Nuevo servicio',
-        color : 'bg-success',
-        icon  : 'fa-plus',
+        path: './servicios',
+        title: 'Servicios',
+        icon: 'fa-tasks',
+        color: 'bg-primary'
       },
       {
-        path: './operaciones',
-        title: 'Seguimiento',
-        icon: 'fa-tasks',
-        color: 'bg-primary',
-        children: [
-          {
-            path: './operaciones/esp',
-            title: 'E.S.P.',
-            color: 'bg-warning',
-            icon: 'fa-check'
-          },
-          {
-            path: './operaciones/investigaciones',
-            title: 'Investigaciones.',
-            color: 'bg-danger',
-            icon: 'fa-check'
-          },
-        ],
+        path  : './clientes/solicitud',
+        title : 'Solicitar servicio',
+        color : 'bg-success',
+        icon  : 'fa-plus',
       },
     ],
     analistaEsp: [
@@ -88,25 +60,17 @@ export class MenuService {
     ],
     directorOperaciones: [
       {
-        path: './operaciones/esp',
-        title: 'E.S.P.',
-        color: 'bg-warning',
-        icon: 'settings'
+        path: './servicios',
+        title: 'Servicios',
+        icon: 'fa-tasks',
+        color: 'bg-primary'
       },
       {
-        path: './clientes',
-        title: 'Clientes',
-        icon: 'fa-user',
-        color: 'bg-danger',
-        children: [
-          {
-            path: './clientes/solicitud',
-            title: 'Nuevo servicio',
-            color: 'bg-success',
-            icon: 'fa-plus'
-          },
-        ]
-      }
+        path  : './clientes/solicitud',
+        title : 'Nuevo servicio',
+        color : 'bg-success',
+        icon  : 'fa-plus',
+      },
     ]
   };
 

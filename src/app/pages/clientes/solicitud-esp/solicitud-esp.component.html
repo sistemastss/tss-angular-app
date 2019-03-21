@@ -128,26 +128,28 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="contacto" class="col-sm-3 col-form-label">
-                Adjunto
+              <label for="anexo" class="col-sm-3 col-form-label">
+                Anexo
               </label>
               <div class="col-sm-9">
-                <input type="file" id="contacto" class="form-control">
+                <input type="file" id="anexo" class="form-control">
               </div>
             </div>
             <div class="form-group row">
-              <label for="observaciones" class="col-sm-3 col-form-label">Observaciones</label>
+              <label for="descripcion" class="col-sm-3 col-form-label">Descripcion</label>
               <div class="col-sm-9">
                 <textarea
                       cols="30" rows="5"
                       class="form-control"
-                      id="observaciones"
-                      name="observaciones"
-                      placeholder="Observaciones"
-                      formControlName="observaciones">
+                      id="descripcion"
+                      name="descripcion"
+                      placeholder="Descripcion"
+                      formControlName="descripcion">
                 </textarea>
               </div>
             </div>
+
+
 
             <div class="form-group row"  formGroupName="actividades">
               <label class="col-sm-3 col-form-label">Servicios</label>
@@ -179,15 +181,6 @@
                     Verificacion laboral
                   </label>
                 </div>
-                <!--<div class="form-check">
-                  <input class="form-check-input"
-                         type="checkbox" value=""
-                         id="due-dilligence"
-                         formControlName="dueDilligence">
-                  <label class="form-check-label" for="due-dilligence">
-                    Due Dilligence
-                  </label>
-                </div>-->
                 <div class="form-check">
                   <input class="form-check-input"
                          type="checkbox" value=""
@@ -246,19 +239,28 @@
                 </div>
               </div>
             </div>
+
+            <div class="form-check text-center mt-2">
+              <input class="form-check-input" type="checkbox" name="aceptarTerminos" value="" id="defaultCheck0"
+              required [value]="false"
+                      formControlName="aceptarTerminos">
+              <label class="form-check-label" for="defaultCheck9">
+                Aceptar terminos y condiciones
+              </label>
+            </div>
           </div>
           <div class="form-group mx-auto">
-            <button *ngIf="!updateServicioEsp.update"
+            <button *ngIf="!controlEsp.editar"
               class="btn btn-primary"
               [disabled]="form.status == 'INVALID'"
-              (click)="onCreateServiceEsp()">
+              (click)="crearServicioEsp()">
               <i class="fa fa-plus"></i>
               Agregar
             </button>
-            <button *ngIf="updateServicioEsp.update"
+            <button *ngIf="controlEsp.editar"
               class="btn btn-primary"
               [disabled]="form.status == 'INVALID'"
-              (click)="onUpdate(updateServicioEsp.id)">
+              (click)="editarServicioEsp()">
               Actualizar
             </button>
           </div>
@@ -268,7 +270,7 @@
   </div>
 </div>
 
-<div *ngIf="formatDataTable().length > 0">
+<div *ngIf="serviciosEsp.length > 0">
   <div class="col-md-10 mx-auto col-sm-12 mt-3">
     <div class="card mb-3">
       <div class="card-header">
@@ -279,29 +281,29 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
             <tr>
-              <th>Fecha</th>
               <th>Evaluado</th>
+              <th>Documento Evaluado</th>
               <th>Ciudad de desarrollo</th>
               <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
 
-            <tr *ngFor="let item of formatDataTable(); index as i">
-              <th *ngFor="let col of colums">
-                <span *ngIf="col == 'fecha'">{{ item[col] | date }}</span>
-                <span *ngIf="col != 'fecha'">{{ item[col] }}</span>
-
-                <div class="mx-auto" *ngIf="col == 'acciones'">
+            <tr *ngFor="let item of serviciosEsp; index as i">
+              <th>{{ item.nombre }}</th>
+              <th>{{ item.documento }}</th>
+              <th>{{ item.ciudadDesarrollo }}</th>
+              <th>
+                <div class="mx-auto">
                   <div class="custom-control-inline" >
                     <button class="btn btn-sm btn-primary"
-                            (click)="onRollback(i)">
+                            (click)="establecerFormularioEsp(i)">
                       <i class="fa fa-edit"></i>
                     </button>
                   </div>
                   <div class="custom-control-inline">
                     <button class="btn btn-sm btn-danger"
-                            (click)="onDelete(i)">
+                            (click)="eliminarServicioEsp(i)">
                       <i class="fa fa-trash"></i>
                     </button>
                   </div>
@@ -314,7 +316,7 @@
       </div>
       <div class="card-footer ">
         <div class="form-group text-center">
-          <button class="btn btn-primary" (click)="onSaveServicesEsp()">
+          <button class="btn btn-primary" (click)="guardarServiciosEsp()">
             <i class="fa fa-save"></i>
             Guardar servicios
           </button>

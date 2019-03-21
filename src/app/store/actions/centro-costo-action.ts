@@ -3,7 +3,13 @@ import {CentroCosto} from '../../@models/centro-costo';
 
 export enum CentroCostoActionTypes {
   CREAR = '[CENTRO_COSTO] CREAR',
-  ELIMINAR = '[CENTRO_COSTO] ELIMINAR'
+  ALMACENAR = '[CENTRO_COSTO] ALMACENAR',
+  REMOVER = '[CENTRO_COSTO] REMOVER'
+}
+
+export enum Servicios {
+  ESP = 'ESP',
+  INVESTIGACIONES = 'INVESTIGACIONES'
 }
 
 export class CrearCentroCosto implements Action {
@@ -11,8 +17,16 @@ export class CrearCentroCosto implements Action {
   constructor(public payload: CentroCosto) {}
 }
 
-export class EliminarCentroCosto implements Action {
-  readonly type = CentroCostoActionTypes.ELIMINAR;
+export class AlmacenarCentroCosto implements Action {
+  readonly type = CentroCostoActionTypes.ALMACENAR;
+  constructor(public payload: Servicios) {}
 }
 
-export type CentroCostoAction = CrearCentroCosto| EliminarCentroCosto;
+export class RemoverCentroCosto implements Action {
+  readonly type = CentroCostoActionTypes.REMOVER;
+}
+
+export type CentroCostoAction =
+  CrearCentroCosto      |
+  AlmacenarCentroCosto  |
+  RemoverCentroCosto ;

@@ -5,11 +5,10 @@ import { OperacionesRoutingModule } from './operaciones-routing.module';
 import { OperacionesComponent } from './operaciones.component';
 import { EspComponent } from './esp/esp.component';
 import { IndexComponent } from './index/index.component';
-import {CardModule} from '../../card/card.module';
-import {NgxPermissionsModule} from 'ngx-permissions';
+import { CardModule} from '../../card/card.module';
+import { NgxPermissionsModule} from 'ngx-permissions';
 import { InvestigacionesComponent } from './investigaciones/investigaciones.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ServiciosComponent } from '../servicios/servicios.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { ServiciosComponent } from '../servicios/servicios.component';
     EspComponent,
     IndexComponent,
     InvestigacionesComponent,
-    ServiciosComponent
   ],
   imports: [
     CommonModule,

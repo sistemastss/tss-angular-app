@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { Menu, SubMenu } from '../../../utilities';
+import { Component, OnInit } from '@angular/core';
+import { SubMenu } from '../../../utilities';
 import { Router } from '@angular/router';
 import {MenuService} from '../../../services/menu.service';
 import {LoginService} from '../../../services/login.service';

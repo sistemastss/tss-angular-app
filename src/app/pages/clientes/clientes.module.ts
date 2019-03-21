@@ -4,12 +4,13 @@ import { ClientesRoutingModule } from './clientes-routing.module';
 import { ClientesComponent } from './clientes.component';
 import { IndexComponent } from './index/index.component';
 import { CentroCostoComponent } from './centro-costo/centro-costo.component';
-import { RequestEspComponent } from './request-esp/request-esp.component';
+import { SolicitudEspComponent } from './solicitud-esp/solicitud-esp.component';
 import { CardModule} from '../../card/card.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxPermissionsModule} from 'ngx-permissions';
-import { RequestInvestigacionComponent } from './request-investigacion/request-investigacion.component';
+import { SolicitudInvestigacionComponent } from './solicitud-investigacion/solicitud-investigacion.component';
 import { SolicitudServiciosComponent } from './solicitud-servicios/solicitud-servicios.component';
+import { SolicitudPoligrafiaComponent } from './solicitud-poligrafia/solicitud-poligrafia.component';
 
 // @ts-ignore
 @NgModule({
@@ -17,9 +18,10 @@ import { SolicitudServiciosComponent } from './solicitud-servicios/solicitud-ser
     ClientesComponent,
     IndexComponent,
     CentroCostoComponent,
-    RequestEspComponent,
-    RequestInvestigacionComponent,
-    SolicitudServiciosComponent
+    SolicitudEspComponent,
+    SolicitudInvestigacionComponent,
+    SolicitudServiciosComponent,
+    SolicitudPoligrafiaComponent
   ],
   imports: [
     CommonModule,

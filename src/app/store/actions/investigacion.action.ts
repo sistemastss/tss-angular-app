@@ -3,9 +3,9 @@ import {Investigacion} from '../../@models/Investigacion';
 
 export enum InvestigacionActionTypes {
   CREAR = '[INVESTIGACION] CREAR',
-  ACTUALIZAR = '[INVESTIGACION] ACTUALIZAR',
+  EDITAR = '[INVESTIGACION] EDITAR',
   ELIMINAR = '[INVESTIGACION] ELIMINAR',
-  GUARDAR = '[INVESTIGACION] GUARDAR',
+  ALMACENAR = '[INVESTIGACION] ALMACENAR',
   REMOVER = '[INVESTIGACION] REMOVER'
 }
 
@@ -14,9 +14,9 @@ export class CrearInvestigacion implements Action {
   constructor(public payload: Investigacion) {}
 }
 
-export class ActualizarInvestigacion implements Action {
-  readonly type = InvestigacionActionTypes.ACTUALIZAR;
-  constructor(public id: number, public payload: Investigacion) {}
+export class EditarInvestigacion implements Action {
+  readonly type = InvestigacionActionTypes.EDITAR;
+  constructor(public payload: Investigacion, public id: number) {}
 }
 
 export class EliminarInvestigacion implements Action {
@@ -24,8 +24,9 @@ export class EliminarInvestigacion implements Action {
   constructor(public id: number) {}
 }
 
-export class GuardarInvestigaciones implements Action {
-  readonly type = InvestigacionActionTypes.GUARDAR;
+export class AlmacenarInvestigaciones implements Action {
+  readonly type = InvestigacionActionTypes.ALMACENAR;
+  constructor(public centroCostoId: number) {}
 }
 
 export class RemoverInvestigaciones implements Action {
@@ -33,9 +34,9 @@ export class RemoverInvestigaciones implements Action {
 }
 
 export type InvestigacionActions =
-  ActualizarInvestigacion   |
-  CrearInvestigacion        |
-  ActualizarInvestigacion   |
-  EliminarInvestigacion     |
-  GuardarInvestigaciones    |
-  RemoverInvestigaciones;
+  EditarInvestigacion
+  | CrearInvestigacion
+  | EditarInvestigacion
+  | EliminarInvestigacion
+  | AlmacenarInvestigaciones
+  | RemoverInvestigaciones;

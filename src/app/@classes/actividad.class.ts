@@ -122,7 +122,7 @@ export class ActividadClass {
 
 
   /**
-   * actualizar informacion almacenada
+   * editarServicioEsp informacion almacenada
    */
   protected onUpdate(): void {}
 

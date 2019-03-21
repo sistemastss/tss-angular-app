@@ -17,7 +17,7 @@ export class EspService {
   /**
    * 1. crear objeto de centro de costo en el localstorage
    * 2. añador servicios esp al centro de costo
-   * 2.1. actualizar servicio esp
+   * 2.1. editarServicioEsp servicio esp
    * 2.2. eliminar servicio esp
    * 3. guardar servicio esp en la base de datos
    * 4.listar servicios esp creados por el clientes o

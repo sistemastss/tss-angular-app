@@ -138,7 +138,7 @@ export class ActividadesService {
     const errorMessage = err.error.message;
 
     if (errorCode === 422) {
-      alert('Debe actualizar al menos un registro.');
+      alert('Debe editarServicioEsp al menos un registro.');
     }
 
     if (errorCode === 409) {

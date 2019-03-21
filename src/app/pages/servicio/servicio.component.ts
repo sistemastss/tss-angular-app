@@ -1,35 +1,32 @@
+import { Component, OnInit } from '@angular/core';
+import { EspService } from '../../services/esp.service';
+import { Router } from '@angular/router';
+import { DataService } from '../../services/data.service';
+import { LoginService } from '../../services/login.service';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { ActividadesService } from '../../services/actividades.service';
 import { Store } from '@ngrx/store';
-import { Servicio } from './../../../@models/servicio';
-import {Component, OnInit} from '@angular/core';
-import {EspService} from '../../../services/esp.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DataService} from '../../../services/data.service';
-import {LoginService} from '../../../services/login.service';
-import {NgxPermissionsService} from 'ngx-permissions';
-import {ActividadesService} from '../../../services/actividades.service';
+import { Servicio } from '../../@models/servicio';
 import * as moment from 'moment';
-import {MailServiceService} from '../../../services/mail-service.service';
 import { SolicitarServicios } from 'src/app/store/actions/servicios.action';
 
 @Component({
-  selector: 'app-seguimiento',
-  templateUrl: './esp.component.html',
+  selector: './app-servicio',
+  templateUrl: 'servicio.component.html',
   styles: []
 })
 
-export class EspComponent implements OnInit {
+export class ServicioComponent implements OnInit {
 
   constructor(
     private store: Store<any>,
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     private loginService: LoginService,
     private espService: EspService,
     private dataService: DataService,
     private actividadesService: ActividadesService,
-    private mailService: MailServiceService,
-    private ngxPermissionsService: NgxPermissionsService) {
-  }
+    private ngxPermissionsService: NgxPermissionsService
+  ) { }
 
   /**
    * carga todos los servicios esp
@@ -343,38 +340,9 @@ export class EspComponent implements OnInit {
     if (notificar) {
       const estado = 'finalizado';
 
-
-      const mailFacturacion = {
-        mailTo: 'directorOperacionesToFacturacion',
-        mailData: {
-          to: "styven21121@gmail.com",
-          centroCostoId: item.centroCosto.id,
-          cliente: item.centroCosto.cliente.nombre,
-          contacto: ' ',
-          numeroContacto: 1234323,
-          nombreEvaluado: item.personaEvaluada.nombre,
-          actividades: [
-            {
-              nombreActividad: "visita domiciliaria",
-              fechaCreacion: "8/10/2019",
-              fechaCulminada: "10/1/2019"
-
-            },
-            {
-              nombreActividad: "visita segurida",
-              fechaCreacion: "8/10/2019",
-              fechaCulminada: "10/1/2019"
-
-            }
-          ]
-        }
-      }
-
-
       this.dataService.updateEstadoServicioEsp(item.id, {estado})
         .subscribe((value: any) => {
-          this.mailService.sendMail(mailFacturacion).subscribe(() => window.location.reload());
-
+          window.location.reload()
         });
     }
 

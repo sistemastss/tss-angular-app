@@ -261,7 +261,7 @@
               <button *ngIf="(permissions.FRCE && actividad.estado == 'proceso') || (permissions.AESP || permissions.ADG && actividad.estado == 'notificado')"
                       class="btn btn-warning"
                       [disabled]="form.invalid"
-                      (click)="onUpdate()">
+                      (click)="editarServicioEsp()">
                 <i class="fa fa-edit"></i>
                 Actualizar
               </button>

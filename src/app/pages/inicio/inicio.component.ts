@@ -6,7 +6,7 @@ import {NgxPermissionsService} from 'ngx-permissions';
 
 @Component({
   selector: 'app-inicio',
-  template: `<router-outlet></router-outlet>`,
+  templateUrl: 'inicio.component.html',
   styleUrls: []
 })
 export class InicioComponent implements OnInit {

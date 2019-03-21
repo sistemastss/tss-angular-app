@@ -1,5 +1,4 @@
 <div class="container-fluid mt-3">
-
   <div class="col-md-6 mx-auto" *ngIf="showError">
     <div class="alert alert-danger" role="alert">
       No existen registros.
@@ -7,98 +6,80 @@
   </div>
 
   <div class="card mb-3" *ngIf="!showError">
-
     <div class="card-header">
       <i class="fas fa-table"></i>
-      Servicios creados
+      Orden de servicios
     </div>
-
     <div class="card-body">
       <div class="table-responsive">
-        <!-- TABLE OF ESP_SERVICES -->
-        <div class="form-group mt-2 text-right">
-          <div class="input-group input-group-sm col-sm-6 offset-sm-6">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Filtrar por</span>
-            </div>
-            <select name="opciones" id="options" class="form-control text-capitalize" #filtro>
-              <option *ngFor="let e of options" [value]="e.value">{{ e.title }}</option>
-            </select>
-
-            <input type="text" class="form-control" placeholder="Busqueda" (keydown.enter)="filtrarServicios(filtro.value, busqueda.value)" #busqueda>
-
-            <button type="button" (click)="filtrarServicios(filtro.value, busqueda.value)" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Buscar</button>&nbsp;
-          </div>
-        </div>
+        <!-- TABLE OF SERVICES -->
         <table class="table table-bordered table-hover table-sm">
             <thead>
               <tr class="text-capitalize">
-                <th *ngIf="permissions.ADG" class="text-capitalize">eliminar</th>
-                <th class="text-capitalize">centro de costo</th>
-                <th class="text-capitalize">fecha creacion</th>
-                <th class="text-capitalize">ciudad</th>
-                <th class="text-capitalize">solicitante</th>
-                <th class="text-capitalize">servicio Solicitado</th>
-                <th class="text-capitalize">adjunto</th>
-                <th class="text-capitalize">informe</th>
-                <th class="text-capitalize">estado</th>
-            </tr>
+                <th>centro de costo</th>
+                <th>fecha creación</th>
+                <th>ciudad</th>
+                <th>solicitante</th>
+                <th>detalles</th>
+                <th>tipo de servicio</th>
+                <th>informe</th>
+                <th>estado</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of data">
-              <td *ngIf="permissions.ADG"><button (click)="deleteEsp(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-              <td> {{ item.centroCosto }} </td>
-              <td> {{ item.fechaCreacion }} </td>
-              <td> {{ item.ciudad }} </td>
-              <td> {{ item.solicitante }} </td>
-              <td>
-                <div *ngIf="item.clase === 'esp'" >
-                  <div class="form-group text-center">
-                    <button class="btn btn-success text-center" (click)="onShowModal(item)">
-                      <i class="fa fa-eye"></i>
-                      &nbsp;
-                      <span>ESP</span>
-                    </button>
-                  </div>
-                </div>
-                <div *ngIf="item.clase === 'inv'" >
-                  <div class="form-group text-center">
-                      <div *ngIf="permissions.DOPE || permissions.ADG" >
-                          <button class="btn btn-link" routerLink="../../investigacion">
-                            INVESTIGACION
-                          </button>
-                      </div>
-                      <div *ngIf="permissions.CLI">
-                          INVESTIGACION
-                      </div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="form-group text-center" *ngIf="item.anexo">
-                  <a [href]="url + item.anexo" class="btn btn-primary">
-                    <i class="fa fa-file"></i>
-                  </a>
-                </div>
-              </td>
-              <td>
-                  <div class="form-group text-center" *ngIf="item.informe">
-                      <a [href]="url + item.informe" class="btn btn-primary">
-                        <i class="fa fa-file"></i>
-                      </a>
+              <tr *ngFor="let item of data">
+                <td> {{ item.centroCosto.id }} </td>
+                <td> {{ item.fechaCreacion }} </td>
+                <td> {{ item.ciudad }} </td>
+                <td> {{ item.solicitante }} </td>
+                <td>
+                  <div *ngIf="item.clase === 'esp'" >
+                    <div class="form-group text-center">
+                      <button class="btn btn-success text-center" (click)="onShowModal(item)">
+                        <i class="fa fa-eye"></i>
+                        &nbsp;
+                        <span>ESP</span>
+                      </button>
                     </div>
-              </td>
-              <!--<td>
-                <button *ngIf="item.estado == 'completado' && (permissions.AESP || permissions.ADG)"
-                  (click)="notificarDirectorOperacion(item)" class="btn btn-success btn-sm">
-                  <i class="fa fa-lightbulb"></i>
-                </button>
-                <button *ngIf="item.estado == 'notificado' && permissions.DOPE"
-                        (click)="notificarClienteAndFacturacion(item)" class="btn btn-danger btn-sm">
-                  <i class="fa fa-lightbulb"></i>
-                </button>
-              </td>-->
-              <td>
+                  </div>
+                  <div *ngIf="item.clase === 'inv'" >
+                    <div class="form-group text-center">
+                        <div *ngIf="permissions.DOPE || permissions.ADG" >
+                            <button class="btn btn-link" routerLink="../../investigacion">
+                              INVESTIGACION
+                            </button>
+                        </div>
+                        <div *ngIf="permissions.CLI">
+                            INVESTIGACION
+                        </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group text-center" *ngIf="item.anexo">
+                    <a [href]="url + item.anexo" class="btn btn-primary">
+                      <i class="fa fa-file"></i>
+                    </a>
+                  </div>
+                </td>
+                <td>
+                    <div class="form-group text-center" *ngIf="item.informe">
+                        <a [href]="url + item.informe" class="btn btn-primary">
+                          <i class="fa fa-file"></i>
+                        </a>
+                      </div>
+                </td>
+                <!--<td>
+                  <button *ngIf="item.estado == 'completado' && (permissions.AESP || permissions.ADG)"
+                    (click)="notificarDirectorOperacion(item)" class="btn btn-success btn-sm">
+                    <i class="fa fa-lightbulb"></i>
+                  </button>
+                  <button *ngIf="item.estado == 'notificado' && permissions.DOPE"
+                          (click)="notificarClienteAndFacturacion(item)" class="btn btn-danger btn-sm">
+                    <i class="fa fa-lightbulb"></i>
+                  </button>
+                </td>-->
+                <td>
                   <div [ngSwitch]="item.estado">
                     <div *ngSwitchCase="'proceso'">
                       <span class="badge badge badge-warning"> {{ item.estado }} </span>

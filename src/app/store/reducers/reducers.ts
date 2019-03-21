@@ -7,26 +7,36 @@ import {InvestigacionActions, InvestigacionActionTypes} from '../actions/investi
 import {Servicio} from '../../@models/servicio';
 import {ServiciosAction, ServiciosActionTypes} from '../actions/servicios.action';
 
-export const servicioEspReducer = (state: ServicioEsp[] = [], action: ServicioEspAction): ServicioEsp[] => {
+export const centroCostoReducer = (state: CentroCosto, action: CentroCostoAction): CentroCosto => {
+  switch (action.type) {
+    case CentroCostoActionTypes.CREAR:
+      return {...state, ...action.payload};
+
+    case CentroCostoActionTypes.REMOVER:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
+
+export const servicioEspReducer = (state: any[] = [], action: ServicioEspAction): any[] => {
   switch (action.type) {
     case ServicioEspActionTypes.CREAR:
       return [...state, action.payload];
 
+    case ServicioEspActionTypes.FILTRAR:
+      return [...state.filter((value, index) => index === action.id)];
+
     case ServicioEspActionTypes.EDITAR:
-      return [...state.map(value => value.id === action.payload.id ? action.payload : value)];
+      return [...state.map((value, index) => index === action.id ? action.payload : value)];
 
     case ServicioEspActionTypes.ELIMINAR:
-      return [...state.filter(value => value.id !== action.id)];
-  }
-};
+      return [...state.filter((value, index) => index !== action.id)];
 
-export const centroCostoReducer = (state: CentroCosto, action: CentroCostoAction): CentroCosto => {
-  switch (action.type) {
-    case CentroCostoActionTypes.CREAR:
-      return action.payload;
-
-    case CentroCostoActionTypes.ELIMINAR:
-      return null;
+    case ServicioEspActionTypes.REMOVER:
+      return [];
 
     default:
       return state;
@@ -38,14 +48,11 @@ export const investigacionReducer = (state: Investigacion[] = [], action: Invest
     case InvestigacionActionTypes.CREAR:
       return [...state, action.payload];
 
-    case InvestigacionActionTypes.ACTUALIZAR:
+    case InvestigacionActionTypes.EDITAR:
       return [...state.map((value, index) => index !== action.id ? value : action.payload)];
 
     case InvestigacionActionTypes.ELIMINAR:
       return [...state.filter((value, index) => index !== action.id)];
-
-    case InvestigacionActionTypes.GUARDAR:
-      return state;
 
     case InvestigacionActionTypes.REMOVER:
       return [];
@@ -55,13 +62,15 @@ export const investigacionReducer = (state: Investigacion[] = [], action: Invest
   }
 };
 
-
 export const serviciosReducer = (state: Servicio[] = [], action: ServiciosAction) => {
   switch (action.type) {
-    case ServiciosActionTypes.SOLICITAR:
-      return [...state];
+    case ServiciosActionTypes.CARGAR:
+      return [...state, ...action.payload];
 
     case ServiciosActionTypes.ELIMINAR:
       return [...state.filter(value => value.id !== action.id)];
+
+    default:
+      return state;
   }
 };

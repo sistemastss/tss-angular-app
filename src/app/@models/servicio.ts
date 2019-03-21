@@ -1,16 +1,30 @@
-import { keys } from 'ts-transformer-keys';
+interface CentroCosto {
+  id: number;
+  solicitante: string;
+  email: string;
+  telefono: number;
+}
 
 export interface Servicio {
   id: number;
-  centroCosto: number;
-  fecha: string;
-  ciudad: string;
+  centroCosto: CentroCosto;
+  fechaCreacion: string;
+  ciudad?: string;
   solicitante: string;
-  servicioSolicitado: string;
-  estado: string;
-  adjunto: string;
+  tipoServicio: string;
   informe: string;
+  estado: string;
+  datosEvaluado: Evaluado;
   links?: string;
 }
 
-export const servicioKeys = keys<Servicio>();
+export interface Evaluado {
+  id: number;
+  nombre: string;
+  numeroIdentidad: number;
+  ciudadDesarrollo: string;
+  telefono: number;
+  email: string;
+  direccion: string;
+  observaciones: string;
+}

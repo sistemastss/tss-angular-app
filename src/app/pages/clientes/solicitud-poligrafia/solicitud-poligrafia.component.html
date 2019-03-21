@@ -1,0 +1,201 @@
+<div id="content-wrapper">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <form [formGroup]="form">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="text-center">Orden de servicio</h4>
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <label for="nombre" class="col-sm-3 col-form-label">Nombre del Evaluado</label>
+                <div class="col-sm-9">
+                  <input type="text"
+                         class="form-control"
+                         id="nombre"
+                         name="nombre"
+                         required="required"
+                         placeholder="Nombre del evaluado"
+                         formControlName="nombre">
+                  <div [hidden]="form.controls['nombre'].valid || form.controls['nombre'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="documento" class="col-sm-3 col-form-label">Documento de identidad</label>
+                <div class="col-sm-9">
+                  <input type="number"
+                         class="form-control"
+                         id="documento"
+                         name="documento"
+                         placeholder="Documento de indentidad"
+                         required="required"
+                         formControlName="documento">
+                  <div [hidden]="form.controls['documento'].valid || form.controls['documento'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+                <div class="col-sm-9">
+                  <input type="number"
+                         class="form-control"
+                         id="telefono"
+                         name="telefono"
+                         required="required"
+                         placeholder="Telefono"
+                         formControlName="telefono">
+                  <div [hidden]="form.controls['telefono'].valid  || form.controls['telefono'].pristine ">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="correo" class="col-sm-3 col-form-label">Correo electronico</label>
+                <div class="col-sm-9">
+                  <input type="email"
+                         class="form-control"
+                         id="correo"
+                         name="correo"
+                         required="required"
+                         placeholder="Correo electronico"
+                         formControlName="correo">
+                  <div [hidden]="form.controls['correo'].valid  || form.controls['correo'].pristine ">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="anexo" class="col-sm-3 col-form-label">
+                  Anexo
+                </label>
+                <div class="col-sm-9">
+                  <input type="file" id="anexo" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="descripcion" class="col-sm-3 col-form-label">Descripcion</label>
+                <div class="col-sm-9">
+                  <textarea
+                        cols="30" rows="5"
+                        class="form-control"
+                        id="descripcion"
+                        name="descripcion"
+                        placeholder="Descripcion"
+                        formControlName="descripcion">
+                  </textarea>
+                </div>
+              </div>
+
+              <div class="form-group text-center"  formGroupName="actividades">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                  <label class="form-check-label" for="exampleRadios1">
+                    Preempleo
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option1" checked>
+                  <label class="form-check-label" for="exampleRadios2">
+                    Rutina
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option1" checked>
+                  <label class="form-check-label" for="exampleRadios3">
+                    Especifico
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mx-auto">
+              <button *ngIf="!controlEsp.editar"
+                class="btn btn-primary"
+                [disabled]="form.status == 'INVALID'"
+                (click)="crearServicioEsp()">
+                <i class="fa fa-plus"></i>
+                Agregar
+              </button>
+              <button *ngIf="controlEsp.editar"
+                class="btn btn-primary"
+                [disabled]="form.status == 'INVALID'"
+                (click)="editarServicioEsp()">
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="serviciosEsp.length > 0">
+    <div class="col-md-10 mx-auto col-sm-12 mt-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          Servicios solicitados</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+                <th>Evaluado</th>
+                <th>Documento Evaluado</th>
+                <th>Ciudad de desarrollo</th>
+                <th>Acciones</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let item of serviciosEsp; index as i">
+                <th>{{ item.nombre }}</th>
+                <th>{{ item.documento }}</th>
+                <th>{{ item.ciudadDesarrollo }}</th>
+                <th>
+                  <div class="mx-auto">
+                    <div class="custom-control-inline" >
+                      <button class="btn btn-sm btn-primary"
+                              (click)="establecerFormularioEsp(i)">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                    </div>
+                    <div class="custom-control-inline">
+                      <button class="btn btn-sm btn-danger"
+                              (click)="eliminarServicioEsp(i)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="guardarServiciosEsp()">
+              <i class="fa fa-save"></i>
+              Guardar servicios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

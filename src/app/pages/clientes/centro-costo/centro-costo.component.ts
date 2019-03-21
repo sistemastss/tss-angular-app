@@ -8,7 +8,6 @@ import {Store} from '@ngrx/store';
 import {CentroCostoState} from '../../../store/state';
 import {CrearCentroCosto} from '../../../store/actions/centro-costo-action';
 import {CentroCosto} from '../../../@models/centro-costo';
-import {throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-centro-costo',
@@ -20,11 +19,16 @@ export class CentroCostoComponent implements OnInit {
   ordenCompra = false;
 
   form = new FormGroup({
-    clienteId           : new FormControl('', Validators.required),
-    solicitante         : new FormControl('', Validators.required),
-    correoSolicitante   : new FormControl('', Validators.required),
-    numeroOrden         : new FormControl(),
-    anexo               : new FormControl()
+    clienteId               : new FormControl('', Validators.required),
+    solicitante             : new FormControl('', Validators.required),
+    correoSolicitante       : new FormControl('', Validators.required),
+    numeroOrden             : new FormControl(),
+    anexo                   : new FormControl(),
+    destinoFactura          : new FormControl(),
+    tipoSociedad            : new FormControl(),
+    tipoIdentificacion      : new FormControl(),
+    numeroIdentificacion    : new FormControl(),
+    telefonoFactura         : new FormControl(),
   });
 
   clientes: object[];
@@ -53,19 +57,19 @@ export class CentroCostoComponent implements OnInit {
     this.ordenCompra = ordenCompra;
   }
 
-  onSolicitarServicio() {
+  solicitarServicio() {
     const data = this.construirObjeto();
     this.store.dispatch(new CrearCentroCosto(data));
     this.espService.centroCostoStore(data);
-    // this.router.navigate(['./clientes/solicitud-servicios']);
+    this.router.navigate(['./clientes/solicitud-servicios']);
   }
 
   construirObjeto(): CentroCosto {
-    const form = Object.assign({}, this.form.value);
+    const data = Object.assign({}, this.form.value);
     if (!this.ordenCompra) {
-      delete form.numeroOrden;
-      delete form.anexo;
+      delete data.numeroOrden;
+      delete data.anexo;
     }
-    return form;
+    return data;
   }
 }
