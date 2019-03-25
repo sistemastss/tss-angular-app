@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from './services/login.service';
-import {BASE_API} from './@models/app-settings';
 
 @Component({
   selector: 'app-root',

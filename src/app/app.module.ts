@@ -10,14 +10,14 @@ import { VerificacionAcademitaComponent } from './verificacion-academita/verific
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { NavBarModule} from './pages/nav-bar/nav-bar.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
-import { MailServiceService} from './services/mail-service.service';
+import { MailServiceService } from './services/mail-service.service';
 import { StoreModule } from '@ngrx/store';
 import { WordsLimiterPipe } from './pipes/words-limiter.pipe';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {EffectsModule} from '@ngrx/effects';
-import {effects} from './store/effects';
-import {environment} from '../environments/environment';
-import {reducers} from './store/reducers';
+import { StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { EffectsModule} from '@ngrx/effects';
+import { effects } from './store/effects';
+import { reducers } from './store/reducers';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [

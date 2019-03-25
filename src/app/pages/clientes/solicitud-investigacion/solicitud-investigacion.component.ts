@@ -1,16 +1,15 @@
-import { AlmacenarCentroCosto, Servicios } from './../../../store/actions/centro-costo-action';
-import { AlmacenarInvestigaciones } from './../../../store/actions/investigacion.action';
+import { AlmacenarCentroCosto, Servicios } from '../../../store/actions/centro-costo-actions';
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
-import {InvestigacionState} from '../../../store/state';
-import {InvestigacionService} from '../../../services/investigaciones/investigacion.service';
-import {Investigacion} from '../../../@models/Investigacion';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { InvestigacionState } from '../../../store/state';
+import { InvestigacionService } from '../../../services/investigaciones/investigacion.service';
+import { Investigacion } from '../../../@models/Investigacion';
 import {
   EditarInvestigacion,
   CrearInvestigacion,
   EliminarInvestigacion,
-} from '../../../store/actions/investigacion.action';
+} from '../../../store/actions/investigacion.actions';
 
 @Component({
   selector: 'app-request-investigacion',
@@ -74,6 +73,6 @@ export class SolicitudInvestigacionComponent implements OnInit {
 
 
   guardarInvestigaciones() {
-    this.store.dispatch(new AlmacenarCentroCosto(Servicios.INVESTIGACIONES));
+    this.store.dispatch(new AlmacenarCentroCosto(Servicios.INVESTIGACION));
   }
 }

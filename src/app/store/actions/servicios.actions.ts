@@ -23,6 +23,6 @@ export class EliminarServicio implements Action {
   constructor(public id: number) {}
 }
 
-export type ServiciosAction =
-  | CargarServicios
+export type ServiciosActions =
+  CargarServicios
   | EliminarServicio;

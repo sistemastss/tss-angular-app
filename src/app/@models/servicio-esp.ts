@@ -1,13 +1,12 @@
 export interface ServicioEsp {
-  id?: number;
-  nombre: string;
+  evaluado: string;
   documento: number;
-  departamento: string;
-  ciudad: string;
-  telefono: number;
-  correo: string;
   ciudadDesarrollo: string;
-  anexo?: string;
-  descripcion: string;
-  actividades: any[];
+  telefono: number;
+  email: string;
+  direccion: string;
+  observaciones: string;
+  tipoEsp: string;
+  anexo?: File;
+  aceptarTerminos: boolean;
 }

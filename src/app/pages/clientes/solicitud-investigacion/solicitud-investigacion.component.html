@@ -8,7 +8,7 @@
               <h4 class="text-center">Orden de servicio</h4>
             </div>
             <div class="card-body">
-
+              <!-- ciudad -->
               <div class="form-group row">
                 <label for="ciudad" class="col-sm-3 col-form-label">Ciudad</label>
                 <div class="col-sm-9">
@@ -27,14 +27,7 @@
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label for="anexo" class="col-sm-3 col-form-label">
-                  Anexo
-                </label>
-                <div class="col-sm-9">
-                  <input type="file" id="anexo" class="form-control">
-                </div>
-              </div>
+              <!-- descripcion -->
               <div class="form-group row">
                 <label for="descripcion" class="col-sm-3 col-form-label">Descripcion</label>
                 <div class="col-sm-9">
@@ -51,6 +44,16 @@
                       El campo es requerido
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <!-- anexo -->
+              <div class="form-group row">
+                <label for="anexo" class="col-sm-3 col-form-label">
+                  Anexo
+                </label>
+                <div class="col-sm-9">
+                  <input type="file" id="anexo" class="form-control">
                 </div>
               </div>
             </div>
@@ -86,7 +89,8 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
               <tr>
-                <th>Ciudad</th>
+                <th>Fecha de creacion</th>
+                <th>Detalles de investigacion</th>
                 <th>Anexo</th>
                 <th class="text-center">Acciones</th>
               </tr>
@@ -94,8 +98,14 @@
               <tbody>
 
               <tr *ngFor="let item of investigaciones; index as i">
-                <td>{{ item.ciudad }}</td>
-                <td>{{ item.descripcion }}</td>
+                <td>{{ item.fechaCreacion | date }}</td>
+                <td>
+                  <button class="btn btn-success">
+                    <i class="fa fa-eye"></i>
+                    Detalles
+                  </button>
+                </td>
+                <th>{{ item.anexo }}</th>
                 <td>
                   <div class="text-center">
                     <div class="custom-control-inline" >

@@ -1,13 +1,15 @@
-import {ServicioEsp} from '../../@models/servicio-esp';
-import {ServicioEspAction, ServicioEspActionTypes} from '../actions/servicio-esp.action';
+import {EspActions, ServicioEspActionTypes} from '../actions/esp.actions';
 import {CentroCosto} from '../../@models/centro-costo';
-import {CentroCostoAction, CentroCostoActionTypes} from '../actions/centro-costo-action';
+import {CentroCostoActions, CentroCostoActionTypes} from '../actions/centro-costo-actions';
 import {Investigacion} from '../../@models/Investigacion';
-import {InvestigacionActions, InvestigacionActionTypes} from '../actions/investigacion.action';
+import {InvestigacionActions, InvestigacionActionTypes} from '../actions/investigacion.actions';
 import {Servicio} from '../../@models/servicio';
-import {ServiciosAction, ServiciosActionTypes} from '../actions/servicios.action';
+import {ServiciosActions, ServiciosActionTypes} from '../actions/servicios.actions';
+import {Poligrafia} from '../../@models/poligrafia';
+import {PoligrafiaActions, PoligrafiaActionTypes} from '../actions/poligrafia.actions';
+import {ServicioEsp} from '../../@models/servicio-esp';
 
-export const centroCostoReducer = (state: CentroCosto, action: CentroCostoAction): CentroCosto => {
+export function centroCostoReducer(state: CentroCosto, action: CentroCostoActions): CentroCosto {
   switch (action.type) {
     case CentroCostoActionTypes.CREAR:
       return {...state, ...action.payload};
@@ -18,10 +20,10 @@ export const centroCostoReducer = (state: CentroCosto, action: CentroCostoAction
     default:
       return state;
   }
-};
+}
 
 
-export const servicioEspReducer = (state: any[] = [], action: ServicioEspAction): any[] => {
+export function servicioEspReducer(state: ServicioEsp[] = [], action: EspActions): any[] {
   switch (action.type) {
     case ServicioEspActionTypes.CREAR:
       return [...state, action.payload];
@@ -41,9 +43,9 @@ export const servicioEspReducer = (state: any[] = [], action: ServicioEspAction)
     default:
       return state;
   }
-};
+}
 
-export const investigacionReducer = (state: Investigacion[] = [], action: InvestigacionActions) => {
+export function investigacionReducer(state: Investigacion[] = [], action: InvestigacionActions) {
   switch (action.type) {
     case InvestigacionActionTypes.CREAR:
       return [...state, action.payload];
@@ -60,9 +62,29 @@ export const investigacionReducer = (state: Investigacion[] = [], action: Invest
     default:
       return state;
   }
-};
+}
 
-export const serviciosReducer = (state: Servicio[] = [], action: ServiciosAction) => {
+
+export function poligrafiaReducer(state: Poligrafia[] = [], action: PoligrafiaActions) {
+  switch (action.type) {
+    case PoligrafiaActionTypes.CREAR:
+      return [...state, action.payload];
+
+    case PoligrafiaActionTypes.EDITAR:
+      return [...state.map((value, index) => index !== action.id ? value : action.payload)];
+
+    case PoligrafiaActionTypes.ELIMINAR:
+      return [...state.filter((value, index) => index !== action.id)];
+
+    case PoligrafiaActionTypes.REMOVER:
+      return [];
+
+    default:
+      return state;
+  }
+}
+
+export function serviciosReducer(state: Servicio[] = [], action: ServiciosActions) {
   switch (action.type) {
     case ServiciosActionTypes.CARGAR:
       return [...state, ...action.payload];
@@ -73,4 +95,4 @@ export const serviciosReducer = (state: Servicio[] = [], action: ServiciosAction
     default:
       return state;
   }
-};
+}

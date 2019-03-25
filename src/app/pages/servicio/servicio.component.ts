@@ -8,7 +8,7 @@ import { ActividadesService } from '../../services/actividades.service';
 import { Store } from '@ngrx/store';
 import { Servicio } from '../../@models/servicio';
 import * as moment from 'moment';
-import { SolicitarServicios } from 'src/app/store/actions/servicios.action';
+import { SolicitarServicios } from 'src/app/store/actions/servicios.actions';
 
 @Component({
   selector: './app-servicio',

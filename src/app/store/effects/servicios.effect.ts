@@ -1,14 +1,14 @@
-import { ServiciosActionTypes, CargarServicios } from './../actions/servicios.action';
-import {InvestigacionActionTypes, AlmacenarInvestigaciones} from './../actions/investigacion.action';
+import { ServiciosActionTypes, CargarServicios } from '../actions/servicios.actions';
+import {InvestigacionActionTypes, AlmacenarInvestigaciones} from '../actions/investigacion.actions';
 import {Router} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {withLatestFrom, map, mergeMap, tap, switchMap} from 'rxjs/operators';
 import {DataService} from '../../services/data.service';
-import {CentroCostoActionTypes, RemoverCentroCosto, Servicios} from '../actions/centro-costo-action';
+import {CentroCostoActionTypes, RemoverCentroCosto, Servicios} from '../actions/centro-costo-actions';
 import {Store} from '@ngrx/store';
-import {AlmacenarServiciosEsp, RemoverServiciosEsp, ServicioEspActionTypes} from '../actions/servicio-esp.action';
-import {RemoverInvestigaciones} from '../actions/investigacion.action';
+import {AlmacenarServiciosEsp, RemoverServiciosEsp, ServicioEspActionTypes} from '../actions/esp.actions';
+import {RemoverInvestigaciones} from '../actions/investigacion.actions';
 import { EMPTY } from 'rxjs';
 
 @Injectable()

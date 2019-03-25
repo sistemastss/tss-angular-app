@@ -7,7 +7,7 @@ import {Store} from '@ngrx/store';
 import { LoginService } from './login.service';
 import {ServicioEsp} from '../@models/servicio-esp';
 import {Observable} from 'rxjs';
-import {CrearServicioEsp} from '../store/actions/servicio-esp.action';
+import {CrearServicioEsp} from '../store/actions/esp.actions';
 
 @Injectable({
   providedIn: 'root'

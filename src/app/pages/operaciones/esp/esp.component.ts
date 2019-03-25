@@ -9,7 +9,7 @@ import {NgxPermissionsService} from 'ngx-permissions';
 import {ActividadesService} from '../../../services/actividades.service';
 import * as moment from 'moment';
 import {MailServiceService} from '../../../services/mail-service.service';
-import { SolicitarServicios } from 'src/app/store/actions/servicios.action';
+import { SolicitarServicios } from 'src/app/store/actions/servicios.actions';
 
 @Component({
   selector: 'app-seguimiento',

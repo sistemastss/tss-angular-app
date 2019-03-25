@@ -2,12 +2,12 @@ import {Action} from '@ngrx/store';
 import {ServicioEsp} from '../../@models/servicio-esp';
 
 export enum ServicioEspActionTypes {
-  CREAR = '[ESP] CREAR',
-  ALMACENAR = '[ESP] ALMACENAR',
-  EDITAR = '[ESP] EDITAR',
-  FILTRAR = '[ESP] FILTRAR',
-  ELIMINAR = '[ESP] ELIMINAR',
-  REMOVER = '[ESP] REMOVER'
+  CREAR       = '[ESP] CREAR',
+  ALMACENAR   = '[ESP] ALMACENAR',
+  EDITAR      = '[ESP] EDITAR',
+  FILTRAR     = '[ESP] FILTRAR',
+  ELIMINAR    = '[ESP] ELIMINAR',
+  REMOVER     = '[ESP] REMOVER'
 }
 
 export class CrearServicioEsp implements Action {
@@ -39,7 +39,7 @@ export class RemoverServiciosEsp implements Action {
   readonly type = ServicioEspActionTypes.REMOVER;
 }
 
-export type ServicioEspAction =
+export type EspActions =
   CrearServicioEsp
   | AlmacenarServiciosEsp
   | FiltrarServicioEsp

@@ -9,7 +9,8 @@ export enum CentroCostoActionTypes {
 
 export enum Servicios {
   ESP = 'ESP',
-  INVESTIGACIONES = 'INVESTIGACIONES'
+  INVESTIGACION = 'INVESTIGACION',
+  POLIGRAFIA = 'POLIGRAFIA'
 }
 
 export class CrearCentroCosto implements Action {
@@ -26,7 +27,7 @@ export class RemoverCentroCosto implements Action {
   readonly type = CentroCostoActionTypes.REMOVER;
 }
 
-export type CentroCostoAction =
+export type CentroCostoActions =
   CrearCentroCosto      |
   AlmacenarCentroCosto  |
   RemoverCentroCosto ;

@@ -1,7 +1,7 @@
 import {config} from '../@models/app-settings';
 
 /**
- * @author cristian stiven puenguenan <styven21121@gmail.com>
+ * @author cristian stiven p <styven21121@gmail.com>
  */
 export class Helper {
 
@@ -32,5 +32,26 @@ export class Helper {
       url += `/${values}/${params}`;
     }
     return url;
+  }
+
+  static formDataFromArray(data: any[]): FormData[] {
+    const formDataArr = [];
+
+    data.forEach(value => {
+      const formData = Helper.formData(value);
+      formDataArr.push(formData);
+    });
+
+    return formDataArr;
+  }
+
+  static formData(data: {}): FormData {
+    const formData = new FormData();
+    for (const key in data) {
+      if (data[key]) {
+        formData.append(key, data[key]);
+      }
+    }
+    return formData;
   }
 }
