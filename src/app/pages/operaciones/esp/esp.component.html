@@ -48,9 +48,9 @@
             <tr *ngFor="let item of data">
               <td *ngIf="permissions.ADG"><button (click)="deleteEsp(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
               <td> {{ item.centroCosto }} </td>
-              <td> {{ item.fechaCreacion }} </td>
-              <td> {{ item.ciudad }} </td>
-              <td> {{ item.solicitante }} </td>
+              <td> {{ item.timestamp.fechaCreacion }} </td>
+              <td> {{ item.ciudadDesarrollo }} </td>
+              <td> {{ item.centroCosto.solicitante }} </td>
               <td>
                 <div *ngIf="item.clase === 'esp'" >
                   <div class="form-group text-center">

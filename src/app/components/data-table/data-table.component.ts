@@ -22,7 +22,7 @@ export class DataTableComponent implements OnInit {
     { title: 'adjunto', type: Type.text }
   ];*/
 
-  /*data = [
+  /*servicios = [
     {
       'fecha'         : new Date().getTime(),
       'ciudad'        : 'demo',

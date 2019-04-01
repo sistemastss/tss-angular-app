@@ -65,7 +65,7 @@ export class VisitaDomiciliariaComponent extends ActividadClass implements OnIni
 
     this.dataService.visitaDomiciliariaCompletada(this.servicioEsp)
       .subscribe((value: any) => {
-        this.estado = value.data.estado;
+        this.estado = value.servicios.estado;
         console.log(value);
       });
 
@@ -82,7 +82,7 @@ export class VisitaDomiciliariaComponent extends ActividadClass implements OnIni
       event => {
         this.dataService.visitaDomiciliariaCompletada(this.servicioEsp)
           .subscribe((value: any) => {
-            this.estado = value.data.estado;
+            this.estado = value.servicios.estado;
           });
       }
     );

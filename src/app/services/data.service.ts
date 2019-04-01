@@ -1,3 +1,4 @@
+import { Poligrafia } from './../@models/poligrafia';
 import { Servicio } from './../@models/servicio';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -74,7 +75,9 @@ export class DataService {
 
   almacenarCentroCosto(payload: CentroCosto) {
     const url = config.api + '/centro-costo';
-    return this.http.post(url, payload);
+    return this.http.post(url, payload).pipe(
+      map((data: any) => data.data.id)
+    );
   }
 
   almacenarEsp(centroCosto: number, payload: ServicioEsp[]) {
@@ -87,24 +90,36 @@ export class DataService {
     return this.http.post(url, payload, config.httpOpts);
   }
 
+  almacenarPoligrafias(centroCosto: number, payload: Poligrafia[]) {
+    const url = Helper.route(['centro-costo', 'poligrafia'], centroCosto);
+    return this.http.post(url, payload, config.httpOpts);
+  }
+
   cargarServicios() {
     const url = config.api + '/servicios';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.data as any[])
+      map((value: any) => value.servicios as any[])
     );
   }
 
   cargarEsps() {
     const url = config.api + '/servicio-esp';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.data as any[])
+      map((value: any) => value.data as Servicio[])
     );
   }
 
   cargarInvestigaciones() {
     const url = config.api + '/investigaciones';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.data as any[])
+      map((value: any) => value.data as Servicio[])
+    );
+  }
+
+  cargarPoligrafias() {
+    const url = config.api + '/poligrafia';
+    return this.http.get(url, config.httpOpts).pipe(
+      map((value: any) => value.data as Servicio[])
     );
   }
 
@@ -193,7 +208,7 @@ export class DataService {
   obtenerServicios() {
     const url = config.api + '/servicios';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.data)
+      map((value: any) => value.servicios)
     );
   }
 

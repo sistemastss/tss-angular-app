@@ -53,7 +53,7 @@ export class PruebaPsicotecnicaComponent extends ActividadClass implements OnIni
 
           console.log(value);
 
-          const data = this.transformResponse(value.data);
+          const data = this.transformResponse(value.servicios);
 
           this.form.setValue(data);
 
@@ -75,9 +75,9 @@ export class PruebaPsicotecnicaComponent extends ActividadClass implements OnIni
 
           this.setEstado('proceso');
 
-          // this.currentActivityId = value.data.id;
+          // this.currentActivityId = value.servicios.id;
 
-          const dat = this.transformResponse(value.data);
+          const dat = this.transformResponse(value.servicios);
 
           this.form.setValue(dat);
 
@@ -103,7 +103,7 @@ export class PruebaPsicotecnicaComponent extends ActividadClass implements OnIni
           alert('Se han actualizado los datos exitosamente');
 
 
-          // this.form.setValue(this.transformResponse(value.data));
+          // this.form.setValue(this.transformResponse(value.servicios));
 
         },
         err => alert(err.error.message)

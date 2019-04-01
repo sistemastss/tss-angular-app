@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { EspService } from '../../services/esp.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { EspService } from '../../services/esp/esp.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { LoginService } from '../../services/login.service';
@@ -8,7 +8,8 @@ import { ActividadesService } from '../../services/actividades.service';
 import { Store } from '@ngrx/store';
 import { Servicio } from '../../@models/servicio';
 import * as moment from 'moment';
-import { SolicitarServicios } from 'src/app/store/actions/servicios.actions';
+import {RemoverServicios, SolicitarServicios} from 'src/app/store/actions/servicios.actions';
+import {ServicioState} from '../../store/state';
 
 @Component({
   selector: './app-servicio',
@@ -16,90 +17,49 @@ import { SolicitarServicios } from 'src/app/store/actions/servicios.actions';
   styles: []
 })
 
-export class ServicioComponent implements OnInit {
+export class ServicioComponent implements OnInit, OnDestroy {
+
+  servicios: Servicio[];
+  toggle = false;
+  actividades: any;
+  servicioEsp: any;
+  permissions: any;
+  showError: boolean;
+  servicios$ = this.store.select(state => state.servicio);
 
   constructor(
-    private store: Store<any>,
+    private store: Store<ServicioState>,
     private router: Router,
     private loginService: LoginService,
     private espService: EspService,
     private dataService: DataService,
     private actividadesService: ActividadesService,
     private ngxPermissionsService: NgxPermissionsService
-  ) { }
-
-  /**
-   * carga todos los servicios esp
-   */
-  data: Servicio[];
-
-
-  /**
-   * controla la visivilidad del modal
-   */
-  toggle = false;
-
-
-  /**
-   * se cargaran las actividades que se
-   * mostrara en el modal
-   */
-  actividades: any;
-
-
-  /**
-   * se almacenara temporalmente el servicio esp
-   * al momento de abrir el modal
-   */
-  servicioEsp: any;
-
-
-  /**
-   * carga rol del usuario
-   */
-  permissions: any;
-
-
-  /**
-   * flag
-   * controla el mensaje de error
-   */
-  showError: boolean;
-
-
-  options = [
-    { title: 'sin filtro', value: 'sinFiltro' },
-    { title: 'centro de costo', value: 'centroCosto' },
-    { title: 'ciudad', value: 'ciudad' },
-    { title: 'nombre del clientes', value: 'cliente' },
-    { title: 'identificacion de evaluado', value: 'identificacion' },
-  ];
-
-
-  auxData: any;
-
-
-
-  ngOnInit() {
-    this.store.select('servicio').subscribe(data => {
-      this.data = data;
-    });
-
-    this.store.dispatch(new SolicitarServicios());
-    this.permissions = this.ngxPermissionsService.getPermissions();
-    // this.loadServiciosEsp();
-    this.showError = false;
+  ) {
+      this.servicios$.subscribe(data => {
+        this.servicios = ServicioComponent.sortData(data);
+      });
   }
 
-  sortData(data: Servicio[]) {
+  static sortData(data: Servicio[]) {
     return data.sort((a: Servicio, b: Servicio) => {
-      const A = new Date(a.fechaCreacion).getDate;
-      const B = new Date(b.fechaCreacion).getDate;
+      const A = a.centroCosto.id; // new Date(a.fechaCreacion).getDate;
+      const B = b.centroCosto.id; // new Date(b.fechaCreacion).getDate;
       if (A === B) {
         return 0;
       }
-      return (A > B) ? 1 : -1;
+      return (A < B) ? 1 : -1;
     });
+  }
+
+  ngOnInit() {
+    this.store.dispatch(new SolicitarServicios());
+    this.permissions = this.ngxPermissionsService.getPermissions();
+    this.showError = false;
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(new RemoverServicios());
   }
 
 
@@ -108,7 +68,7 @@ export class ServicioComponent implements OnInit {
     /*if (this.permissions.ADG || this.permissions.AESP || this.permissions.DOPE) {
 
       this.dataService.cargarEsps().subscribe(
-        (value: Servicio[]) => this.data = this.sortData(value),
+        (value: Servicio[]) => this.servicios = this.sortData(value),
         (err: any) => console.error(err.error.message)
       );
 
@@ -118,7 +78,7 @@ export class ServicioComponent implements OnInit {
       const clienteId = this.loginService.user.id;
 
       this.dataService.cargarEsps().subscribe(
-        (value: Servicio[]) => this.data = this.sortData(value),
+        (value: Servicio[]) => this.servicios = this.sortData(value),
         (err: any) => this.showError = true
       );
 
@@ -128,7 +88,7 @@ export class ServicioComponent implements OnInit {
       const freelanceId = this.loginService.user.id;
 
       this.dataService.getFreelanceServiciosEsp(freelanceId).subscribe(
-        (value: any) => this.data = value.data,
+        (value: any) => this.servicios = value.servicios,
         (err: any) => console.error(err.error.message)
       );
 
@@ -180,7 +140,7 @@ export class ServicioComponent implements OnInit {
 
             console.log(value);
 
-            this.actividades = value.data;
+            this.actividades = value.servicios;
 
             this.toggle = true;
           }
@@ -234,7 +194,7 @@ export class ServicioComponent implements OnInit {
 
                 this.actividadesService.storeServicioEsp(this.servicioEsp);
 
-                ActividadesService.storeActividades(response.data);
+                ActividadesService.storeActividades(response.servicios);
 
                 this.router.navigate([value.path]);
               }
@@ -262,7 +222,7 @@ export class ServicioComponent implements OnInit {
 
                 this.actividadesService.storeServicioEsp(this.servicioEsp);
 
-                ActividadesService.storeActividades(response.data);
+                ActividadesService.storeActividades(response.servicios);
 
                 console.log(value.path);
                 this.router.navigate([value.path]);
@@ -304,7 +264,7 @@ export class ServicioComponent implements OnInit {
     const minDateTimestamp = moment(minDate).unix();
     const maxDateTimestamp = moment(maxDate).unix();
 
-    const values = this.data
+    const values = this.servicios
       .filter((el: any) =>
         moment(el.timestamps.fechaCreacion.date).unix() >= minDateTimestamp &&
         moment(el.timestamps.fechaCreacion.date).unix() <= maxDateTimestamp
@@ -315,7 +275,7 @@ export class ServicioComponent implements OnInit {
 
     }
 
-    this.data = values;
+    this.servicios = values;
 
   }
 
@@ -332,85 +292,4 @@ export class ServicioComponent implements OnInit {
     }
   }
 
-
-
-  notificarClienteAndFacturacion(item: any) {
-    const notificar = confirm('Desea notificar el servicio a facturacion y al clientes?');
-
-    if (notificar) {
-      const estado = 'finalizado';
-
-      this.dataService.updateEstadoServicioEsp(item.id, {estado})
-        .subscribe((value: any) => {
-          window.location.reload()
-        });
-    }
-
-  }
-
-  filtrarServicios(filtro: string, query: any) {
-
-    let dataFiltered: any;
-
-    if (this.auxData == null) {
-      this.auxData = this.data;
-
-      console.log('aux initialization');
-    }
-
-    if (query === '' && filtro !== 'sinFiltro') {
-      window.alert('Por favor ingrese un valor a buscar');
-      return;
-    }
-
-    if (filtro === 'sinFiltro') {
-      this.loadServiciosEsp();
-      return;
-
-    }
-
-    if (filtro === 'centroCosto') {
-      this.data = this.auxData;
-      dataFiltered = this.data
-        .filter((el: any) => !el.centroCosto.id.toString().search(query));
-    }
-
-    if (filtro === 'ciudad') {
-      this.data = this.auxData;
-      dataFiltered = this.data
-        .filter((el: any) => !el.ciudadDesarrollo.toLowerCase().search(query));
-    }
-
-    if (filtro === 'cliente') {
-      this.data = this.auxData;
-      dataFiltered = this.data
-        .filter((el: any) => !el.personaEvaluada.nombre.toLowerCase().search(query));
-    }
-
-    if (filtro === 'identificacion') {
-      this.data = this.auxData;
-      dataFiltered = this.data
-        .filter((el: any) => !el.personaEvaluada.documento.toString().search(query));
-    }
-
-    if (dataFiltered.length === 0) {
-      window.alert('No se han encontrado resultados');
-      return;
-
-    } else {
-      this.data = dataFiltered;
-    }
-
-  }
-
-  deleteEsp(id) {
-    const confir = window.confirm('Desea eliminar este servicio esp?');
-
-    if  (confir) {
-      this.espService.deleteServEsp(id).subscribe(() => {
-        alert('servicio-esp eliminado');
-        this.data = this.data.filter(value => value.id !== id);
-      });
-    }
-  }
 }

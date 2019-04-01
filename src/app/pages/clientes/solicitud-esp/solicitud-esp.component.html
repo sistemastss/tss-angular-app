@@ -51,16 +51,16 @@
 
               <!-- Ciudad de desarrollo -->
               <div class="form-group row">
-                <label for="ciudadDesarrollo" class="col-sm-3 col-form-label">Ciudad de desarrollo del servicio</label>
+                <label for="ciudad" class="col-sm-3 col-form-label">Ciudad de desarrollo del servicio</label>
                 <div class="col-sm-9">
                   <input type="text"
                          class="form-control"
-                         id="ciudadDesarrollo"
-                         name="ciudadDesarrollo"
+                         id="ciudad"
+                         name="ciudad"
                          required="required"
                          placeholder="Ciudad de desarrollo del servicio"
-                         formControlName="ciudadDesarrollo">
-                  <div [hidden]="form.controls['ciudadDesarrollo'].valid  || form.controls['ciudadDesarrollo'].pristine">
+                         formControlName="ciudad">
+                  <div [hidden]="form.controls['ciudad'].valid  || form.controls['ciudad'].pristine">
                     <div class="ng-invalid-feedback">
                       El campo es requerido
                     </div>
@@ -146,7 +146,7 @@
                   Anexo
                 </label>
                 <div class="col-sm-9">
-                  <input type="file" id="anexo" class="form-control-file" (click)="cargarArchivo($event)">
+                  <input type="file" id="anexo" class="form-control-file" (change)="cargarArchivo($event)" #inputFile>
                 </div>
               </div>
 
@@ -194,7 +194,7 @@
                        [value]="false" id="aceptarTerminos"
                        formControlName="aceptarTerminos"
                        required>
-                <label class="form-check-label" for="aceptarTerminos">
+                <label (click)="abrirVentanaTerminos()"  class="form-check-label" for="aceptarTerminos">
                   Aceptar terminos y condiciones
                 </label>
               </div>
@@ -303,7 +303,7 @@
             <!--Ciudad desarrollo-->
             <div class="form-group">
               <label for="m-ciudad">Ciudad de desarrollo</label>
-              <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="detalle.ciudadDesarrollo">
+              <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="detalle.ciudad">
             </div>
 
             <!--telefono-->
@@ -346,7 +346,7 @@
                 <div class="d-block">
                   <a [href]="detalle.anexo" class="btn btn-link">
                     <i class="fa fa-download"></i>
-                    {{ detalle.anexo.name }}
+                    {{ detalle.anexo }}
                   </a>
                 </div>
               </div>
@@ -421,6 +421,9 @@
   </div>
 </app-modal>
 
-<pre>
-  {{ form.value | json }}
-</pre>
+
+<div  *ngIf="terminos">
+    <app-modal (close)="cerrarVentanaTerminos()" title="Detalle del servicio" size="large">
+
+      </app-modal>
+</div>

@@ -66,7 +66,7 @@ export class ActividadClass {
     this._actividades.postAsignarActividad(actividad, data)
       .subscribe(
         (response: any) => {
-          this.actividad.actividadAsignada = response.data;
+          this.actividad.actividadAsignada = response.servicios;
           this.setEstado(estado);
         },
         this._actividades.handleError

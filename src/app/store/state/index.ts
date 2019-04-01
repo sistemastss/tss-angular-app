@@ -2,6 +2,11 @@ import { ServicioEsp } from '../../@models/servicio-esp';
 import { Investigacion } from '../../@models/Investigacion';
 import { CentroCosto } from '../../@models/centro-costo';
 import { Poligrafia } from '../../@models/poligrafia';
+import {Servicio} from '../../@models/servicio';
+
+export interface ServicioState {
+  readonly servicio: Servicio[];
+}
 
 export interface CentroCostoState {
   readonly centroCosto: CentroCosto;

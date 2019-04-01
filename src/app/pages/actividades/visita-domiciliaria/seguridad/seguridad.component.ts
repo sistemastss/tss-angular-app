@@ -4,7 +4,7 @@ import {ActividadesService} from '../../../../services/actividades.service';
 import {DataService} from '../../../../services/data.service';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {ActividadClass} from '../../../../@classes/actividad.class';
-import {SeguridadService} from '../../../../services/servicios-esp/actividades/visita-domiciliaria/seguridad.service';
+import {SeguridadService} from '../../../../services/esp/actividades/visita-domiciliaria/seguridad.service';
 
 @Component({
   selector: 'app-seguridad',
@@ -74,8 +74,8 @@ export class SeguridadComponent extends ActividadClass implements OnInit {
     this._seguridad.get(this.servicioEsp)
       .subscribe(
         (value: any) => {
-          this.estado = value.data.estado;
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.estado = value.servicios.estado;
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
         },
         () =>  this.estado = 'aceptado'
       );
@@ -87,8 +87,8 @@ export class SeguridadComponent extends ActividadClass implements OnInit {
     this._seguridad.post(this.servicioEsp, data)
       .subscribe(
         (value: any) => {
-          this.estado = value.data.estado;
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.estado = value.servicios.estado;
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
           alert('Se han guardado los datos exitosamente');
 
         },
@@ -105,9 +105,9 @@ export class SeguridadComponent extends ActividadClass implements OnInit {
       .subscribe(
         (value: any) => {
           if (this.permissions.FRCE) {
-            this.estado = value.data.estado;
+            this.estado = value.servicios.estado;
           }
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
           alert('Se han actualizado los datos exitosamente');
 
         },

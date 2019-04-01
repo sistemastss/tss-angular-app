@@ -35,7 +35,6 @@ export class RemoverPoligrafia implements Action {
 
 export type PoligrafiaActions =
   CrearPoligrafia
-  | AlmacenarPoligrafia
   | EditarPoligrafia
   | EliminarPoligrafia
   | RemoverPoligrafia;

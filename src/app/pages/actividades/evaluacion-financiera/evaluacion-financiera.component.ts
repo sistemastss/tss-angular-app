@@ -4,7 +4,7 @@ import {ActividadesService} from '../../../services/actividades.service';
 import {DataService} from '../../../services/data.service';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {ActividadClass} from '../../../@classes/actividad.class';
-import {EvaluacionFinancieraService} from '../../../services/servicios-esp/actividades/evaluacion-financiera.service';
+import {EvaluacionFinancieraService} from '../../../services/esp/actividades/evaluacion-financiera.service';
 import {HandlerModal} from '../../../@models/handler-modal';
 
 @Component({
@@ -87,19 +87,19 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
     this.actividad = this._actividades.actividadProxy(this.codigo);
 
     this._evaluacionFinanciera.getCuentasBancarias(this.servicioEsp)
-      .subscribe((res: any) => this.cuentaBancaria = res.data);
+      .subscribe((res: any) => this.cuentaBancaria = res.servicios);
 
     this._evaluacionFinanciera.getObligacionesVigentes(this.servicioEsp)
-      .subscribe((res: any) => this.obligacionVigente = res.data);
+      .subscribe((res: any) => this.obligacionVigente = res.servicios);
 
     this._evaluacionFinanciera.getObligacionesReales(this.servicioEsp)
-      .subscribe((res: any) => this.obligacionVigenteReal = res.data);
+      .subscribe((res: any) => this.obligacionVigenteReal = res.servicios);
 
     this._evaluacionFinanciera.getObligacionesMora(this.servicioEsp)
-      .subscribe((res: any) => this.obligacionMora = res.data);
+      .subscribe((res: any) => this.obligacionMora = res.servicios);
 
     this._evaluacionFinanciera.getObligacionesExtinguidas(this.servicioEsp)
-      .subscribe((res: any) => this.obligacionExtinguida = res.data);
+      .subscribe((res: any) => this.obligacionExtinguida = res.servicios);
 
     if (this._actividades.canLoadResource(this.actividad)) {
       this.getValue();
@@ -112,7 +112,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
     this._evaluacionFinanciera.get(this.servicioEsp)
       .subscribe(
         (value: any) => {
-          const data = this._actividades.transformResponse(value.data);
+          const data = this._actividades.transformResponse(value.servicios);
           this.form.setValue(data);
         });
   }
@@ -125,7 +125,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
       .subscribe(
         (value: any) => {
           this.setEstado('proceso');
-          const response = this._actividades.transformResponse(value.data);
+          const response = this._actividades.transformResponse(value.servicios);
           this.form.setValue(response);
           alert('Se han guardado los datos exitosamente');
 
@@ -143,7 +143,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
           if (this.permissions.FRCE) {
             this.setEstado('proceso');
           }
-          const response = this._actividades.transformResponse(value.data);
+          const response = this._actividades.transformResponse(value.servicios);
           this.form.setValue(response);
           alert('Se han actualizado los datos exitosamente');
         },
@@ -161,7 +161,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
   addCuentaBancaria() {
     this._evaluacionFinanciera.postCuentaBancaria(this.servicioEsp, this.cuentaBancariaForm.value)
       .subscribe((res: any) => {
-        this.cuentaBancaria.push(res.data);
+        this.cuentaBancaria.push(res.servicios);
         this.closeModalCuentaBancaria();
       });
   }
@@ -186,7 +186,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
       .subscribe(
         (res: any) => {
           this.cuentaBancaria = this.cuentaBancaria
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalCuentaBancaria();
 
@@ -225,7 +225,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
   addObligacionVigente() {
     this._evaluacionFinanciera.postObligacionVigente(this.servicioEsp, this.obligacionVigenteForm.value)
       .subscribe((res: any) => {
-        this.obligacionVigente.push(res.data);
+        this.obligacionVigente.push(res.servicios);
         this.closeModalObligacionVigente();
       });
   }
@@ -250,7 +250,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
       .subscribe(
         (res: any) => {
           this.obligacionVigente = this.obligacionVigente
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalObligacionVigente();
 
@@ -288,7 +288,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
   addObligacionVigenteReal() {
     this._evaluacionFinanciera.postObligacionReal(this.servicioEsp, this.obligacionVigenteRealForm.value)
       .subscribe((res: any) => {
-        this.obligacionVigenteReal.push(res.data);
+        this.obligacionVigenteReal.push(res.servicios);
         this.closeModalObligacionVigenteReal();
       });
   }
@@ -313,7 +313,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
       .subscribe(
         (res: any) => {
           this.obligacionVigenteReal = this.obligacionVigenteReal
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalObligacionVigenteReal();
           alert('Datos actualizados correctamente');
@@ -350,7 +350,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
   addObligacionMora() {
     this._evaluacionFinanciera.postObligacionMora(this.servicioEsp, this.obligacionMoraForm.value)
       .subscribe((res: any) => {
-        this.obligacionMora.push(res.data);
+        this.obligacionMora.push(res.servicios);
         this.closeModalObligacionMora();
       });
   }
@@ -375,7 +375,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
       .subscribe(
         (res: any) => {
           this.obligacionMora = this.obligacionMora
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalObligacionMora();
           alert('Datos actualizados correctamente');
@@ -412,7 +412,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
   addObligacionExtinguida() {
     this._evaluacionFinanciera.postObligacionExtinguida(this.servicioEsp, this.obligacionExtinguidaForm.value)
       .subscribe((res: any) => {
-        this.obligacionExtinguida.push(res.data);
+        this.obligacionExtinguida.push(res.servicios);
         this.closeModalObligacionExtinguida();
       });
   }
@@ -437,7 +437,7 @@ export class EvaluacionFinancieraComponent extends ActividadClass implements OnI
       .subscribe(
         (res: any) => {
           this.obligacionExtinguida = this.obligacionExtinguida
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalObligacionExtinguida();
           alert('Datos actualizados correctamente');

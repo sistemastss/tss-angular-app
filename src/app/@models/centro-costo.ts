@@ -4,7 +4,7 @@ export interface CentroCosto {
   telefonoSolicitante: number;
   emailSolicitante: string;
   numeroOrden?: number;
-  anexo?: File;
+  anexo?: string;
   destinoFactura: string;
   tipoSociedad: string;
   tipoIdentificacion: string;

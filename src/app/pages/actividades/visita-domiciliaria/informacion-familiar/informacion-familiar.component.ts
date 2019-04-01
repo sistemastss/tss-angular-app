@@ -3,7 +3,7 @@ import {FormGroup} from '@angular/forms';
 import {ActividadClass} from '../../../../@classes/actividad.class';
 import {ActividadesService} from '../../../../services/actividades.service';
 import {NgxPermissionsService} from 'ngx-permissions';
-import {NucleoFamiliarService} from '../../../../services/servicios-esp/actividades/visita-domiciliaria/nucleo-familiar.service';
+import {NucleoFamiliarService} from '../../../../services/esp/actividades/visita-domiciliaria/nucleo-familiar.service';
 
 @Component({
   selector: 'app-informacion-familiar',
@@ -63,18 +63,18 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
         (value: any) => {
 
           console.log(value);
-          this.estado = value.data.estado;
+          this.estado = value.servicios.estado;
 
           this._nucleoFamiliar.getHijos(this.servicioEsp)
-            .subscribe((res: any) => this.hijos = res.data);
+            .subscribe((res: any) => this.hijos = res.servicios);
 
           this._nucleoFamiliar.getInfoFamiliar(this.servicioEsp)
-            .subscribe((res: any) => this.infoFamiliar = res.data);
+            .subscribe((res: any) => this.infoFamiliar = res.servicios);
 
           this._nucleoFamiliar.getReferencias(this.servicioEsp)
-            .subscribe((res: any) => this.referencias = res.data);
+            .subscribe((res: any) => this.referencias = res.servicios);
 
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
         },
         () =>  {
           this.estado = 'aceptado';
@@ -88,10 +88,10 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
     this._nucleoFamiliar.post(this.servicioEsp, data)
       .subscribe(
         (value: any) => {
-            this.estado = value.data.estado;
+            this.estado = value.servicios.estado;
             alert('Se han guardado los datos exitosamente');
             this.form.reset();
-            this.form.setValue(this._actividades.transformResponse(value.data));
+            this.form.setValue(this._actividades.transformResponse(value.servicios));
 
           },
         err => alert('Ocurrio un error inesperado. Intentelo de nuevo')
@@ -106,11 +106,11 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
       .subscribe(
         (value: any) => {
           if (this.permissions.FRCE) {
-            this.estado = value.data.estado;
+            this.estado = value.servicios.estado;
           }
           this.form.reset();
           alert('Se han actualizado los datos exitosamente');
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
         },
         err => alert(err.error.message)
       );
@@ -119,7 +119,7 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
   addHijos() {
     this._nucleoFamiliar.postHijo(this.servicioEsp, this.hijoForm.value)
       .subscribe((res: any) => {
-        this.hijos.push(res.data);
+        this.hijos.push(res.servicios);
         this.closeModalHijos();
       });
   }
@@ -142,7 +142,7 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
     this._nucleoFamiliar.putHijo(this.servicioEsp, id, this.hijoForm.value)
       .subscribe(
         (res: any) => {
-          this.hijos = this.hijos.map(value => value.id === res.data.id ? res.data : value);
+          this.hijos = this.hijos.map(value => value.id === res.servicios.id ? res.servicios : value);
           this.closeModalHijos();
           alert('Datos actualizados correctamente');
         },
@@ -177,7 +177,7 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
   addInfoFlia() {
     this._nucleoFamiliar.postInfoFamiliar(this.servicioEsp, this.infoFamiliarForm.value)
       .subscribe((res: any) => {
-        this.infoFamiliar.push(res.data);
+        this.infoFamiliar.push(res.servicios);
         this.closeModalInfoFlia();
       });
   }
@@ -201,7 +201,7 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
     this._nucleoFamiliar.putInfoFamiliar(this.servicioEsp, id, this.infoFamiliarForm.value)
       .subscribe(
         (res: any) => {
-          this.infoFamiliar = this.infoFamiliar.map(value => value.id === res.data.id ? res.data : value);
+          this.infoFamiliar = this.infoFamiliar.map(value => value.id === res.servicios.id ? res.servicios : value);
           this.closeModalInfoFlia();
           alert('Datos actualizados correctamente');
         },
@@ -237,7 +237,7 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
   addReferencia() {
     this._nucleoFamiliar.postReferencia(this.servicioEsp, this.referenciaForm.value)
       .subscribe((res: any) => {
-        this.referencias.push(res.data);
+        this.referencias.push(res.servicios);
         this.closeModalReferencia();
       });
   }
@@ -261,7 +261,7 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
     this._nucleoFamiliar.putReferencia(this.servicioEsp, id, this.referenciaForm.value)
       .subscribe(
         (res: any) => {
-          this.referencias = this.referencias.map(value => value.id === res.data.id ? res.data : value);
+          this.referencias = this.referencias.map(value => value.id === res.servicios.id ? res.servicios : value);
           this.closeModalReferencia();
           alert('Datos actualizados correctamente');
         },
@@ -316,14 +316,14 @@ export class InformacionFamiliarComponent extends ActividadClass implements OnIn
     const file = this.form.get('fotografia').value;
     console.log(file);
 
-    return !(file.includes('data:application') || file === '');
+    return !(file.includes('servicios:application') || file === '');
   }
 
   checkTypeFile() {
     const file = this.form.get('fotografia').value;
     console.log(file);
     console.log('typo', typeof file);
-    return file.includes('data:application') || file === '';
+    return file.includes('servicios:application') || file === '';
   }
 
 }

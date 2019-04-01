@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActividadesService} from '../../../services/actividades.service';
 import {NgxPermissionsService} from 'ngx-permissions';
-import {HistorialJudicialService} from '../../../services/servicios-esp/actividades/historial-judicial.service';
+import {HistorialJudicialService} from '../../../services/esp/actividades/historial-judicial.service';
 import {ActividadClass} from '../../../@classes/actividad.class';
 
 @Component({
@@ -77,7 +77,7 @@ export class HistorialJudicialComponent extends ActividadClass implements OnInit
       .subscribe(
       (value: any) => {
 
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
 
           this.setEstado('proceso');
 
@@ -105,7 +105,7 @@ export class HistorialJudicialComponent extends ActividadClass implements OnInit
             this.setEstado('proceso');
           }
 
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
 
           alert('Se han actualizado los datos exitosamente');
 
@@ -124,7 +124,7 @@ export class HistorialJudicialComponent extends ActividadClass implements OnInit
     this._histJudicial.getHistorialJudicial(this.servicioEsp)
       .subscribe(
         (response: any) => {
-          this.form.setValue(this._actividades.transformResponse(response.data));
+          this.form.setValue(this._actividades.transformResponse(response.servicios));
         },
         this._actividades.handleError
       );

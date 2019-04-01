@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Servicio } from './../../../@models/servicio';
 import {Component, OnInit} from '@angular/core';
-import {EspService} from '../../../services/esp.service';
+import {EspService} from '../../../services/esp/esp.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../../services/data.service';
 import {LoginService} from '../../../services/login.service';
@@ -34,7 +34,7 @@ export class EspComponent implements OnInit {
   /**
    * carga todos los servicios esp
    */
-  data: Servicio[];
+  data: any[];
 
 
   /**
@@ -111,7 +111,7 @@ export class EspComponent implements OnInit {
     /*if (this.permissions.ADG || this.permissions.AESP || this.permissions.DOPE) {
 
       this.dataService.cargarEsps().subscribe(
-        (value: Servicio[]) => this.data = this.sortData(value),
+        (value: Servicio[]) => this.servicios = this.sortData(value),
         (err: any) => console.error(err.error.message)
       );
 
@@ -121,7 +121,7 @@ export class EspComponent implements OnInit {
       const clienteId = this.loginService.user.id;
 
       this.dataService.cargarEsps().subscribe(
-        (value: Servicio[]) => this.data = this.sortData(value),
+        (value: Servicio[]) => this.servicios = this.sortData(value),
         (err: any) => this.showError = true
       );
 
@@ -131,7 +131,7 @@ export class EspComponent implements OnInit {
       const freelanceId = this.loginService.user.id;
 
       this.dataService.getFreelanceServiciosEsp(freelanceId).subscribe(
-        (value: any) => this.data = value.data,
+        (value: any) => this.servicios = value.servicios,
         (err: any) => console.error(err.error.message)
       );
 
@@ -157,7 +157,7 @@ export class EspComponent implements OnInit {
 
             console.log(value);
 
-            this.actividades = value.data;
+            this.actividades = value.servicios;
 
             this.toggle = true;
 
@@ -183,7 +183,7 @@ export class EspComponent implements OnInit {
 
             console.log(value);
 
-            this.actividades = value.data;
+            this.actividades = value.servicios;
 
             this.toggle = true;
           }
@@ -237,7 +237,7 @@ export class EspComponent implements OnInit {
 
                 this.actividadesService.storeServicioEsp(this.servicioEsp);
 
-                ActividadesService.storeActividades(response.data);
+                ActividadesService.storeActividades(response.servicios);
 
                 this.router.navigate([value.path]);
               }
@@ -265,7 +265,7 @@ export class EspComponent implements OnInit {
 
                 this.actividadesService.storeServicioEsp(this.servicioEsp);
 
-                ActividadesService.storeActividades(response.data);
+                ActividadesService.storeActividades(response.servicios);
 
                 console.log(value.path);
                 this.router.navigate([value.path]);
@@ -433,16 +433,5 @@ export class EspComponent implements OnInit {
       this.data = dataFiltered;
     }
 
-  }
-
-  deleteEsp(id) {
-    const confir = window.confirm('Desea eliminar este servicio esp?');
-
-    if  (confir) {
-      this.espService.deleteServEsp(id).subscribe(() => {
-        alert('servicio-esp eliminado');
-        this.data = this.data.filter(value => value.id !== id);
-      });
-    }
   }
 }

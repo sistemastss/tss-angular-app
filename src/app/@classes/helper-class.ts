@@ -5,7 +5,7 @@ import {config} from '../@models/app-settings';
  */
 export class Helper {
 
-  static route(values: any, params: any): string {
+  static route(values: any, params: any = null): string {
     let url = config.api;
 
     if (Array.isArray(values)) {
@@ -29,29 +29,33 @@ export class Helper {
         }
       });
     } else {
-      url += `/${values}/${params}`;
+      if (!params) {
+        url += `/${values}`;
+      } else {
+        url += `/${values}/${params}`;
+      }
     }
     return url;
   }
 
-  static formDataFromArray(data: any[]): FormData[] {
+  static formDataFromArray(data: any[]): any[] {
     const formDataArr = [];
-
     data.forEach(value => {
-      const formData = Helper.formData(value);
-      formDataArr.push(formData);
+      const item = Helper.formData(value);
+      formDataArr.push(item);
     });
-
     return formDataArr;
   }
 
-  static formData(data: {}): FormData {
+  static formData(data: {}): any {
     const formData = new FormData();
     for (const key in data) {
-      if (data[key]) {
+      if (key === 'anexo') {
         formData.append(key, data[key]);
+        const file = data['anexo'];
+        data['anexo'] = formData;
       }
     }
-    return formData;
+    return data;
   }
 }

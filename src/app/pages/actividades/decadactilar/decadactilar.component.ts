@@ -4,7 +4,7 @@ import {ActividadesService} from '../../../services/actividades.service';
 import {DataService} from '../../../services/data.service';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {ActividadClass} from '../../../@classes/actividad.class';
-import {ComunService} from '../../../services/servicios-esp/actividades/comun.service';
+import {ComunService} from '../../../services/esp/actividades/comun.service';
 
 @Component({
   selector: 'app-decadactilar',
@@ -46,7 +46,7 @@ export class DecadactilarComponent extends ActividadClass implements OnInit {
       .subscribe(
         (value: any) => {
 
-          const data = this._actividades.transformResponse(value.data);
+          const data = this._actividades.transformResponse(value.servicios);
           this.form.setValue(data);
         },
         () => alert('Ocurrio un error inesperado al tratar de recuperar los datos')
@@ -64,9 +64,9 @@ export class DecadactilarComponent extends ActividadClass implements OnInit {
 
           this.setEstado('proceso');
 
-          // this.currentActivityId = value.data.id;
+          // this.currentActivityId = value.servicios.id;
 
-          const dat = this._actividades.transformResponse(value.data);
+          const dat = this._actividades.transformResponse(value.servicios);
 
           this.form.reset();
           this.form.setValue(dat);
@@ -91,7 +91,7 @@ export class DecadactilarComponent extends ActividadClass implements OnInit {
           alert('Se han actualizado los datos exitosamente');
 
           this.form.reset();
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
 
         },
         err => alert(err.error.message)
@@ -125,13 +125,13 @@ export class DecadactilarComponent extends ActividadClass implements OnInit {
     const file = this.form.get('adjunto').value;
     console.log(file);
 
-    return !(file.includes('data:application') || file === '');
+    return !(file.includes('servicios:application') || file === '');
   }
 
   checkTypeFile() {
     const file = this.form.get('adjunto').value;
     console.log(file);
     console.log('typo', typeof file);
-    return file.includes('data:application') || file === '';
+    return file.includes('servicios:application') || file === '';
   }
 }

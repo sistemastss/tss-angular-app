@@ -22,7 +22,7 @@ export class AsignarFuncionarioComponent implements OnInit {
 
   ngOnInit() {
     this._data.frelance().subscribe(
-      (value: any) => this.funcionarios = value.data,
+      (value: any) => this.funcionarios = value.servicios,
       err => console.log(err)
     );
   }

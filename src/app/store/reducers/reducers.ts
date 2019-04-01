@@ -1,12 +1,12 @@
-import {EspActions, ServicioEspActionTypes} from '../actions/esp.actions';
+import {EspActions, ServicioEspActionTypes} from '../actions';
 import {CentroCosto} from '../../@models/centro-costo';
-import {CentroCostoActions, CentroCostoActionTypes} from '../actions/centro-costo-actions';
+import {CentroCostoActions, CentroCostoActionTypes} from '../actions';
 import {Investigacion} from '../../@models/Investigacion';
-import {InvestigacionActions, InvestigacionActionTypes} from '../actions/investigacion.actions';
+import {InvestigacionActions, InvestigacionActionTypes} from '../actions';
 import {Servicio} from '../../@models/servicio';
-import {ServiciosActions, ServiciosActionTypes} from '../actions/servicios.actions';
+import {ServiciosActions, ServiciosActionTypes} from '../actions';
 import {Poligrafia} from '../../@models/poligrafia';
-import {PoligrafiaActions, PoligrafiaActionTypes} from '../actions/poligrafia.actions';
+import {PoligrafiaActions, PoligrafiaActionTypes} from '../actions';
 import {ServicioEsp} from '../../@models/servicio-esp';
 
 export function centroCostoReducer(state: CentroCosto, action: CentroCostoActions): CentroCosto {
@@ -91,6 +91,9 @@ export function serviciosReducer(state: Servicio[] = [], action: ServiciosAction
 
     case ServiciosActionTypes.ELIMINAR:
       return [...state.filter(value => value.id !== action.id)];
+
+    case ServiciosActionTypes.REMOVER:
+      return [];
 
     default:
       return state;

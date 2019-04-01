@@ -8,7 +8,7 @@ export class MenuService {
   menu = {
     administrador: [
       {
-        path: './servicios',
+        path: './',
         title: 'Servicios',
         icon: 'fa-tasks',
         color: 'bg-primary'
@@ -30,7 +30,7 @@ export class MenuService {
     ],
     cliente: [
       {
-        path: './servicios',
+        path: './',
         title: 'Servicios',
         icon: 'fa-tasks',
         color: 'bg-primary'
@@ -60,7 +60,7 @@ export class MenuService {
     ],
     directorOperaciones: [
       {
-        path: './servicios',
+        path: './',
         title: 'Servicios',
         icon: 'fa-tasks',
         color: 'bg-primary'

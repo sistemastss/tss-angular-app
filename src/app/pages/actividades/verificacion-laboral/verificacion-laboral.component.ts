@@ -5,7 +5,7 @@ import {ActividadesService} from '../../../services/actividades.service';
 import {DataService} from '../../../services/data.service';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {HandlerModal} from '../../../@models/handler-modal';
-import {VerificacionLaboralService} from '../../../services/servicios-esp/actividades/verificacion-laboral.service';
+import {VerificacionLaboralService} from '../../../services/esp/actividades/verificacion-laboral.service';
 
 @Component({
   selector: 'app-verificacion-laboral',
@@ -64,7 +64,7 @@ export class VerificacionLaboralComponent extends ActividadClass implements OnIn
     this._verificacionLaboral.get(this.servicioEsp)
       .subscribe(
         (value: any) => {
-          this.verificacionLaboral = value.data;
+          this.verificacionLaboral = value.servicios;
         }
         // () => alert('Ocurrio un error inesperado al tratar de recuperar los datos')
       );
@@ -75,7 +75,7 @@ export class VerificacionLaboralComponent extends ActividadClass implements OnIn
   addVerifLaboral() {
     this._verificacionLaboral.post(this.servicioEsp, this.form.value)
       .subscribe((res: any) => {
-        this.verificacionLaboral.push(res.data);
+        this.verificacionLaboral.push(res.servicios);
         this.closeModalVerifLaboral();
       });
   }
@@ -100,7 +100,7 @@ export class VerificacionLaboralComponent extends ActividadClass implements OnIn
       .subscribe(
         (res: any) => {
           this.verificacionLaboral = this.verificacionLaboral
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalVerifLaboral();
           alert('Datos actualizados correctamente');

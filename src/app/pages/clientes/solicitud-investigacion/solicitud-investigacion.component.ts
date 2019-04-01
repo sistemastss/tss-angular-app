@@ -1,10 +1,10 @@
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AlmacenarCentroCosto, Servicios } from '../../../store/actions/centro-costo-actions';
-import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { InvestigacionState } from '../../../store/state';
-import { InvestigacionService } from '../../../services/investigaciones/investigacion.service';
 import { Investigacion } from '../../../@models/Investigacion';
+import { ModalService } from '../../../services/modal/modal.service';
 import {
   EditarInvestigacion,
   CrearInvestigacion,
@@ -18,52 +18,65 @@ import {
 })
 export class SolicitudInvestigacionComponent implements OnInit {
 
+  @ViewChild('inputFile') inputFile: ElementRef;
+
   form = new FormGroup({
     ciudad        : new FormControl('', Validators.required),
-    anexo         : new FormControl(''),
-    descripcion   : new FormControl('', Validators.required)
+    descripcion   : new FormControl('', Validators.required),
+    anexo         : new FormControl('')
   });
 
-  investigaciones: Investigacion[];
-
-  controlInvestigaciones = {
+  control = {
     editar: false,
     id: 0
   };
 
-  constructor(private store: Store<InvestigacionState>,
-              private investigacionService: InvestigacionService) {}
+  servicios: Investigacion[] = [];
+  detalle: Investigacion;
+  today = new Date().getTime();
+
+  constructor(
+    private store: Store<InvestigacionState>,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit() {
     this.store.select(state => state.investigacion)
-      .subscribe((value: Investigacion[]) => this.investigaciones = value);
+      .subscribe((value: Investigacion[]) => this.servicios = value);
   }
 
-  establecerFormulario(id: number) {
-    window.scrollTo(0, 0);
-    this.controlInvestigaciones.editar = true;
-    this.controlInvestigaciones.id = id;
-    const investigacion = this.investigaciones
-      .filter(((value, index) => index === id))[0];
-    this.form.setValue(investigacion);
+  obtenerServicio(index: number): Investigacion {
+    return Object.assign({}, this.servicios[index]);
   }
 
-  crearInvestigacion() {
+  cargarArchivo(event, editar = false) {
+    const file = event.target.files[0];
+    editar
+      ? this.detalle.anexo = file.name
+      : this.form.get('anexo').patchValue(file.name);
+  }
+
+  crearServicio() {
     const data = this.form.value;
-    this.form.reset();
     this.store.dispatch(new CrearInvestigacion(data));
-  }
-
-  editarInvestigacion() {
-    const id = this.controlInvestigaciones.id;
-    const data = this.form.value;
-    this.store.dispatch(new EditarInvestigacion(data, id));
     this.form.reset();
-    this.controlInvestigaciones.editar = false;
-    this.controlInvestigaciones.id = 0;
+    this.inputFile.nativeElement.value = '';
   }
 
-  eliminarInvestigacion(id: number) {
+  verDetalle(index: number, editar: boolean = false) {
+    this.control.id = index;
+    this.control.editar = editar;
+    this.detalle = this.obtenerServicio(index);
+    this.modalService.open();
+  }
+
+  guardarCambios() {
+    const id = this.control.id;
+    this.store.dispatch(new EditarInvestigacion(this.detalle, id));
+    this.cerrarVentana();
+  }
+
+  eliminarServicio(id: number) {
     const confirm = window.confirm('Esta seguro de eliminar este servicio?');
     if (!confirm) {
       return;
@@ -71,8 +84,20 @@ export class SolicitudInvestigacionComponent implements OnInit {
     this.store.dispatch(new EliminarInvestigacion(id));
   }
 
+  cerrarVentana() {
+    this.control.editar = false;
+    this.control.id = 0;
+    this.modalService.close();
+    this.detalle = null;
+  }
 
-  guardarInvestigaciones() {
-    this.store.dispatch(new AlmacenarCentroCosto(Servicios.INVESTIGACION));
+
+  guardarServicios() {
+    const confirm = window.confirm('Esta seguro de solicitar los servicios?');
+    if (!confirm) {
+      return;
+    }
+    const servicio = Servicios.INVESTIGACION;
+    this.store.dispatch(new AlmacenarCentroCosto(servicio));
   }
 }

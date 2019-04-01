@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActividadesService} from '../../../../services/actividades.service';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {ActividadClass} from '../../../../@classes/actividad.class';
-import {ModusVivendiService} from '../../../../services/servicios-esp/actividades/visita-domiciliaria/modus-vivendi.service';
+import {ModusVivendiService} from '../../../../services/esp/actividades/visita-domiciliaria/modus-vivendi.service';
 import {HandlerModal} from '../../../../@models/handler-modal';
 import {FormGroup} from '@angular/forms';
 
@@ -72,21 +72,21 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
     this._modusVivendi.get(this.servicioEsp)
       .subscribe(
         (value: any) => {
-          this.estado = value.data.estado;
+          this.estado = value.servicios.estado;
 
           this._modusVivendi.getBienesInmuebles(this.servicioEsp)
-            .subscribe((res: any) => this.bienesInmuebles = res.data);
+            .subscribe((res: any) => this.bienesInmuebles = res.servicios);
 
           this._modusVivendi.getBienesMuebles(this.servicioEsp)
-            .subscribe((res: any) => this.bienesMuebles = res.data);
+            .subscribe((res: any) => this.bienesMuebles = res.servicios);
 
           this._modusVivendi.getRefBancarias(this.servicioEsp)
-            .subscribe((res: any) => this.refBancarias = res.data);
+            .subscribe((res: any) => this.refBancarias = res.servicios);
 
           this._modusVivendi.getCapEndeudamiento(this.servicioEsp)
-            .subscribe((res: any) => this.capEndeudamiento = res.data);
+            .subscribe((res: any) => this.capEndeudamiento = res.servicios);
 
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
 
         },
         () =>  {
@@ -102,10 +102,10 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
     this._modusVivendi.post(this.servicioEsp, data)
       .subscribe(
         (value: any) => {
-          this.estado = value.data.estado;
+          this.estado = value.servicios.estado;
           alert('Se han guardado los datos exitosamente');
           this.form.reset();
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
 
         },
         err => alert('Ocurrio un error inesperado. Intentelo de nuevo')
@@ -121,12 +121,12 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
       .subscribe(
         (value: any) => {
           if (this.permissions.FRCE) {
-            this.estado = value.data.estado;
+            this.estado = value.servicios.estado;
           }
 
           alert('Se han actualizado los datos exitosamente');
           this.form.reset();
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
 
         },
         err => this._actividades.handleError(err)
@@ -138,7 +138,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
   addBienInmueble() {
     this._modusVivendi.postBienInmueble(this.servicioEsp, this.bienInmuebleForm.value)
       .subscribe((res: any) => {
-        this.bienesInmuebles.push(res.data);
+        this.bienesInmuebles.push(res.servicios);
         this.closeModalBienInmueble();
       });
   }
@@ -163,7 +163,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
       .subscribe(
         (res: any) => {
           this.bienesInmuebles = this.bienesInmuebles
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalBienInmueble();
 
@@ -198,7 +198,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
   addBienMueble() {
     this._modusVivendi.postBienMueble(this.servicioEsp, this.bienMuebleForm.value)
       .subscribe((res: any) => {
-        this.bienesMuebles.push(res.data);
+        this.bienesMuebles.push(res.servicios);
         this.closeModalBienMueble();
       });
   }
@@ -223,7 +223,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
       .subscribe(
         (res: any) => {
           this.bienesMuebles = this.bienesMuebles
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalBienMueble();
 
@@ -258,7 +258,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
   addRefBancaria() {
     this._modusVivendi.postRefBancaria(this.servicioEsp, this.refBancariaForm.value)
       .subscribe((res: any) => {
-        this.refBancarias.push(res.data);
+        this.refBancarias.push(res.servicios);
         this.closeModalRefBancaria();
       });
   }
@@ -283,7 +283,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
       .subscribe(
         (res: any) => {
           this.refBancarias = this.refBancarias
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalRefBancaria();
 
@@ -317,7 +317,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
   addCapEndeudamiento() {
     this._modusVivendi.postCapEndeudamiento(this.servicioEsp, this.capEndeudamientoForm.value)
       .subscribe((res: any) => {
-        this.capEndeudamiento.push(res.data);
+        this.capEndeudamiento.push(res.servicios);
         this.closeModalCapEndeudamiento();
       });
   }
@@ -342,7 +342,7 @@ export class ModusVivendiComponent extends ActividadClass implements OnInit {
       .subscribe(
         (res: any) => {
           this.capEndeudamiento = this.capEndeudamiento
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalCapEndeudamiento();
 

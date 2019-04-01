@@ -1,9 +1,9 @@
-import { AlmacenarCentroCosto, Servicios } from '../../../store/actions/centro-costo-actions';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AlmacenarCentroCosto, Servicios } from '../../../store/actions';
 import { Store } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
 import { PoligrafiaState } from '../../../store/state';
-import { CrearPoligrafia, EditarPoligrafia, EliminarPoligrafia} from '../../../store/actions/poligrafia.actions';
+import { CrearPoligrafia, EditarPoligrafia, EliminarPoligrafia } from '../../../store/actions';
 import { ModalService } from '../../../services/modal/modal.service';
 import { Poligrafia } from '../../../@models/poligrafia';
 
@@ -13,6 +13,8 @@ import { Poligrafia } from '../../../@models/poligrafia';
   styleUrls: ['./solicitud-poligrafia.component.css']
 })
 export class SolicitudPoligrafiaComponent implements OnInit {
+
+  @ViewChild('inputFile') inputFile: ElementRef;
 
   form = new FormGroup({
     evaluado                : new FormControl('', Validators.required),
@@ -54,6 +56,7 @@ export class SolicitudPoligrafiaComponent implements OnInit {
         anexo: ''
       }
     );
+
     this.store.select(state => state.poligrafia)
       .subscribe(value => this.servicios = value);
   }
@@ -64,16 +67,16 @@ export class SolicitudPoligrafiaComponent implements OnInit {
 
   cargarArchivo(event, editar = false) {
     const file = event.target.files[0];
-    // console.log(this.form.get('anexo').value);
     editar
-      ? this.detalle.anexo = file
-      : this.form.get('anexo').patchValue(file);
+      ? this.detalle.anexo = file.name
+      : this.form.get('anexo').patchValue(file.name);
   }
 
   crearServicio() {
     const data = this.form.value;
     this.store.dispatch(new CrearPoligrafia(data));
     // this.form.reset();
+    this.inputFile.nativeElement.value = '';
   }
 
   verDetalle(index: number, editar: boolean = false) {
@@ -110,6 +113,6 @@ export class SolicitudPoligrafiaComponent implements OnInit {
       return;
     }
     const servicio = Servicios.POLIGRAFIA;
-    // this.store.dispatch(new AlmacenarCentroCosto(servicio));
+    this.store.dispatch(new AlmacenarCentroCosto(servicio));
   }
 }

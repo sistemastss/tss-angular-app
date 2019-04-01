@@ -1,7 +1,7 @@
 <div id="content-wrapper">
   <div class="container mt-3">
     <div class="row">
-      <div class="col-md-10 mx-auto">
+      <div class="col-md-10 mx-auto mb-3">
         <form [formGroup]="form">
           <div class="card">
             <div class="card-header">
@@ -53,23 +53,17 @@
                   Anexo
                 </label>
                 <div class="col-sm-9">
-                  <input type="file" id="anexo" class="form-control">
+                  <input type="file" id="anexo" class="form-control-file"
+                         (change)="cargarArchivo($event)" #inputFile>
                 </div>
               </div>
             </div>
             <div class="form-group mx-auto">
-              <button *ngIf="!controlInvestigaciones.editar"
-                      class="btn btn-primary"
+              <button class="btn btn-primary"
                       [disabled]="form.status == 'INVALID'"
-                      (click)="crearInvestigacion()">
+                      (click)="crearServicio()">
                 <i class="fa fa-plus"></i>
                 Agregar
-              </button>
-              <button *ngIf="controlInvestigaciones.editar"
-                      class="btn btn-primary"
-                      [disabled]="form.status == 'INVALID'"
-                      (click)="editarInvestigacion()">
-                Actualizar
               </button>
             </div>
           </div>
@@ -78,7 +72,7 @@
     </div>
   </div>
 
-  <div *ngIf="investigaciones.length > 0">
+  <div *ngIf="servicios.length > 0">
     <div class="col-md-10 mx-auto col-sm-12 mt-3">
       <div class="card mb-3">
         <div class="card-header">
@@ -88,19 +82,20 @@
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
-              <tr>
-                <th>Fecha de creacion</th>
-                <th>Detalles de investigacion</th>
-                <th>Anexo</th>
-                <th class="text-center">Acciones</th>
+              <tr class="text-capitalize text-center">
+                <th>fecha de creacion</th>
+                <th>detalles de investigación</th>
+                <th>anexo</th>
+                <th>acciónes</th>
               </tr>
               </thead>
               <tbody>
 
-              <tr *ngFor="let item of investigaciones; index as i">
-                <td>{{ item.fechaCreacion | date }}</td>
-                <td>
-                  <button class="btn btn-success">
+              <tr *ngFor="let item of servicios; index as i">
+                <td>{{ today | date }}</td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-success"
+                          (click)="verDetalle(i)">
                     <i class="fa fa-eye"></i>
                     Detalles
                   </button>
@@ -110,13 +105,13 @@
                   <div class="text-center">
                     <div class="custom-control-inline" >
                       <button class="btn btn-sm btn-primary"
-                              (click)="establecerFormulario(i)">
+                              (click)="verDetalle(i, true)">
                         <i class="fa fa-edit"></i>
                       </button>
                     </div>
                     <div class="custom-control-inline">
                       <button class="btn btn-sm btn-danger"
-                              (click)="eliminarInvestigacion(i)">
+                              (click)="eliminarServicio(i)">
                         <i class="fa fa-trash"></i>
                       </button>
                     </div>
@@ -129,7 +124,7 @@
         </div>
         <div class="card-footer ">
           <div class="form-group text-center">
-            <button class="btn btn-primary" (click)="guardarInvestigaciones()">
+            <button class="btn btn-primary" (click)="guardarServicios()">
               <i class="fa fa-save"></i>
               Guardar servicios
             </button>
@@ -139,3 +134,69 @@
     </div>
   </div>
 </div>
+
+<!-- modal -->
+<app-modal *ngIf="detalle" title="Detalle del servicio">
+  <div class="body">
+    <fieldset [disabled]="!control.editar">
+      <!--ciudad-->
+      <div class="form-group">
+        <label for="m-ciudad">Ciudad</label>
+        <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="detalle.ciudad">
+      </div>
+
+      <!--descripcion-->
+      <div class="form-group">
+        <label for="m-descripcion">Descripcion</label>
+        <textarea
+          rows="4"
+          class="form-control"
+          id="m-descripcion"
+          [(ngModel)]="detalle.descripcion">
+        </textarea>
+      </div>
+
+      <!--read-->
+      <div *ngIf="!control.editar">
+        <!-- anexo-->
+        <div class="form-group" *ngIf="detalle.anexo">
+          <label>Anexo</label>
+          <div class="d-block">
+            <a [href]="detalle.anexo" class="btn btn-link">
+              <i class="fa fa-download"></i>
+              {{ detalle.anexo }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!--write-->
+      <div *ngIf="control.editar">
+        <!-- anexo -->
+        <div class="form-group">
+          <label for="m-anexo">
+            Anexo
+          </label>
+          <input type="file" id="m-anexo" (change)="cargarArchivo($event, true)" class="form-control-file">
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="footer">
+    <button *ngIf="!control.editar"
+            class="btn btn-primary mr-2" (click)="control.editar = true">
+      <i class="fa fa-edit"></i>
+      Editar
+    </button>
+    <button *ngIf="control.editar"
+            class="btn btn-success mr-2" (click)="guardarCambios()">
+      <i class="fa fa-save"></i>
+      Guardar
+    </button>
+    <button class="btn btn-secondary" (click)="cerrarVentana()">
+      <i class="fa fa-close"></i>
+      Cerrar
+    </button>
+  </div>
+</app-modal>
+<pre>{{ form.value | json }}</pre>

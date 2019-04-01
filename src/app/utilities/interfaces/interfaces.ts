@@ -13,7 +13,7 @@ export interface Menu {
 }
 
 /**
- * data table definitions
+ * servicios table definitions
  */
 export interface DataTable {
   headers: string[];

@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActividadClass} from '../../../../@classes/actividad.class';
 import {ActividadesService} from '../../../../services/actividades.service';
 import {NgxPermissionsService} from 'ngx-permissions';
-import {EntonoHabitacionalService} from '../../../../services/servicios-esp/actividades/visita-domiciliaria/entono-habitacional.service';
+import {EntonoHabitacionalService} from '../../../../services/esp/actividades/visita-domiciliaria/entono-habitacional.service';
 
 @Component({
   selector: 'app-entorno-habitacional',
@@ -62,8 +62,8 @@ export class EntornoHabitacionalComponent extends ActividadClass implements OnIn
     this._entornoHabitacional.get(this.servicioEsp)
       .subscribe(
         (value: any) => {
-          this.estado = value.data.estado;
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.estado = value.servicios.estado;
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
 
         },
         () =>  this.estado = 'aceptado' // alert('Ocurrio un error inesperado al tratar de recuperar los datos')
@@ -78,9 +78,9 @@ export class EntornoHabitacionalComponent extends ActividadClass implements OnIn
     this._entornoHabitacional.post(this.servicioEsp, data)
       .subscribe(
         (value: any) => {
-          this.estado = value.data.estado;
+          this.estado = value.servicios.estado;
           this.form.reset();
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
           alert('Se han guardado los datos exitosamente');
 
         },
@@ -97,11 +97,11 @@ export class EntornoHabitacionalComponent extends ActividadClass implements OnIn
       .subscribe(
         (value: any) => {
           if (this.permissions.FRCE) {
-            this.estado = value.data.estado;
+            this.estado = value.servicios.estado;
           }
 
           this.form.reset();
-          this.form.setValue(this._actividades.transformResponse(value.data));
+          this.form.setValue(this._actividades.transformResponse(value.servicios));
           alert('Se han actualizado los datos exitosamente');
 
         },

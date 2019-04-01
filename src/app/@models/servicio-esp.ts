@@ -1,12 +1,12 @@
 export interface ServicioEsp {
   evaluado: string;
   documento: number;
-  ciudadDesarrollo: string;
+  ciudad: string;
   telefono: number;
   email: string;
   direccion: string;
   observaciones: string;
   tipoEsp: string;
-  anexo?: File;
+  anexo?: string;
   aceptarTerminos: boolean;
 }

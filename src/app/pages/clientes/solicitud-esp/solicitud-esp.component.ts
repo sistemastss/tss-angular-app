@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServicioEsp } from '../../../@models/servicio-esp';
 import { Store } from '@ngrx/store';
 import { ServicioEspState } from '../../../store/state';
-import {CrearServicioEsp, EditarServicioEsp, EliminarServicioEsp} from '../../../store/actions/esp.actions';
-import { AlmacenarCentroCosto, Servicios } from '../../../store/actions/centro-costo-actions';
-import {ModalService} from '../../../services/modal/modal.service';
-import {EditarPoligrafia} from '../../../store/actions/poligrafia.actions';
+import { CrearServicioEsp, EditarServicioEsp, EliminarServicioEsp } from '../../../store/actions';
+import { AlmacenarCentroCosto, Servicios } from '../../../store/actions';
+import { ModalService } from '../../../services/modal/modal.service';
 
 @Component({
   selector: 'app-servicio-esp',
@@ -15,10 +14,12 @@ import {EditarPoligrafia} from '../../../store/actions/poligrafia.actions';
 })
 export class SolicitudEspComponent implements OnInit {
 
+  @ViewChild('inputFile') inputFile: ElementRef;
+
   form = new FormGroup({
     evaluado            : new FormControl('', Validators.required),
     documento           : new FormControl('', [Validators.required, Validators.minLength(6)]),
-    ciudadDesarrollo    : new FormControl('', Validators.required),
+    ciudad              : new FormControl('', Validators.required),
     telefono            : new FormControl('', [Validators.required, Validators.minLength(7)]),
     email               : new FormControl('', [Validators.required, Validators.email]),
     direccion           : new FormControl('', Validators.required),
@@ -33,14 +34,10 @@ export class SolicitudEspComponent implements OnInit {
     id: 0
   };
 
+  terminos = false;
   detalle: ServicioEsp;
   servicios: ServicioEsp[] = [];
   today = new Date().getTime();
-
-  controlEsp = {
-    editar: false,
-    id: 0
-  };
 
   constructor(
     private store: Store<ServicioEspState>,
@@ -52,7 +49,7 @@ export class SolicitudEspComponent implements OnInit {
       {
         evaluado: 'asds',
         documento: 12345678,
-        ciudadDesarrollo: 'Bogota',
+        ciudad: 'Bogota',
         telefono: 3600255,
         email: 'styven21121@gmail.com',
         direccion: 'cll 16 # 20 -16',
@@ -61,6 +58,7 @@ export class SolicitudEspComponent implements OnInit {
         anexo: '',
         aceptarTerminos: false
       });
+
     this.store.select(state => state.servicioEsp)
       .subscribe((value: ServicioEsp[]) => this.servicios = value);
   }
@@ -71,16 +69,16 @@ export class SolicitudEspComponent implements OnInit {
 
   cargarArchivo(event, editar = false) {
     const file = event.target.files[0];
-    // console.log(this.form.get('anexo').value);
     editar
-      ? this.detalle.anexo = file
-      : this.form.get('anexo').patchValue(file);
+      ? this.detalle.anexo = file.name
+      : this.form.get('anexo').patchValue(file.name);
   }
 
   crearServicio() {
     const data = this.form.value;
     this.store.dispatch(new CrearServicioEsp(data));
-    // this.form.reset();
+    this.form.reset();
+    this.inputFile.nativeElement.value = '';
   }
 
   verDetalle(index: number, editar: boolean = false) {
@@ -116,7 +114,17 @@ export class SolicitudEspComponent implements OnInit {
     if (!confirm) {
       return;
     }
-    this.store.dispatch(new AlmacenarCentroCosto(Servicios.ESP));
+    const servicio = Servicios.ESP;
+    this.store.dispatch(new AlmacenarCentroCosto(servicio));
+  }
+
+  abrirVentanaTerminos() {
+    this.terminos = true;
+    this.modalService.open();
+  }
+
+  cerrarVentanaTerminos() {
+    this.terminos = false;
   }
 }
 

@@ -4,7 +4,7 @@ import {ActividadesService} from '../../../services/actividades.service';
 import {DataService} from '../../../services/data.service';
 import {ActividadClass} from '../../../@classes/actividad.class';
 import {NgxPermissionsService} from 'ngx-permissions';
-import {VerificacionAcademicaService} from '../../../services/servicios-esp/actividades/verificacion-academica.service';
+import {VerificacionAcademicaService} from '../../../services/esp/actividades/verificacion-academica.service';
 import {HandlerModal} from '../../../@models/handler-modal';
 
 @Component({
@@ -60,7 +60,7 @@ export class VerificacionAcademicaComponent extends ActividadClass implements On
     this._verificacionAcademica.get(this.servicioEsp)
       .subscribe(
         (value: any) => {
-          this.verificacionesAcademicas = value.data;
+          this.verificacionesAcademicas = value.servicios;
         }
         // () => alert('Ocurrio un error inesperado al tratar de recuperar los datos')
       );
@@ -70,7 +70,7 @@ export class VerificacionAcademicaComponent extends ActividadClass implements On
   addVerifAcademica() {
     this._verificacionAcademica.post(this.servicioEsp, this.form.value)
       .subscribe((res: any) => {
-        this.verificacionesAcademicas.push(res.data);
+        this.verificacionesAcademicas.push(res.servicios);
         this.closeModalVerifAcademica();
       });
   }
@@ -95,7 +95,7 @@ export class VerificacionAcademicaComponent extends ActividadClass implements On
       .subscribe(
         (res: any) => {
           this.verificacionesAcademicas = this.verificacionesAcademicas
-            .map(value => value.id === res.data.id ? res.data : value);
+            .map(value => value.id === res.servicios.id ? res.servicios : value);
 
           this.closeModalVerifAcademica();
           alert('Datos actualizados correctamente');

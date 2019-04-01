@@ -7,5 +7,5 @@ export interface Poligrafia {
   email: string;
   contexto: string;
   tipoPoligrafia: string;
-  anexo?: File;
+  anexo?: string;
 }

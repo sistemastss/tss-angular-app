@@ -6,7 +6,8 @@ export enum ServiciosActionTypes {
   SOLICITAR = '[SERVICIOS] SOLICITAR',
   CARGAR = '[SERVICIOS] CARGAR',
   FILTRAR = '[SERVICIOS] FILTRAR',
-  ELIMINAR = '[SERVICIOS] ELIMINAR'
+  ELIMINAR = '[SERVICIOS] ELIMINAR',
+  REMOVER = '[SERVICIOS] REMOVER',
 }
 
 export class SolicitarServicios implements Action {
@@ -15,7 +16,7 @@ export class SolicitarServicios implements Action {
 
 export class CargarServicios implements Action {
   readonly type = ServiciosActionTypes.CARGAR;
-  constructor(public payload: any[]) {}
+  constructor(public payload: Servicio[]) {}
 }
 
 export class EliminarServicio implements Action {
@@ -23,6 +24,11 @@ export class EliminarServicio implements Action {
   constructor(public id: number) {}
 }
 
+export class RemoverServicios implements Action {
+  readonly type = ServiciosActionTypes.REMOVER;
+}
+
 export type ServiciosActions =
   CargarServicios
-  | EliminarServicio;
+  | EliminarServicio
+  | RemoverServicios;
