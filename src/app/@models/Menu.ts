@@ -17,7 +17,7 @@ export const MENU = [
   {
     title: 'Clientes',
     icon: '',
-    link: '/clientes',
+    link: '/solicitud-servicio',
     children: [
       {
         title: 'Investigaciones',

@@ -11,6 +11,7 @@ export interface Servicio {
   ciudad?: string;
   anexo?: string;
   evaluado?: string;
+  tipoDocumento?: number;
   documento?: number;
   departamento?: string;
   telefono?: number;

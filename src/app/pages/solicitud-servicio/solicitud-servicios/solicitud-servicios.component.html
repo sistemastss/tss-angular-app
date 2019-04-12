@@ -1,0 +1,44 @@
+<div id="content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 text-center mt-3">
+
+        <div class="btn-group">
+
+          <button
+            type="button" class="btn btn-primary"
+            routerLinkActive="active"
+            [routerLink]="'../solicitud-servicios/esp'">
+            <a class="tooltips">ESP
+              <span>Estudio de seguridad a personas</span>
+            </a>
+          </button>
+
+          <button
+            type="button" class="btn btn-primary"
+            routerLinkActive="active"
+            [routerLink]="'../solicitud-servicios/esp-masivo'">
+            ESP Masivo
+          </button>
+
+          <button
+            type="button" class="btn btn-primary"
+            routerLinkActive="active"
+            [routerLink]="'../solicitud-servicios/investigaciones'">
+            Investigaciones
+          </button>
+
+          <button
+            type="button" class="btn btn-primary"
+            routerLinkActive="active"
+            [routerLink]="'../solicitud-servicios/poligrafia'">
+            Poligrafia
+          </button>
+        </div>
+      </div>
+      <div class="col-md-12 mt-3">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

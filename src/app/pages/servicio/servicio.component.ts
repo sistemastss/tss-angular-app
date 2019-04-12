@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { EspService } from '../../services/esp/esp.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { LoginService } from '../../services/login.service';
@@ -10,6 +9,7 @@ import { Servicio } from '../../@models/servicio';
 import * as moment from 'moment';
 import {RemoverServicios, SolicitarServicios} from 'src/app/store/actions/servicios.actions';
 import {ServicioState} from '../../store/state';
+import {ModalService} from '../../services/modal/modal.service';
 
 @Component({
   selector: './app-servicio',
@@ -27,13 +27,25 @@ export class ServicioComponent implements OnInit, OnDestroy {
   showError: boolean;
   servicios$ = this.store.select(state => state.servicio);
 
+  filtro = [
+    { title: 'sin filtro', value: 'false' },
+    { title: 'centro de costo', value: 'centroCosto' },
+    { title: 'Ciudad', value: 'ciudad' },
+    { title: 'Solicicitante', value: 'solicitante' },
+    { title: 'evaluado', value: 'Evaluado' },
+  ];
+  detalle: Servicio;
+  control = {
+    type: ''
+  };
+
   constructor(
     private store: Store<ServicioState>,
     private router: Router,
     private loginService: LoginService,
-    private espService: EspService,
     private dataService: DataService,
     private actividadesService: ActividadesService,
+    private modalService: ModalService,
     private ngxPermissionsService: NgxPermissionsService
   ) {
       this.servicios$.subscribe(data => {
@@ -53,8 +65,9 @@ export class ServicioComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(new SolicitarServicios());
+    // this.store.dispatch(new SolicitarServicios());
     this.permissions = this.ngxPermissionsService.getPermissions();
+    this.loadServiciosEsp();
     this.showError = false;
   }
 
@@ -64,35 +77,43 @@ export class ServicioComponent implements OnInit, OnDestroy {
 
 
   loadServiciosEsp(): void {
+    this.store.dispatch(new SolicitarServicios());
     // servicios esp para administrador general y analista esp
-    /*if (this.permissions.ADG || this.permissions.AESP || this.permissions.DOPE) {
+    if (this.permissions.ADG || this.permissions.AESP || this.permissions.DOPE) {
 
-      this.dataService.cargarEsps().subscribe(
-        (value: Servicio[]) => this.servicios = this.sortData(value),
-        (err: any) => console.error(err.error.message)
-      );
+      this.store.dispatch(new SolicitarServicios());
 
-      // servicios esp para clientes
+      // servicios esp para solicitud-servicio
     } else if (this.permissions.CLI) {
 
       const clienteId = this.loginService.user.id;
 
-      this.dataService.cargarEsps().subscribe(
-        (value: Servicio[]) => this.servicios = this.sortData(value),
+      /*this.dataService.cargarEsps().subscribe(
+        (value: Servicio[]) => this.servicios = ServicioComponent.sortData(value),
         (err: any) => this.showError = true
-      );
+      );*/
+
+      this.store.dispatch(new SolicitarServicios());
+
 
       // servicios esp para freelance
     } else if (this.permissions.FRCE) {
 
       const freelanceId = this.loginService.user.id;
 
-      this.dataService.getFreelanceServiciosEsp(freelanceId).subscribe(
-        (value: any) => this.servicios = value.servicios,
+      this.dataService.cargarEsps()
+      .subscribe(value => {
+        this.servicios = value;
+      });
+      /*this.dataService.getFreelanceServiciosEsp(freelanceId).subscribe(
+        (value: any) => {
+          console.log(value);
+          this.servicios = value.servicios;
+        },
         (err: any) => console.error(err.error.message)
-      );
+      );*/
 
-    }*/
+    }
   }
 
 
@@ -106,7 +127,6 @@ export class ServicioComponent implements OnInit, OnDestroy {
     if (permissions.ADG || permissions.AESP || permissions.CLI || permissions.DOPE) {
 
       const actividadesUrl = this.servicioEsp.links.actividades;
-
       // se cargan actividades y se muestra el modal
       this.dataService.httpGet(actividadesUrl, false)
         .subscribe(
@@ -233,9 +253,63 @@ export class ServicioComponent implements OnInit, OnDestroy {
     });
   }
 
+  filtrarServicios(filtro: string, query: any) {
+
+    let dataFiltered: any;
+
+    if (filtro === 'false') {
+      this.loadServiciosEsp();
+      return;
+
+    }
+
+    if (query === '' && filtro !== 'false') {
+      window.alert('Por favor ingrese un valor a buscar');
+      return;
+    }
+
+    if (filtro === 'centroCosto') {
+      dataFiltered = this.servicios
+        .filter((el: any) => !el.centroCosto.id.toString().search(query));
+    }
+
+    if (filtro === 'ciudad') {
+      dataFiltered = this.servicios
+        .filter((el: any) => !el.ciudad.toLowerCase().search(query));
+    }
+
+    if (filtro === 'solicitante') {
+      dataFiltered = this.servicios
+        .filter((el: any) => !el.centroCosto.solicitante.toLowerCase().search(query));
+    }
 
 
-  filterServicesEsp(minDate: any, maxDate: any): void {
+    if (filtro === 'evaluado') {
+      dataFiltered = this.servicios
+        .filter((el: any) => !el.evaluado.toLowerCase().search(query));
+    }
+
+    if (filtro === 'date') {
+      this.filtrarPorFecha(query);
+      return;
+    }
+
+    if (dataFiltered.length === 0) {
+      window.alert('No se han encontrado resultados');
+      return;
+
+    } else {
+      this.servicios = dataFiltered;
+    }
+
+  }
+
+  filtrarPorFecha(query) {
+    const dates = query.date;
+    const [minDate, maxDate] = dates;
+
+
+    console.log(minDate, maxDate);
 
     if (!minDate && !maxDate) {
       alert('Por favor seleccionar una fecha minima y una fecha maxima');
@@ -292,4 +366,18 @@ export class ServicioComponent implements OnInit, OnDestroy {
     }
   }
 
+  abrirVentana(servicio: Servicio) {
+    this.detalle = servicio;
+    this.modalService.open();
+  }
+
+  cerrarVentana() {
+    this.modalService.close();
+    this.detalle = null;
+  }
+
+  reiniciar() {
+    this.store.dispatch(new RemoverServicios());
+    this.store.dispatch(new SolicitarServicios());
+  }
 }

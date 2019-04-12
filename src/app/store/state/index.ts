@@ -16,6 +16,10 @@ export interface ServicioEspState {
   readonly servicioEsp: ServicioEsp[];
 }
 
+export interface EspMasivoState {
+  readonly espMasivo: any;
+}
+
 export interface InvestigacionState {
   readonly investigacion: Investigacion[];
 }

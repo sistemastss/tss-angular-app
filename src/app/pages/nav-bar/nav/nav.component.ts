@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SubMenu } from '../../../utilities';
 import { Router } from '@angular/router';
 import {MenuService} from '../../../services/menu.service';
 import {LoginService} from '../../../services/login.service';
@@ -25,11 +24,11 @@ export class NavComponent implements OnInit {
 
     switch (loginService.rol['codigo']) {
       case 'ADG':
-        this.menuItems = this._menu.menu.administrador;
+        this.menuItems = this._menu.menu;
         break;
 
       case 'CLI':
-        this.menuItems = this._menu.menu.cliente;
+        this.menuItems = this._menu.menu;
         break;
     }
   }
@@ -41,7 +40,7 @@ export class NavComponent implements OnInit {
     this.menuToggle = !this.menuToggle;
   }
 
-  loadUrl(item: SubMenu) {
+  loadUrl(item: any) {
     this.menuToggle = false;
     this.router.navigate([item.route]).then();
   }

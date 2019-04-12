@@ -1,5 +1,6 @@
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { RemoverPoligrafia } from './../actions/poligrafia.actions';
 import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { withLatestFrom, map, mergeMap, tap, switchMap } from 'rxjs/operators';
 import { ServiciosActionTypes, CargarServicios, AlmacenarPoligrafia, PoligrafiaActionTypes } from '../actions';
@@ -9,8 +10,6 @@ import { InvestigacionActionTypes, AlmacenarInvestigaciones } from '../actions';
 import { CentroCostoActionTypes, RemoverCentroCosto, Servicios } from '../actions';
 import { AlmacenarServiciosEsp, RemoverServiciosEsp, ServicioEspActionTypes } from '../actions';
 import { RemoverInvestigaciones } from '../actions';
-import { Servicio } from '../../@models/servicio';
-import { RemoverPoligrafia } from '../actions';
 
 @Injectable()
 export class ServiciosEffect {
@@ -45,6 +44,7 @@ export class ServiciosEffect {
     mergeMap(([centroCostoId, payload]) => this.dataService.almacenarEsp(centroCostoId, payload).pipe(
       tap(() => {
         console.log('after "esps" were saved');
+        this.router.navigate(['../control']);
       })
     )),
     switchMap(() => this.limpiarStore())
@@ -58,6 +58,7 @@ export class ServiciosEffect {
     mergeMap(([centroCostoId, payload]) => this.dataService.almacenarInvestigaciones(centroCostoId, payload).pipe(
       tap(() => {
         console.log('after "investigaciones" were saved');
+        this.router.navigate(['../control']);
       })
     )),
     switchMap(() => this.limpiarStore())
@@ -71,24 +72,22 @@ export class ServiciosEffect {
     mergeMap(([centroCostoId, payload]) => this.dataService.almacenarPoligrafias(centroCostoId, payload).pipe(
       tap(() => {
         console.log('after "poligrafias" were saved');
+        this.router.navigate(['../control']);
       })
     )),
     switchMap(() => this.limpiarStore())
   );
 
-  @Effect()
+  /*@Effect()
   servicios$ = this.actions$.pipe(
     ofType(ServiciosActionTypes.SOLICITAR),
-    withLatestFrom(this.dataService.cargarInvestigaciones()),
-    map(([payload, inv]) => inv),
     withLatestFrom(this.dataService.cargarEsps()),
-    map(([inv, esp]) => inv.concat(esp)),
+    withLatestFrom(this.dataService.cargarInvestigaciones()),
     withLatestFrom(this.dataService.cargarPoligrafias()),
-    map(([invEsp, pol]) => invEsp.concat(pol)),
-    tap(() => console.log('before load data')),
-    map((data: Servicio[]) => new CargarServicios(data)),
-    tap(() => console.log('before load data'))
-  );
+    tap(([data, investigaciones]) => console.log(data, investigaciones)),
+    map(([data, investigaciones]) => data[1].concat(investigaciones)),
+    map((data: any[]) => new CargarServicios(data))
+  );*/
 
   constructor(
     private actions$: Actions,
@@ -98,9 +97,6 @@ export class ServiciosEffect {
   ) {}
 
   limpiarStore() {
-    this.router.navigate(['./'])
-      .then(() => window.location.reload());
-
     return [
       new RemoverCentroCosto(),
       new RemoverServiciosEsp(),

@@ -23,7 +23,7 @@ export class SolicitarServiciosGuard implements CanActivate {
         if (value) {
           return true;
         }
-        this.router.navigate(['../clientes/solicitud']);
+        this.router.navigate(['../nuevo-servicio/solicitud']);
         return false;
       })
     );

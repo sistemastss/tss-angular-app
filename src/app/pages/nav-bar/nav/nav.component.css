@@ -71,6 +71,11 @@ body {
   cursor: pointer !important;
 }
 
+.color {
+  /*background-color: #1e2b4e*/
+  background-color: #294694;
+}
+
 .menu-item {
   color: white;
   display: inline-block;

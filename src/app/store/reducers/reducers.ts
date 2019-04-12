@@ -1,4 +1,4 @@
-import {EspActions, ServicioEspActionTypes} from '../actions';
+import {EspActions, EspMasivoActionTypes, ServicioEspActionTypes} from '../actions';
 import {CentroCosto} from '../../@models/centro-costo';
 import {CentroCostoActions, CentroCostoActionTypes} from '../actions';
 import {Investigacion} from '../../@models/Investigacion';
@@ -8,6 +8,7 @@ import {ServiciosActions, ServiciosActionTypes} from '../actions';
 import {Poligrafia} from '../../@models/poligrafia';
 import {PoligrafiaActions, PoligrafiaActionTypes} from '../actions';
 import {ServicioEsp} from '../../@models/servicio-esp';
+import {EspMasivoActions} from '../actions';
 
 export function centroCostoReducer(state: CentroCosto, action: CentroCostoActions): CentroCosto {
   switch (action.type) {
@@ -22,6 +23,19 @@ export function centroCostoReducer(state: CentroCosto, action: CentroCostoAction
   }
 }
 
+
+export function espMasivoReducer(state: any, action: EspMasivoActions): any[] {
+  switch (action.type) {
+    case EspMasivoActionTypes.AGREGAR:
+      return {...state, ...action.payload};
+
+    case EspMasivoActionTypes.REMOVER:
+      return null;
+
+    default:
+      return state;
+  }
+}
 
 export function servicioEspReducer(state: ServicioEsp[] = [], action: EspActions): any[] {
   switch (action.type) {
@@ -88,6 +102,10 @@ export function serviciosReducer(state: Servicio[] = [], action: ServiciosAction
   switch (action.type) {
     case ServiciosActionTypes.CARGAR:
       return [...state, ...action.payload];
+
+    case ServiciosActionTypes.EDITAR:
+      return [...state.map((value, index) => index !== action.id ? value : action.payload)];
+
 
     case ServiciosActionTypes.ELIMINAR:
       return [...state.filter(value => value.id !== action.id)];

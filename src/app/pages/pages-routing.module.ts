@@ -7,15 +7,11 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
-        path: 'inicio',
+        path: 'control',
         loadChildren: './servicio/servicio.module#ServicioModule'
       },
-      {
-        path: 'servicios',
-        loadChildren: './operaciones/operaciones.module#OperacionesModule'
-      },
-      { path: 'clientes',
-        loadChildren: './clientes/clientes.module#ClientesModule'
+      { path: 'nuevo-servicio',
+        loadChildren: './solicitud-servicio/solicitud-servicio.module#SolicitudServicioModule'
       },
       { path: 'actividades',
         loadChildren: './actividades/actividades.module#ActividadesModule'
@@ -25,8 +21,12 @@ const routes: Routes = [
         loadChildren: './investigacion/investigacion.module#InvestigacionModule'
       },
       {
+        path: 'perfil',
+        loadChildren: './perfil/perfil.module#PerfilModule'
+      },
+      {
         path: '',
-        redirectTo: 'inicio',
+        redirectTo: 'perfil',
         pathMatch: 'full'
       }
     ]

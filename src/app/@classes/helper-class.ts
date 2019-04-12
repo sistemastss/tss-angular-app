@@ -38,24 +38,19 @@ export class Helper {
     return url;
   }
 
-  static formDataFromArray(data: any[]): any[] {
-    const formDataArr = [];
-    data.forEach(value => {
-      const item = Helper.formData(value);
-      formDataArr.push(item);
-    });
-    return formDataArr;
-  }
+  static readFile(file) {
+    const fileReader = new FileReader();
 
-  static formData(data: {}): any {
-    const formData = new FormData();
-    for (const key in data) {
-      if (key === 'anexo') {
-        formData.append(key, data[key]);
-        const file = data['anexo'];
-        data['anexo'] = formData;
-      }
-    }
-    return data;
+    return new Promise((resolve, reject) => {
+      fileReader.onerror = () => {
+        fileReader.abort();
+        reject(new DOMException('Problem parsing input file.'));
+      };
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.readAsDataURL(file);
+    });
   }
 }

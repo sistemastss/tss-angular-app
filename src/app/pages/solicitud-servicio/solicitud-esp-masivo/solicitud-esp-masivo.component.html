@@ -1,0 +1,50 @@
+<div id="content-wrapper">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <form [formGroup]="form">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="text-center">Orden de servicio</h4>
+            </div>
+            <div class="card-body">
+              <!-- Button -->
+              <div class="form-group row">
+                <label class="col-md-4 control-label" for="ejemplo">Descargar ejemplo</label>
+                <div class="col-md-8">
+                  <a [href]="fileUrl" target="_blank" id="ejemplo" class="btn btn-success">
+                    <i class="fa fa-download"></i>
+                    Descargar archivo de ejemplo
+                  </a>
+                  <span class="small d-block">Descargue este archivo <br>Agregue la informacion y cargue este archivo</span>
+                </div>
+              </div>
+
+              <!-- File Button -->
+              <div class="form-group row">
+                <label class="col-md-4 control-label" for="file">Subir archivo excel</label>
+                <div class="col-md-8">
+                  <input id="file" name="file" class="input-file" type="file" required (change)="cargarArchivo($event)">
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <!-- Button -->
+              <div class="form-group text-center">
+                <button id="cargarEspMasivo"
+                        name="cargarEspMasivo"
+                        class="btn btn-primary"
+                        (click)="guardarEspMasivos()"
+                        [disabled]="form.status  == 'INVALID'">
+                  <i class="fa fa-save"></i>
+                  Cargar ESP masivo
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

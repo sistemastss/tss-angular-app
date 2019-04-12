@@ -1,3 +1,4 @@
+import { AlmacenarEspMasivo } from './../store/actions/esp-masivo.actions';
 import { Poligrafia } from './../@models/poligrafia';
 import { Servicio } from './../@models/servicio';
 import { Injectable } from '@angular/core';
@@ -5,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {BASE_API, config} from '../@models/app-settings';
 import {map} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import {CentroCosto} from '../@models/centro-costo';
 import {ServicioEsp} from '../@models/servicio-esp';
 import {Helper} from '../@classes/helper-class';
@@ -76,12 +77,17 @@ export class DataService {
   almacenarCentroCosto(payload: CentroCosto) {
     const url = config.api + '/centro-costo';
     return this.http.post(url, payload).pipe(
-      map((data: any) => data.data.id)
+      map((response: any) => response.data.id)
     );
   }
 
   almacenarEsp(centroCosto: number, payload: ServicioEsp[]) {
     const url = Helper.route(['centro-costo', 'servicio-esp'], centroCosto);
+    return this.http.post(url, payload, config.httpOpts);
+  }
+
+  almacenarEspMasivo(centroCosto: number, payload: any) {
+    const url = Helper.route(['centro-costo', 'servicio-esp-masivo'], centroCosto);
     return this.http.post(url, payload, config.httpOpts);
   }
 
@@ -96,30 +102,34 @@ export class DataService {
   }
 
   cargarServicios() {
-    const url = config.api + '/servicios';
-    return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.servicios as any[])
+    return forkJoin(
+      this.cargarEsps(),
+      this.cargarInvestigaciones(),
+      this.cargarPoligrafias()
+    ).pipe(
+      // @ts-ignore
+      map((data: any) => data.flat())
     );
   }
 
   cargarEsps() {
     const url = config.api + '/servicio-esp';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.data as Servicio[])
+      map((value: any) => value.data as any[])
     );
   }
 
   cargarInvestigaciones() {
     const url = config.api + '/investigaciones';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.data as Servicio[])
+      map((value: any) => value.data as any[])
     );
   }
 
   cargarPoligrafias() {
     const url = config.api + '/poligrafia';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.data as Servicio[])
+      map((value: any) => value.data as any[])
     );
   }
 
@@ -137,18 +147,6 @@ export class DataService {
 
   httpPut(url: string, body: object) {
     return this.http.put(BASE_API + url, body, this.httpOptions);
-  }
-
-  getServiciosEsp() {
-    return this.httpGet('servicio-esp');
-  }
-
-  getUsuarioServiciosEsp(usuarioId: number) {
-    return this.httpGet(`usuario/${usuarioId}/servicios-esp`);
-  }
-
-  getFreelanceServiciosEsp(usuarioId: number) {
-    return this.httpGet(`freelance/${usuarioId}/servicios-esp`);
   }
 
   getFreelanceActividadesServicioEsp(usuarioId: number, servicioEspId: number) {
@@ -175,12 +173,6 @@ export class DataService {
   }
 
 
-
-  /**
-   * editarServicioEsp estado esp
-   * @param servicioEspId
-   * @param body
-   */
   updateEstadoServicioEsp(servicioEspId: number, body: any) {
     return this.httpPut(`servicio-esp/${servicioEspId}`, body);
   }
@@ -208,7 +200,7 @@ export class DataService {
   obtenerServicios() {
     const url = config.api + '/servicios';
     return this.http.get(url, config.httpOpts).pipe(
-      map((value: any) => value.servicios)
+      map((value: any) => value.data)
     );
   }
 

@@ -3,3 +3,4 @@ export * from './esp.actions';
 export * from './investigacion.actions';
 export * from './poligrafia.actions';
 export * from './servicios.actions';
+export * from './esp-masivo.actions';

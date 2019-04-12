@@ -9,6 +9,7 @@ export enum CentroCostoActionTypes {
 
 export enum Servicios {
   ESP = 'ESP',
+  ESP_MASIVO = 'ESP_MASIVO',
   INVESTIGACION = 'INVESTIGACION',
   POLIGRAFIA = 'POLIGRAFIA'
 }

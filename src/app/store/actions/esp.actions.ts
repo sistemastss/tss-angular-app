@@ -2,12 +2,23 @@ import {Action} from '@ngrx/store';
 import {ServicioEsp} from '../../@models/servicio-esp';
 
 export enum ServicioEspActionTypes {
+  SOLICITAR   = '[ESP] SOLICITAR',
+  CARGAR      = '[ESP] CARGAR',
   CREAR       = '[ESP] CREAR',
   ALMACENAR   = '[ESP] ALMACENAR',
   EDITAR      = '[ESP] EDITAR',
   FILTRAR     = '[ESP] FILTRAR',
   ELIMINAR    = '[ESP] ELIMINAR',
   REMOVER     = '[ESP] REMOVER'
+}
+
+export class SolicitarServiciosEsp {
+  readonly type = ServicioEspActionTypes.SOLICITAR;
+}
+
+export class CargarServiciosEsp {
+  readonly type = ServicioEspActionTypes.CARGAR;
+  constructor(public payload: ServicioEsp[]) {}
 }
 
 export class CrearServicioEsp implements Action {

@@ -1,50 +1,33 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {config} from '../../@models/app-settings';
-import {Helper} from '../../@classes/helper-class';
-import {Observable} from 'rxjs';
+import {Helper} from '../../@classes';
 import {Store} from '@ngrx/store';
 import {InvestigacionState} from '../../store/state';
 import {map} from 'rxjs/operators';
+import {Investigacion} from '../../@models/Investigacion';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvestigacionService {
 
-  constructor(private _http: HttpClient,
-              private _store: Store<InvestigacionState>) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store<InvestigacionState>
+  ) {}
 
-  obtenerInvestigaciones() {
+  almacenarInvestigaciones(centroCosto: number, payload: Investigacion[]) {
+    const url = Helper.route(['centro-costo', 'investigaciones'], centroCosto);
+    return this.http.post(url, payload, config.httpOpts);
+  }
+
+  cargarInvestigaciones() {
     const url = config.api + '/investigaciones';
-    return this._http.get(url, config.httpOpts);
+    return this.http.get(url, config.httpOpts).pipe(
+      map((value: any) => value.data as any[])
+    );
   }
 
-  almacenarInvestigaciones(centroCostoId, payload) {
-    const url = Helper.route(['centro-costo', 'investigaciones'], centroCostoId);
-    return this._http.post(url, payload, config.httpOpts);
-  }
-
-  actualizarInvestigacion(investigacionId: number, data: any) {
-    const url = config.api + 'investigaciones';
-    return this._http.put(url, data, config.httpOpts);
-  }
-
-  eliminarInvestigacion(investigacionId: number) {
-    const url = config.api + 'investigaciones';
-    return this._http.delete(url, config.httpOpts);
-  }
-
-  obtenerEstadoInvestigaciones() {
-    return this._store.select('investigacion');
-  }
-
-  aplicarActividades(actividades, id) {
-    const data = {
-      actividades: actividades
-    };
-    const url = `investigaciones/${id}/actividades`;
-
-    return this._http.post(url, data, config.httpOpts);
-  }
 }

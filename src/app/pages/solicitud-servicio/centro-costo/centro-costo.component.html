@@ -1,0 +1,288 @@
+<div id="content-wrapper">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text-center">Orden de servicio</h4>
+          </div>
+          <div class="card-body" [formGroup]="form">
+
+            <div class="card">
+              <div class="card-body border-bottom">
+                <h5>Datos de solicitud</h5>
+              </div>
+
+              <div class="card-body">
+                <!-- cliente -->
+                <!--<div class="form-group row">
+                  <label for="cliente" class="col-sm-3 col-form-label">Cliente</label>
+                  <div class="col-sm-9">
+                    <select name="cliente"<
+                            id="cliente"
+                            class="form-control"
+                            formControlName="clienteId">
+                      <option value="">Seleccione un cliente</option>
+                      <option *ngFor="let cliente of solicitud-servicio"
+                              [value]="cliente.id">{{cliente.nombre}}
+                      </option>
+                    </select>
+                  </div>
+                </div>-->
+
+                <!-- solicitante -->
+                <div class="form-group row">
+                  <label for="solicitante" class="col-sm-3 col-form-label">
+                    Solicitante
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" id="solicitante"
+                           placeholder="Ingrese el nombre completo"
+                           class="form-control" formControlName="solicitante">
+                    <div [hidden]="form.controls['solicitante'].valid  || form.controls['solicitante'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- telefono solicitante -->
+                <div class="form-group row">
+                  <label for="telefonoSolicitante" class="col-sm-3 col-form-label">
+                    Telefono del solicitante
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="number" id="telefonoSolicitante"
+                           placeholder="Ingrese el telefono del solicitante"
+                           class="form-control" formControlName="telefonoSolicitante">
+                    <div [hidden]="form.controls['telefonoSolicitante'].valid  || form.controls['telefonoSolicitante'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- email -->
+                <div class="form-group row">
+                  <label for="emailSolicitante" class="col-sm-3 col-form-label">
+                    Email
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="email" id="emailSolicitante"
+                           placeholder="Ingrese un correo electronico valido"
+                           class="form-control"
+                           formControlName="emailSolicitante">
+                    <div [hidden]="form.controls['emailSolicitante'].valid  || form.controls['emailSolicitante'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- tiene orden compra -->
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Orden de compra</label>
+                  <div class="col-sm-9">
+                    <div class="form-check form-check-inline" >
+                      <input (click)="switchOrdenCompra(true)"
+                             class="form-check-input" type="radio"
+                             name="tieneOrdenCompra"
+                             value="true"
+                             id="orden-si">
+                      <label class="form-check-label" for="orden-si">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input (click)="switchOrdenCompra(false)"
+                             class="form-check-input" type="radio"
+                             name="tieneOrdenCompra"
+                             value="false"
+                             id="orden-no"
+                             checked>
+                      <label class="form-check-label" for="orden-no">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- si tiene orden de compra -->
+                <div *ngIf="ordenCompra" class="animated fade-in">
+                  <!-- numero de orden -->
+                  <div class="form-group row">
+                    <label for="num-orden-compra" class="col-sm-3 col-form-label">Numero de orden</label>
+                    <div class="col-sm-9">
+                      <input type="number"
+                             class="form-control"
+                             id="num-orden-compra"
+                             placeholder="Ingrese el numero de la orden de compra"
+                             formControlName="numeroOrden">
+                      <div [hidden]="form.controls['numeroOrden'].valid  || form.controls['numeroOrden'].pristine">
+                        <div class="ng-invalid-feedback">
+                          El campo es requerido
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- anexo de orden -->
+                  <div class="form-group row">
+                    <label for="anexo" class="col-sm-3 col-form-label">Anexo</label>
+                    <div class="col-sm-9">
+                      <input type="file" class="form-control-file" (change)="cargarArchivo($event)" id="anexo" #fileInput>
+                      <div [hidden]="form.controls['anexo'].valid  || form.controls['anexo'].pristine">
+                        <div class="ng-invalid-feedback">
+                          El campo es requerido
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-body border-bottom mt-3">
+                <h5>Datos de factura</h5>
+              </div>
+              <div class="card-body">
+                <!-- factura -->
+                <div class="form-group row">
+                  <label for="destinoFactura" class="col-sm-3 col-form-label">
+                    Facturar a
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" id="destinoFactura"
+                           placeholder="Ingrese el nombre del destinatario de la factura"
+                           class="form-control"
+                           formControlName="destinoFactura">
+                    <div [hidden]="form.controls['destinoFactura'].valid  || form.controls['destinoFactura'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- tipo sociedad -->
+                <div class="form-group row">
+                  <label for="tipoSociedad" class="col-sm-3 col-form-label">
+                    Tipo de sociedad
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="tipoSociedad"
+                            class="form-control"
+                            id="tipoSociedad"
+                            formControlName="tipoSociedad">
+                      <option [selected]="true" value="">Seleccione</option>
+                      <option value="juridico">Juridico</option>
+                      <option value="natural">Natural</option>
+                    </select>
+                    <div [hidden]="form.controls['tipoSociedad'].valid  || form.controls['tipoSociedad'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- tipo identificacion -->
+                <div class="form-group row">
+                  <label for="tipoIdentificacion" class="col-sm-3 col-form-label">
+                    Tipo de documento
+                  </label>
+                  <div class="col-sm-9">
+                    <select name="tipoIdentificacion"
+                            class="form-control"
+                            id="tipoIdentificacion"
+                            formControlName="tipoIdentificacion">
+                      <option [selected]="true" value="">Seleccione</option>
+                      <option value="juridico">Cedula</option>
+                      <option value="natural">Nit</option>
+                    </select>
+                    <div [hidden]="form.controls['tipoIdentificacion'].valid  || form.controls['tipoIdentificacion'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- numero identificacion -->
+                <div class="form-group row">
+                  <label for="numeroIdentificacion" class="col-sm-3 col-form-label">
+                    Numero de identificación
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="number" id="numeroIdentificacion"
+                           placeholder="Ingrese el numero de identificacion"
+                           class="form-control"
+                           formControlName="numeroIdentificacion">
+
+                    <div [hidden]="form.controls['numeroIdentificacion'].valid  || form.controls['numeroIdentificacion'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- telefono facturante-->
+                <div class="form-group row">
+                  <label for="telefonoFactura" class="col-sm-3 col-form-label">
+                    Telefono
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="number" id="telefonoFactura"
+                           placeholder="Telefono del facturante"
+                           class="form-control"
+                           formControlName="telefonoFactura">
+                    <div [hidden]="form.controls['telefonoFactura'].valid  || form.controls['telefonoFactura'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- email -->
+                <div class="form-group row">
+                  <label for="emailFactura" class="col-sm-3 col-form-label">
+                    Email
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="email" id="emailFactura"
+                           placeholder="Ingrese un correo valido"
+                           class="form-control"
+                           formControlName="emailFactura">
+                    <div [hidden]="form.controls['emailFactura'].valid  || form.controls['emailFactura'].pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- continuar -->
+            <div class="form-group mt-3">
+              <div class="col-md-4 mx-auto">
+                <button [disabled]="form.invalid"
+                        (click)="solicitarServicio()"
+                        class="btn btn-primary btn-block">
+                  Siguiente
+                  <i class="fa fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

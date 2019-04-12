@@ -3,11 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { VistaDomiciliariaComponent } from './vista-domiciliaria/vista-domiciliaria.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ActividadesService } from './services/actividades.service';
-import { VerificacionAcademitaComponent } from './verificacion-academita/verificacion-academita.component';
-import { DataTableComponent } from './components/data-table/data-table.component';
 import { NavBarModule} from './pages/nav-bar/nav-bar.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { MailServiceService } from './services/mail-service.service';
@@ -18,13 +15,11 @@ import { EffectsModule} from '@ngrx/effects';
 import { effects } from './store/effects';
 import { reducers } from './store/reducers';
 import { environment } from '../environments/environment';
+import {TokenInterceptorService} from './auth/token-interceptor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VistaDomiciliariaComponent,
-    VerificacionAcademitaComponent,
-    DataTableComponent,
     WordsLimiterPipe,
   ],
   imports: [
@@ -40,7 +35,15 @@ import { environment } from '../environments/environment';
     EffectsModule.forRoot(effects),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [ActividadesService, MailServiceService],
+  providers: [
+    ActividadesService,
+    MailServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

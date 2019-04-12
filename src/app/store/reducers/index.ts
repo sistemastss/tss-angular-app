@@ -1,5 +1,5 @@
 import {
-  centroCostoReducer,
+  centroCostoReducer, espMasivoReducer,
   investigacionReducer,
   poligrafiaReducer,
   servicioEspReducer,
@@ -9,6 +9,7 @@ import {
 export const reducers = {
   centroCosto: centroCostoReducer,
   servicioEsp: servicioEspReducer,
+  espMasivo: espMasivoReducer,
   investigacion: investigacionReducer,
   poligrafia: poligrafiaReducer,
   servicio: serviciosReducer

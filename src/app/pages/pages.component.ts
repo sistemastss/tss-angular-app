@@ -6,34 +6,39 @@ import {Location} from '@angular/common';
   selector: 'app-pages',
   template: `
     <app-nav></app-nav>
-      <div id="content-wrapper" class="container-fluid">
-        <div class="col-md-12 mt-2">
-        <nav aria-label="breadcrumb">
-          <!-- breadcrumb -->
-          <div class="col">
-            <ol class="breadcrumb">
-              <ng-container *ngIf="count == null">
-                <li class="breadcrumb-item"><i class="material-icons">home</i></li>
-              </ng-container>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2 p-0 ">
+          <app-side-menu></app-side-menu>
+        </div>
+        <div class="col-md-10 mt-2">
+          <nav aria-label="breadcrumb">
+            <!-- breadcrumb -->
+            <div class="col">
+              <ol class="breadcrumb">
+                <ng-container *ngIf="count == null">
+                  <li class="breadcrumb-item"><i class="material-icons">home</i></li>
+                </ng-container>
 
-              <ng-container *ngIf="count != null">
-                <li class="breadcrumb-item">
-                  <a href="javascript:void(0)" [routerLink]="['/']">
-                    <i class="material-icons">home</i></a>
-                </li>
-              </ng-container>
+                <ng-container *ngIf="count != null">
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0)" [routerLink]="['/']">
+                      <i class="material-icons">home</i></a>
+                  </li>
+                </ng-container>
 
-              <ng-container *ngFor="let breadLink of breadcrumbList">
-                <li class="breadcrumb-item">
-                  <a href="javascript:void(0)" [routerLink]="breadcrumbList[2]">
-                    {{breadLink}}
-                  </a>
-                </li>
-              </ng-container>
-            </ol>
-          </div>
-        </nav>
-        <router-outlet></router-outlet>
+                <ng-container *ngFor="let breadLink of breadcrumbList">
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0)" [routerLink]="breadcrumbList[2]">
+                      {{breadLink}}
+                    </a>
+                  </li>
+                </ng-container>
+              </ol>
+            </div>
+          </nav>
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   `,

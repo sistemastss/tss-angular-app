@@ -1,0 +1,455 @@
+<div id="content-wrapper">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <form [formGroup]="form">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="text-center">Orden de servicio</h4>
+            </div>
+            <div class="card-body">
+              <!-- nombre evaluado -->
+              <div class="form-group row">
+                <label for="evaluado" class="col-sm-3 col-form-label">
+                  Nombre del Evaluado
+                </label>
+                <div class="col-sm-9">
+                  <input type="text"
+                         class="form-control"
+                         id="evaluado"
+                         name="evaluado"
+                         required="required"
+                         placeholder="Nombre del evaluado"
+                         formControlName="evaluado">
+                  <div [hidden]="form.controls['evaluado'].valid || form.controls['evaluado'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tipo de documento -->
+              <div class="form-group row">
+                <label for="tipoDocumento" class="col-sm-3 col-form-label">Tipo de documento</label>
+                <div class="col-sm-9">
+                  <select class="form-control" formComtrolName="tipoDocumento" id="tipoDocumento">
+                    <option value="cc">C.C. Cedula</option>
+                    <option value="ti">T.I. Tarjeta de identidad</option>
+                    <option value="ce">C.E. Cedula de extrangeria</option>
+                    <option value="pa">P.A. Pasaporte</option>
+                    <option value="pep">P.E.P. Permiso especial de permanencia</option>
+                  </select>
+                  <div [hidden]="form.controls['tipoDocumento'].valid || form.controls['tipoDocumento'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- documento -->
+              <div class="form-group row">
+                <label for="documento" class="col-sm-3 col-form-label">
+                  Numero de documento
+                </label>
+                <div class="col-sm-9">
+                  <input type="number"
+                         class="form-control"
+                         id="documento"
+                         name="documento"
+                         placeholder="Documento de indentidad"
+                         required="required"
+                         formControlName="documento">
+                  <div [hidden]="form.controls['documento'].valid || form.controls['documento'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- departamento -->
+              <div class="form-group row">
+                <label for="departamento" class="col-sm-3 col-form-label">
+                  Departamento
+                </label>
+                <div class="col-sm-9">
+                  <input type="text"
+                         class="form-control"
+                         id="departamento"
+                         name="departamento"
+                         required="required"
+                         placeholder="Ingrese del departamento"
+                         formControlName="departamento">
+                  <div [hidden]="form.controls['departamento'].valid || form.controls['departamento'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ciudad -->
+              <div class="form-group row">
+                <label for="ciudad" class="col-sm-3 col-form-label">
+                  Ciudad
+                </label>
+                <div class="col-sm-9">
+                  <input type="text"
+                         class="form-control"
+                         id="ciudad"
+                         name="ciudad"
+                         required="required"
+                         placeholder="Ingrese la ciudad de prueba"
+                         formControlName="ciudad">
+                  <div [hidden]="form.controls['ciudad'].valid || form.controls['ciudad'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- telefono -->
+              <div class="form-group row">
+                <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+                <div class="col-sm-9">
+                  <input type="number"
+                         class="form-control"
+                         id="telefono"
+                         name="telefono"
+                         required="required"
+                         placeholder="Telefono del evaluado"
+                         formControlName="telefono">
+                  <div [hidden]="form.controls['telefono'].valid  || form.controls['telefono'].pristine ">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- email -->
+              <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                  <input type="email"
+                         class="form-control"
+                         id="email"
+                         name="email"
+                         required="required"
+                         placeholder="email del evaluado"
+                         formControlName="email">
+                  <div [hidden]="form.controls['email'].valid  || form.controls['email'].pristine ">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- contexo -->
+              <div class="form-group row">
+                <label for="contexto" class="col-sm-3 col-form-label">Contexto</label>
+                <div class="col-sm-9">
+                  <textarea
+                        cols="30" rows="5"
+                        class="form-control"
+                        id="contexto"
+                        name="contexto"
+                        placeholder="Contexto"
+                        formControlName="contexto">
+                  </textarea>
+                </div>
+              </div>
+
+              <!-- tipo poligrafia -->
+              <div class="form-group row">
+                <label for="pre-empleo" class="col-sm-3 col-form-label">
+                  Tipo de poligrafia
+                </label>
+                <div class="col-sm-9">
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio" name="tipoPoligrafia"
+                           id="pre-empleo" value="pre-empleo"
+                           formControlName="tipoPoligrafia"
+                           checked>
+                    <label class="form-check-label" for="pre-empleo">
+                      Pre-empleo
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio" name="tipoPoligrafia"
+                           id="rutina" value="rutina"
+                           formControlName="tipoPoligrafia">
+                    <label class="form-check-label" for="rutina">
+                      Rutina
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio" name="tipoPoligrafia"
+                           id="especifico" value="especifico"
+                           formControlName="tipoPoligrafia">
+                    <label class="form-check-label" for="especifico">
+                      Especifico
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- anexo -->
+              <div class="form-group row">
+                <label for="anexo" class="col-sm-3 col-form-label">
+                  Anexo
+                </label>
+                <div class="col-sm-9">
+                  <input type="file" id="anexo"
+                         (change)="cargarArchivo($event)"
+                         class="form-control-file" #inputFile>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group mx-auto">
+              <button class="btn btn-primary"
+                      [disabled]="form.status == 'INVALID'"
+                      (click)="crearServicio()">
+                <i class="fa fa-plus"></i>
+                Agregar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="servicios.length > 0">
+    <div class="col-md-10 mx-auto col-sm-12 mt-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          Servicios solicitados</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+              <tr class="text-capitalize">
+                <th>fecha de creacion</th>
+                <th>evaluado</th>
+                <th>datos del evaluado</th>
+                <th>tipo de poligrafia</th>
+                <th>Acciones</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of servicios; index as i">
+                  <td>{{ today | date }}</td>
+                  <td>{{ item.evaluado }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-success"
+                            (click)="verDetalle(i)">
+                      <i class="fa fa-eye"></i>
+                      Detalle
+                    </button>
+                  </td>
+                  <td>{{ item.tipoPoligrafia }}</td>
+                  <td>
+                    <div class="mx-auto">
+                      <div class="custom-control-inline" >
+                        <button class="btn btn-sm btn-primary"
+                                (click)="verDetalle(i, true)">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                      </div>
+                      <div class="custom-control-inline">
+                        <button class="btn btn-sm btn-danger"
+                                (click)="eliminarServicio(i)">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="guardarServicios()">
+              <i class="fa fa-save"></i>
+              Guardar servicios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal *ngIf="detalle" title="Detalle del servicio" size="large">
+  <div class="body">
+    <div>
+      <fieldset [disabled]="!control.editar">
+        <div class="row">
+          <div class="col-md-6">
+            <!--evaluado-->
+            <div class="form-group">
+              <label for="m-evaluado">Nombre del evaluado</label>
+              <input type="text" id="m-evaluado" class="form-control" [(ngModel)]="detalle.evaluado">
+            </div>
+
+            <!--tipo documento-->
+            <div class="form-group">
+                <label for="m-tipoDocumento">Documento de identidad</label>
+                <select class="form-control" [(ngModel)]="detalle.tipoDocumento" id="m-tipoDocumento">
+                    <option value="cc">C.C. Cedula</option>
+                    <option value="ti">T.I. Tarjeta de identidad</option>
+                    <option value="ce">C.E. Cedula de extrangeria</option>
+                    <option value="pa">P.A. Pasaporte</option>
+                    <option value="pep">P.E.P. Permiso especial de permanencia</option>
+                  </select>
+              </div>
+
+            <!--documento-->
+            <div class="form-group">
+              <label for="m-documento">Numero de documento</label>
+              <input type="number" class="form-control" id="m-documento"  [(ngModel)]="detalle.documento">
+            </div>
+
+            <!--departamento-->
+            <div class="form-group">
+              <label for="m-departamento">Departamento</label>
+              <input type="text" class="form-control" id="m-departamento"  [(ngModel)]="detalle.departamento">
+            </div>
+
+            <!--contexto-->
+            <div class="form-group">
+              <label for="m-contexto">Contexto</label>
+              <textarea
+                rows="4"
+                class="form-control"
+                id="m-contexto"
+                [(ngModel)]="detalle.contexto">
+              </textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!--ciudad-->
+            <div class="form-group">
+              <label for="m-ciudad">Ciudad</label>
+              <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="detalle.ciudad">
+            </div>
+
+            <!--telefono-->
+            <div class="form-group">
+              <label for="m-telefono">Telefono</label>
+              <input type="number" class="form-control" id="m-telefono"  [(ngModel)]="detalle.telefono">
+            </div>
+
+            <!--email-->
+            <div class="form-group">
+              <label for="m-email">Email</label>
+              <input type="email" class="form-control" id="m-email"  [(ngModel)]="detalle.email">
+            </div>
+
+            <!--read-->
+            <div *ngIf="!control.editar">
+              <!-- tipo poligrafia -->
+              <div class="form-group">
+                <label>Tipo de poligrafia</label>
+                <div class="d-block">
+                  <span class="badge badge-success">{{ detalle.tipoPoligrafia }}</span>
+                </div>
+              </div>
+
+              <!-- anexo-->
+              <div class="form-group" *ngIf="detalle.anexo">
+                <label>Anexo</label>
+                <div class="d-block">
+                  <a [href]="detalle.anexo" class="btn btn-link">
+                    <i class="fa fa-download"></i>
+                    {{ detalle.anexo }}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!--write-->
+            <div *ngIf="control.editar">
+              <!-- tipo poligrafia -->
+              <div class="form-group">
+                <label for="m-pre-empleo">
+                  Tipo de poligrafia
+                </label>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" id="m-pre-empleo"
+                         name="m-tipoPoligrafia"
+                         value="pre-empleo"
+                         [(ngModel)]="detalle.tipoPoligrafia" checked>
+                  <label class="form-check-label" for="m-pre-empleo">
+                    Pre-empleo
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" id="m-rutina"
+                         name="m-tipoPoligrafia"
+                         value="rutina"
+                         [(ngModel)]="detalle.tipoPoligrafia">
+                  <label class="form-check-label" for="m-rutina">
+                    Rutina
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="radio" id="m-especifico"
+                         name="m-tipoPoligrafia"
+                         value="especifico"
+                         [(ngModel)]="detalle.tipoPoligrafia" >
+                  <label class="form-check-label" for="m-especifico">
+                    Especifico
+                  </label>
+                </div>
+              </div>
+
+              <!-- anexo -->
+              <div class="form-group">
+                <label for="m-anexo">
+                  Anexo
+                </label>
+                <input type="file" id="m-anexo" (change)="cargarArchivo($event, true)" class="form-control-file">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="footer">
+    <button *ngIf="!control.editar"
+            class="btn btn-primary mr-2" (click)="control.editar = true">
+      <i class="fa fa-edit"></i>
+      Editar
+    </button>
+    <button *ngIf="control.editar"
+            class="btn btn-success mr-2" (click)="guardarCambios()">
+      <i class="fa fa-save"></i>
+      Guardar
+    </button>
+    <button class="btn btn-secondary" (click)="cerrarVentana()">
+      <i class="fa fa-close"></i>
+      Cerrar
+    </button>
+  </div>
+</app-modal>
+
+

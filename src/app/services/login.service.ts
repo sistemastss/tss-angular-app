@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {BASE_API} from '../@models/app-settings';
-
+import {config} from '../@models/app-settings';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +12,18 @@ export class LoginService {
   }
 
   login(username: string, password: string) {
-     return this.http.post<Array<object>>(BASE_API + 'login', {username, password})
-      .pipe(map(value => {
-      if (value) {
+    const url = config.api + '/login';
+    const data = {
+      username,
+      password
+    };
+    return this.http.post(url, data, config.httpOpts).pipe(
+      map(value => {
         console.log(value);
         localStorage.setItem('currentUser', JSON.stringify(value));
-      }
-      return value;
-    }));
+        return value;
+      })
+    );
   }
 
   logout() {

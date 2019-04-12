@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
+import {NgxPermissionsService} from 'ngx-permissions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
 
-  menu = {
+  private _menu = {
     administrador: [
       {
-        path: './',
-        title: 'Servicios',
+        path: './inicio',
+        title: 'Control',
         icon: 'fa-tasks',
-        color: 'bg-primary'
+        color: 'bg-primary',
       },
       {
-        path: './clientes',
+        path: './solicitud-servicio',
         title: 'Clientes',
         icon: 'fa-user',
         color: 'bg-danger',
         children: [
           {
-            path: './clientes/solicitud',
+            path: './solicitud-servicio/solicitud',
             title: 'Solicitar servicio',
             color: 'bg-success',
             icon: 'fa-plus'
@@ -30,13 +31,13 @@ export class MenuService {
     ],
     cliente: [
       {
-        path: './',
-        title: 'Servicios',
+        path: './inicio',
+        title: 'Control',
         icon: 'fa-tasks',
         color: 'bg-primary'
       },
       {
-        path  : './clientes/solicitud',
+        path  : './solicitud-servicio/solicitud',
         title : 'Solicitar servicio',
         color : 'bg-success',
         icon  : 'fa-plus',
@@ -60,13 +61,13 @@ export class MenuService {
     ],
     directorOperaciones: [
       {
-        path: './',
+        path: './inicio',
         title: 'Servicios',
         icon: 'fa-tasks',
         color: 'bg-primary'
       },
       {
-        path  : './clientes/solicitud',
+        path  : './solicitud-servicio/solicitud',
         title : 'Nuevo servicio',
         color : 'bg-success',
         icon  : 'fa-plus',
@@ -74,6 +75,27 @@ export class MenuService {
     ]
   };
 
-  constructor() {}
+  constructor(private permissions: NgxPermissionsService) {}
+
+  get menu() {
+    const permissions = this.permissions.getPermissions();
+
+    if (permissions.ADG) {
+      return this._menu.administrador;
+
+    } else if (permissions.CLI) {
+      return this._menu.cliente;
+
+    } else if (permissions.AESP) {
+      return this._menu.analistaEsp;
+
+    } else if (permissions.FRCE) {
+      return this._menu.freeLance;
+
+    } else if (permissions.DOPE) {
+      return this._menu.directorOperaciones;
+
+    }
+  }
 }
 
