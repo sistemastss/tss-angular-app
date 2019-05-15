@@ -7,7 +7,7 @@ import {NavBarModule} from './nav-bar/nav-bar.module';
 
 @NgModule({
   declarations: [
-    PagesComponent
+    PagesComponent,
   ],
   imports: [
     CommonModule,

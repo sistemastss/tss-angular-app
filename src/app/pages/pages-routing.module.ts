@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: './perfil/perfil.module#PerfilModule'
       },
       {
+        path: 'freelance',
+        loadChildren: './freelance/freelance.module#FreelanceModule'
+      },
+      {
         path: '',
         redirectTo: 'perfil',
         pathMatch: 'full'
