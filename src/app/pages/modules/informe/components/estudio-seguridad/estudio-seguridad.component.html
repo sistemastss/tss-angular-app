@@ -1,0 +1,47 @@
+<div class="card-header">
+  <h4 class="text-center text-primary">Estudio de seguridad</h4>
+</div>
+<div class="card-body">
+
+  <div class="form-group border-bottom">
+    <h5 class="text-center text-uppercase">
+      Sanchez aguilar jenifer lynay
+    </h5>
+    <h6 class="text-center">
+      123123
+    </h6>
+  </div>
+
+  <div *ngIf="!dataLoaded">
+  <div class="form-group row">
+    <label class="col-form-label col-md-3" for="image">Cargar imagen del evaluado</label>
+    <div class="col-md-9">
+      <input id="image" type="file" class="form-control-file" (change)="setImagenEvaluado($event)">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-md-3" for="logoEmpresa">Cargar logo de la empresa</label>
+    <div class="col-md-9">
+      <input id="logoEmpresa" type="file" class="form-control-file" (change)="setLogoCliente($event)">
+    </div>
+  </div>
+  </div>
+
+  <div>
+    <div class="form-group">
+      <label>Foto del evaluado</label><br>
+      <img class="img-fluid" [src]="makeFileUrl(data.fotoEvaluado)" alt="">
+    </div>
+
+    <div class="form-group">
+      <label>Logo del cliente</label><br>
+      <img class="img-fluid" [src]="makeFileUrl(data.logoCliente)" alt="">
+    </div>
+  </div>
+
+</div>
+<div class="card-footer text-right">
+  <button class="btn btn-primary" (click)="saveAll()" *ngIf="!dataLoaded">Guardar</button>
+</div>
+

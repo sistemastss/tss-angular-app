@@ -1,0 +1,481 @@
+<div id="content-wrapper">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <form [formGroup]="form">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="text-center">Orden de servicio</h4>
+            </div>
+            <div class="card-body">
+              <ng-container formGroupName="evaluado">
+                <!-- Evaluado -->
+                <div class="form-group row">
+                  <label for="evaluado"
+                         class="col-sm-3 col-form-label">
+                    Nombre del Evaluado
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           id="evaluado"
+                           name="evaluado"
+                           required="required"
+                           placeholder="Nombre del evaluado"
+                           formControlName="evaluado">
+                    <div [hidden]="form.get('evaluado').get('evaluado').valid || form.get('evaluado').get('evaluado').pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tipo de documento -->
+                <div class="form-group row">
+                  <label for="tipoDocumento" class="col-sm-3 col-form-label">Tipo de documento</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" formControlName="tipoDocumento" id="tipoDocumento">
+                      <option value="cc">C.C. Cedula</option>
+                      <option value="ti">T.I. Tarjeta de identidad</option>
+                      <option value="ce">C.E. Cedula de extrangeria</option>
+                      <option value="pa">P.A. Pasaporte</option>
+                      <option value="pep">P.E.P. Permiso especial de permanencia</option>
+                    </select>
+                    <div [hidden]="form.get('evaluado').get('tipoDocumento').valid || form.get('evaluado').get('tipoDocumento').pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Documento de identidad -->
+                <div class="form-group row">
+                  <label for="documento" class="col-sm-3 col-form-label">Numero de documento</label>
+                  <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           id="documento"
+                           name="documento"
+                           placeholder="Documento de indentidad"
+                           required="required"
+                           formControlName="documento">
+                    <div [hidden]="form.get('evaluado').get('documento').valid || form.get('evaluado').get('documento').pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Telefono -->
+                <div class="form-group row">
+                  <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+                  <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           id="telefono"
+                           name="telefono"
+                           required="required"
+                           placeholder="Telefono"
+                           formControlName="telefono">
+                    <div [hidden]="form.get('evaluado').get('telefono').valid  || form.get('evaluado').get('telefono').pristine ">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group row">
+                  <label for="email" class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           name="email"
+                           required="required"
+                           placeholder="Email"
+                           formControlName="email">
+                    <div [hidden]="form.get('evaluado').get('email').valid  || form.get('evaluado').get('email').pristine ">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Direccion -->
+                <div class="form-group row">
+                  <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
+                  <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           id="direccion"
+                           name="direccion"
+                           placeholder="Ingrese la dirección del evaluado"
+                           required="required"
+                           formControlName="direccion">
+                    <div [hidden]="form.get('evaluado').get('direccion').valid  || form.get('evaluado').get('direccion').pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cargo -->
+                <div class="form-group row">
+                  <label for="cargo" class="col-sm-3 col-form-label">Cargo</label>
+                  <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           id="cargo"
+                           name="direccion"
+                           placeholder="Cargo del evaluado"
+                           required="required"
+                           formControlName="cargo">
+                    <div [hidden]="form.get('evaluado').get('cargo').valid  || form.get('evaluado').get('cargo').pristine">
+                      <div class="ng-invalid-feedback">
+                        El campo es requerido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </ng-container>
+
+              <!-- lugar de desarrollo -->
+              <div class="form-group row">
+                <label for="lugarDesarrollo" class="col-sm-3 col-form-label">Lugar de desarrollo</label>
+                <div class="col-sm-9">
+                  <input type="text"
+                         class="form-control"
+                         id="lugarDesarrollo"
+                         name="lugarDesarrollo"
+                         required="required"
+                         placeholder="Lugar de desarrollo del servicio"
+                         formControlName="lugarDesarrollo">
+                  <div [hidden]="form.controls['lugarDesarrollo'].valid  || form.controls['lugarDesarrollo'].pristine">
+                    <div class="ng-invalid-feedback">
+                      El campo es requerido
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Observaciones -->
+              <div class="form-group row">
+                <label for="observaciones" class="col-sm-3 col-form-label">Observaciones</label>
+                <div class="col-sm-9">
+                    <textarea
+                      cols="30" rows="5"
+                      class="form-control"
+                      id="observaciones"
+                      name="observaciones"
+                      placeholder="Observaciones"
+                      formControlName="observaciones">
+                    </textarea>
+                </div>
+              </div>
+
+              <!-- Anexo -->
+              <div class="form-group row">
+                <label for="anexo" class="col-sm-3 col-form-label">
+                  Anexo
+                </label>
+                <div class="col-sm-9">
+                  <input type="file" id="anexo" class="form-control-file" (change)="cargarArchivo($event)" #inputFile>
+                </div>
+              </div>
+
+              <!-- Tipo de servicio -->
+              <div class="form-group row">
+                <label for="anexo" class="col-sm-3 col-form-label">
+                  Tipo de servicio
+                </label>
+                <div class="col-sm-9">
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio" name="tipoEsp"
+                           id="basico" value="basico"
+                           formControlName="tipoEsp"
+                           checked>
+                    <label class="form-check-label" for="basico">
+                      Basico (Historial judicial, Verificacion Academica, Verificacion Laboral, Visita Domiciliaria)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio" name="tipoEsp"
+                           id="integral" value="integral"
+                           formControlName="tipoEsp">
+                    <label class="form-check-label"for="integral">
+                      Integral (Basico + Poligrafia)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio" name="tipoEsp"
+                           id="avanzado" value="avanzado"
+                           formControlName="tipoEsp">
+                    <label class="form-check-label" for="avanzado">
+                      Avanzado (Integral + Estudio financiero)
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Aceptar terminos -->
+              <div class="form-check text-center mt-2">
+                <input class="form-check-input"
+                       type="checkbox" name="aceptarTerminos"
+                       [value]="false" id="aceptarTerminos"
+                       formControlName="aceptarTerminos"
+                       required>
+                <label (click)="openMdTerminos(mdTerminos)"  class="form-check-label" for="aceptarTerminos">
+                  Aceptar terminos y condiciones
+                </label>
+              </div>
+            </div>
+            <div class="form-group mx-auto">
+              <button class="btn btn-primary"
+                      [disabled]="form.status == 'INVALID'"
+                      (click)="crearServicio()">
+                <i class="fa fa-plus"></i>
+                Agregar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="servicios.length > 0">
+    <div class="col-md-10 mx-auto col-sm-12 mt-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          Servicios solicitados</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+              <tr class="text-capitalize">
+                <th>fecha creacion</th>
+                <th>evaluado</th>
+                <th>datos del evaluado</th>
+                <th>tipo de ESP</th>
+                <th>hoja de vida</th>
+                <th>acciones</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let item of servicios; index as i">
+                <th>{{ today | date }}</th>
+                <th>{{ item.evaluado.evaluado }}</th>
+                <th>
+                  <div class="text-center">
+                    <button class="btn btn-sm btn-success"
+                            (click)="verDetalle(mdDetalle, i)">
+                      <i class="fa fa-eye"></i>
+                      Ver detalle
+                    </button>
+                  </div>
+                </th>
+                <th class="text-capitalize">{{ item.tipoEsp }}</th>
+                <th class="text-capitalize">{{ item.anexo ? 'Si' : 'No' }}</th>
+                <th>
+                  <div class="mx-auto">
+                    <div class="custom-control-inline" >
+                      <button class="btn btn-sm btn-primary"
+                              (click)="verDetalle(mdDetalle, i, true)">
+                        <i class="fa fa-edit"></i>
+                        Editar
+                      </button>
+                    </div>
+                    <div class="custom-control-inline">
+                      <button class="btn btn-sm btn-danger"
+                              (click)="eliminarServicioEsp(i)">
+                        <i class="fa fa-trash"></i>
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="guardarServiciosEsp()">
+              <i class="fa fa-save"></i>
+              Guardar servicios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #mdDetalle let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Detalle del servicio</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <fieldset [disabled]="!control.editar">
+      <div class="row">
+        <div class="col-md-6">
+          <!--evaluado-->
+          <div class="form-group">
+            <label for="m-evaluado">Nombre del evaluado</label>
+            <input type="text" id="m-evaluado" class="form-control" [(ngModel)]="detalle.evaluado.evaluado">
+          </div>
+
+          <!--documento-->
+          <div class="form-group">
+            <label for="m-tipoDocumento">Documento de identidad</label>
+            <select class="form-control" [(ngModel)]="detalle.evaluado.tipoDocumento" id="m-tipoDocumento">
+              <option value="cc">C.C. Cedula</option>
+              <option value="ti">T.I. Tarjeta de identidad</option>
+              <option value="ce">C.E. Cedula de extrangeria</option>
+              <option value="pa">P.A. Pasaporte</option>
+              <option value="pep">P.E.P. Permiso especial de permanencia</option>
+            </select>
+          </div>
+
+          <!--documento-->
+          <div class="form-group">
+            <label for="m-documento">Numero de documento</label>
+            <input type="number" class="form-control" id="m-documento"  [(ngModel)]="detalle.evaluado.documento">
+          </div>
+
+          <!--Ciudad desarrollo-->
+          <div class="form-group">
+            <label for="m-ciudad">Ciudad de desarrollo</label>
+            <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="detalle.lugarDesarrollo">
+          </div>
+
+        </div>
+        <div class="col-md-6">
+
+          <!--telefono-->
+          <div class="form-group">
+            <label for="m-telefono">Telefono</label>
+            <input type="number" class="form-control" id="m-telefono"  [(ngModel)]="detalle.evaluado.telefono">
+          </div>
+
+          <!--email-->
+          <div class="form-group">
+            <label for="m-email">Email</label>
+            <input type="email" class="form-control" id="m-email"  [(ngModel)]="detalle.evaluado.email">
+          </div>
+
+          <!--observaciones-->
+          <div class="form-group">
+            <label for="m-obs">Observaciones</label>
+            <textarea
+              rows="3"
+              class="form-control"
+              id="m-obs"
+              [(ngModel)]="detalle.observaciones">
+              </textarea>
+          </div>
+
+          <div class="" *ngIf="!control.editar">
+            <!-- tipo servicio -->
+            <div class="form-group">
+              <label>Tipo de esp</label>
+              <div class="d-block">
+                <span class="badge badge-success">{{ detalle.tipoEsp }}</span>
+              </div>
+            </div>
+
+            <!-- anexo -->
+            <div class="form-group" *ngIf="detalle.anexo">
+              <label>Anexo</label>
+              <div class="d-block">
+                <i class="fa fa-file"></i>
+                {{ detalle.anexo.fileName }}
+              </div>
+            </div>
+          </div>
+
+          <div class="" *ngIf="control.editar">
+            <!-- tipo servicio -->
+            <div class="form-group">
+              <label for="m-basico">
+                Tipo de Esp
+              </label>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="radio" id="m-basico"
+                       name="m-tipoEsp"
+                       value="basico"
+                       [(ngModel)]="detalle.tipoEsp" checked>
+                <label class="form-check-label" for="m-basico">
+                  Basico
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="radio" id="m-integral"
+                       name="m-tipoEsp"
+                       value="integral"
+                       [(ngModel)]="detalle.tipoEsp">
+                <label class="form-check-label" for="m-integral">
+                  Integral
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="radio" id="m-avanzado"
+                       name="m-tipoEsp"
+                       value="avanzado"
+                       [(ngModel)]="detalle.tipoEsp" >
+                <label class="form-check-label" for="m-avanzado">
+                  Avanzado
+                </label>
+              </div>
+            </div>
+
+            <!-- anexo -->
+            <div class="form-group">
+              <label for="m-anexo">
+                Anexo
+              </label>
+              <input type="file" id="m-anexo" (change)="cargarArchivo($event, true)" class="form-control-file">
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="control.editar"
+            class="btn btn-success mr-2" (click)="guardarCambios(modal)">
+      <i class="fa fa-save"></i>
+      Guardar
+    </button>
+    <button class="btn btn-secondary" (click)="modal.close()">
+      <i class="fa fa-close"></i>
+      Cerrar
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #mdTerminos let-modal>
+
+</ng-template>
+

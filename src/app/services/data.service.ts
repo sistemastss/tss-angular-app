@@ -1,16 +1,14 @@
-import { AlmacenarEspMasivo } from './../store/actions/esp-masivo.actions';
-import { Poligrafia } from './../@models/poligrafia';
-import { Servicio } from './../@models/servicio';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {BASE_API, config} from '../@models/app-settings';
 import {map} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import { Observable, forkJoin } from 'rxjs';
-import {CentroCosto} from '../@models/centro-costo';
-import {ServicioEsp} from '../@models/servicio-esp';
-import {Helper} from '../@classes/helper-class';
-import {Investigacion} from '../@models/Investigacion';
+import {CentroCosto} from '../pages/solicitud-servicio/interfaces/centro-costo.interface';
+import {Esp} from '../pages/solicitud-servicio/interfaces/esp.interface';
+import {Helper} from '../@classes';
+import {Investigacion} from '../pages/solicitud-servicio/interfaces/Investigacion.interface';
+import { getServicios } from '../pages/control/store/selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -81,7 +79,7 @@ export class DataService {
     );
   }
 
-  almacenarEsp(centroCosto: number, payload: ServicioEsp[]) {
+  almacenarEsp(centroCosto: number, payload: Esp[]) {
     const url = Helper.route(['centro-costo', 'servicio-esp'], centroCosto);
     return this.http.post(url, payload, config.httpOpts);
   }
@@ -96,7 +94,7 @@ export class DataService {
     return this.http.post(url, payload, config.httpOpts);
   }
 
-  almacenarPoligrafias(centroCosto: number, payload: Poligrafia[]) {
+  almacenarPoligrafias(centroCosto: number, payload: any[]) {
     const url = Helper.route(['centro-costo', 'poligrafia'], centroCosto);
     return this.http.post(url, payload, config.httpOpts);
   }
@@ -206,5 +204,15 @@ export class DataService {
 
   visitaDomiciliariaCompletada(servicioEsp: number) {
     return this.httpGet(`servicio-esp/${servicioEsp}/verificacion-laboral`);
+  }
+
+
+  setServicios(servicios) {
+    const data = JSON.stringify(servicios);
+    localStorage.setItem('servicios', data);
+  }
+
+  getServicios() {
+    return JSON.parse(localStorage.getItem('servicios')) as [];
   }
 }

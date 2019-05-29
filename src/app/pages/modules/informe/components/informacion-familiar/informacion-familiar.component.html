@@ -1,0 +1,741 @@
+<div class="card-header bg-white">
+  <h4 class="text-center">Estudio de seguridad</h4>
+</div>
+<div class="card-body bg-light">
+
+  <!-- Informacion personal card-->
+  <div [formGroup]="formNucleoFamiliar" class="col-md-10 mx-auto card card-body mb-4">
+    <b class="card-title">Nucleo familiar</b>
+    <hr>
+
+    <!-- Nombre del conyuge -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="nombreConyuge">
+        Nombre del conyuge
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="nombreConyuge"
+               formControlName="nombreConyuge"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['nombreConyuge'].invalid &&
+             formNucleoFamiliar.controls['nombreConyuge'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- edad -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="edadConyuge">Edad</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               minlength="0" maxlength="130"
+               id="edadConyuge"
+               formControlName="edadConyuge"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['edadConyuge'].invalid &&
+             formNucleoFamiliar.controls['edadConyuge'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Identificación -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="identificacion">Identificación</label>
+      <div class="col-sm-8">
+        <input type="number" minlength="0" class="form-control"
+               id="identificacion"
+               formControlName="identificacion"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['identificacion'].invalid &&
+             formNucleoFamiliar.controls['identificacion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Lugar de Expedición -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="lugarExpedicion">Lugar de Expedición
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="lugarExpedicion"
+               formControlName="lugarExpedicion"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['lugarExpedicion'].invalid &&
+             formNucleoFamiliar.controls['lugarExpedicion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Lugar de nacimiento -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="lugarNacimiento">Lugar de nacimiento
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="lugarNacimiento"
+               formControlName="lugarNacimiento"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['lugarNacimiento'].invalid &&
+             formNucleoFamiliar.controls['lugarNacimiento'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- fecha de nacimiento -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="fechaNacimiento">Fecha de Nacimiento
+      </label>
+      <div class="col-sm-8">
+        <input type="date" class="form-control"
+               id="fechaNacimiento"
+               formControlName="fechaNacimiento"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['fechaNacimiento'].invalid &&
+             formNucleoFamiliar.controls['fechaNacimiento'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- ocupacion -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="ocupacion">Ocupación
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="ocupacion"
+               formControlName="ocupacion"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['ocupacion'].invalid &&
+             formNucleoFamiliar.controls['ocupacion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- empresa -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="empresa">Empresa
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="empresa"
+               formControlName="empresa"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['empresa'].invalid &&
+             formNucleoFamiliar.controls['empresa'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- telefono -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="telefono">Telefono - Celular
+      </label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="telefono"
+               formControlName="telefono"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['telefono'].invalid &&
+             formNucleoFamiliar.controls['telefono'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- tiempo Laborado -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="tiempoLaborado">Tiempo Laborado
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="tiempoLaborado"
+               formControlName="tiempoLaborado"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formNucleoFamiliar.controls['tiempoLaborado'].invalid &&
+             formNucleoFamiliar.controls['tiempoLaborado'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hijos -->
+  <div class="mx-auto card card-body mb-4">
+    <div class="row">
+      <div class="col-md-8">
+        <b class="card-title">Hijos</b>
+      </div>
+      <div class="col-md-4 text-right">
+        <button (click)="open(mdHijos)" class="btn btn-primary">
+          <i class="fa fa-plus"></i>
+          Agregar
+        </button>
+      </div>
+    </div>
+    <div class="form-group"><hr></div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <table class="table table-bordered">
+          <thead class="text-capitalize">
+          <th>edad</th>
+          <th>nombre</th>
+          <th>ocupación</th>
+          <th>ubicación</th>
+          <th class="acciones">acciones</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let value of hijos">
+            <td>{{ value.edad }}</td>
+            <td>{{ value.nombre }}</td>
+            <td>{{ value.ocupacion }}</td>
+            <td>{{ value.ubicacion }}</td>
+            <td class="acciones">
+              <div class="text-center">
+                <button class="btn btn-primary mr-2" (click)="open(mdHijos, value)">
+                  <i class="fa fa-edit"></i>
+                </button>
+
+                <button class="btn btn-danger ml-2" (click)="deleteHijo(value.id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+  <!-- Informacion familiar -->
+  <div class="card mt-3">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-md-8">
+          <b class="card-title">Informacion familiar</b>
+        </div>
+        <div class="col-md-4 text-right">
+          <button (click)="open(mdInfoFamiliar)" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Agregar
+          </button>
+        </div>
+      </div>
+      <div class="form-group"><hr></div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <table class="table table-bordered">
+            <thead class="text-capitalize">
+            <th>nombre</th>
+            <th>parentesco</th>
+            <th>edad</th>
+            <th>ocupacion</th>
+            <th>telefono</th>
+            <th>ciudad</th>
+            <th>Vive con ud</th>
+            <th class="acciones">acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let value of infoFamiliar">
+              <td>{{ value.nombre }}</td>
+              <td>{{ value.parentesco }}</td>
+              <td>{{ value.edad }}</td>
+              <td>{{ value.ocupacion}}</td>
+              <td>{{ value.telefono}}</td>
+              <td>{{ value.ciudad}}</td>
+              <td>{{ value.viveConUd === true ? 'Si' : 'No' }}</td>
+              <td class="acciones">
+                <div class="text-center">
+                  <button class="btn btn-primary mr-2" (click)="open(mdInfoFamiliar, value)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button class="btn btn-danger ml-2" (click)="deleteInfoFamiliar(value.id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Referencias -->
+  <div class="card mt-3">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-md-8">
+          <b class="card-title">Referencias</b>
+        </div>
+        <div class="col-md-4 text-right">
+          <button (click)="open(mdReferencias)" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Agregar
+          </button>
+        </div>
+      </div>
+      <div class="form-group"><hr></div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <table class="table table-bordered">
+            <thead class="text-capitalize">
+            <th>nombre</th>
+            <th>ocupacion</th>
+            <th>telefono</th>
+            <th>ciudad</th>
+            <th>confirmacion</th>
+            <th class="acciones">acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let value of referencias">
+              <td>{{ value.nombre }}</td>
+              <td>{{ value.ocupacion }}</td>
+              <td>{{ value.telefono }}</td>
+              <td>{{ value.ciudad }}</td>
+              <td>{{ value.confirmacion }}</td>
+              <td class="acciones">
+                <div class="text-center">
+                  <button class="btn btn-primary mr-2" (click)="open(mdReferencias, value.id)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button class="btn btn-danger ml-2" (click)="deleteReferencia(value.id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-footer bg-white">
+
+</div>
+
+
+
+
+
+<!-- Modal add hijos -->
+<ng-template #mdHijos let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalVerticalLabel">Hijos</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formHijo">
+
+      <!-- edad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="hijo-edad">Edad</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="hijo-edad"
+                 name="edad"
+                 formControlName="edad"
+                 placeholder="Ingrese un numero valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formHijo.get('edad').invalid &&
+                     formHijo.get('edad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- nombre -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="hijo-nombre">Nombre</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="hijo-nombre"
+                 name="nombre"
+                 formControlName="nombre"
+                 placeholder="Ingrese el nombre valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formHijo.get('nombre').invalid &&
+                     formHijo.get('nombre').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ocupacion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="hijo-ocupacion">Ocupación</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="hijo-ocupacion"
+                 name="ocupacion"
+                 formControlName="ocupacion"
+                 placeholder="Ocupación del hijo"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formHijo.get('ocupacion').invalid &&
+                     formHijo.get('ocupacion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ubicacion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="hijo-ubicacion">Ubicación</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="hijo-ubicacion"
+                 name="ubicacion"
+                 formControlName="ubicacion"
+                 placeholder="ingrese una ubicación valida"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formHijo.get('ubicacion').invalid &&
+                     formHijo.get('ubicacion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning"
+            *ngIf="isUpdate"
+            [disabled]="formHijo.invalid"
+            (click)="updateHijo()">
+      Actualizar
+    </button>
+    <button class="btn btn-primary"
+            *ngIf="!isUpdate"
+            [disabled]="formHijo.invalid"
+            (click)="addHijos()">
+      Guardar
+    </button>
+    <button class="btn btn-secondary"
+            (click)="modal.close()">
+      Cerrar
+    </button>
+  </div>
+</ng-template>
+
+
+
+<!-- Modal InformacionFamiliar -->
+<ng-template #mdInfoFamiliar let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Información familiar</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formInfoFamiliar">
+      <!-- nombre -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="info-flia-nombre">Nombre</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="info-flia-nombre"
+                 name="nombre"
+                 formControlName="nombre"
+                 placeholder="Ingrese un nombre valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formInfoFamiliar.get('nombre').invalid &&
+                     formInfoFamiliar.get('nombre').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- parentesco -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="info-flia-parentesco">Parentesco</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="info-flia-parentesco"
+                 name="parentesco"
+                 formControlName="parentesco"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formInfoFamiliar.get('parentesco').invalid &&
+                     formInfoFamiliar.get('parentesco').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- edad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="info-flia-edad">Edad</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="info-flia-edad"
+                 name="edad"
+                 formControlName="edad"
+                 placeholder="Ingrese un numero valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formInfoFamiliar.get('edad').invalid &&
+                     formInfoFamiliar.get('edad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- ocupacion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="info-flia-ocupacion">ocupacion</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="info-flia-ocupacion"
+                 name="edad"
+                 formControlName="ocupacion"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formInfoFamiliar.get('ocupacion').invalid &&
+                     formInfoFamiliar.get('ocupacion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- telefono -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="info-flia-telefono">Telefono</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="info-flia-telefono"
+                 name="telefono"
+                 formControlName="telefono"
+                 placeholder="Ingrese un telefono valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formInfoFamiliar.get('telefono').invalid &&
+                     formInfoFamiliar.get('telefono').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- ciudad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="info-flia-ciudad">Ciudad</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="info-flia-ciudad"
+                 name="edad"
+                 formControlName="ciudad"
+                 placeholder="Ingrese una ciudad valida"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formInfoFamiliar.get('ciudad').invalid &&
+                     formInfoFamiliar.get('ciudad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- Vive con ud -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="viveConUd">Vive con ud</label>
+        <div class="col-sm-9">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="viveConUd"
+                   id="viveConUd" [value]="true">
+            <label class="form-check-label" for="viveConUd">Si</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="viveConUd"
+                   id="viveConUd!" [value]="false">
+            <label class="form-check-label" for="viveConUd!">No</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning"
+            *ngIf="isUpdate"
+            [disabled]="formInfoFamiliar.invalid"
+            (click)="updateInfoFamiliar()">
+      Actualizar
+    </button>
+    <button class="btn btn-primary"
+            *ngIf="!isUpdate"
+            [disabled]="formInfoFamiliar.invalid"
+            (click)="addInfoFamiliar()">
+      Guardar
+    </button>
+    <button class="btn btn-secondary"
+            (click)="modal.close()">
+      Cerrar
+    </button>
+  </div>
+</ng-template>
+
+<!-- Modal referencias -->
+<ng-template #mdReferencias let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Información familiar</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formReferencias">
+      <!-- nombre -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="ref-nombre">Nombre</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="ref-nombre"
+                 name="nombre"
+                 formControlName="nombre"
+                 placeholder="Ingrese un nombre valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formReferencias.get('nombre').invalid &&
+                     formReferencias.get('nombre').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- ocupacion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="ref-ocupacion">Ocupación</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="ref-ocupacion"
+                 name="ocupacion"
+                 formControlName="ocupacion"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formReferencias.get('ocupacion').invalid &&
+                     formReferencias.get('ocupacion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- telefono -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="ref-telefono">Telefono</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="ref-telefono"
+                 name="telefono"
+                 formControlName="telefono"
+                 placeholder="Ingrese un telefono valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formReferencias.get('telefono').invalid &&
+                     formReferencias.get('telefono').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- ciudad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="ref-ciudad">Ciudad</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="ref-ciudad"
+                 name="ciudad"
+                 formControlName="ciudad"
+                 placeholder="Ingrese una ciudad valida"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formReferencias.get('ciudad').invalid &&
+                     formReferencias.get('ciudad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- confirmacion -->
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="ref-confirmacion">Confirmacion</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control"
+                 id="ref-confirmacion"
+                 name="confirmacion"
+                 formControlName="confirmacion"
+                 placeholder="Ingrese una dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formReferencias.get('confirmacion').invalid &&
+                     formReferencias.get('confirmacion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning"
+            *ngIf="isUpdate"
+            [disabled]="formReferencias.invalid"
+            (click)="updateReferencia()">
+      Actualizar
+    </button>
+    <button class="btn btn-primary"
+            *ngIf="!isUpdate"
+            [disabled]="formReferencias.invalid"
+            (click)="addReferencia()">
+      Guardar
+    </button>
+    <button class="btn btn-secondary"
+            (click)="modal.close()">
+      Cerrar
+    </button>
+  </div>
+</ng-template>
+
+

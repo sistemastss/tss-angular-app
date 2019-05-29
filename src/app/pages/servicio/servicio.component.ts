@@ -7,8 +7,6 @@ import { ActividadesService } from '../../services/actividades.service';
 import { Store } from '@ngrx/store';
 import { Servicio } from '../../@models/servicio';
 import * as moment from 'moment';
-import {RemoverServicios, SolicitarServicios} from 'src/app/store/actions/servicios.actions';
-import {ServicioState} from '../../store/state';
 import {ModalService} from '../../services/modal/modal.service';
 
 @Component({
@@ -19,13 +17,13 @@ import {ModalService} from '../../services/modal/modal.service';
 
 export class ServicioComponent implements OnInit, OnDestroy {
 
-  servicios: Servicio[];
+  servicios: Servicio[] = [];
   toggle = false;
   actividades: any;
   servicioEsp: any;
   permissions: any;
   showError: boolean;
-  servicios$ = this.store.select(state => state.servicio);
+  servicios$ = this.store.select(state => state.solicitudServicio.esp);
 
   filtro = [
     { title: 'sin filtro', value: 'false' },
@@ -40,7 +38,7 @@ export class ServicioComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private store: Store<ServicioState>,
+    private store: Store<any>,
     private router: Router,
     private loginService: LoginService,
     private dataService: DataService,
@@ -49,7 +47,7 @@ export class ServicioComponent implements OnInit, OnDestroy {
     private ngxPermissionsService: NgxPermissionsService
   ) {
       this.servicios$.subscribe(data => {
-        this.servicios = ServicioComponent.sortData(data);
+        this.servicios = data
       });
   }
 
@@ -72,16 +70,16 @@ export class ServicioComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(new RemoverServicios());
+    // this.store.dispatch(new RemoverServicios());
   }
 
 
   loadServiciosEsp(): void {
-    this.store.dispatch(new SolicitarServicios());
+    // this.store.dispatch(new SolicitarServicios());
     // servicios esp para administrador general y analista esp
     if (this.permissions.ADG || this.permissions.AESP || this.permissions.DOPE) {
 
-      this.store.dispatch(new SolicitarServicios());
+      // this.store.dispatch(new SolicitarServicios());
 
       // servicios esp para solicitud-servicio
     } else if (this.permissions.CLI) {
@@ -93,7 +91,7 @@ export class ServicioComponent implements OnInit, OnDestroy {
         (err: any) => this.showError = true
       );*/
 
-      this.store.dispatch(new SolicitarServicios());
+      // this.store.dispatch(new SolicitarServicios());
 
 
       // servicios esp para freelance
@@ -345,7 +343,7 @@ export class ServicioComponent implements OnInit, OnDestroy {
       );
 
     if (!values) {
-      alert('No existen servicios Esp en el rango de fechas seleccionado');
+      alert('No existen servicios EspInterface en el rango de fechas seleccionado');
 
     }
 
@@ -377,7 +375,7 @@ export class ServicioComponent implements OnInit, OnDestroy {
   }
 
   reiniciar() {
-    this.store.dispatch(new RemoverServicios());
-    this.store.dispatch(new SolicitarServicios());
+    // this.store.dispatch(new RemoverServicios());
+    // this.store.dispatch(new SolicitarServicios());
   }
 }

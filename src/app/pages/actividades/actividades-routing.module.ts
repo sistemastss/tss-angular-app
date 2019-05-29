@@ -26,6 +26,7 @@ const routes: Routes = [
     children: [
       { path: 'datos-personales', component: DatosPersonalesComponent },
       { path: 'historial-judicial', component: HistorialJudicialComponent},
+
       {
         path: 'visita-domiciliaria',
         component: VisitaDomiciliariaComponent,

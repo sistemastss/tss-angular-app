@@ -1,0 +1,104 @@
+<table class="table table-bordered table-hover table-sm">
+  <thead>
+  <tr class="text-capitalize">
+    <th>fecha creación</th>
+    <th>fecha entrega</th>
+    <th>analista esp</th>
+    <th>cliente</th>
+    <th>lugar de desarrollo</th>
+    <th>evaluado</th>
+    <th>estado</th>
+    <th>informe</th>
+    <th>aceptacion</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of servicios">
+    <td> {{ item.fechaCreacion | date }} </td>
+    <td> {{ item.fechaEntrega | date }} </td>
+    <td> {{ item.analistaEsp }} </td>
+    <td> {{ item.cliente }} </td>
+    <td> {{ item.lugarDesarrollo }} </td>
+    <td>
+      <div class="form-group text-center">
+        <button class="btn btn-info text-center" (click)="verDetalle(item)">
+          <i class="fa fa-eye"></i>
+          Ver detalle
+        </button>
+      </div>
+    </td>
+    <td>
+      <div [ngSwitch]="item.estado">
+        <div *ngSwitchCase="'cargado'">
+          <span class="badge badge-pill service-loaded"> {{ item.estado }} </span>
+        </div>
+        <div *ngSwitchCase="'asignado'">
+          <span class="badge badge-pill service-asigned"> {{ item.estado }} </span>
+        </div>
+        <div *ngSwitchCase="'aceptado'">
+          <span class="badge badge-pill service-acepted"> {{ item.estado }} </span>
+        </div>
+        <div *ngSwitchCase="'proceso'">
+          <span class="badge badge-pill service-process"> {{ item.estado }} </span>
+        </div>
+        <div *ngSwitchCase="'completado'">
+          <span class="badge badge-pill service-finished"> {{ item.estado }} </span>
+        </div>
+        <div *ngSwitchCase="'alerta'">
+          <span class="badge badge-pill  badge-danger"> {{ item.estado }} </span>
+        </div>
+        <div *ngSwitchCase="'finalizado'">
+          <span class="badge badge-pill  badge-success"> {{ item.estado }} </span>
+        </div>
+      </div>
+
+    </td>
+    <td>
+      <button (click)="agregarInformacion()" *ngIf="item.estado == 'aceptado'" class="btn btn-warning btn-sm">
+        Informe
+      </button>
+    </td>
+    <td>
+      <div>
+        <button [disabled]="(item.estado == 'aceptado')" class="btn btn-primary btn-sm text-center mb-1 ml-2 mr-2" (click)="aceptarServicio(item)">
+          <i class="fa fa-check"></i>
+          Aceptar
+        </button>
+        <button [disabled]="(item.estado == 'aceptado')" class="btn btn-danger btn-sm text-center ml-2 mr-2" (click)="rechazarServicio(mdRechazarServicio, item)">
+          <i class="fa fa-times"></i>
+          Rechazar
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #mdRechazarServicio let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalVerticalLabel">
+      observaciones de rechazo
+    </h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="justificacionRechazo">¿Porque rechaza el servicio?</label>
+      <textarea class="form-control"
+                id="justificacionRechazo" rows="4"
+                placeholder="Describa los motivos de rechazo del servicio" [formControl]="justificacionRechazo"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" [disabled]="justificacionRechazo.invalid" (click)="guardarRechazo()">
+      <i class="fa fa-save"></i>
+      Guardar justificacion
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">
+      <i class="fa fa-times"></i>
+      Cerrar</button>
+  </div>
+
+</ng-template>

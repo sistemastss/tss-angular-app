@@ -29,6 +29,14 @@ const routes: Routes = [
         loadChildren: './freelance/freelance.module#FreelanceModule'
       },
       {
+        path: 'dashboard',
+        loadChildren: './control/control.module#ControlModule'
+      },
+      {
+        path: 'informe',
+        loadChildren: './modules/informe/informe.module#InformeModule'
+      },
+      {
         path: '',
         redirectTo: 'perfil',
         pathMatch: 'full'

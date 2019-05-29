@@ -133,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "sagFront"
+  "defaultProject": "sagFront",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

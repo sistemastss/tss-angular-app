@@ -1,0 +1,773 @@
+<div class="card-header bg-white">
+  <h4>Visita domiciliaria de seguridad</h4>
+</div>
+<div class="card-body bg-light">
+
+  <!-- Informacion personal card-->
+  <div [formGroup]="formIngresos" class="col-md-10 mx-auto card card-body mb-4">
+    <b class="card-title">Ingresos mensuales</b>
+    <hr>
+
+    <!-- Salario -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="salario">Salario</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="salario"
+               formControlName="salario"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formIngresos.controls['salario'].invalid &&
+                     formIngresos.controls['salario'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- otrosIngresos -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="otrosIngresos">Otros ingresos</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="otrosIngresos"
+               formControlName="otrosIngresos"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formIngresos.controls['otrosIngresos'].invalid &&
+                     formIngresos.controls['otrosIngresos'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Salario Conyugue -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="salarioConyugue">Salario Conyugue</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="salarioConyugue"
+               formControlName="salarioConyugue"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formIngresos.controls['salarioConyugue'].invalid &&
+                     formIngresos.controls['salarioConyugue'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!--Egresos mensuales-->
+  <div [formGroup]="formEgresos" class="col-md-10 mx-auto card card-body mb-4">
+    <b class="card-title">Ingresos mensuales</b>
+    <hr>
+
+    <!-- total egresos -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="engresosMensuales">Total egresos</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="engresosMensuales"
+               formControlName="engresosMensuales"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formEgresos.controls['engresosMensuales'].invalid &&
+                     formEgresos.controls['engresosMensuales'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Descripción de gastos	-->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="descripcionGastos">Descripcion de egresos</label>
+      <div class="col-sm-8">
+        <textarea name="descripcionGastos"
+                  id="descripcionGastos"
+                  rows="3" class="form-control"
+                  formControlName="descripcionGastos"></textarea>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formEgresos.controls['descripcionGastos'].invalid &&
+                     formEgresos.controls['descripcionGastos'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- personas dependientes -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="personasDependientes">Personas que dependen del evaluado.</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="personasDependientes"
+               formControlName="personasDependientes"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(formEgresos.controls['personasDependientes'].invalid &&
+                     formEgresos.controls['personasDependientes'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- card patrimonio bienes immuebles -->
+  <div class="card mt-4">
+    <div class="card-body ">
+      <!-- bienes Inmuebles -->
+      <div class="form-group row">
+        <label class="col-sm-6 col-form-label">
+          <b>Patrimonio - Bienes Inmuebles</b>
+        </label>
+        <div class="col-sm-6">
+          <div class="form-group text-right">
+            <button (click)="open(mdBienInmueble)" class="btn btn-primary">
+              <i class="fa fa-plus"></i> Agregar
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <hr>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <table class="table table-bordered">
+            <thead class="text-capitalize">
+            <th>tipo</th>
+            <th>dirección</th>
+            <th>telefono</th>
+            <th>ciudad</th>
+            <th>avalúo</th>
+            <th>hipoteca</th>
+            <th class="acciones">acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let value of bienesInmuebles">
+              <td>{{ value.tipo }}</td>
+              <td>{{ value.direccion }}</td>
+              <td>{{ value.telefono }}</td>
+              <td>{{ value.ciudad }}</td>
+              <td>{{ value.avaluo }}</td>
+              <td>{{ value.hipoteca === true ? 'Si' : 'No' }}</td>
+              <td class="acciones">
+                <div class="text-center">
+                  <button class="btn btn-primary mr-2" (click)="open(mdBienInmueble, value)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button class="btn btn-danger ml-2" (click)="deleteBienInmueble(value.id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- card bienes muebles -->
+  <div class="card mt-4">
+    <div class="card-body ">
+      <div class="form-group row">
+        <label class="col-sm-6 col-form-label">
+          <b>Patrimonio - Bienes Muebles</b>
+        </label>
+        <div class="col-sm-6">
+          <div class="form-group text-right">
+            <button (click)="open(mdBienMueble)" class="btn btn-primary">
+              <i class="fa fa-plus"></i> Agregar
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <hr>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <table class="table table-bordered">
+            <thead class="text-capitalize">
+            <th>clase</th>
+            <th>modelo</th>
+            <th>placa</th>
+            <th>avalúo</th>
+            <th>pignorado</th>
+            <th class="acciones">acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let value of bienesMuebles">
+              <td> {{ value.clase }}</td>
+              <td> {{ value.modelo }}</td>
+              <td> {{ value.placa }}</td>
+              <td> {{ value.avaluo }}</td>
+              <td> {{ value.pignorado === true ? 'Si' : 'No' }}</td>
+              <td class="acciones">
+                <div class="text-center">
+                  <button class="btn btn-primary mr-2" (click)="open(mdBienMueble, value)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button class="btn btn-danger ml-2" (click)="deleteBienMueble(value.id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- card referencias bancarias -->
+  <div class="card mt-4">
+    <div class="card-body ">
+      <div class="form-group row">
+        <label class="col-sm-6 col-form-label">
+          <b>Referencias bancarias</b>
+        </label>
+        <div class="col-sm-6">
+          <div class="form-group text-right">
+            <button (click)="open(mdRefBancarias)" class="btn btn-primary">
+              <i class="fa fa-plus"></i>
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <hr>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <table class="table table-bordered">
+            <thead class="text-capitalize">
+            <th>entidad</th>
+            <th>tipo de cuenta</th>
+            <th class="acciones">acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let value of refBancarias">
+              <td> {{ value.entidad }} </td>
+              <td> {{ value.tipoCuenta }} </td>
+              <td class="acciones">
+                <div class="text-center">
+                  <button class="btn btn-primary mr-2" (click)="open(mdRefBancarias, value)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button class="btn btn-danger ml-2" (click)="deleteRefBancaria(value.id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- card capacidad endeudamiento -->
+  <div class="card mt-3">
+    <div class="card-body ">
+      <div class="form-group row">
+        <label class="col-sm-6 col-form-label">
+          <b>Capacidad de endeudamiento</b>
+        </label>
+        <div class="col-sm-6">
+          <div class="form-group text-right">
+            <button (click)="open(mdCapEndeudamiento)" class="btn btn-primary">
+              <i class="fa fa-plus"></i>
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <hr>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <table class="table table-bordered">
+            <thead class="text-capitalize">
+            <th>descripción</th>
+            <th>entidad</th>
+            <th>monto</th>
+            <th>estado deuda</th>
+            <th>valor mensual</th>
+            <th class="acciones">acciones</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let value of capEndeudamiento">
+              <td> {{ value.descripcion }}</td>
+              <td> {{ value.entidad }}</td>
+              <td> {{ value.monto }}</td>
+              <td> {{ value.estadoDeuda }}</td>
+              <td> {{ value.valorMensual }}</td>
+              <td class="acciones">
+                <div class="text-center">
+                  <button class="btn btn-primary mr-2" (click)="open(mdCapEndeudamiento, value)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button class="btn btn-danger ml-2" (click)="deleteCapEndeudamiento(value.id)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Analisis patrimonial-->
+  <!--<div class="card mt-3">
+    <div class="card-body ">
+      <b class="card-title">Analisis patrimonial</b>
+      <hr>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="analisisPatrimonial">
+          Análisis e interpretación patrimonial
+          y financiera teniendo en cuenta la
+          condición socioeconómica del
+          candidato
+        </label>
+        <div class="col-sm-8">
+                <textarea name="analisisPatrimonial"
+                          id="analisisPatrimonial" rows="3"
+                          class="form-control" formControlName="analisisPatrimonial"
+                          placeholder="Ingrese el analisis">
+                </textarea>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formIngresos.controls['analisisPatrimonial'].invalid &&
+                     formIngresos.controls['analisisPatrimonial'].dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+</div>
+<div class="card-footer bg-white">
+
+</div>
+
+<!-- Modal bien inmueble -->
+<ng-template #mdBienInmueble let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Bienes inmuebles</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formBienInmueble">
+
+      <!-- tipo -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bi-tipo">Tipo</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bi-tipo"
+                 name="tipo"
+                 formControlName="tipo"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienInmueble.get('tipo').invalid &&
+                     formBienInmueble.get('tipo').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- direccion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bi-direccion">Dirección</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bi-direccion"
+                 name="direccion"
+                 formControlName="direccion"
+                 placeholder="Ingrese una dirección valida"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienInmueble.get('direccion').invalid &&
+                     formBienInmueble.get('direccion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- telefono -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bi-telefono">Telefono</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bi-telefono"
+                 name="telefono"
+                 formControlName="telefono"
+                 placeholder="Ingrese un telefono valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienInmueble.get('telefono').invalid &&
+                     formBienInmueble.get('telefono').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- ciudad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bi-ciudad">Ciudad</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bi-ciudad"
+                 name="ciudad"
+                 formControlName="ciudad"
+                 placeholder="Ingrese una ciudad valida"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienInmueble.get('ciudad').invalid &&
+                     formBienInmueble.get('ciudad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- avaluo -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bi-avaluo">Avaluo</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="bi-avaluo"
+                 name="avaluo"
+                 formControlName="avaluo"
+                 placeholder="Ingrese una valor valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienInmueble.get('avaluo').invalid &&
+                     formBienInmueble.get('avaluo').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- hipoteca -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bi-hipoteca">hipoteca</label>
+        <div class="col-sm-9">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="hipoteca"
+                   id="bi-hipoteca" [value]="true">
+            <label class="form-check-label" for="bi-hipoteca">Si</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="hipoteca"
+                   id="bi-hipoteca!" [value]="false">
+            <label class="form-check-label" for="bi-hipoteca!">No</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button type="button" class="btn btn-warning" [disabled]="formBienInmueble.invalid" (click)="updateBienInmueble()" *ngIf="isUpdate">Actualizar</button>
+    <button type="button" class="btn btn-primary" [disabled]="formBienInmueble.invalid" (click)="addBienInmueble()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>
+
+<!-- Modal bien mueble -->
+<ng-template #mdBienMueble let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Bienes muebles</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formBienMueble">
+
+      <!-- clase -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-clase">Clase</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-clase"
+                 name="clase"
+                 formControlName="clase"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienMueble.get('clase').invalid &&
+               formBienMueble.get('clase').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- modelo -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-modelo">Modelo</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-modelo"
+                 name="modelo"
+                 formControlName="modelo"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienMueble.get('modelo').invalid &&
+               formBienMueble.get('modelo').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- placa -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-placa">Placa</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-placa"
+                 name="placa"
+                 formControlName="placa"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienMueble.get('placa').invalid &&
+               formBienMueble.get('placa').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- avaluo -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-avaluo">Avalúo</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="bm-avaluo"
+                 name="avaluo"
+                 formControlName="avaluo"
+                 placeholder="Ingrese un numero valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formBienMueble.get('avaluo').invalid &&
+               formBienMueble.get('avaluo').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- pignorado -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-pignorado">Pignorado</label>
+        <div class="col-sm-9">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="pignorado"
+                   id="bm-pignorado" [value]="true">
+            <label class="form-check-label" for="bm-pignorado">Si</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="pignorado"
+                   id="bm-pignorado!" [value]="false">
+            <label class="form-check-label" for="bm-pignorado!">No</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button type="button" class="btn btn-warning" [disabled]="formBienMueble.invalid" (click)="updateBienMueble()" *ngIf="isUpdate">Actualizar</button>
+    <button type="button" class="btn btn-primary" [disabled]="formBienMueble.invalid" (click)="addBienMueble()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>
+
+<!-- Modal referencias bancarias -->
+<ng-template #mdRefBancarias let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Referencias bancarias</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formRefBancaria">
+
+      <!-- entidad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-entidad">Entidad</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-entidad"
+                 name="entidad"
+                 formControlName="entidad"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formRefBancaria.get('entidad').invalid &&
+                     formRefBancaria.get('entidad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- tipoCuenta -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-tipoCuenta">Tipo de Cuenta</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-tipoCuenta"
+                 name="tipoCuenta"
+                 formControlName="tipoCuenta"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formRefBancaria.get('tipoCuenta').invalid &&
+                     formRefBancaria.get('tipoCuenta').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button type="button" class="btn btn-warning" [disabled]="formRefBancaria.invalid" (click)="updateRefBancaria()" *ngIf="isUpdate">Actualizar</button>
+    <button type="button" class="btn btn-primary" [disabled]="formRefBancaria.invalid" (click)="addRefBancaria()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>
+
+<!-- Modal capacidad endeudamiento -->
+<ng-template #mdCapEndeudamiento let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Capacidad de endeudamiento</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formCapEndeudamiento">
+
+      <!-- Descripcion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="cap-descripcion">Descripcion</label>
+        <div class="col-sm-9">
+          <select name="descripcion" id="cap-descripcion"
+                  class="form-control text-capitalize"
+                  formControlName="descripcion">
+            <option value="">Seleccione</option>
+            <option>tarjeta de credito</option>
+            <option>credito hipotecario</option>
+            <option>credito libre inversión</option>
+          </select>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formCapEndeudamiento.get('descripcion').invalid &&
+                     formCapEndeudamiento.get('descripcion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- entidad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="cap-entidad">Entidad</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="cap-entidad"
+                 name="entidad" formControlName="entidad"
+                 placeholder="Ingrese un dato valido" required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formCapEndeudamiento.get('entidad').invalid &&
+                     formCapEndeudamiento.get('entidad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- monto -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="cap-monto">Monto</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="cap-monto"
+                 name="monto" formControlName="monto"
+                 placeholder="Ingrese un dato valido" required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formCapEndeudamiento.get('monto').invalid &&
+                     formCapEndeudamiento.get('monto').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- estadoDeuda -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="cap-estadoDeuda">Estado de Deuda</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="cap-estadoDeuda"
+                 name="estadoDeuda" formControlName="estadoDeuda"
+                 placeholder="Ingrese un dato valido" required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formCapEndeudamiento.get('estadoDeuda').invalid &&
+                     formCapEndeudamiento.get('estadoDeuda').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- valorMensual -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="cap-valorMensual">Valor Mensual</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="cap-valorMensual"
+                 name="valorMensual" formControlName="valorMensual"
+                 placeholder="Ingrese un numero valido" required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(formCapEndeudamiento.get('valorMensual').invalid &&
+                     formCapEndeudamiento.get('valorMensual').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button type="button" class="btn btn-warning" [disabled]="formCapEndeudamiento.invalid" (click)="updateCapEndeudamiento()" *ngIf="isUpdate">Actualizar</button>
+    <button type="button" class="btn btn-primary" [disabled]="formCapEndeudamiento.invalid" (click)="addCapEndeudamiento()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>
+
+
+

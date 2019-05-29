@@ -143,7 +143,7 @@ export class HistorialJudicialComponent extends ActividadClass implements OnInit
     }
 
     this.setEstado('alerta', () => {
-      alert('Alerta enviada al analista Esp');
+      alert('Alerta enviada al analista EspInterface');
     });
   }
 

@@ -143,7 +143,7 @@ export class VerificacionLaboralComponent extends ActividadClass implements OnIn
     }
 
     this.setEstado('alerta', () => {
-      alert('Alerta enviada al analista Esp');
+      alert('Alerta enviada al analista EspInterface');
     });
   }
 

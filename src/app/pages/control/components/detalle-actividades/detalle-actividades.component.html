@@ -1,0 +1,57 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalVerticalLabel">Actividades Aplicadas</h5>
+  <button type="button" class="close" (click)="activedModal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-sm-6">
+          <span>Actividad</span>
+        </div>
+        <div class="col-sm-6 text-right">
+          <span>Estado</span>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngFor="let actividad of actividades">
+      <div class="row">
+        <div class="col-sm-6">
+          <a >
+            {{ actividad.nombre }}
+          </a>
+        </div>
+        <div class="col-sm-6 text-right">
+          <div [ngSwitch]="actividad.estado">
+            <div *ngSwitchCase="'cargado'">
+              <span class="badge badge-pill service-loaded"> {{ actividad.estado }} </span>
+            </div>
+            <div *ngSwitchCase="'asignado'">
+              <span class="badge badge-pill service-asigned"> {{ actividad.estado }} </span>
+            </div>
+            <div *ngSwitchCase="'aceptado'">
+              <span class="badge badge-pill service-acepted"> {{ actividad.estado }} </span>
+            </div>
+            <div *ngSwitchCase="'proceso'">
+              <span class="badge badge-pill service-process"> {{ actividad.estado }} </span>
+            </div>
+            <div *ngSwitchCase="'completado'">
+              <span class="badge badge-pill service-finished"> {{ actividad.estado }} </span>
+            </div>
+            <div *ngSwitchCase="'alerta'">
+              <span class="badge badge-pill  badge-danger"> {{ actividad.estado }} </span>
+            </div>
+            <div *ngSwitchCase="'finalizado'">
+              <span class="badge badge-pill  badge-success"> {{ actividad.estado }} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activedModal.close()">Cerrar</button>
+</div>

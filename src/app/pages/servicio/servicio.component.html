@@ -1,11 +1,5 @@
 <div class="container-fluid mt-3">
-  <div class="col-md-6 mx-auto" *ngIf="showError">
-    <div class="alert alert-danger" role="alert">
-      No existen registros.
-    </div>
-  </div>
-
-  <div class="card mb-3" *ngIf="!showError">
+  <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
       Control de gestión
@@ -47,6 +41,7 @@
         <!-- TABLE OF SERVICES -->
         <app-freelance *ngIf="permissions.FRCE" (mostrarVentana)="abrirVentana($event)"></app-freelance>
 
+        <!-- only copy not cut-->
         <table *ngIf="permissions.CLI || permissions.AESP || permissions.DOPE"
           class="table table-bordered table-hover table-sm">
             <thead>

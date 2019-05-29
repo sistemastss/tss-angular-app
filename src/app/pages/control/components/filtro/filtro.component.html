@@ -1,0 +1,31 @@
+<div class="form-group mt-2 text-right">
+  <div class="input-group input-group-sm col-sm-6 offset-sm-6">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Filtrar por fecha</span>
+    </div>
+    <input type="date" class="form-control" #date1>
+    <input type="date" class="form-control" #date2>
+    <button type="button" (click)="filtrarServicios('date', {date: [date1.value, date2.value]})" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Filtrar</button>&nbsp;
+    <button type="button" (click)="reiniciar()" class="btn btn-danger btn-sm">
+      <i class="fa fa-check"></i>
+      Reiniciar
+    </button>
+  </div>
+</div>
+
+<div class="form-group mt-2 text-right">
+  <div class="input-group input-group-sm col-sm-6 offset-sm-6">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Filtrar por</span>
+    </div>
+    <select name="opciones" id="options" class="form-control text-capitalize" #$filtro>
+      <option *ngFor="let e of filtro" [value]="e.value">{{ e.title }}</option>
+    </select>
+
+    <input type="text" class="form-control" placeholder="Busqueda" (keydown.enter)="filtrarServicios($filtro.value, busqueda.value)" #busqueda>
+
+    <button type="button" (click)="filtrarServicios($filtro.value, busqueda.value)" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Buscar</button>&nbsp;
+    <button type="button" (click)="reiniciar()" class="btn btn-danger btn-sm"><i class="fa fa-check"></i> Reiniciar</button>&nbsp;
+
+  </div>
+</div>

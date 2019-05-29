@@ -1,0 +1,84 @@
+<table class="table table-bordered table-hover table-sm">
+  <thead>
+    <tr class="text-capitalize">
+      <th>centro de costo</th>
+      <th>fecha creación</th>
+      <th>lugar de desarrollo</th>
+      <th>solicitante</th>
+      <th>Servicio solicitado</th>
+      <th>actividades</th>
+      <th>estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of servicios">
+      <td> {{ item.centroCosto.id }} </td>
+      <td> {{ item.fechaCreacion | date }} </td>
+      <td> {{ item.lugarDesarrollo }} </td>
+      <td> {{ item.centroCosto.solicitante }} </td>
+      <td>
+        <div *ngIf="item.tipoServicio === 'esp'" >
+          <div class="form-group text-center">
+            <button class="btn btn-info text-center" (click)="verDetalle(item)">
+              <i class="fa fa-eye"></i>
+              ESP
+            </button>
+          </div>
+        </div>
+        <div *ngIf="item.tipoServicio === 'inv'" >
+          <div class="form-group text-center">
+            <div class="form-group text-center">
+              INVESTIGACION
+            </div>
+          </div>
+        </div>
+        <div *ngIf="item.tipoServicio === 'pol'">
+          <div class="form-group text-center">
+            <button class="btn btn-info text-center" (click)="verDetalle(item)">
+              <i class="fa fa-eye"></i>
+              POLIGRAFIA
+            </button>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="form-group text-center">
+          <button class="btn btn-danger text-center" (click)="verActividades(item)">
+            <i class="fa fa-eye"></i>
+            Ver
+          </button>
+        </div>
+      </td>
+      <td>
+
+        <div *ngIf="item.tipoServicio == 'pol' || item.tipoServicio == 'inv'">
+          <div [ngSwitch]="item.estado">
+            <span *ngSwitchCase="'proceso'" class="badge badge badge-warning">{{ item.estado }} </span>
+            <span *ngSwitchCase="'completado'" class="badge badge badge-warning"> {{ item.estado }} </span>
+            <span *ngSwitchCase="'alerta'" class="badge badge badge-danger" placement="top" ngbTooltip="Comunicarse con Tss">
+              {{ item.estado }}
+            </span>
+            <span *ngSwitchCase="'finalizado'" class="badge badge badge-success"> {{ item.estado }} </span>
+          </div>
+        </div>
+
+        <div *ngIf="item.tipoServicio == 'esp'">
+          <div [ngSwitch]="item.estado">
+            <button *ngSwitchCase="'proceso'" class="btn btn-sm btn-warning">
+              <i class="fa fas-exclamation"></i>
+              {{ item.estado }} </button>
+            <button *ngSwitchCase="'completado'" class="btn btn-sm btn-warning"> {{ item.estado }} </button>
+            <button *ngSwitchCase="'alerta'" class="btn btn-sm btn-danger" placement="top" ngbTooltip="Comunicarse con Tss">
+              {{ item.estado }}
+            </button>
+            <button *ngSwitchCase="'finalizado'" class="btn btn-sm btn-success"> {{ item.estado }} </button>
+          </div>
+        </div>
+
+      </td>
+      <td>
+
+      </td>
+    </tr>
+  </tbody>
+</table>

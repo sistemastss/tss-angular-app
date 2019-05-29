@@ -1,10 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Servicio} from '../../../@models/servicio';
 import {Store} from '@ngrx/store';
-import {ServicioState} from '../../../store/state';
-import {EspService} from '../../../services/esp/esp.service';
+import {EspService} from '../../shared/services/esp.service';
 import {ModalService} from '../../../services/modal/modal.service';
-import {EditarServicio, EditarServicioEsp} from '../../../store/actions';
 
 @Component({
   selector: 'app-freelance',
@@ -21,7 +19,7 @@ export class FreelanceComponent implements OnInit {
   };
 
   constructor(
-    private store: Store<ServicioState>,
+    private store: Store<any>,
     private espService: EspService,
     private modalService: ModalService
   ) { }
@@ -41,7 +39,7 @@ export class FreelanceComponent implements OnInit {
       return;
     }
     payload.estado = 'aceptado';
-    this.store.dispatch(new EditarServicio(payload, index));
+    // this.store.dispatch(new EditarServicio(payload, index));
     // this.espService.actualizarServicioEsp(payload);
   }
 
@@ -51,7 +49,7 @@ export class FreelanceComponent implements OnInit {
       return;
     }
     payload.estado = 'proceso';
-    this.store.dispatch(new EditarServicio(payload, index));
+    // this.store.dispatch(new EditarServicio(payload, index));
 
   }
 
@@ -64,7 +62,7 @@ export class FreelanceComponent implements OnInit {
   asignarFecha() {
     const {id, payload} = this.control;
     payload.estado = 'desarrollo';
-    this.store.dispatch(new EditarServicio(payload, id));
+    // this.store.dispatch(new EditarServicio(payload, id));
     this.modalService.close();
   }
 }

@@ -85,14 +85,14 @@ export class ActividadClass {
    *Notificar una vez se ha finalizado la actividad
    */
   notificarAnalista(): void {
-    const confirm = window.confirm('Esta seguro de notificar al analista Esp?');
+    const confirm = window.confirm('Esta seguro de notificar al analista EspInterface?');
 
     if (! confirm) {
       return;
     }
 
     this.setEstado('notificado', () => {
-      alert('Notificacion enviada al analista Esp');
+      alert('Notificacion enviada al analista EspInterface');
     });
   }
 

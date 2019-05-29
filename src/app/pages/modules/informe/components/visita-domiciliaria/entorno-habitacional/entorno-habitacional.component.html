@@ -1,0 +1,472 @@
+<div class="mx-auto animated fade-in">
+  <form [formGroup]="form">
+    <div class="card">
+      <div class="card-header bg-white">
+        <h4>Entorno habitacional</h4>
+      </div>
+      <div class="card-body bg-light">
+        <!-- Informacion personal card-->
+        <div class="card">
+          <div class="card-body ">
+            <b class="card-title">Información de la vivienda</b>
+            <hr>
+
+
+            <!-- tipo de vivienda -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="tipoVivienda">Tipo de vivienda</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="tipoVivienda" id="tipoVivienda" formControlName="tipoVivienda">
+                  <option value="">Seleccione</option>
+                  <option value="Casa">Casa</option>
+                  <option value="Casa lote">Casa lote</option>
+                  <option value="Apartamento">Apartamento</option>
+                  <option value="Apartamento">Apartamento</option>
+                  <option value="Aparta-estudio">Aparta-estudio</option>
+                </select>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['tipoVivienda'].invalid &&
+                   form.controls['tipoVivienda'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Tenencia -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="tenencia">Tenencia</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="tenencia" id="tenencia" formControlName="tenencia">
+                  <option value="">Seleccione</option>
+                  <option value="Arriendo">Arriendo</option>
+                  <option value="Familiar">Familiar</option>
+                  <option value="Propia">Propia</option>
+                </select>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['tenencia'].invalid &&
+                   form.controls['tenencia'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Tiempo de permanencia -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="tiempoPermanencia">Tiempo de permanencia</label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="tiempoPermanencia"
+                       id="tiempoPermanencia"
+                       placeholder="Ingrese el tiempo de permanencia"
+                       formControlName="tiempoPermanencia">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['tiempoPermanencia'].invalid &&
+                   form.controls['tiempoPermanencia'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Información del propietario -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="infoPropietario">
+                Información del propietario
+              </label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="infoPropietario"
+                       id="infoPropietario"
+                       placeholder="Ingrese el tiempo de permanencia"
+                       formControlName="infoPropietario">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['infoPropietario'].invalid &&
+                   form.controls['infoPropietario'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Fotografia -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="fotografia">
+                Fotografías
+              </label>
+              <div class="col-sm-8">
+                <div class="custom-file">
+                  <input type="text"
+                         class="custom-file-input"
+                         name="fotografia"
+                         id="fotografia"
+                         placeholder="Ingrese el tiempo de permanencia"
+                         formControlName="fotografia">
+                  <label class="custom-file-label" for="fotografia">seleccione un archivo</label>
+                </div>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['fotografia'].invalid &&
+                   form.controls['fotografia'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-body">
+            <b class="card-title">Condiciones físicas del inmueble</b>
+            <hr>
+
+            <!-- Estado general -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="estadoGeneral">Estado general</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="estadoGeneral" id="estadoGeneral" formControlName="estadoGeneral">
+                  <option value="">Seleccione</option>
+                  <option value="Bueno">Bueno</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Malo">Malo</option>
+                </select>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['estadoGeneral'].invalid &&
+                   form.controls['estadoGeneral'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Acabados -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="acabados">Acabados</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="acabados" id="acabados" formControlName="acabados">
+                  <option value="">Seleccione</option>
+                  <option value="Completos">Completos</option>
+                  <option value="Incompletos">Incompletos</option>
+                </select>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['acabados'].invalid &&
+                   form.controls['acabados'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Dotacion -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="dotacion">
+                Dotación
+              </label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="dotacion"
+                       id="dotacion"
+                       placeholder="Ingrese la dotación"
+                       formControlName="dotacion">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['dotacion'].invalid &&
+                   form.controls['dotacion'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Dotacion -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="salubridad">
+                Salubridad
+              </label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="salubridad"
+                       id="salubridad"
+                       placeholder="Ingrese el estado de salubridad"
+                       formControlName="salubridad">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['salubridad'].invalid &&
+                   form.controls['salubridad'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Estrato -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="estrato">Estrato</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="estrato" id="estrato" formControlName="estrato">
+                  <option value="">Seleccione</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['estrato'].invalid &&
+                   form.controls['estrato'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Servicio públicos	 -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="serviciosPublicos">
+                Servicios públicos
+              </label>
+              <div class="col-sm-8">
+                <textarea name="serviciosPublicos" id="serviciosPublicos"
+                          cols="30" rows="3"
+                          class="form-control"
+                          formControlName="serviciosPublicos"
+                          placeholder="Ingrese los servicios publicos">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['serviciosPublicos'].invalid &&
+                   form.controls['serviciosPublicos'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Distribución de la vivienda	 -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="distribucion">
+                Distribución de la vivienda
+              </label>
+              <div class="col-sm-8">
+                <textarea name="serviciosPublicos" id="distribucion"
+                          cols="30" rows="3"
+                          class="form-control"
+                          formControlName="distribucion"
+                          placeholder="Ingrese la distribución de la vivienda	">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['distribucion'].invalid &&
+                   form.controls['distribucion'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Ciudad -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="ciudad">
+                Ciudad
+              </label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="ciudad"
+                       id="ciudad"
+                       placeholder="Ingrese la ciudad"
+                       formControlName="ciudad">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['ciudad'].invalid &&
+                   form.controls['ciudad'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Barrio -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="barrio">
+                Barrio
+              </label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="barrio"
+                       id="barrio"
+                       placeholder="Ingrese el barrio"
+                       formControlName="barrio">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['barrio'].invalid &&
+                   form.controls['barrio'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Barrio -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="localidad">
+                Localidad
+              </label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="localidad"
+                       id="localidad"
+                       placeholder="Ingrese la localidad"
+                       formControlName="localidad">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['localidad'].invalid &&
+                   form.controls['localidad'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Distribución de la vivienda	 -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="viasAcceso">
+                Vías de acceso
+              </label>
+              <div class="col-sm-8">
+                <textarea name="viasAcceso" id="viasAcceso"
+                          cols="30" rows="3"
+                          class="form-control"
+                          formControlName="viasAcceso"
+                          placeholder="Ingrese las vias de acceso">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['viasAcceso'].invalid &&
+                   form.controls['viasAcceso'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Transporte público	 -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="transportePublico">
+                Transporte público
+              </label>
+              <div class="col-sm-8">
+                <textarea name="transportePublico" id="transportePublico"
+                          cols="30" rows="3"
+                          class="form-control"
+                          formControlName="transportePublico"
+                          placeholder="Transporte público">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['transportePublico'].invalid &&
+                   form.controls['transportePublico'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Centros asistenciales		 -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="centrosAsistenciales">
+                Centros asistenciales
+              </label>
+              <div class="col-sm-8">
+                <textarea name="centrosAsistenciales" id="centrosAsistenciales"
+                          cols="30" rows="3"
+                          class="form-control"
+                          formControlName="centrosAsistenciales"
+                          placeholder="Centros asistenciales">
+                </textarea>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['centrosAsistenciales'].invalid &&
+                   form.controls['centrosAsistenciales'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Flujo vehicular -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="flujoVehicular">
+                Flujo vehícular
+              </label>
+              <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="flujoVehicular"
+                       id="flujoVehicular"
+                       placeholder="Ingrese el flujo vehícular	"
+                       formControlName="flujoVehicular">
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['flujoVehicular'].invalid &&
+                   form.controls['flujoVehicular'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Nivel de seguridad -->
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="nivelSeguridad">
+                Nivel de seguridad
+              </label>
+              <div class="col-sm-8">
+                <select class="form-control" name="nivelSeguridad" id="nivelSeguridad" formControlName="nivelSeguridad">
+                  <option value="">Seleccione</option>
+                  <option value="Alto">Alto</option>
+                  <option value="Medio">Medio</option>
+                  <option value="Bajo">Bajo</option>
+                </select>
+                <div class="ng-invalid-feedback"
+                     *ngIf="(form.controls['nivelSeguridad'].invalid &&
+                   form.controls['nivelSeguridad'].dirty)">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white">
+        <div class="form-group text-center">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <button *ngIf="permissions.FRCE && estado == 'aceptado'"
+                      class="btn btn-danger"
+                      [disabled]="form.invalid"
+                      (click)="onSubmit()">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <button *ngIf="(permissions.FRCE && estado == 'proceso') || (permissions.AESP || permissions.ADG && estado == 'notificado')"
+                      class="btn btn-warning"
+                      [disabled]="form.invalid"
+                      (click)="onUpdate()">
+                <i class="fa fa-edit"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="permissions.AESP || permissions.ADG && estado == 'notificado'">
+          <span class="text-primary d-block">Fecha de notificacion: {{ actividad.timestamps.fechaActualizacion.date | date:'short' }}</span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!--<pre>{{ form.getRawValue() | json }}</pre>-->

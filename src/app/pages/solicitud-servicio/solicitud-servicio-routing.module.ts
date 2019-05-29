@@ -1,13 +1,13 @@
-import { SolicitudPoligrafiaComponent } from './solicitud-poligrafia/solicitud-poligrafia.component';
+import { SolicitudPoligrafiaComponent } from './components/solicitud-poligrafia/solicitud-poligrafia.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SolicitudServicioComponent } from './solicitud-servicio.component';
-import { CentroCostoComponent } from './centro-costo/centro-costo.component';
-import { SolicitudEspComponent } from './solicitud-esp/solicitud-esp.component';
-import { SolicitudServiciosComponent } from './solicitud-servicios/solicitud-servicios.component';
-import { SolicitudInvestigacionComponent } from './solicitud-investigacion/solicitud-investigacion.component';
-import { SolicitarServiciosGuard } from '../../guards/solicitar-servicios.guard';
-import { SolicitudEspMasivoComponent } from './solicitud-esp-masivo/solicitud-esp-masivo.component';
+import { CentroCostoComponent } from './components/centro-costo/centro-costo.component';
+import { SolicitudEspComponent } from './components/solicitud-esp/solicitud-esp.component';
+import { SolicitudServiciosComponent } from './components/solicitud-servicios/solicitud-servicios.component';
+import { SolicitudInvestigacionComponent } from './components/solicitud-investigacion/solicitud-investigacion.component';
+import { SolicitarServiciosGuard } from './guards/solicitar-servicios.guard';
+import { SolicitudEspMasivoComponent } from './components/solicitud-esp-masivo/solicitud-esp-masivo.component';
 
 const routes: Routes = [
   {

@@ -133,7 +133,7 @@ export class VerificacionAcademicaComponent extends ActividadClass implements On
     }
 
     this.setEstado('alerta', () => {
-      alert('Alerta enviada al analista Esp');
+      alert('Alerta enviada al analista EspInterface');
     });
   }
 

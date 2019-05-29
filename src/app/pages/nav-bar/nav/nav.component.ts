@@ -17,20 +17,11 @@ export class NavComponent implements OnInit {
   constructor(
     private router: Router,
     private _menu: MenuService,
-    private loginService: LoginService
+    // private loginService: LoginService
   ) {
     this.menuToggle = false;
     this.menuItemToggle = false;
-
-    switch (loginService.rol['codigo']) {
-      case 'ADG':
-        this.menuItems = this._menu.menu;
-        break;
-
-      case 'CLI':
-        this.menuItems = this._menu.menu;
-        break;
-    }
+    this.menuItems = this._menu.menu;
   }
 
   ngOnInit() {
@@ -50,6 +41,6 @@ export class NavComponent implements OnInit {
   }
 
   logout() {
-    this.loginService.logout();
+    // this.loginService.logout();
   }
 }
