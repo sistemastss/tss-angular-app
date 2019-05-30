@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Esp } from '../../interfaces/esp.interface';
 import { Store } from '@ngrx/store';
 import { AlmacenarEsps, CrearEsp, EditarEsp, EliminarEsp } from '../../store/actions/esp.actions';
@@ -14,6 +14,13 @@ import { EspState } from '../../store/state';
   styles: []
 })
 export class SolicitudEspComponent implements OnInit {
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<EspState>,
+    private modalService: NgbModal,
+    private helper: HelperService,
+  ) {}
 
   @ViewChild('inputFile') inputFile: ElementRef;
 
@@ -34,6 +41,70 @@ export class SolicitudEspComponent implements OnInit {
     aceptarTerminos     : [false, Validators.required],
   });
 
+  actividades = [
+    {
+      codigo : 'HJ',
+      nombre : 'Historial judicial',
+      forName: 'Basico'
+    },
+    {
+      codigo : 'VDS',
+      nombre : 'Visita domiciliaria',
+      forName: 'Basico'
+    },
+    {
+      codigo : 'VA',
+      nombre : 'Verificación académica',
+      forName: 'Basico'
+    },
+    {
+      codigo : 'VL',
+      nombre : 'Verificación laboral',
+      forName: 'Basico'
+    },
+    {
+      codigo : 'PL',
+      nombre : 'Poligrafía',
+      forName: 'Integral'
+    },
+    {
+      codigo : 'EF',
+      nombre : 'Estudio financiero',
+      forName: 'Avanzado'
+    },
+    {
+      codigo : 'DDL',
+      nombre : 'Due Dilligence',
+      forName: ''
+    },
+    {
+      codigo : 'DG',
+      nombre : 'Dictamen grafológico',
+      forName: ''
+    },
+    {
+      codigo : 'Dd',
+      nombre : 'Decadactilar',
+      forName: ''
+    },
+    {
+      codigo : 'PP',
+      nombre : 'Prueba psicotécnica',
+      forName: ''
+    },
+  ];
+
+  /**
+   * Basico (
+   * Historial judicial, Verificacion Academica, Verificacion Laboral, Visita Domiciliaria)
+   Integral (Basico + Poligrafia)
+   Avanzado (Integral + Estudio financiero)
+   */
+
+  basico = [
+    {  }
+  ]
+
   control = {
     editar: false,
     id: 0
@@ -45,13 +116,6 @@ export class SolicitudEspComponent implements OnInit {
 
   espSelect = state => state.solicitudServicio.esp;
 
-  constructor(
-    private fb: FormBuilder,
-    private store: Store<EspState>,
-    // private modalService: ModalService,
-    private modalService: NgbModal,
-    private helper: HelperService,
-  ) {}
 
   ngOnInit() {
     this.form.setValue(

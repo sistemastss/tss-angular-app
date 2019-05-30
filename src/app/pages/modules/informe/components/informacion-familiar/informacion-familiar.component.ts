@@ -57,6 +57,7 @@ export class InformacionFamiliarComponent implements OnInit {
   infoFamiliar = [];
   isUpdate = false;
   selectedItem: any;
+  dataLoaded = false;
 
   constructor(
     private fb: FormBuilder,
@@ -114,4 +115,7 @@ export class InformacionFamiliarComponent implements OnInit {
 
   }
 
+  saveAll() {
+
+  }
 }

@@ -21,8 +21,8 @@ const routes: Routes = [
       { path: 'datos-personales', component: DatosPersonalesComponent },
       { path: 'informacion-familiar', component: InformacionFamiliarComponent },
       { path: 'entorno-habitacional', component: EntornoHabitacionalComponent },
-      { path: 'historial-laboral-academico', component: HistorialLaboralAcademicoComponent},
       { path: 'modus-vivendi', component: ModusVivendiComponent },
+      { path: 'historial-laboral-academico', component: HistorialLaboralAcademicoComponent},
       {
         path: 'visita-domiciliaria',
         component: VisitaDomiciliariaComponent,

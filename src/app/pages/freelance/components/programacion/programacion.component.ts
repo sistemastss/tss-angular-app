@@ -30,17 +30,16 @@ export class ProgramacionComponent implements OnInit {
 
   ngOnInit() {
 
-    /*this.freelanceService.getProgramacion()
-      .subscribe(
+    this.freelanceService.getProgramacion().subscribe(
       (response: any) => {
         this.data = response.data;
+        console.log(response.data);
         this.isLoadData = true;
-      });*/
+      });
   }
 
   programar() {
     const data = this.form.value;
-
     /*this.freelanceService.saveProgramacion(data)
       .subscribe(response => alert('Programacion realizada con exito'));*/
   }

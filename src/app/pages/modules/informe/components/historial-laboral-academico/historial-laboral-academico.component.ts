@@ -12,6 +12,7 @@ export class HistorialLaboralAcademicoComponent implements OnInit {
   historialAcademico: any;
   isUpdate = false;
   private modalRef: NgbModalRef;
+  dataLoaded = false;
 
   constructor(
     private modalService: NgbModal,
@@ -47,4 +48,5 @@ export class HistorialLaboralAcademicoComponent implements OnInit {
 
   }
 
+  saveAll() {}
 }

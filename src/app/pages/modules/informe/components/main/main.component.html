@@ -1,4 +1,21 @@
-<div class="col-md-10 mx-auto">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 text-center mt-3">
+
+      <div class="btn-group">
+
+        <button *ngFor="let item of informe"
+                type="button" class="btn btn-primary"
+                routerLinkActive="active"
+                [routerLink]="item.path">
+          {{ item.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-10 mx-auto mt-4">
   <div class="card">
     <router-outlet></router-outlet>
   </div>

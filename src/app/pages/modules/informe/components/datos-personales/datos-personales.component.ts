@@ -45,6 +45,7 @@ export class DatosPersonalesComponent implements OnInit {
     realizaDeporte  : [ '', Validators.required ],
     hobbies         : [ '', Validators.required ],
   });
+  dataLoaded = false;
 
   constructor(
     private fb: FormBuilder,

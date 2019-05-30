@@ -84,11 +84,13 @@
 
         <!-- anexo -->
         <div class="form-group" *ngIf="servicio.anexo">
-          <label>Anexo</label>
           <div class="d-block">
-            <i class="fa fa-file"></i>
-            {{ servicio.anexo }}
+            <a [href]="makeFileUrl(servicio.anexo)">
+              <i class="fa fa-file"></i>
+              {{ servicio.anexo }}
+            </a>
           </div>
+          <label>Anexo</label>
         </div>
       </div>
     </div>

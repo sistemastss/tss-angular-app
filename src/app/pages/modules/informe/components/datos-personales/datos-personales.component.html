@@ -495,7 +495,6 @@
     </div>
   </div>
 </div>
-<div class="card-footer bg-white">
-  <button class="btn btn-primary" (click)="saveAll()">Guardar</button>
-
+<div class="card-footer text-right">
+  <button class="btn btn-primary" (click)="saveAll()" *ngIf="!dataLoaded">Guardar</button>
 </div>

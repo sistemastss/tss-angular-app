@@ -27,6 +27,7 @@ export class ModusVivendiComponent implements OnInit {
   isUpdate = false;
 
   modalRef: NgbModalRef;
+  dataLoaded = false;
 
   constructor(
     private fb: FormBuilder,
@@ -88,4 +89,6 @@ export class ModusVivendiComponent implements OnInit {
   addCapEndeudamiento() {
 
   }
+
+  saveAll() {}
 }

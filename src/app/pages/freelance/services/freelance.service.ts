@@ -15,12 +15,12 @@ export class FreelanceService {
   ) { }
 
   getProgramacion() {
-    const route = this.helper.route(['esp', 'programacion'], 1);
+    const route = this.helper.route('programacion/vsd', 1);
     return this.http.get(route);
   }
 
   saveProgramacion(payload: IProgramacion) {
-    const route = this.helper.route(['esp', 'programacion'], 1);
+    const route = this.helper.route( 'programacion/vsd', 1);
     return this.http.put(route, payload);
   }
 
@@ -30,7 +30,7 @@ export class FreelanceService {
   }
 
   getviaticos() {
-    const route = this.helper.route(['esp', 'viaticos'], 1);
+    const route = this.helper.route(['vsd', 'viaticos'], 1);
     return this.http.get(route);
   }
 
