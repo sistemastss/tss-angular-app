@@ -75,6 +75,27 @@ export class MenuService {
     ]
   };
 
+  men: Menu[] = [
+    {
+      path: '../dashboard',
+      title: 'Control',
+      icon: 'fa-tasks',
+      rol: ['cls', 'frce', 'adg', 'frc']
+    },
+    {
+      path: '../nuevo-servicio',
+      title: 'Solicitud',
+      icon: 'fa-tasks',
+      rol: ['cls', 'frce', 'adg', 'frc']
+    },
+    {
+      path: '../usuarios',
+      title: 'Usuarios',
+      icon: 'fa-tasks',
+      rol: ['cls', 'frce', 'adg', 'frc']
+    }
+  ];
+
   constructor(private permissions: NgxPermissionsService) {}
 
   get menu() {
@@ -99,3 +120,9 @@ export class MenuService {
   }
 }
 
+export interface Menu {
+  path: string;
+  title: string;
+  icon?: string;
+  rol: string[];
+}

@@ -1,0 +1,268 @@
+<div class="card card-body mb-4">
+  <b class="card-title">Historial laboral</b>
+  <hr>
+
+  <!-- table component -->
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <div class="form-group text-right">
+        <button (click)="open(mdHistorialLab)" class="btn btn-primary">
+          <i class="fa fa-plus"></i> Agregar
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <hr>
+    </div>
+    <table class="table table-bordered">
+      <thead class="text-capitalize">
+      <th>empresa</th>
+      <th>cargo</th>
+      <th>telefono</th>
+      <th>periodo</th>
+      <th>jefeInmediato</th>
+      <th>cargoJefe</th>
+      <th>ciudad</th>
+      <th>motivoRetiro</th>
+      <th>Confirmacion</th>
+      <th>observaciones</th>
+      <th class="acciones">acciones</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let value of verificacionLaboral">
+        <td> {{ value.empresa }} </td>
+        <td> {{ value.cargo }} </td>
+        <td> {{ value.telefono }} </td>
+        <td> {{ value.periodo }} </td>
+        <td> {{ value.jefeInmediato }} </td>
+        <td> {{ value.cargoJefe }} </td>
+        <td> {{ value.ciudad }} </td>
+        <td> {{ value.motivoRetiro }} </td>
+        <td> {{ value.confirmacion === true ? 'Si' : 'No' }} </td>
+        <td> {{ value.observaciones }} </td>
+        <td class="acciones">
+          <div class="text-center">
+            <button class="btn btn-primary mr-2 ml-2" (click)="open(mdHistorialLab, value)">
+              <i class="fa fa-edit"></i>
+            </button>
+
+            <button class="btn btn-danger ml-2 mr-2" (click)="delete(value.id)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #mdHistorialLab let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Información familiar</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- empresa -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="empresa">Empresa</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="empresa"
+                     name="empresa"
+                     formControlName="empresa"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('empresa').invalid &&
+                     form.get('empresa').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- cargo -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="cargo">Cargo</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="cargo"
+                     name="cargo"
+                     formControlName="cargo"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('cargo').invalid &&
+                     form.get('cargo').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+          <!-- telefono -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="telefono">Telefono</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control"
+                     id="telefono"
+                     name="telefono"
+                     formControlName="telefono"
+                     placeholder="Ingrese un telefono valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('telefono').invalid &&
+                     form.get('telefono').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- periodo -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="periodo">Periodo</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="periodo"
+                     name="periodo"
+                     formControlName="periodo"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('periodo').invalid &&
+                     form.get('periodo').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- jefeInmediato -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="jefeInmediato">Jefe Inmediato</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="jefeInmediato"
+                     name="jefeInmediato"
+                     formControlName="jefeInmediato"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('jefeInmediato').invalid &&
+                     form.get('jefeInmediato').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- cargoJefe -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="cargoJefe">Cargo del Jefe</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="cargoJefe"
+                     name="cargoJefe"
+                     formControlName="cargoJefe"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('cargoJefe').invalid &&
+                     form.get('cargoJefe').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+          <!-- ciudad -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="ciudad">Ciudad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="ciudad"
+                     name="ciudad"
+                     formControlName="ciudad"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('ciudad').invalid &&
+                     form.get('ciudad').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!-- motivoRetiro -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="motivoRetiro">Motivo Retiro</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="motivoRetiro"
+                     name="motivoRetiro"
+                     formControlName="motivoRetiro"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('motivoRetiro').invalid &&
+                     form.get('motivoRetiro').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+
+          <!-- confirmacion -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="confirmacion">confirmacion</label>
+            <div class="col-sm-9">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       formControlName="confirmacion"
+                       id="confirmacion" [value]="true">
+                <label class="form-check-label" for="confirmacion">Si</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       formControlName="confirmacion"
+                       id="confirmacion!" [value]="false">
+                <label class="form-check-label" for="confirmacion!">No</label>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- observacion -->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="observaciones">Observacion</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"
+                     id="observaciones"
+                     name="observaciones"
+                     formControlName="observaciones"
+                     placeholder="Ingrese un dato valido"
+                     required>
+              <div class="ng-invalid-feedback"
+                   *ngIf="(form.get('observaciones').invalid &&
+                     form.get('observaciones').dirty)">
+                El campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button class="btn btn-warning" [disabled]="form.invalid" (click)="update()" *ngIf="isUpdate">Actualizar</button>
+    <button class="btn btn-primary" [disabled]="form.invalid" (click)="add()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>

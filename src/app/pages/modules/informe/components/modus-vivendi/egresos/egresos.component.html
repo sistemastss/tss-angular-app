@@ -1,0 +1,55 @@
+<div class="col-md-10 mx-auto card mb-4">
+  <div [formGroup]="form" class=" card-body">
+    <b class="card-title">Ingresos mensuales</b>
+    <hr>
+
+    <!-- total egresos -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="engresosMensuales">Total egresos</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="engresosMensuales"
+               formControlName="engresosMensuales"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['engresosMensuales'].invalid &&
+                     form.controls['engresosMensuales'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Descripción de gastos	-->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="descripcionGastos">Descripcion de egresos</label>
+      <div class="col-sm-8">
+        <textarea name="descripcionGastos"
+                  id="descripcionGastos"
+                  rows="3" class="form-control"
+                  formControlName="descripcionGastos"></textarea>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['descripcionGastos'].invalid &&
+                     form.controls['descripcionGastos'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- personas dependientes -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="personasDependientes">Personas que dependen del evaluado.</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="personasDependientes"
+               formControlName="personasDependientes"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['personasDependientes'].invalid &&
+                     form.controls['personasDependientes'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

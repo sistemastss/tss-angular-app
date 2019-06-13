@@ -21,7 +21,7 @@ export class ActividadClass {
 
 
   /**
-   * cargar permisos del usuario
+   * cargar permisos del crear
    */
   protected permissions: any;
 

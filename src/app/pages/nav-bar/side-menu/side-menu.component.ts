@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuService} from '../../../services/menu.service';
+import { Menu, MenuService } from '../../../services/menu.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent implements OnInit {
-  menu = [
+  /*menu = [
     {
       title: 'Control',
       path: '/control'
@@ -18,7 +18,9 @@ export class SideMenuComponent implements OnInit {
       path: '/nuevo-servicio'
 
     }
-  ];
+  ];*/
+
+  menu = this.menuService.men;
 
   constructor(
     private menuService: MenuService,
@@ -26,6 +28,7 @@ export class SideMenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.router.config);
     // console.log(this.router.routerState);
   }
 

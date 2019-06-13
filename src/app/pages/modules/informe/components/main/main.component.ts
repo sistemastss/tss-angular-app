@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EstudioSeguridadComponent } from '../estudio-seguridad/estudio-seguridad.component';
 import { DatosPersonalesComponent } from '../datos-personales/datos-personales.component';
-import { InformacionFamiliarComponent } from '../informacion-familiar/informacion-familiar.component';
-import { EntornoHabitacionalComponent } from '../entorno-habitacional/entorno-habitacional.component';
+import { FamiliaComponent } from '../informacion-familiar/familia.component';
+import { Informe2Component } from '../informe2/informe2.component';
 import { ModusVivendiComponent } from '../modus-vivendi/modus-vivendi.component';
 import { HistorialLaboralAcademicoComponent } from '../historial-laboral-academico/historial-laboral-academico.component';
 
@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
     { path: './informacion-familiar',
       name: 'Informacion Familiar',
     },
-    { path: './entorno-habitacional',
+    { path: './informe2',
       name: 'Entorno habitacional',
     },
     { path: './modus-vivendi',

@@ -14,14 +14,14 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of servicios">
-    <td> {{ item.fechaCreacion | date }} </td>
-    <td> {{ item.fechaEntrega | date }} </td>
-    <td> {{ item.analistaEsp }} </td>
+    <td> {{ item.fecha_creacion | date }} </td>
+    <td> {{ item.fecha_entrega | date }} </td>
+    <td> {{ item.analista }} </td>
     <td> {{ item.cliente }} </td>
-    <td> {{ item.lugarDesarrollo }} </td>
+    <td> {{ item.lugar_desarrollo }} </td>
     <td>
       <div class="form-group text-center">
-        <button class="btn btn-info text-center" (click)="verDetalle(item)">
+        <button class="btn btn-info text-center" (click)="verDetalle(mdServicio, item)">
           <i class="fa fa-eye"></i>
           Ver detalle
         </button>
@@ -100,5 +100,42 @@
       <i class="fa fa-times"></i>
       Cerrar</button>
   </div>
+
+</ng-template>
+
+<ng-template #mdServicio let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Servicio ESP
+    </h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ngb-tabset>
+      <ngb-tab title="Evaluado" id="evaluado">
+        <ng-template ngbTabContent>
+
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Programacion" id="programacion">
+        <ng-template ngbTabContent>
+          <app-programacion></app-programacion>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Seguimiento" id="seguimiento">
+        <ng-template ngbTabContent>
+          <app-seguimiento></app-seguimiento>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Viaticos" id="viaticos">
+        <ng-template ngbTabContent>
+          <app-viaticos></app-viaticos>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <div class="card-footer"></div>
 
 </ng-template>

@@ -1,0 +1,177 @@
+<div class="col-md-10 mx-auto card ">
+  <div [formGroup]="form" class="card-body mb-4">
+    <b class="card-title">Nucleo familiar</b>
+    <hr>
+
+    <!-- Nombre del conyuge -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="nombreConyuge">
+        Nombre del conyuge
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="nombreConyuge"
+               formControlName="nombreConyuge"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['nombreConyuge'].invalid &&
+             form.controls['nombreConyuge'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- edad -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="edadConyuge">Edad</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               minlength="0" maxlength="130"
+               id="edadConyuge"
+               formControlName="edadConyuge"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['edadConyuge'].invalid &&
+             form.controls['edadConyuge'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Identificación -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="identificacion">Identificación</label>
+      <div class="col-sm-8">
+        <input type="number" minlength="0" class="form-control"
+               id="identificacion"
+               formControlName="identificacion"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['identificacion'].invalid &&
+             form.controls['identificacion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Lugar de Expedición -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="lugarExpedicion">Lugar de Expedición
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="lugarExpedicion"
+               formControlName="lugarExpedicion"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['lugarExpedicion'].invalid &&
+             form.controls['lugarExpedicion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Lugar de nacimiento -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="lugarNacimiento">Lugar de nacimiento
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="lugarNacimiento"
+               formControlName="lugarNacimiento"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['lugarNacimiento'].invalid &&
+             form.controls['lugarNacimiento'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- fecha de nacimiento -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="fechaNacimiento">Fecha de Nacimiento
+      </label>
+      <div class="col-sm-8">
+        <input type="date" class="form-control"
+               id="fechaNacimiento"
+               formControlName="fechaNacimiento"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['fechaNacimiento'].invalid &&
+             form.controls['fechaNacimiento'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- ocupacion -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="ocupacion">Ocupación
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="ocupacion"
+               formControlName="ocupacion"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['ocupacion'].invalid &&
+             form.controls['ocupacion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- empresa -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="empresa">Empresa
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="empresa"
+               formControlName="empresa"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['empresa'].invalid &&
+             form.controls['empresa'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- telefono -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="telefono">Telefono - Celular
+      </label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="telefono"
+               formControlName="telefono"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['telefono'].invalid &&
+             form.controls['telefono'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- tiempo Laborado -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="tiempoLaborado">Tiempo Laborado
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="tiempoLaborado"
+               formControlName="tiempoLaborado"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['tiempoLaborado'].invalid &&
+             form.controls['tiempoLaborado'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

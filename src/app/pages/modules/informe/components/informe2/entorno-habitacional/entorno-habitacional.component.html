@@ -1,0 +1,105 @@
+<div class="col-md-10 mx-auto card mb-4">
+  <div class="card-body">
+    <b class="card-title">Entorno habitacional</b>
+    <hr>
+
+    <!-- tipo de vivienda -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="tipoVivienda">Tipo de vivienda</label>
+      <div class="col-sm-8">
+        <select class="form-control" name="tipoVivienda" id="tipoVivienda" formControlName="tipoVivienda">
+          <option value="">Seleccione</option>
+          <option value="Casa">Casa</option>
+          <option value="Casa lote">Casa lote</option>
+          <option value="Apartamento">Apartamento</option>
+          <option value="Apartamento">Apartamento</option>
+          <option value="Aparta-estudio">Aparta-estudio</option>
+        </select>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['tipoVivienda'].invalid &&
+           form.controls['tipoVivienda'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Tenencia -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="tenencia">Tenencia</label>
+      <div class="col-sm-8">
+        <select class="form-control" name="tenencia" id="tenencia" formControlName="tenencia">
+          <option value="">Seleccione</option>
+          <option value="Arriendo">Arriendo</option>
+          <option value="Familiar">Familiar</option>
+          <option value="Propia">Propia</option>
+        </select>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['tenencia'].invalid &&
+           form.controls['tenencia'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Tiempo de permanencia -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="tiempoPermanencia">Tiempo de permanencia</label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="tiempoPermanencia"
+               id="tiempoPermanencia"
+               placeholder="Ingrese el tiempo de permanencia"
+               formControlName="tiempoPermanencia">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['tiempoPermanencia'].invalid &&
+           form.controls['tiempoPermanencia'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del propietario -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="infoPropietario">
+        Información del propietario
+      </label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="infoPropietario"
+               id="infoPropietario"
+               placeholder="Ingrese el tiempo de permanencia"
+               formControlName="infoPropietario">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['infoPropietario'].invalid &&
+           form.controls['infoPropietario'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Fotografia -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="fotografia">
+        Fotografías
+      </label>
+      <div class="col-sm-8">
+        <div class="custom-file">
+          <input type="text"
+                 class="custom-file-input"
+                 name="fotografia"
+                 id="fotografia"
+                 placeholder="Ingrese el tiempo de permanencia"
+                 formControlName="fotografia">
+          <label class="custom-file-label" for="fotografia">seleccione un archivo</label>
+        </div>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['fotografia'].invalid &&
+           form.controls['fotografia'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

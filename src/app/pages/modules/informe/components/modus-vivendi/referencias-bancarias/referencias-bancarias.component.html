@@ -1,0 +1,101 @@
+<div class="card mt-4">
+  <div class="card-body ">
+    <div class="form-group row">
+      <label class="col-sm-6 col-form-label">
+        <b>Referencias bancarias</b>
+      </label>
+      <div class="col-sm-6">
+        <div class="form-group text-right">
+          <button (click)="open(mdRefBancarias)" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Agregar
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <hr>
+      </div>
+      <div class="col-sm-12 mt-2">
+        <table class="table table-bordered">
+          <thead class="text-capitalize">
+          <th>entidad</th>
+          <th>tipo de cuenta</th>
+          <th class="acciones">acciones</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let value of refBancarias">
+            <td> {{ value.entidad }} </td>
+            <td> {{ value.tipoCuenta }} </td>
+            <td class="acciones">
+              <div class="text-center">
+                <button class="btn btn-primary mr-2" (click)="open(mdRefBancarias, value)">
+                  <i class="fa fa-edit"></i>
+                </button>
+
+                <button class="btn btn-danger ml-2" (click)="delete(value.id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #mdRefBancarias let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Referencias bancarias</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+
+      <!-- entidad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-entidad">Entidad</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-entidad"
+                 name="entidad"
+                 formControlName="entidad"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('entidad').invalid &&
+                     form.get('entidad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- tipoCuenta -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-tipoCuenta">Tipo de Cuenta</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-tipoCuenta"
+                 name="tipoCuenta"
+                 formControlName="tipoCuenta"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('tipoCuenta').invalid &&
+                     form.get('tipoCuenta').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button type="button" class="btn btn-warning" [disabled]="form.invalid" (click)="update()" *ngIf="isUpdate">Actualizar</button>
+    <button type="button" class="btn btn-primary" [disabled]="form.invalid" (click)="add()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>

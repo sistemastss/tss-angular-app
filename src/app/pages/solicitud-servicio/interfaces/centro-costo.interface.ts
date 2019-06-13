@@ -1,14 +1,14 @@
 export interface CentroCosto {
-  clienteId: number;
+  cliente_id: number;
   solicitante: string;
-  telefonoSolicitante: number;
-  emailSolicitante: string;
-  numeroOrden?: number;
+  telefono_solicitante: number;
+  email_solicitante: string;
+  numero_orden?: number;
   anexo?: string;
-  destinoFactura: string;
-  tipoSociedad: string;
-  tipoIdentificacion: string;
-  numeroIdentificacion: number;
-  telefonoFactura: number;
-  emailFactura: string;
+  destino_factura: string;
+  tipo_sociedad: string;
+  tipo_identificacion: string;
+  numero_identificacion: number;
+  telefono_factura: number;
+  email_factura: string;
 }

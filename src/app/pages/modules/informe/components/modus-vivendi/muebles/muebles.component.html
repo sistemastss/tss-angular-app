@@ -1,0 +1,167 @@
+<div class="card mt-4">
+  <div class="card-body ">
+    <div class="form-group row">
+      <label class="col-sm-6 col-form-label">
+        <b>Patrimonio - Bienes Muebles</b>
+      </label>
+      <div class="col-sm-6">
+        <div class="form-group text-right">
+          <button (click)="open(mdBienMueble)" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Agregar
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <hr>
+      </div>
+      <div class="col-sm-12 mt-2">
+        <table class="table table-bordered">
+          <thead class="text-capitalize">
+          <th>clase</th>
+          <th>modelo</th>
+          <th>placa</th>
+          <th>avalúo</th>
+          <th>pignorado</th>
+          <th class="acciones">acciones</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let value of bienesMuebles">
+            <td> {{ value.clase }}</td>
+            <td> {{ value.modelo }}</td>
+            <td> {{ value.placa }}</td>
+            <td> {{ value.avaluo }}</td>
+            <td> {{ value.pignorado === true ? 'Si' : 'No' }}</td>
+            <td class="acciones">
+              <div class="text-center">
+                <button class="btn btn-primary mr-2" (click)="open(mdBienMueble, value)">
+                  <i class="fa fa-edit"></i>
+                </button>
+
+                <button class="btn btn-danger ml-2" (click)="delete(value.id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <hr>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Modal bien mueble -->
+<ng-template #mdBienMueble let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Bienes muebles</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+
+      <!-- clase -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-clase">Clase</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-clase"
+                 name="clase"
+                 formControlName="clase"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('clase').invalid &&
+               form.get('clase').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- modelo -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-modelo">Modelo</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-modelo"
+                 name="modelo"
+                 formControlName="modelo"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('modelo').invalid &&
+               form.get('modelo').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- placa -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-placa">Placa</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="bm-placa"
+                 name="placa"
+                 formControlName="placa"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('placa').invalid &&
+               form.get('placa').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- avaluo -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-avaluo">Avalúo</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"
+                 id="bm-avaluo"
+                 name="avaluo"
+                 formControlName="avaluo"
+                 placeholder="Ingrese un numero valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('avaluo').invalid &&
+               form.get('avaluo').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- pignorado -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="bm-pignorado">Pignorado</label>
+        <div class="col-sm-9">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="pignorado"
+                   id="bm-pignorado" [value]="true">
+            <label class="form-check-label" for="bm-pignorado">Si</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="pignorado"
+                   id="bm-pignorado!" [value]="false">
+            <label class="form-check-label" for="bm-pignorado!">No</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button class="btn btn-warning" [disabled]="form.invalid" (click)="update()" *ngIf="isUpdate">Actualizar</button>
+    <button class="btn btn-primary" [disabled]="form.invalid" (click)="add()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>

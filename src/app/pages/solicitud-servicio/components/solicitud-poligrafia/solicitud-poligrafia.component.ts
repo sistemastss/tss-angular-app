@@ -21,13 +21,13 @@ export class SolicitudPoligrafiaComponent implements OnInit {
   form = this.fb.group({
     evaluado: this.fb.group({
       evaluado      : [ '', Validators.required ],
-      tipoDocumento : [ '', Validators.required ],
+      tipo_documento : [ '', Validators.required ],
       documento     : [ '', [ Validators.required, Validators.minLength(6) ] ],
       telefono      : [ '', [ Validators.required, Validators.minLength(7) ] ],
       email         : [ '', [ Validators.required, Validators.email ] ],
       cargo         : [ '', Validators.required, Validators.email],
     }),
-    lugarDesarrollo : [ '', Validators.required ],
+    lugar_desarrollo : [ '', Validators.required ],
     contexto        : [ '', Validators.required ],
     tipoPoligrafia  : [ '', Validators.required ],
     anexo           : '',
@@ -53,13 +53,13 @@ export class SolicitudPoligrafiaComponent implements OnInit {
     this.form.setValue({
       evaluado: {
         evaluado: 'cristian',
-        tipoDocumento: 'cc',
+        tipo_documento: 'cc',
         documento: 1026595856,
         telefono: 3600255,
         email: 'styven22121@gmail.com',
         cargo: 'algo',
       },
-      lugarDesarrollo: 'Bogota',
+      lugar_desarrollo: 'Bogota',
       contexto: 'contexto',
       tipoPoligrafia: 'pre-empleo',
       anexo: ''
@@ -87,7 +87,7 @@ export class SolicitudPoligrafiaComponent implements OnInit {
     const base64 = await this.helper.readFile(file);
 
     const data: File = {
-      fileName: file.name,
+      file_name: file.name,
       blob: base64
     };
 

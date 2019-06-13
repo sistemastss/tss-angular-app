@@ -34,14 +34,14 @@
                 <div class="form-group row">
                   <label for="tipoDocumento" class="col-sm-3 col-form-label">Tipo de documento</label>
                   <div class="col-sm-9">
-                    <select class="form-control" formControlName="tipoDocumento" id="tipoDocumento">
+                    <select class="form-control" formControlName="tipo_documento" id="tipoDocumento">
                       <option value="cc">C.C. Cedula</option>
                       <option value="ti">T.I. Tarjeta de identidad</option>
                       <option value="ce">C.E. Cedula de extrangeria</option>
                       <option value="pa">P.A. Pasaporte</option>
                       <option value="pep">P.E.P. Permiso especial de permanencia</option>
                     </select>
-                    <div [hidden]="form.get('evaluado').get('tipoDocumento').valid || form.get('evaluado').get('tipoDocumento').pristine">
+                    <div [hidden]="form.get('evaluado').get('tipo_documento').valid || form.get('evaluado').get('tipo_documento').pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -141,8 +141,8 @@
                          name="lugarDesarrollo"
                          required="required"
                          placeholder="Ingrese el lugar de desarrollo de la prueba"
-                         formControlName="lugarDesarrollo">
-                  <div [hidden]="form.controls['lugarDesarrollo'].valid || form.controls['lugarDesarrollo'].pristine">
+                         formControlName="lugar_desarrollo">
+                  <div [hidden]="form.controls['lugar_desarrollo'].valid || form.controls['lugar_desarrollo'].pristine">
                     <div class="ng-invalid-feedback">
                       El campo es requerido
                     </div>
@@ -316,7 +316,7 @@
           <!--tipo documento-->
           <div class="form-group">
             <label for="m-tipoDocumento">Documento de identidad</label>
-            <select class="form-control" [(ngModel)]="servicio.evaluado.tipoDocumento" id="m-tipoDocumento">
+            <select class="form-control" [(ngModel)]="servicio.evaluado.tipo_documento" id="m-tipoDocumento">
               <option value="cc">C.C. Cedula</option>
               <option value="ti">T.I. Tarjeta de identidad</option>
               <option value="ce">C.E. Cedula de extrangeria</option>
@@ -353,7 +353,7 @@
           <!--ciudad-->
           <div class="form-group">
             <label for="m-ciudad">Ciudad</label>
-            <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="servicio.lugarDesarrollo">
+            <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="servicio.lugar_desarrollo">
           </div>
 
           <!--telefono-->

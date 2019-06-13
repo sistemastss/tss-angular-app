@@ -4,7 +4,7 @@ import { investigacionReducer } from './investigacion.reducer';
 import { poligrafiaReducer } from './poligrafia.reducer';
 
 export const reducers = {
-  centroCosto: centroCostoReducer,
+  centro_costo: centroCostoReducer,
   esp: espReducer,
   investigacion: investigacionReducer,
   poligrafia: poligrafiaReducer,

@@ -34,7 +34,7 @@ const routes: Routes = [
           { path: 'visita-domiciliaria-seguridad', component: SeguridadComponent },
           { path: 'salubridad', component: EstadoSalubridadComponent },
           { path: 'informacion-familiar', component: InformacionFamiliarComponent },
-          { path: 'entorno-habitacional', component: EntornoHabitacionalComponent },
+          { path: 'informe2', component: EntornoHabitacionalComponent },
           { path: 'modus-vivendi', component: ModusVivendiComponent },
           { path: '', redirectTo: 'visita-domiciliaria-seguridad', pathMatch: 'full' }
         ]

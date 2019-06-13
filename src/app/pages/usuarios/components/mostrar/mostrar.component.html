@@ -1,0 +1,89 @@
+<div class="card">
+  <div class="card-header">
+    Usuarios creados
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered">
+      <tr>
+        <td>Eliminar</td>
+        <td>Nombre</td>
+        <td>Celular</td>
+        <td>Documento</td>
+        <td>Ciudad</td>
+        <td>Email</td>
+        <td>Rol</td>
+        <td>Acciones</td>
+      </tr>
+      <tr *ngFor="let usuario of usuarios">
+        <td><button class="btn btn-sm btn-danger" (click)="eliminar(usuario.id)"><i class="fa fa-trash"></i>Eliminar</button></td>
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.celular }}</td>
+        <td>{{ usuario.documento }}</td>
+        <td>{{ usuario.ciudad }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.rol_id }}</td>
+        <td>
+          <button (click)="verDetalle(content, usuario)" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>Ver detalle</button>
+          <button (click)="editar(usuario)" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i>Editar</button>
+        </td>
+      </tr>
+
+
+    </table>
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ver detalle</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre completo">
+      </div>
+      <div class="form-group">
+        <label for="direccion">Direccion</label>
+        <input formControlName="direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese la direccion de residencia">
+      </div>
+      <div class="form-group">
+        <label for="telefono">Telefono</label>
+        <input formControlName="telefono" type="number" class="form-control" id="telefono" placeholder="Ingrese el telefono">
+      </div>
+      <div class="form-group">
+        <label for="celular">Celular</label>
+        <input formControlName="celular" type="text" class="form-control" id="celular" placeholder="Ingrese el numero de celular">
+      </div>
+      <div class="form-group">
+        <label for="tipo_documento">tipo de documento</label>
+        <select formControlName="tipo_documento" id="tipo_documento" class="form-control">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="documento">Documento</label>
+        <input formControlName="documento" type="text" class="form-control" id="documento" placeholder="Ingrese el numero de documento de identificación">
+      </div>
+      <div class="form-group">
+        <label for="ciudad">Ciudad</label>
+        <input formControlName="ciudad" type="text" class="form-control" id="ciudad" placeholder="Ingrese la ciudad de residencia">
+      </div>
+      <div class="form-group">
+        <label for="rol">Rol</label>
+        <select formControlName="rol_id" name="" id="rol" class="form-control"></select>
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electronico</label>
+        <input formControlName="email" type="email" class="form-control" id="email" placeholder="Ingrese el correo electronico">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

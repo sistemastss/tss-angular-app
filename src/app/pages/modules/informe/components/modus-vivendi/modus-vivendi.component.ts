@@ -10,20 +10,6 @@ import { ModusVivendiService } from '../../services/modus-vivendi.service';
 })
 export class ModusVivendiComponent implements OnInit {
 
-  // forms
-  formEgresos = this.mvService.formEgresos;
-  formIngresos = this.mvService.formIngresos;
-  formBienInmueble = this.mvService.formBienInmueble;
-  formBienMueble = this.mvService.formBienMueble;
-  formRefBancaria = this.mvService.formRefBancaria;
-  formCapEndeudamiento = this.mvService.formCapEndeudamiento;
-
-  // properties
-  bienesInmuebles = [];
-  bienesMuebles = [];
-  refBancarias = [];
-  capEndeudamiento = [];
-
   isUpdate = false;
 
   modalRef: NgbModalRef;
@@ -32,7 +18,6 @@ export class ModusVivendiComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
-    private mvService: ModusVivendiService,
   ) { }
 
   ngOnInit() {
@@ -42,53 +27,4 @@ export class ModusVivendiComponent implements OnInit {
     this.modalRef = this.modalService.open(content);
   }
 
-  updateBienInmueble() {
-    
-  }
-
-  deleteBienInmueble(id: any) {
-    
-  }
-
-  updateBienMueble() {
-
-  }
-
-  deleteBienMueble(id: any) {
-
-  }
-
-  updateRefBancaria() {
-
-  }
-
-  deleteRefBancaria(id: any) {
-
-  }
-
-  updateCapEndeudamiento() {
-
-  }
-
-  deleteCapEndeudamiento(id: any) {
-
-  }
-
-  addBienInmueble() {
-
-  }
-
-  addBienMueble() {
-    
-  }
-
-  addRefBancaria() {
-
-  }
-
-  addCapEndeudamiento() {
-
-  }
-
-  saveAll() {}
 }

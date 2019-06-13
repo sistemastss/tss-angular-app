@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from '../../../../services/helper.service';
 import { File } from '../../../../@models/file.interface';
 import { EspState } from '../../store/state';
+import { ActividadService } from '../../../../shared/services/actividad.service';
 
 @Component({
   selector: 'app-servicio-esp',
@@ -15,95 +16,24 @@ import { EspState } from '../../store/state';
 })
 export class SolicitudEspComponent implements OnInit {
 
-  constructor(
-    private fb: FormBuilder,
-    private store: Store<EspState>,
-    private modalService: NgbModal,
-    private helper: HelperService,
-  ) {}
-
   @ViewChild('inputFile') inputFile: ElementRef;
 
   form = this.fb.group({
     evaluado: this.fb.group({
       evaluado            : ['', Validators.required ],
-      tipoDocumento       : ['', Validators.required ],
+      tipo_documento      : ['', Validators.required ],
       documento           : ['', [ Validators.required, Validators.minLength(6) ]],
       telefono            : ['', [ Validators.required, Validators.minLength(7) ]],
       email               : ['', [ Validators.required, Validators.email ]],
       direccion           : ['', Validators.required ],
       cargo               : ['', Validators.required ],
     }),
-    lugarDesarrollo     : ['', Validators.required ],
-    observaciones       : ['', Validators.required ],
-    anexo               : [''],
-    tipoEsp             : ['', Validators.required ],
-    aceptarTerminos     : [false, Validators.required],
+    lugar_desarrollo      : ['', Validators.required ],
+    observaciones         : ['', Validators.required ],
+    anexo                 : [''],
+    tipo_esp              : ['', Validators.required ],
+    aceptar_terminos      : [false, Validators.required],
   });
-
-  actividades = [
-    {
-      codigo : 'HJ',
-      nombre : 'Historial judicial',
-      forName: 'Basico'
-    },
-    {
-      codigo : 'VDS',
-      nombre : 'Visita domiciliaria',
-      forName: 'Basico'
-    },
-    {
-      codigo : 'VA',
-      nombre : 'Verificación académica',
-      forName: 'Basico'
-    },
-    {
-      codigo : 'VL',
-      nombre : 'Verificación laboral',
-      forName: 'Basico'
-    },
-    {
-      codigo : 'PL',
-      nombre : 'Poligrafía',
-      forName: 'Integral'
-    },
-    {
-      codigo : 'EF',
-      nombre : 'Estudio financiero',
-      forName: 'Avanzado'
-    },
-    {
-      codigo : 'DDL',
-      nombre : 'Due Dilligence',
-      forName: ''
-    },
-    {
-      codigo : 'DG',
-      nombre : 'Dictamen grafológico',
-      forName: ''
-    },
-    {
-      codigo : 'Dd',
-      nombre : 'Decadactilar',
-      forName: ''
-    },
-    {
-      codigo : 'PP',
-      nombre : 'Prueba psicotécnica',
-      forName: ''
-    },
-  ];
-
-  /**
-   * Basico (
-   * Historial judicial, Verificacion Academica, Verificacion Laboral, Visita Domiciliaria)
-   Integral (Basico + Poligrafia)
-   Avanzado (Integral + Estudio financiero)
-   */
-
-  basico = [
-    {  }
-  ]
 
   control = {
     editar: false,
@@ -113,31 +43,102 @@ export class SolicitudEspComponent implements OnInit {
   detalle: Esp;
   servicios: Esp[] = [];
   today = new Date().getTime();
+  actividades = [];
 
   espSelect = state => state.solicitudServicio.esp;
 
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<EspState>,
+    private modalService: NgbModal,
+    private helper: HelperService,
+    private actividadService: ActividadService,
+  ) {}
 
   ngOnInit() {
     this.form.setValue(
       {
         evaluado: {
           evaluado: 'asds',
-          tipoDocumento: 'cc',
+          tipo_documento: 'cc',
           documento: 12345678,
           telefono: 3600255,
           email: 'styven21121@gmail.com',
           direccion: 'cll 16 # 20 -16',
           cargo: 'algo',
         },
-        lugarDesarrollo: 'Bogota',
+        lugar_desarrollo: 'Bogota',
         observaciones: 'datos',
-        tipoEsp: 'basico',
+        tipo_esp: 'basico',
         anexo: '',
-        aceptarTerminos: false
+        aceptar_terminos: false
       });
 
     this.store.select(this.espSelect)
       .subscribe((value: Esp[]) => this.servicios = value);
+
+    this.actividadService.get('ESP').subscribe(response => {
+      this.actividades = response;
+      setTimeout(() => this.selectActividades('basico'), 500);
+    });
+  }
+
+  selectActividades(type: 'basico' | 'integral' | 'avanzado') {
+    const actividades$ = document.getElementsByName('actividades') as NodeList;
+    actividades$.forEach(((value: any) => value.checked = false));
+    switch (type) {
+      case 'basico':
+        const espBasico = this.actividadService.espBasico;
+        actividades$.forEach((value: any) => {
+          for (const item of espBasico) {
+           if (value.value === item) {
+             value.checked = true;
+           }
+          }
+        });
+        break;
+
+      case 'integral':
+        const espIntegral = this.actividadService.espIntegral;
+        actividades$.forEach((value: any) => {
+          for (const item of espIntegral) {
+            if (value.value === item) {
+              value.checked = true;
+            }
+          }
+        });
+        break;
+
+      case 'avanzado':
+        const espAvanzado = this.actividadService.espAvanzado;
+        actividades$.forEach((value: any) => {
+          for (const item of espAvanzado) {
+            if (value.value === item) {
+              value.checked = true;
+            }
+          }
+        });
+        break;
+    }
+  }
+
+  setDefaultEsp() {
+    const espBasico = document.getElementById('basico') as any;
+    espBasico.checked = true;
+  }
+
+  getActividades() {
+    const actividades$ = document.getElementsByName('actividades');
+    const actividadesSelected = [];
+    actividades$.forEach((value: any) => {
+      if (value.checked) {
+        actividadesSelected.push({
+          actividad_id: value.id
+        });
+      }
+    });
+
+    return actividadesSelected;
   }
 
   obtenerServicio(index: number): Esp {
@@ -159,7 +160,7 @@ export class SolicitudEspComponent implements OnInit {
     const base64 = await this.helper.readFile(file);
 
     const data: File = {
-      fileName: file.name,
+      file_name: file.name,
       blob: base64
     };
 
@@ -170,6 +171,7 @@ export class SolicitudEspComponent implements OnInit {
 
   crearServicio() {
     const data = this.form.value;
+    data.actividades = this.getActividades();
 
     this.store.dispatch(new CrearEsp(data));
     this.form.reset();

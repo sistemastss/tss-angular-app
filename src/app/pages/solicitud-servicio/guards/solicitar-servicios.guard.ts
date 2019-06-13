@@ -4,14 +4,12 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { CentroCostoState } from '../store/reducers/centro-costo.reducer';
+import { getCentroCosto } from '../store/selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SolicitarServiciosGuard implements CanActivate {
-
-  // selector
-  centroCosto = state => state.solicitudServicio.centroCosto;
 
   constructor(private store: Store<CentroCostoState>,
               private router: Router) {}
@@ -21,7 +19,7 @@ export class SolicitarServiciosGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
 
-    return this.store.select(this.centroCosto).pipe(
+    return this.store.select(getCentroCosto).pipe(
       map(value => {
         if (value) {
           return true;

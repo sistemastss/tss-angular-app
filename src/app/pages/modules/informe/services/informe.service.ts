@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
+import { HelperService } from '../../../../services/helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InformeService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private helper: HelperService,
+    private store: Store<any>,
+  ) { }
 
-  setId(id) {
-    localStorage.setItem('informeId', id);
-  }
-
-  getId() {
-    return localStorage.getItem('informeId');
+  getId() {}
+  setId() {}
+  get() {
+    const vsId = 1; // replace with vsid
+    const url = this.helper.route('informe', vsId);
+    this.http.get(url);
   }
 }

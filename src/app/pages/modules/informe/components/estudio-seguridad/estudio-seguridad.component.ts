@@ -47,12 +47,10 @@ export class EstudioSeguridadComponent implements OnInit {
 
     const base64 = await this.helper.readFile(file);
 
-    const data: File = {
-      fileName: file.name,
+    this.data.fotoEvaluado = {
+      file_name: file.name,
       blob: base64
     };
-
-    this.data.fotoEvaluado = data;
   }
 
   async setImagenEvaluado(event) {
@@ -67,12 +65,10 @@ export class EstudioSeguridadComponent implements OnInit {
 
     const base64 = await this.helper.readFile(file);
 
-    const data: File = {
-      fileName: file.name,
+    this.data.logoCliente = {
+      file_name: file.name,
       blob: base64
     };
-
-    this.data.logoCliente = data;
 
   }
 

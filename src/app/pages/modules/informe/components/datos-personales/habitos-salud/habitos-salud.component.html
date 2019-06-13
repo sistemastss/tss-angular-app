@@ -1,0 +1,89 @@
+<div class="col-md-10 mx-auto card mb-4">
+  <div [formGroup]="form" class="card-body">
+    <b class="card-title">Habitos de salud</b>
+    <hr>
+
+    <!-- fuma -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label">¿Fuma?</label>
+      <div class="col-sm-8">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"
+                 name="fuma" id="fuma"
+                 [value]="true" formControlName="fuma">
+          <label class="form-check-label" for="fuma">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"
+                 name="fuma" id="fuman"
+                 [value]="false" formControlName="fuma">
+          <label class="form-check-label" for="fuman">No</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ¿Consume bebidas alcohólicas? -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label">¿Consume bebidas alcohólicas?</label>
+      <div class="col-sm-8">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"
+                 name="consumeAlcohol" id="consumeAlcohol"
+                 [value]="true" formControlName="consumeAlcohol">
+          <label class="form-check-label" for="consumeAlcohol">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"
+                 name="consumeAlcohol" id="consumeAlcoholn"
+                 [value]="false" formControlName="consumeAlcohol">
+          <label class="form-check-label" for="consumeAlcoholn">No</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ¿Consume sustancias psicoactivas?	-->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label">¿Consume sustancias psicoactivas?</label>
+      <div class="col-sm-8">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"
+                 name="consumeDrogas" id="consumeDrogas"
+                 [value]="true" formControlName="consumeDrogas">
+          <label class="form-check-label" for="consumeDrogas">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"
+                 name="consumeDrogas" id="consumeDrogasn"
+                 [value]="false" formControlName="consumeDrogas">
+          <label class="form-check-label" for="consumeDrogasn">No</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ¿Realiza algún deporte? -->
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="realizaDeporte">¿Realiza algún deporte?</label>
+      <div class="col-sm-9">
+        <textarea class="form-control"
+                  id="realizaDeporte" name="realizaDeporte"
+                  formControlName="realizaDeporte" rows="3"
+                  placeholder="Ingresé los deportes que practica">
+
+        </textarea>
+      </div>
+    </div>
+
+    <!-- ¿Qué actividades realiza en su tiempo libre? -->
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="hobbies">¿Qué actividades realiza en su tiempo libre?</label>
+      <div class="col-sm-9">
+        <textarea class="form-control"
+                  id="hobbies" name="hobbies"
+                  formControlName="hobbies" rows="3"
+                  placeholder="Ingresé las actividades que realiza">
+
+        </textarea>
+      </div>
+    </div>
+  </div>
+</div>

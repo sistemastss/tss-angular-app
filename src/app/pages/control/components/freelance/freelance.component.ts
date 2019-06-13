@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ServicioState } from '../../store/states';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbTabContent } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from '../../../../services/helper.service';
 import { getServicios } from '../../store/selectors';
 import { FetchServicios } from '../../store/actions/servicios.actions';
@@ -36,6 +36,7 @@ export class FreelanceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.store.select(getServicios).subscribe(
       state => {
         this.servicios = state.filter(value => value.tipoServicio === 'esp' && value.estado !== 'rechazado');
@@ -50,9 +51,9 @@ export class FreelanceComponent implements OnInit {
     return this.helper.makeFileUrl(fileName);
   }
 
-  verDetalle(item: any) {
+  verDetalle(content, item: any) {
     console.log(item);
-    const modalRef = this.modalService.open(DetalleServicioComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(content, { size: 'lg' });
     modalRef.componentInstance.servicio = item;
   }
 

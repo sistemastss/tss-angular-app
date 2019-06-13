@@ -1,0 +1,166 @@
+<div class="col-md-10 mx-auto card mb-4">
+  <div class="card-body">
+    <b class="card-title">Condiciones generales del sector</b>
+    <hr>
+
+    <!-- Ciudad -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="ciudad">
+        Ciudad
+      </label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="ciudad"
+               id="ciudad"
+               placeholder="Ingrese la ciudad"
+               formControlName="ciudad">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['ciudad'].invalid &&
+           form.controls['ciudad'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Barrio -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="barrio">
+        Barrio
+      </label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="barrio"
+               id="barrio"
+               placeholder="Ingrese el barrio"
+               formControlName="barrio">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['barrio'].invalid &&
+           form.controls['barrio'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Localidad -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="localidad">
+        Localidad
+      </label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="localidad"
+               id="localidad"
+               placeholder="Ingrese la localidad"
+               formControlName="localidad">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['localidad'].invalid &&
+           form.controls['localidad'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Vías de acceso	 -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="viasAcceso">
+        Vías de acceso
+      </label>
+      <div class="col-sm-8">
+        <textarea name="viasAcceso" id="viasAcceso"
+                  cols="30" rows="3"
+                  class="form-control"
+                  formControlName="viasAcceso"
+                  placeholder="Ingrese las vias de acceso">
+        </textarea>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['viasAcceso'].invalid &&
+           form.controls['viasAcceso'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Transporte público	 -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="transportePublico">
+        Transporte público
+      </label>
+      <div class="col-sm-8">
+        <textarea name="transportePublico" id="transportePublico"
+                  cols="30" rows="3"
+                  class="form-control"
+                  formControlName="transportePublico"
+                  placeholder="Transporte público">
+        </textarea>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['transportePublico'].invalid &&
+           form.controls['transportePublico'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Centros asistenciales		 -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="centrosAsistenciales">
+        Centros asistenciales
+      </label>
+      <div class="col-sm-8">
+        <textarea name="centrosAsistenciales" id="centrosAsistenciales"
+                  cols="30" rows="3"
+                  class="form-control"
+                  formControlName="centrosAsistenciales"
+                  placeholder="Centros asistenciales">
+        </textarea>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['centrosAsistenciales'].invalid &&
+           form.controls['centrosAsistenciales'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Flujo vehicular -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="flujoVehicular">
+        Flujo vehícular
+      </label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="flujoVehicular"
+               id="flujoVehicular"
+               placeholder="Ingrese el flujo vehícular	"
+               formControlName="flujoVehicular">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['flujoVehicular'].invalid &&
+           form.controls['flujoVehicular'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Nivel de seguridad -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="nivelSeguridad">
+        Nivel de seguridad
+      </label>
+      <div class="col-sm-8">
+        <select class="form-control" name="nivelSeguridad" id="nivelSeguridad" formControlName="nivelSeguridad">
+          <option value="">Seleccione</option>
+          <option value="Alto">Alto</option>
+          <option value="Medio">Medio</option>
+          <option value="Bajo">Bajo</option>
+        </select>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['nivelSeguridad'].invalid &&
+           form.controls['nivelSeguridad'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

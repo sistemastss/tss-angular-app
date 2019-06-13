@@ -1,0 +1,59 @@
+<div class="col-md-10 mx-auto card mb-4">
+  <div [formGroup]="form"  class="card-body">
+    <b class="card-title">Estado de salud</b>
+    <hr>
+
+    <!-- toma medicamentos -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="tomaMedicamentos">
+        ¿Toma medicamentos en la actualidad?
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="tomaMedicamentos"
+               formControlName="tomaMedicamentos"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['tomaMedicamentos'].invalid &&
+           form.controls['tomaMedicamentos'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- sufre enfermedades -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="sufreEnfermedades">
+        ¿Sufre alguna Enfermedad?
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="sufreEnfermedades"
+               formControlName="sufreEnfermedades">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['sufreEnfermedades'].invalid &&
+           form.controls['sufreEnfermedades'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- tratamiento psicologico -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="tratamientoPsicologico">
+        ¿Ha sido sometido a algún tipo de tratamiento psicológico?
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="tratamientoPsicologico"
+               formControlName="tratamientoPsicologico">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['tratamientoPsicologico'].invalid &&
+           form.controls['tratamientoPsicologico'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

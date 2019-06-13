@@ -15,6 +15,9 @@ import { DetalleServicioComponent } from './components/detalle-servicio/detalle-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleActividadesComponent } from './components/detalle-actividades/detalle-actividades.component';
+import { ProgramacionComponent } from './components/freelance/programacion/programacion.component';
+import { SeguimientoComponent } from './components/freelance/seguimiento/seguimiento.component';
+import { ViaticosComponent } from './components/freelance/viaticos/viaticos.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { DetalleActividadesComponent } from './components/detalle-actividades/de
     FiltroComponent,
     DetalleServicioComponent,
     DetalleActividadesComponent,
+    ProgramacionComponent,
+    SeguimientoComponent,
+    ViaticosComponent,
   ],
   imports: [
     NgbModule,

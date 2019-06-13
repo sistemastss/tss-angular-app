@@ -13,8 +13,6 @@ export class AppComponent implements OnInit {
 
   showNav = false;
 
-  // login: boolean;
-
   constructor(
     // private permissionsService: NgxPermissionsService,
     private router: Router,

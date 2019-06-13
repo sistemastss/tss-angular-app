@@ -1,0 +1,206 @@
+<div class="card card-body mb-4">
+  <div class="form-group row">
+    <label class="col-sm-6 col-form-label">
+      <b class="card-title">Nivel academico</b>
+    </label>
+    <div class="col-sm-6">
+      <div class="form-group text-right">
+        <button (click)="open(mdNivelAcademico)" class="btn btn-primary">
+          <i class="fa fa-plus"></i> Agregar
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <hr>
+    </div>
+    <table class="table table-bordered">
+      <thead class="text-capitalize">
+      <th>nivel</th>
+      <th>institución</th>
+      <th>titulo</th>
+      <th>año</th>
+      <th>ciudad</th>
+      <th>confirmación</th>
+      <th>observaciones</th>
+      <th class="acciones">acciones</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let value of nivelesAcademicos">
+        <td>{{ value.nivel }}</td>
+        <td>{{ value.institucion }}</td>
+        <td>{{ value.titulo }}</td>
+        <td>{{ value.anno }}</td>
+        <td>{{ value.ciudad }}</td>
+        <td>{{ value.confirmacion === true ? 'Si' : 'No' }}</td>
+        <td>{{ value.observacion }}</td>
+        <td class="acciones">
+          <div class="text-center">
+            <button class="btn btn-primary mr-2" (click)="open(mdNivelAcademico, value)">
+              <i class="fa fa-edit"></i>
+            </button>
+
+            <button class="btn btn-danger ml-2" (click)="delete(value.id)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<ng-template #mdNivelAcademico let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Información familiar</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+
+      <!-- nivel -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="nivel">Nivel</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="nivel"
+                 name="nivel"
+                 formControlName="nivel"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('nivel').invalid &&
+                     form.get('nivel').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+      <!-- institucion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="institucion">Institucion</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="institucion"
+                 name="institucion"
+                 formControlName="institucion"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('institucion').invalid &&
+                     form.get('institucion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- titulo -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="titulo">Titulo</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="titulo"
+                 name="titulo"
+                 formControlName="titulo"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('titulo').invalid &&
+                     form.get('titulo').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- anno -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="anno">Año</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="anno"
+                 name="anno"
+                 formControlName="anno"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('anno').invalid &&
+                     form.get('anno').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+      <!-- ciudad -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="ciudad2">Ciudad</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="ciudad2"
+                 name="ciudad"
+                 formControlName="ciudad"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('ciudad').invalid &&
+                     form.get('ciudad').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- confirmacion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="confirmacionNivelAc">confirmacion</label>
+        <div class="col-sm-9">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="confirmacion"
+                   id="confirmacionNivelAc" [value]="true">
+            <label class="form-check-label" for="confirmacionNivelAc">Si</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input"
+                   type="radio"
+                   formControlName="confirmacion"
+                   id="confirmacionNivelAc!" [value]="false">
+            <label class="form-check-label" for="confirmacionNivelAc!">No</label>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- observacion -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="observacion">Observacion</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"
+                 id="observacion"
+                 name="observacion"
+                 formControlName="observacion"
+                 placeholder="Ingrese un dato valido"
+                 required>
+          <div class="ng-invalid-feedback"
+               *ngIf="(form.get('observacion').invalid &&
+                     form.get('observacion').dirty)">
+            El campo es requerido
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button class="btn btn-warning" [disabled]="form.invalid" (click)="update()" *ngIf="isUpdate">Actualizar</button>
+    <button class="btn btn-primary" [disabled]="form.invalid" (click)="add()" *ngIf="!isUpdate">Guardar</button>
+  </div>
+</ng-template>

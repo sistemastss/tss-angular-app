@@ -3,8 +3,9 @@ import { File } from '../../../@models/file.interface';
 
 export interface Esp {
   evaluado: Evaluado;
-  lugarDesarrollo: string;
+  lugar_esarrollo: string;
   observaciones: string;
-  tipoEsp: string;
+  tipo_esp: string;
   anexo?: File;
+  actividades: [{ actividad_id: number }];
 }

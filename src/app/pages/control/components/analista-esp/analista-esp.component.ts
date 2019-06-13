@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ServicioState } from '../../store/states';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from '../../../../services/helper.service';
 import { getServicios } from '../../store/selectors';
 import { FetchServicios } from '../../store/actions/servicios.actions';
 import { DetalleServicioComponent } from '../detalle-servicio/detalle-servicio.component';
 import { DetalleActividadesComponent } from '../detalle-actividades/detalle-actividades.component';
+import { ActividadService } from '../../../../shared/services/actividad.service';
+import { ActividadAplicadaService } from '../../../../shared/services/actividad-aplicada.service';
 
 @Component({
   selector: 'app-analista-esp',
@@ -16,11 +18,13 @@ import { DetalleActividadesComponent } from '../detalle-actividades/detalle-acti
 export class AnalistaEspComponent implements OnInit {
 
   servicios = [];
+  actividades = [];
 
   constructor(
     private store: Store<ServicioState>,
     private modalService: NgbModal,
     private helper: HelperService,
+    private actividadAplicadaService: ActividadAplicadaService,
   ) { }
 
   ngOnInit() {
@@ -39,8 +43,13 @@ export class AnalistaEspComponent implements OnInit {
     modalRef.componentInstance.servicio = item;
   }
 
-  verActividades(item: any) {
-    this.modalService.open(DetalleActividadesComponent);
+  verActividades(content, espId) {
+    this.actividadAplicadaService.getFromEsp(espId).subscribe(
+      response => {
+        this.actividades = response;
+        this.modalService.open(content);
+      }
+    );
   }
 
   selectAction() {

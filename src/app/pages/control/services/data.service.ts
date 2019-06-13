@@ -19,8 +19,8 @@ export class DataService {
   fetchServicios() {
     return forkJoin(
       this.espService.fetch(),
-      this.investigacionService.fetch(),
-      this.poligrafiaService.fetch(),
+      // this.investigacionService.fetch(),
+      // this.poligrafiaService.fetch(),
     ).pipe(
       map((data: any) => data.flat()),
     );

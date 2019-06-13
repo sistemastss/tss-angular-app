@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from './pages.component';
+import { ControlGuard } from './control/guards/control.guard';
 
 const routes: Routes = [
   { path: '',
     component: PagesComponent,
     children: [
-      {
-        path: 'control',
-        loadChildren: './servicio/servicio.module#ServicioModule'
-      },
       { path: 'nuevo-servicio',
         loadChildren: './solicitud-servicio/solicitud-servicio.module#SolicitudServicioModule'
       },
@@ -30,7 +27,12 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: './control/control.module#ControlModule'
+        loadChildren: './control/control.module#ControlModule',
+        // canActivate: [ControlGuard]
+      },
+      {
+        path: 'usuarios',
+        loadChildren: './usuarios/usuarios.module#UsuariosModule'
       },
       {
         path: 'informe',
@@ -38,8 +40,11 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'perfil',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
+      },
+      {
+        path: '',
       }
     ]
   },

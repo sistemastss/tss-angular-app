@@ -14,7 +14,7 @@
   <tr *ngFor="let item of servicios">
     <td> {{ item.centroCosto.id }} </td>
     <td> {{ item.fechaCreacion | date }} </td>
-    <td> {{ item.lugarDesarrollo }} </td>
+    <td> {{ item.lugar_desarrollo }} </td>
     <td> {{ item.centroCosto.solicitante }} </td>
     <td>
       <div *ngIf="item.tipoServicio === 'esp'" >

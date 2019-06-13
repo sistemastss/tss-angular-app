@@ -16,16 +16,16 @@ export class CentroCostoComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   form = this.fb.group({
-    clienteId               : [ '' ],
-    solicitante             : [ '', Validators.required ],
-    telefonoSolicitante     : [ '', Validators.required ],
-    emailSolicitante        : [ '', Validators.required ],
-    destinoFactura          : [ '', Validators.required ],
-    tipoSociedad            : [ '', Validators.required ],
-    tipoDocumento           : [ '', [ Validators.required, Validators.min(0) ] ],
-    documento               : [ '', [ Validators.required, Validators.min(0) ] ],
-    telefonoFactura         : [ '', [ Validators.required, Validators.min(0) ] ],
-    emailFactura            : [ '', [ Validators.required, Validators.email ] ],
+    cliente_id               : [ '' ],
+    solicitante              : [ '', Validators.required ],
+    telefono_solicitante     : [ '', Validators.required ],
+    email_solicitante        : [ '', Validators.required ],
+    destino_factura          : [ '', Validators.required ],
+    tipo_sociedad            : [ '', Validators.required ],
+    tipo_documento           : [ '', [ Validators.required, Validators.min(0) ] ],
+    documento                : [ '', [ Validators.required, Validators.min(0) ] ],
+    telefono_factura         : [ '', [ Validators.required, Validators.min(0) ] ],
+    email_factura            : [ '', [ Validators.required, Validators.email ] ],
   });
 
   ordenCompra = false;
@@ -40,22 +40,22 @@ export class CentroCostoComponent implements OnInit {
 
   ngOnInit() {
     this.form.setValue({
-        clienteId: '6',
+        cliente_id: '6',
         solicitante: 'alguien',
-        telefonoSolicitante: 12334323,
-        emailSolicitante: 'styven21121@gmail.com',
-        destinoFactura: 'alguien',
-        tipoSociedad: 'juridico',
-        tipoDocumento: 'cedula',
+        telefono_solicitante: 12334323,
+        email_solicitante: 'styven21121@gmail.com',
+        destino_factura: 'alguien',
+        tipo_sociedad: 'juridico',
+        tipo_documento: 'cedula',
         documento: 123123412,
-        telefonoFactura: 123123,
-        emailFactura: 'styven21121@gmail.com'
+        telefono_factura: 123123,
+        email_factura: 'styven21121@gmail.com'
       }
     );
 
 
     const userId = 6;
-    this.form.get('clienteId').patchValue(userId);
+    this.form.get('cliente_id').patchValue(userId);
   }
 
   async cargarArchivo(event) {
@@ -64,14 +64,14 @@ export class CentroCostoComponent implements OnInit {
 
     if (!allowedExtensions.test(file.name)) {
       alert('Archivo no valido');
-      event.targert.value = '';
+      event.target.value = '';
       return;
     }
 
     const base64 = await this.helper.readFile(file);
 
     this.form.get('anexo').patchValue({
-      fileName: file.name,
+      file_name: file.name,
       blob: base64
     });
   }
@@ -83,8 +83,8 @@ export class CentroCostoComponent implements OnInit {
 
   mostrarOrdenCompra(): void {
     if (!this.ordenCompra) {
-      if (this.form.get('numeroOrden') && this.form.get('anexo')) {
-        this.form.removeControl('numeroOrden');
+      if (this.form.get('numero_orden') && this.form.get('anexo')) {
+        this.form.removeControl('numero_orden');
         this.form.removeControl('anexo');
       }
       return;
@@ -93,7 +93,7 @@ export class CentroCostoComponent implements OnInit {
     const numeroOrden = this.fb.control('', [Validators.required, Validators.min(0)]);
     const anexo = this.fb.control('', Validators.required);
 
-    this.form.addControl('numeroOrden', numeroOrden);
+    this.form.addControl('numero_orden', numeroOrden);
     this.form.addControl('anexo', anexo);
   }
 

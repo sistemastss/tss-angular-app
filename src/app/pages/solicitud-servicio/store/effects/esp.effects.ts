@@ -19,7 +19,8 @@ export class EspEffects {
       this.store.select(getCentroCosto),
       this.store.select(getEsps),
     ),
-    map(([action, centroCosto, esps]) => ({ centroCosto, esps, })),
+    map(([action, centro_costo, esps]) => ({ centro_costo, esps, })),
+    tap(value => console.log(value)),
     mergeMap(value => this.espService.save(value).pipe(
       tap(() => this.redirect()),
       switchMap(() => EMPTY),
@@ -31,7 +32,7 @@ export class EspEffects {
     private store: Store<any>,
     private espService: EspService,
     private router: Router,
-  ) {}
+  ) { }
 
   redirect() {
     this.router.navigate(['../dashboard/cl']);

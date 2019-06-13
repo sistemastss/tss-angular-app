@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IEsp } from '../../interfaces/esp.interface';
+import { IEsp } from '../../../control/interfaces/esp.interface';
 
 export enum EspActionTypes {
   LoadEsps = '[Esp] Load Esps',

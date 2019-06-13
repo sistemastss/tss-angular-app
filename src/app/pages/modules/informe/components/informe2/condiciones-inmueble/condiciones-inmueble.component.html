@@ -1,0 +1,143 @@
+<div class="col-md-10 mx-auto card mb-4">
+  <div class="card-body">
+    <b class="card-title">Condiciones  fisicas del inmueble</b>
+    <hr>
+
+    <!-- Estado general -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="estadoGeneral">Estado general</label>
+      <div class="col-sm-8">
+        <select class="form-control" name="estadoGeneral" id="estadoGeneral" formControlName="estadoGeneral">
+          <option value="">Seleccione</option>
+          <option value="Bueno">Bueno</option>
+          <option value="Regular">Regular</option>
+          <option value="Malo">Malo</option>
+        </select>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['estadoGeneral'].invalid &&
+           form.controls['estadoGeneral'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Acabados -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="acabados">Acabados</label>
+      <div class="col-sm-8">
+        <select class="form-control" name="acabados" id="acabados" formControlName="acabados">
+          <option value="">Seleccione</option>
+          <option value="Completos">Completos</option>
+          <option value="Incompletos">Incompletos</option>
+        </select>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['acabados'].invalid &&
+           form.controls['acabados'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Dotacion -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="dotacion">
+        Dotación
+      </label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="dotacion"
+               id="dotacion"
+               placeholder="Ingrese la dotación"
+               formControlName="dotacion">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['dotacion'].invalid &&
+           form.controls['dotacion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Salubridad -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="salubridad">
+        Salubridad
+      </label>
+      <div class="col-sm-8">
+        <input type="text"
+               class="form-control"
+               name="salubridad"
+               id="salubridad"
+               placeholder="Ingrese el estado de salubridad"
+               formControlName="salubridad">
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['salubridad'].invalid &&
+           form.controls['salubridad'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Estrato -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="estrato">Estrato</label>
+      <div class="col-sm-8">
+        <select class="form-control" name="estrato" id="estrato" formControlName="estrato">
+          <option value="">Seleccione</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['estrato'].invalid &&
+           form.controls['estrato'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Servicio públicos	 -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="serviciosPublicos">
+        Servicios públicos
+      </label>
+      <div class="col-sm-8">
+        <textarea name="serviciosPublicos" id="serviciosPublicos"
+                  cols="30" rows="3"
+                  class="form-control"
+                  formControlName="serviciosPublicos"
+                  placeholder="Ingrese los servicios publicos">
+        </textarea>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['serviciosPublicos'].invalid &&
+           form.controls['serviciosPublicos'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Distribución de la vivienda	 -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="distribucion">
+        Distribución de la vivienda
+      </label>
+      <div class="col-sm-8">
+        <textarea name="serviciosPublicos" id="distribucion"
+                  cols="30" rows="3"
+                  class="form-control"
+                  formControlName="distribucion"
+                  placeholder="Ingrese la distribución de la vivienda	">
+        </textarea>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['distribucion'].invalid &&
+           form.controls['distribucion'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

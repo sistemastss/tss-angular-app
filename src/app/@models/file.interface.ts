@@ -1,4 +1,4 @@
 export interface File {
-  fileName: string;
+  file_name: string;
   blob: any;
 }

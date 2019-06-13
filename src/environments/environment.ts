@@ -7,7 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 export const environment = {
   production: false,
   url: 'http://localhost:4200/',
-  api: 'http://localhost:3000',
+  api: 'http://localhost:8000/api',
   httpOpts: {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

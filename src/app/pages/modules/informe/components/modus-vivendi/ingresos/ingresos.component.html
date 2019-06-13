@@ -1,0 +1,56 @@
+<!-- Ingresos-->
+<div class="col-md-10 mx-auto card mb-4">
+  <div [formGroup]="form" class="card-body ">
+    <b class="card-title">Ingresos mensuales</b>
+    <hr>
+
+    <!-- Salario -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="salario">Salario</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control"
+               id="salario"
+               formControlName="salario"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['salario'].invalid &&
+                     form.controls['salario'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- otrosIngresos -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="otrosIngresos">Otros ingresos</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="otrosIngresos"
+               formControlName="otrosIngresos"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['otrosIngresos'].invalid &&
+                     form.controls['otrosIngresos'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Salario Conyugue -->
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="salarioConyugue">Salario Conyugue</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control"
+               id="salarioConyugue"
+               formControlName="salarioConyugue"
+               required>
+        <div class="ng-invalid-feedback"
+             *ngIf="(form.controls['salarioConyugue'].invalid &&
+                     form.controls['salarioConyugue'].dirty)">
+          El campo es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

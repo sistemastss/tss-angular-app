@@ -21,7 +21,7 @@
                     <select name="cliente"<
                             id="cliente"
                             class="form-control"
-                            formControlName="clienteId">
+                            formControlName="cliente_id">
                       <option value="">Seleccione un cliente</option>
                       <option *ngFor="let cliente of solicitud-servicio"
                               [value]="cliente.id">{{cliente.nombre}}
@@ -56,8 +56,8 @@
                   <div class="col-sm-9">
                     <input type="number" id="telefonoSolicitante"
                            placeholder="Ingrese el telefono del solicitante"
-                           class="form-control" formControlName="telefonoSolicitante">
-                    <div [hidden]="form.controls['telefonoSolicitante'].valid  || form.controls['telefonoSolicitante'].pristine">
+                           class="form-control" formControlName="telefono_solicitante">
+                    <div [hidden]="form.controls['telefono_solicitante'].valid  || form.controls['telefono_solicitante'].pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -74,8 +74,8 @@
                     <input type="email" id="emailSolicitante"
                            placeholder="Ingrese un correo electronico valido"
                            class="form-control"
-                           formControlName="emailSolicitante">
-                    <div [hidden]="form.controls['emailSolicitante'].valid  || form.controls['emailSolicitante'].pristine">
+                           formControlName="email_solicitante">
+                    <div [hidden]="form.controls['email_solicitante'].valid  || form.controls['email_solicitante'].pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -118,8 +118,8 @@
                              class="form-control"
                              id="num-orden-compra"
                              placeholder="Ingrese el numero de la orden de compra"
-                             formControlName="numeroOrden">
-                      <div [hidden]="form.controls['numeroOrden'].valid  || form.controls['numeroOrden'].pristine">
+                             formControlName="numero_orden">
+                      <div [hidden]="form.controls['numero_orden'].valid  || form.controls['numero_orden'].pristine">
                         <div class="ng-invalid-feedback">
                           El campo es requerido
                         </div>
@@ -157,8 +157,8 @@
                     <input type="text" id="destinoFactura"
                            placeholder="Ingrese el nombre del destinatario de la factura"
                            class="form-control"
-                           formControlName="destinoFactura">
-                    <div [hidden]="form.controls['destinoFactura'].valid  || form.controls['destinoFactura'].pristine">
+                           formControlName="destino_factura">
+                    <div [hidden]="form.controls['destino_factura'].valid  || form.controls['destino_factura'].pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -176,12 +176,12 @@
                     <select name="tipoSociedad"
                             class="form-control"
                             id="tipoSociedad"
-                            formControlName="tipoSociedad">
+                            formControlName="tipo_sociedad">
                       <option [selected]="true" value="">Seleccione</option>
                       <option value="juridico">Juridico</option>
                       <option value="natural">Natural</option>
                     </select>
-                    <div [hidden]="form.controls['tipoSociedad'].valid  || form.controls['tipoSociedad'].pristine">
+                    <div [hidden]="form.controls['tipo_sociedad'].valid  || form.controls['tipo_sociedad'].pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -198,12 +198,12 @@
                     <select name="tipoIdentificacion"
                             class="form-control"
                             id="tipoDocumento"
-                            formControlName="tipoDocumento">
+                            formControlName="tipo_documento">
                       <option [selected]="true" value="">Seleccione</option>
                       <option value="juridico">Cedula</option>
                       <option value="natural">Nit</option>
                     </select>
-                    <div [hidden]="form.controls['tipoDocumento'].valid  || form.controls['tipoDocumento'].pristine">
+                    <div [hidden]="form.controls['tipo_documento'].valid  || form.controls['tipo_documento'].pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -239,8 +239,8 @@
                     <input type="number" id="telefonoFactura"
                            placeholder="Telefono del facturante"
                            class="form-control"
-                           formControlName="telefonoFactura">
-                    <div [hidden]="form.controls['telefonoFactura'].valid  || form.controls['telefonoFactura'].pristine">
+                           formControlName="telefono_factura">
+                    <div [hidden]="form.controls['telefono_factura'].valid  || form.controls['telefono_factura'].pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -257,8 +257,8 @@
                     <input type="email" id="emailFactura"
                            placeholder="Ingrese un correo valido"
                            class="form-control"
-                           formControlName="emailFactura">
-                    <div [hidden]="form.controls['emailFactura'].valid  || form.controls['emailFactura'].pristine">
+                           formControlName="email_factura">
+                    <div [hidden]="form.controls['email_factura'].valid  || form.controls['email_factura'].pristine">
                       <div class="ng-invalid-feedback">
                         El campo es requerido
                       </div>
@@ -286,3 +286,6 @@
     </div>
   </div>
 </div>
+
+
+<pre>{{ form.value | json }}</pre>

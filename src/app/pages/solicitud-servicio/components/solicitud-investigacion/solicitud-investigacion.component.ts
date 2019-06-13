@@ -24,7 +24,7 @@ export class SolicitudInvestigacionComponent implements OnInit {
   @ViewChild('inputFile') inputFile: ElementRef;
 
   form = this.fb.group({
-    lugarDesarrollo : ['', Validators.required ],
+    lugar_desarrollo : ['', Validators.required ],
     descripcion     : ['', Validators.required ],
     anexo           : '',
   });
@@ -68,7 +68,7 @@ export class SolicitudInvestigacionComponent implements OnInit {
     const base64 = await this.helper.readFile(file);
 
     const data: File = {
-      fileName: file.name,
+      file_name: file.name,
       blob: base64
     };
 

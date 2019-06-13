@@ -1,0 +1,26 @@
+<div class="card-header bg-white">
+  <h4 class="text-center">Estudio de seguridad</h4>
+</div>
+
+<div class="card-body bg-light">
+
+  <!-- Informacion familiar card-->
+  <app-info-personal></app-info-personal>
+
+  <!-- Hijos -->
+  <app-hijos></app-hijos>
+
+  <!-- Informacion familiar -->
+  <app-informacion-familiar></app-informacion-familiar>
+
+  <!-- Referencias -->
+  <app-referencias></app-referencias>
+
+</div>
+
+<div class="card-footer bg-white">
+  <button class="btn btn-primary" (click)="saveAll()" *ngIf="!dataLoaded">Guardar</button>
+</div>
+
+
+

@@ -34,7 +34,7 @@ export class VisitaDomiciliariaComponent extends ActividadClass implements OnIni
     },
     {
       title: 'Entorno Habitacional',
-      path: '../visita-domiciliaria/entorno-habitacional'
+      path: '../visita-domiciliaria/informe2'
     },
     {
       title: 'Modus vivendi',

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IProgramacion } from '../../interfaces/programacion.interface';
+import { Programacion } from '../../../control/interfaces/programacion.interface';
 
 export enum ProgramacionActionTypes {
   LoadProgramacion = '[Programacion] Load Programacion',
@@ -16,19 +16,19 @@ export class LoadProgramacion implements Action {
 export class LoadProgramacionSuccess implements Action {
   readonly type = ProgramacionActionTypes.LoadProgramacionSuccess;
 
-  constructor(public payload: IProgramacion) {}
+  constructor(public payload: Programacion) {}
 }
 
 export class SaveProgramacion implements Action {
   readonly type = ProgramacionActionTypes.SaveProgramacion;
 
-  constructor(public payload: IProgramacion) {}
+  constructor(public payload: Programacion) {}
 }
 
 export class UpdateProgramacion implements Action {
   readonly type = ProgramacionActionTypes.UpdateProgramacion;
 
-  constructor(public payload: IProgramacion) {}
+  constructor(public payload: Programacion) {}
 }
 
 export type ProgramacionActions =
