@@ -1,5 +1,68 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["control-control-module"],{
 
+/***/ "./src/app/pages/control/components/administrador/administrador.component.css":
+/*!************************************************************************************!*\
+  !*** ./src/app/pages/control/components/administrador/administrador.component.css ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2NvbnRyb2wvY29tcG9uZW50cy9hZG1pbmlzdHJhZG9yL2FkbWluaXN0cmFkb3IuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/pages/control/components/administrador/administrador.component.html":
+/*!*************************************************************************************!*\
+  !*** ./src/app/pages/control/components/administrador/administrador.component.html ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  administrador works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/control/components/administrador/administrador.component.ts":
+/*!***********************************************************************************!*\
+  !*** ./src/app/pages/control/components/administrador/administrador.component.ts ***!
+  \***********************************************************************************/
+/*! exports provided: AdministradorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdministradorComponent", function() { return AdministradorComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AdministradorComponent = /** @class */ (function () {
+    function AdministradorComponent() {
+    }
+    AdministradorComponent.prototype.ngOnInit = function () {
+    };
+    AdministradorComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-administrador',
+            template: __webpack_require__(/*! ./administrador.component.html */ "./src/app/pages/control/components/administrador/administrador.component.html"),
+            styles: [__webpack_require__(/*! ./administrador.component.css */ "./src/app/pages/control/components/administrador/administrador.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], AdministradorComponent);
+    return AdministradorComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/pages/control/components/analista-esp/analista-esp.component.html":
 /*!***********************************************************************************!*\
   !*** ./src/app/pages/control/components/analista-esp/analista-esp.component.html ***!
@@ -7,7 +70,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered table-hover table-sm\">\n  <thead>\n    <tr class=\"text-capitalize\">\n      <th>centro de costo</th>\n      <th>fecha creación</th>\n      <th>lugar de desarrollo</th>\n      <th>solicitante</th>\n      <th>Servicio solicitado</th>\n      <th>actividades</th>\n      <th>estado</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let item of servicios\">\n      <td> {{ item.centro_costo.id }} </td>\n      <td> {{ item.fecha_creacion | date }} </td>\n      <td> {{ item.lugar_desarrollo }} </td>\n      <td> {{ item.centro_costo.solicitante }} </td>\n      <td>\n        <div *ngIf=\"item.tipo_servicio === 'esp'\" >\n          <div class=\"form-group text-center\">\n            <button class=\"btn btn-info text-center\" (click)=\"verDetalle(item)\">\n              <i class=\"fa fa-eye\"></i>\n              ESP\n            </button>\n          </div>\n        </div>\n        <div *ngIf=\"item.tipo_servicio === 'inv'\" >\n          <div class=\"form-group text-center\">\n            <div class=\"form-group text-center\">\n              INVESTIGACION\n            </div>\n          </div>\n        </div>\n        <div *ngIf=\"item.tipo_servicio === 'pol'\">\n          <div class=\"form-group text-center\">\n            <button class=\"btn btn-info text-center\" (click)=\"verDetalle(item)\">\n              <i class=\"fa fa-eye\"></i>\n              POLIGRAFIA\n            </button>\n          </div>\n        </div>\n      </td>\n      <td>\n        <div class=\"form-group text-center\">\n          <button class=\"btn btn-danger text-center\" (click)=\"verActividades(mdActividad, item.id)\">\n            <i class=\"fa fa-eye\"></i>\n            Ver\n          </button>\n        </div>\n      </td>\n      <td>\n\n        <div *ngIf=\"item.tipo_servicio == 'pol' || item.tipo_servicio == 'inv'\">\n          <div [ngSwitch]=\"item.estado\">\n            <span *ngSwitchCase=\"'proceso'\" class=\"badge badge badge-warning\">{{ item.estado }} </span>\n            <span *ngSwitchCase=\"'completado'\" class=\"badge badge badge-warning\"> {{ item.estado }} </span>\n            <span *ngSwitchCase=\"'alerta'\" class=\"badge badge badge-danger\" placement=\"top\" ngbTooltip=\"Comunicarse con Tss\">\n              {{ item.estado }}\n            </span>\n            <span *ngSwitchCase=\"'finalizado'\" class=\"badge badge badge-success\"> {{ item.estado }} </span>\n          </div>\n        </div>\n\n        <div *ngIf=\"item.tipo_servicio == 'esp'\">\n          <div [ngSwitch]=\"item.estado\">\n            <button *ngSwitchCase=\"'proceso'\" class=\"btn btn-sm btn-warning\">\n              <i class=\"fa fas-exclamation\"></i>\n              {{ item.estado }} </button>\n            <button *ngSwitchCase=\"'completado'\" class=\"btn btn-sm btn-warning\"> {{ item.estado }} </button>\n            <button *ngSwitchCase=\"'alerta'\" class=\"btn btn-sm btn-danger\" placement=\"top\" ngbTooltip=\"Comunicarse con Tss\">\n              {{ item.estado }}\n            </button>\n            <button *ngSwitchCase=\"'finalizado'\" class=\"btn btn-sm btn-success\"> {{ item.estado }} </button>\n          </div>\n        </div>\n\n      </td>\n      <td>\n\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n\n<ng-template #mdActividad let-modal>\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\" id=\"exampleModalVerticalLabel\">Actividades Aplicadas</h5>\n    <button type=\"button\" class=\"close\" (click)=\"modal.close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <ul class=\"list-group\">\n      <li class=\"list-group-item\">\n        <div class=\"row\">\n          <div class=\"col-sm-6\">\n            <span>Actividad</span>\n          </div>\n          <div class=\"col-sm-6 text-right\">\n            <span>Estado</span>\n          </div>\n        </div>\n      </li>\n      <li class=\"list-group-item\" *ngFor=\"let actividad of actividades\">\n        <div class=\"row\">\n          <div class=\"col-sm-6\">\n            <a >{{ actividad.nombre }}</a>\n          </div>\n          <div class=\"col-sm-6 text-right\">\n            <div [ngSwitch]=\"actividad.estado\">\n              <div *ngSwitchCase=\"'cargado'\">\n                <span class=\"badge badge-pill service-loaded\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'asignado'\">\n                <span class=\"badge badge-pill service-asigned\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'aceptado'\">\n                <span class=\"badge badge-pill service-acepted\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'proceso'\">\n                <span class=\"badge badge-pill service-process\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'completado'\">\n                <span class=\"badge badge-pill service-finished\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'alerta'\">\n                <span class=\"badge badge-pill  badge-danger\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'finalizado'\">\n                <span class=\"badge badge-pill  badge-success\"> {{ actividad.estado }} </span>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    </ul>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"modal.close()\">Cerrar</button>\n  </div>\n</ng-template>\n"
+module.exports = "<table class=\"table table-bordered table-hover table-sm\">\n  <thead>\n    <tr class=\"text-capitalize\">\n      <th>centro de costo</th>\n      <th>fecha creación</th>\n      <th>lugar de desarrollo</th>\n      <th>solicitante</th>\n      <th>Servicio solicitado</th>\n      <th>actividades</th>\n      <th>estado</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let item of servicios\">\n      <td> {{ item.centro_costo.id }} </td>\n      <td> {{ item.fecha_creacion | date }} </td>\n      <td> {{ item.lugar_desarrollo }} </td>\n      <td> {{ item.centro_costo.solicitante }} </td>\n      <td>\n        <div *ngIf=\"item.tipo_servicio === 'esp'\" >\n          <div class=\"form-group text-center\">\n            <button class=\"btn btn-info text-center\" (click)=\"verDetalle(item)\">\n              <i class=\"fa fa-eye\"></i>\n              ESP\n            </button>\n          </div>\n        </div>\n      </td>\n      <td>\n        <div class=\"form-group text-center\">\n          <button class=\"btn btn-danger text-center\" (click)=\"verActividades(mdActividad, item.id)\">\n            <i class=\"fa fa-eye\"></i>\n            Ver\n          </button>\n        </div>\n      </td>\n      <td>\n        <div [ngSwitch]=\"item.estado\">\n          <button *ngSwitchCase=\"'proceso'\" class=\"btn btn-sm btn-warning\">\n            <i class=\"fa fas-exclamation\"></i>\n            {{ item.estado }} </button>\n          <button *ngSwitchCase=\"'completado'\" class=\"btn btn-sm btn-warning\"> {{ item.estado }} </button>\n          <button *ngSwitchCase=\"'alerta'\" class=\"btn btn-sm btn-danger\" placement=\"top\" ngbTooltip=\"Comunicarse con Tss\">\n            {{ item.estado }}\n          </button>\n          <button *ngSwitchCase=\"'finalizado'\" class=\"btn btn-sm btn-success\"> {{ item.estado }} </button>\n        </div>\n      </td>\n      <td>\n\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n\n<ng-template #mdActividad let-modal>\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\" id=\"exampleModalVerticalLabel\">Actividades Aplicadas</h5>\n    <button type=\"button\" class=\"close\" (click)=\"modal.close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <ul class=\"list-group\">\n      <li class=\"list-group-item\">\n        <div class=\"row\">\n          <div class=\"col-sm-6\">\n            <span>Actividad</span>\n          </div>  \n          <div class=\"col-sm-6 text-right\">\n            <span>Estado</span>\n          </div>\n        </div>\n      </li>\n      <li class=\"list-group-item\" *ngFor=\"let actividad of actividades\">\n        <div class=\"row\">\n          <div class=\"col-sm-6\">\n            <div *ngIf=\"actividad.codigo === 'VDS'; else sinLink;\">\n                <button class=\"btn btn-link\" (click)=\"open(mdFreelance, actividad)\">{{ actividad.nombre }}</button>\n            </div>\n            <ng-template #sinLink>\n                <a >{{ actividad.nombre }}</a>\n            </ng-template>\n          </div>\n          <div class=\"col-sm-6 text-right\">\n            <div [ngSwitch]=\"actividad.estado\">\n              <div *ngSwitchCase=\"'cargado'\">\n                <span class=\"badge badge-pill service-loaded\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'asignado'\">\n                <span class=\"badge badge-pill service-asigned\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'aceptado'\">\n                <span class=\"badge badge-pill service-acepted\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'proceso'\">\n                <span class=\"badge badge-pill service-process\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'completado'\">\n                <span class=\"badge badge-pill service-finished\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'alerta'\">\n                <span class=\"badge badge-pill  badge-danger\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'finalizado'\">\n                <span class=\"badge badge-pill  badge-success\"> {{ actividad.estado }} </span>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    </ul>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"modal.close()\">Cerrar</button>\n  </div>\n</ng-template>\n\n\n<ng-template #mdFreelance let-modal>\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\">Actividades Aplicadas</h5>\n    <button type=\"button\" class=\"close\" (click)=\"modal.close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <div class=\"form-group\">\n      <label for=\"freelance\">Seleccionar freelance</label>\n      <select name=\"freelance\" id=\"freelance\" class=\"form-control\" [(ngModel)]=\"freelanceModel.freelance_id\">\n        <option [selected]=\"true\">Seleccione una opcion</option>\n        <option *ngFor=\"let item of freelances\" [value]=\"item.id\">{{ item.nombre }}</option>\n      </select>\n    </div>\n  </div>\n  <div class=\"modal-footer\">\n    <button class=\"btn btn-outline-primary\" [disabled]=\"freelanceModel.freelance_id == 0\" (click)=\"asignarFreelance()\">Asignar Visita domiciliaria</button>\n  </div>\n</ng-template>\n\n"
 
 /***/ }),
 
@@ -27,8 +90,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_helper_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/helper.service */ "./src/app/services/helper.service.ts");
 /* harmony import */ var _store_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store/selectors */ "./src/app/pages/control/store/selectors/index.ts");
 /* harmony import */ var _store_actions_servicios_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store/actions/servicios.actions */ "./src/app/pages/control/store/actions/servicios.actions.ts");
-/* harmony import */ var _detalle_servicio_detalle_servicio_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../detalle-servicio/detalle-servicio.component */ "./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.ts");
+/* harmony import */ var _modal_servicio_modal_servicio_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modal-servicio/modal-servicio.component */ "./src/app/pages/control/components/modal-servicio/modal-servicio.component.ts");
 /* harmony import */ var _shared_services_actividad_aplicada_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../shared/services/actividad-aplicada.service */ "./src/app/shared/services/actividad-aplicada.service.ts");
+/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/pages/control/services/data.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -46,25 +110,40 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AnalistaEspComponent = /** @class */ (function () {
-    function AnalistaEspComponent(store, modalService, helper, actividadAplicadaService) {
+    function AnalistaEspComponent(store, modalService, helper, actividadAplicadaService, dataService) {
         this.store = store;
         this.modalService = modalService;
         this.helper = helper;
         this.actividadAplicadaService = actividadAplicadaService;
+        this.dataService = dataService;
         this.servicios = [];
         this.actividades = [];
+        this.freelances = [];
+        this.freelanceModel = {
+            freelance_id: 0,
+        };
     }
     AnalistaEspComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.store.select(_store_selectors__WEBPACK_IMPORTED_MODULE_4__["getServicios"]).subscribe(function (state) { return _this.servicios = state; });
         this.store.dispatch(new _store_actions_servicios_actions__WEBPACK_IMPORTED_MODULE_5__["FetchServicios"]());
+        this.dataService.getFreelances().subscribe(function (response) { return _this.freelances = response; });
+    };
+    AnalistaEspComponent.prototype.ngOnDestroy = function () {
+        console.log('Destroy aesp');
+        this.store.dispatch(new _store_actions_servicios_actions__WEBPACK_IMPORTED_MODULE_5__["RemoveServicios"]());
+    };
+    AnalistaEspComponent.prototype.open = function (content, item) {
+        this.modalRef = this.modalService.open(content);
+        this.selectedItem = item;
     };
     AnalistaEspComponent.prototype.makeFileUrl = function (fileName) {
         return this.helper.makeFileUrl(fileName);
     };
     AnalistaEspComponent.prototype.verDetalle = function (item) {
-        var modalRef = this.modalService.open(_detalle_servicio_detalle_servicio_component__WEBPACK_IMPORTED_MODULE_6__["DetalleServicioComponent"], { size: 'lg' });
+        var modalRef = this.modalService.open(_modal_servicio_modal_servicio_component__WEBPACK_IMPORTED_MODULE_6__["ModalServicioComponent"], { size: 'lg' });
         modalRef.componentInstance.servicio = item;
     };
     AnalistaEspComponent.prototype.verActividades = function (content, espId) {
@@ -72,6 +151,20 @@ var AnalistaEspComponent = /** @class */ (function () {
         this.actividadAplicadaService.getFromEsp(espId).subscribe(function (response) {
             _this.actividades = response;
             _this.modalService.open(content);
+        });
+    };
+    AnalistaEspComponent.prototype.asignarFreelance = function () {
+        var _this = this;
+        ///
+        var data = {
+            usuario_id: this.freelanceModel.freelance_id,
+            estado: 'asignado',
+        };
+        this.dataService.asignarVisitaDom(this.selectedItem.id, data).subscribe(function () {
+            _this.modalRef.close();
+            _this.actividades[_this.actividades.indexOf(_this.selectedItem)].estado = data.estado;
+        }, function () {
+            alert('Ocurrio un error, intente mas tarde');
         });
     };
     AnalistaEspComponent.prototype.selectAction = function () {
@@ -84,7 +177,8 @@ var AnalistaEspComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["Store"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"],
             _services_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"],
-            _shared_services_actividad_aplicada_service__WEBPACK_IMPORTED_MODULE_7__["ActividadAplicadaService"]])
+            _shared_services_actividad_aplicada_service__WEBPACK_IMPORTED_MODULE_7__["ActividadAplicadaService"],
+            _services_data_service__WEBPACK_IMPORTED_MODULE_8__["DataService"]])
     ], AnalistaEspComponent);
     return AnalistaEspComponent;
 }());
@@ -100,7 +194,7 @@ var AnalistaEspComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered table-hover table-sm\">\n  <thead>\n    <tr class=\"text-capitalize\">\n      <th>centro de costo</th>\n      <th>fecha creación</th>\n      <th>lugar de desarrollo</th>\n      <th>solicitante</th>\n      <th>Servicio solicitado</th>\n      <th>informe</th>\n      <th>estado</th>\n    </tr>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let item of servicios\">\n    <td> {{ item.centroCosto.id }} </td>\n    <td> {{ item.fechaCreacion | date }} </td>\n    <td> {{ item.lugar_desarrollo }} </td>\n    <td> {{ item.centroCosto.solicitante }} </td>\n    <td>\n      <div *ngIf=\"item.tipoServicio === 'esp'\" >\n        <div class=\"form-group text-center\">\n          <button class=\"btn btn-info text-center\" (click)=\"verDetalle(item)\">\n            <i class=\"fa fa-eye\"></i>\n            ESP\n          </button>\n        </div>\n      </div>\n      <div *ngIf=\"item.tipoServicio === 'inv'\" >\n        <div class=\"form-group text-center\">\n          <div class=\"form-group text-center\">\n            INVESTIGACION\n          </div>\n        </div>\n      </div>\n      <div *ngIf=\"item.tipoServicio === 'pol'\">\n        <div class=\"form-group text-center\">\n          <button class=\"btn btn-info text-center\" (click)=\"verDetalle(item)\">\n            <i class=\"fa fa-eye\"></i>\n            POLIGRAFIA\n          </button>\n        </div>\n      </div>\n    </td>\n    <td>\n      <div class=\"form-group text-center\" *ngIf=\"item.informe\">\n        <a [href]=\"makeFileUrl(item.informe)\" class=\"btn btn-primary\">\n          <i class=\"fa fa-file\"></i>\n        </a>\n      </div>\n    </td>\n\n    <td>\n\n      <div *ngIf=\"item.tipoServicio == 'pol' || item.tipoServicio == 'inv'\">\n        <div [ngSwitch]=\"item.estado\">\n          <span *ngSwitchCase=\"'proceso'\" class=\"badge badge badge-warning\">{{ item.estado }} </span>\n          <span *ngSwitchCase=\"'completado'\" class=\"badge badge badge-warning\"> {{ item.estado }} </span>\n          <span *ngSwitchCase=\"'alerta'\" class=\"badge badge badge-danger\" placement=\"top\" ngbTooltip=\"Comunicarse con Tss\">\n            {{ item.estado }}\n          </span>\n          <span *ngSwitchCase=\"'finalizado'\" class=\"badge badge badge-success\"> {{ item.estado }} </span>\n        </div>\n      </div>\n\n      <div *ngIf=\"item.tipoServicio == 'esp'\">\n        <div [ngSwitch]=\"item.estado\">\n          <button *ngSwitchCase=\"'proceso'\" class=\"btn btn-sm btn-warning\">\n            <i class=\"fa fas-exclamation\"></i>\n            {{ item.estado }} </button>\n          <button *ngSwitchCase=\"'completado'\" class=\"btn btn-sm btn-warning\"> {{ item.estado }} </button>\n          <button *ngSwitchCase=\"'alerta'\" class=\"btn btn-sm btn-danger\" placement=\"top\" ngbTooltip=\"Comunicarse con Tss\">\n            {{ item.estado }}\n          </button>\n          <button *ngSwitchCase=\"'finalizado'\" class=\"btn btn-sm btn-success\"> {{ item.estado }} </button>\n        </div>\n      </div>\n\n    </td>\n  </tr>\n  </tbody>\n</table>\n"
+module.exports = "<table class=\"table table-bordered table-hover table-sm\">\n  <thead>\n    <tr class=\"text-capitalize\">\n      <th>centro de costo</th>\n      <th>fecha creación</th>\n      <th>lugar de desarrollo</th>\n      <th>solicitante</th>\n      <th>Servicio solicitado</th>\n      <th>informe</th>\n      <th>estado</th>\n    </tr>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let item of servicios\">\n    <td> {{ item.centro_costo.id }} </td>\n    <td> {{ item.fecha_creacion | date }} </td>\n    <td> {{ item.lugar_desarrollo }} </td>\n    <td> {{ item.centro_costo.solicitante }} </td>\n    <td>\n      <div *ngIf=\"item.tipo_servicio === 'esp'\" >\n        <div class=\"form-group text-center\">\n          <button class=\"btn btn-sm btn-info text-center\" (click)=\"verDetalle(item)\">\n            <i class=\"fa fa-eye\"></i>\n            ESP\n          </button>\n        </div>\n      </div>\n      <div *ngIf=\"item.tipo_servicio === 'inv'\" >\n        <div class=\"form-group text-center\">\n          <div class=\"form-group text-center\">\n            INVESTIGACION\n          </div>\n        </div>\n      </div>\n      <div *ngIf=\"item.tipo_servicio === 'pol'\">\n        <div class=\"form-group text-center\">\n          <button class=\"btn btn-sm btn-info text-center\" (click)=\"verDetalle(item)\">\n            <i class=\"fa fa-eye\"></i>\n            POLIGRAFIA\n          </button>\n        </div>\n      </div>\n    </td>\n    <td>\n      <div class=\"form-group text-center\" *ngIf=\"item.informe\">\n        <a [href]=\"makeFileUrl(item.informe)\" class=\"btn btn-primary\">\n          <i class=\"fa fa-file\"></i>\n        </a>\n      </div>\n    </td>\n\n    <td>\n\n      <div *ngIf=\"item.tipo_servicio == 'pol' || item.tipo_servicio == 'inv'\">\n        <div [ngSwitch]=\"item.estado\">\n          <span *ngSwitchCase=\"'proceso'\" class=\"badge badge badge-warning\">{{ item.estado }} </span>\n          <span *ngSwitchCase=\"'completado'\" class=\"badge badge badge-warning\"> {{ item.estado }} </span>\n          <span *ngSwitchCase=\"'alerta'\" class=\"badge badge badge-danger\" placement=\"top\" ngbTooltip=\"Comunicarse con Tss\">\n            {{ item.estado }}\n          </span>\n          <span *ngSwitchCase=\"'finalizado'\" class=\"badge badge badge-success\"> {{ item.estado }} </span>\n        </div>\n      </div>\n\n      <div *ngIf=\"item.tipo_servicio == 'esp'\">\n        <div [ngSwitch]=\"item.estado\">\n          <button *ngSwitchCase=\"'proceso'\" class=\"btn btn-sm btn-warning\" (click)=\"verActividades(item)\">\n            <i class=\"fa fas-eye\"></i>\n            {{ item.estado }} </button>\n          <button *ngSwitchCase=\"'completado'\" class=\"btn btn-sm btn-warning\"> {{ item.estado }} </button>\n          <button *ngSwitchCase=\"'alerta'\" class=\"btn btn-sm btn-danger\" placement=\"top\" ngbTooltip=\"Comunicarse con Tss\">\n            {{ item.estado }}\n          </button>\n          <button *ngSwitchCase=\"'finalizado'\" class=\"btn btn-sm btn-success\"> {{ item.estado }} </button>\n        </div>\n      </div>\n\n    </td>\n  </tr>\n  </tbody>\n</table>\n"
 
 /***/ }),
 
@@ -120,7 +214,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 /* harmony import */ var _store_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store/selectors */ "./src/app/pages/control/store/selectors/index.ts");
 /* harmony import */ var _store_actions_servicios_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store/actions/servicios.actions */ "./src/app/pages/control/store/actions/servicios.actions.ts");
-/* harmony import */ var _detalle_servicio_detalle_servicio_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../detalle-servicio/detalle-servicio.component */ "./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.ts");
+/* harmony import */ var _modal_servicio_modal_servicio_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modal-servicio/modal-servicio.component */ "./src/app/pages/control/components/modal-servicio/modal-servicio.component.ts");
+/* harmony import */ var src_app_pages_shared_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/pages/shared/services */ "./src/app/pages/shared/services/index.ts");
+/* harmony import */ var _detalle_actividades_detalle_actividades_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../detalle-actividades/detalle-actividades.component */ "./src/app/pages/control/components/detalle-actividades/detalle-actividades.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -137,11 +233,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var ClienteComponent = /** @class */ (function () {
-    function ClienteComponent(store, modalService, helper) {
+    function ClienteComponent(store, modalService, helper, espService) {
         this.store = store;
         this.modalService = modalService;
         this.helper = helper;
+        this.espService = espService;
         this.servicios = [];
     }
     ClienteComponent.prototype.ngOnInit = function () {
@@ -153,10 +252,15 @@ var ClienteComponent = /** @class */ (function () {
         return this.helper.makeFileUrl(fileName);
     };
     ClienteComponent.prototype.verDetalle = function (item) {
-        var modalRef = this.modalService.open(_detalle_servicio_detalle_servicio_component__WEBPACK_IMPORTED_MODULE_6__["DetalleServicioComponent"], { size: 'lg' });
+        var modalRef = this.modalService.open(_modal_servicio_modal_servicio_component__WEBPACK_IMPORTED_MODULE_6__["ModalServicioComponent"], { size: 'lg' });
         modalRef.componentInstance.servicio = item;
     };
     ClienteComponent.prototype.verActividades = function (item) {
+        var _this = this;
+        this.espService.getActividades(item.id).subscribe(function (response) {
+            var modalRef = _this.modalService.open(_detalle_actividades_detalle_actividades_component__WEBPACK_IMPORTED_MODULE_8__["DetalleActividadesComponent"]);
+            modalRef.componentInstance.actividades = response;
+        }, function () { return alert('Este servicio no tiene actividades'); });
     };
     ClienteComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -165,7 +269,8 @@ var ClienteComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"],
-            _services_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"]])
+            _services_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"],
+            src_app_pages_shared_services__WEBPACK_IMPORTED_MODULE_7__["EspService"]])
     ], ClienteComponent);
     return ClienteComponent;
 }());
@@ -181,7 +286,7 @@ var ClienteComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-header\">\n  <h5 class=\"modal-title\" id=\"exampleModalVerticalLabel\">Actividades Aplicadas</h5>\n  <button type=\"button\" class=\"close\" (click)=\"activedModal.close()\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <span>Actividad</span>\n        </div>\n        <div class=\"col-sm-6 text-right\">\n          <span>Estado</span>\n        </div>\n      </div>\n    </li>\n    <li class=\"list-group-item\" *ngFor=\"let actividad of actividades\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <a >\n            {{ actividad.nombre }}\n          </a>\n        </div>\n        <div class=\"col-sm-6 text-right\">\n          <div [ngSwitch]=\"actividad.estado\">\n            <div *ngSwitchCase=\"'cargado'\">\n              <span class=\"badge badge-pill service-loaded\"> {{ actividad.estado }} </span>\n            </div>\n            <div *ngSwitchCase=\"'asignado'\">\n              <span class=\"badge badge-pill service-asigned\"> {{ actividad.estado }} </span>\n            </div>\n            <div *ngSwitchCase=\"'aceptado'\">\n              <span class=\"badge badge-pill service-acepted\"> {{ actividad.estado }} </span>\n            </div>\n            <div *ngSwitchCase=\"'proceso'\">\n              <span class=\"badge badge-pill service-process\"> {{ actividad.estado }} </span>\n            </div>\n            <div *ngSwitchCase=\"'completado'\">\n              <span class=\"badge badge-pill service-finished\"> {{ actividad.estado }} </span>\n            </div>\n            <div *ngSwitchCase=\"'alerta'\">\n              <span class=\"badge badge-pill  badge-danger\"> {{ actividad.estado }} </span>\n            </div>\n            <div *ngSwitchCase=\"'finalizado'\">\n              <span class=\"badge badge-pill  badge-success\"> {{ actividad.estado }} </span>\n            </div>\n          </div>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"activedModal.close()\">Cerrar</button>\n</div>"
+module.exports = "<div class=\"modal-header\">\n  <h5 class=\"modal-title\" id=\"exampleModalVerticalLabel\">Actividades Aplicadas</h5>\n  <button type=\"button\" class=\"close\" (click)=\"activedModal.close()\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <span>Actividad</span>\n        </div>\n        <div class=\"col-sm-6 text-right\">\n          <span>Estado</span>\n        </div>\n      </div>\n    </li>\n    <li class=\"list-group-item\" *ngFor=\"let actividad of actividades\">\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <a >\n            {{ actividad.nombre }}\n          </a>\n        </div>\n        <div class=\"col-sm-6 text-right\">\n          <div *ngIf=\"rol !== 'CLI'\">\n            <div [ngSwitch]=\"actividad.estado\">\n              <div *ngSwitchCase=\"'cargado'\">\n                <span class=\"badge badge-pill service-loaded\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'asignado'\">\n                <span class=\"badge badge-pill service-asigned\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'aceptado'\">\n                <span class=\"badge badge-pill service-acepted\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'proceso'\">\n                <span class=\"badge badge-pill service-process\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'completado'\">\n                <span class=\"badge badge-pill service-finished\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'alerta'\">\n                <span class=\"badge badge-pill  badge-danger\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'finalizado'\">\n                <span class=\"badge badge-pill  badge-success\"> {{ actividad.estado }} </span>\n              </div>\n            </div>\n          </div>\n          <div *ngIf=\"rol === 'CLI'\">\n            <div [ngSwitch]=\"actividad.estado\">\n              <div *ngSwitchCase=\"'cargado'\">\n                <span class=\"badge badge-pill service-loaded\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'completado'\">\n                <span class=\"badge badge-pill service-finished\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchCase=\"'alerta'\">\n                <span class=\"badge badge-pill  badge-danger\"> {{ actividad.estado }} </span>\n              </div>\n              <div *ngSwitchDefault>\n                <span class=\"badge badge-pill service-process\"> Proceso </span>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </li>\n  </ul>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"activedModal.close()\">Cerrar</button>\n</div>\n"
 
 /***/ }),
 
@@ -197,6 +302,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetalleActividadesComponent", function() { return DetalleActividadesComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ "./src/app/services/auth/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -208,11 +314,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var DetalleActividadesComponent = /** @class */ (function () {
-    function DetalleActividadesComponent(activedModal) {
+    function DetalleActividadesComponent(activedModal, authService) {
         this.activedModal = activedModal;
+        this.authService = authService;
     }
     DetalleActividadesComponent.prototype.ngOnInit = function () {
+        this.rol = this.authService.getUser().user.rol.codigo;
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -223,74 +332,10 @@ var DetalleActividadesComponent = /** @class */ (function () {
             selector: 'app-detalle-actividades',
             template: __webpack_require__(/*! ./detalle-actividades.component.html */ "./src/app/pages/control/components/detalle-actividades/detalle-actividades.component.html")
         }),
-        __metadata("design:paramtypes", [_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbActiveModal"]])
+        __metadata("design:paramtypes", [_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbActiveModal"],
+            _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], DetalleActividadesComponent);
     return DetalleActividadesComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.html":
-/*!*******************************************************************************************!*\
-  !*** ./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.html ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"modal-header\">\n  <h5 class=\"modal-title\">Detalle del servicio</h5>\n  <button type=\"button\" class=\"close\" (click)=\"activeModal.close()\">\n    <span>&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <fieldset disabled>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <!--evaluado-->\n        <div class=\"form-group\">\n          <label for=\"m-evaluado\">Nombre del evaluado</label>\n          <input type=\"text\" id=\"m-evaluado\" class=\"form-control\" [(ngModel)]=\"servicio.evaluado.evaluado\">\n        </div>\n\n        <!--tipo documento-->\n        <div class=\"form-group\">\n          <label for=\"m-tipoDocumento\">Documento de identidad</label>\n          <select class=\"form-control\" [(ngModel)]=\"servicio.evaluado.tipo_documento\" id=\"m-tipoDocumento\">\n            <option value=\"cc\">C.C. Cedula</option>\n            <option value=\"ti\">T.I. Tarjeta de identidad</option>\n            <option value=\"ce\">C.E. Cedula de extrangeria</option>\n            <option value=\"pa\">P.A. Pasaporte</option>\n            <option value=\"pep\">P.E.P. Permiso especial de permanencia</option>\n          </select>\n        </div>\n\n        <!--documento-->\n        <div class=\"form-group\">\n          <label for=\"m-documento\">Numero de documento</label>\n          <input type=\"number\" class=\"form-control\" id=\"m-documento\"  [(ngModel)]=\"servicio.evaluado.documento\">\n        </div>\n\n        <!--lugar desarrollo-->\n        <div class=\"form-group\">\n          <label for=\"m-ciudad\">Lugar de desarrollo</label>\n          <input type=\"text\" class=\"form-control\" id=\"m-ciudad\"  [(ngModel)]=\"servicio.lugar_desarrollo\">\n        </div>\n\n        <!--telefono-->\n        <div class=\"form-group\">\n          <label for=\"m-telefono\">Telefono</label>\n          <input type=\"number\" class=\"form-control\" id=\"m-telefono\"  [(ngModel)]=\"servicio.evaluado.telefono\">\n        </div>\n\n      </div>\n      <div class=\"col-md-6\">\n\n        <!--email-->\n        <div class=\"form-group\">\n          <label for=\"m-email\">Email</label>\n          <input type=\"email\" class=\"form-control\" id=\"m-email\"  [(ngModel)]=\"servicio.evaluado.email\">\n        </div>\n\n        <!--observaciones-->\n        <div class=\"form-group\">\n          <label for=\"m-obs\">Observaciones</label>\n          <textarea\n            rows=\"3\"\n            class=\"form-control\"\n            id=\"m-obs\"\n            [(ngModel)]=\"servicio.observaciones\">\n              </textarea>\n        </div>\n\n        <!-- tipo servicio -->\n        <div class=\"form-group\">\n          <ng-container [ngSwitch]=\"servicio.tipoServicio\">\n            <div *ngSwitchCase=\"'esp'\">\n              <label>Tipo de esp</label>\n              <div class=\"d-block\">\n                <span class=\"badge badge-success\">{{ servicio.tipo_esp }}</span>\n              </div>\n            </div>\n            <div *ngSwitchCase=\"'pol'\">\n              <label>Tipo de poligrafia</label>\n              <div class=\"d-block\">\n                <span class=\"badge badge-success\">{{ servicio.tipoPoligrafia }}</span>\n              </div>\n            </div>\n          </ng-container>\n        </div>\n\n        <!-- anexo -->\n        <div class=\"form-group\" *ngIf=\"servicio.anexo\">\n          <div class=\"d-block\">\n            <a [href]=\"makeFileUrl(servicio.anexo)\">\n              <i class=\"fa fa-file\"></i>\n              {{ servicio.anexo }}\n            </a>\n          </div>\n          <label>Anexo</label>\n        </div>\n      </div>\n    </div>\n  </fieldset>\n</div>\n<div class=\"modal-footer\">\n  <button class=\"btn btn-secondary\" (click)=\"activeModal.close()\">\n    <i class=\"fa fa-close\"></i>\n    Cerrar\n  </button>\n</div>\n"
-
-/***/ }),
-
-/***/ "./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.ts":
-/*!*****************************************************************************************!*\
-  !*** ./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.ts ***!
-  \*****************************************************************************************/
-/*! exports provided: DetalleServicioComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetalleServicioComponent", function() { return DetalleServicioComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-/* harmony import */ var _services_helper_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/helper.service */ "./src/app/services/helper.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var DetalleServicioComponent = /** @class */ (function () {
-    function DetalleServicioComponent(activeModal, helper) {
-        this.activeModal = activeModal;
-        this.helper = helper;
-    }
-    DetalleServicioComponent.prototype.makeFileUrl = function (fileName) {
-        return this.helper.makeFileUrl(fileName);
-    };
-    DetalleServicioComponent.prototype.ngOnInit = function () {
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], DetalleServicioComponent.prototype, "servicio", void 0);
-    DetalleServicioComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-detalle-servicio-modal',
-            template: __webpack_require__(/*! ./detalle-servicio.component.html */ "./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.html")
-        }),
-        __metadata("design:paramtypes", [_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbActiveModal"],
-            _services_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"]])
-    ], DetalleServicioComponent);
-    return DetalleServicioComponent;
 }());
 
 
@@ -355,7 +400,7 @@ var FiltroComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered table-hover table-sm\">\n  <thead>\n  <tr class=\"text-capitalize\">\n    <th>fecha creación</th>\n    <th>fecha entrega</th>\n    <th>analista</th>\n    <th>cliente</th>\n    <th>lugar de desarrollo</th>\n    <th>evaluado</th>\n    <th>estado</th>\n    <th>informe</th>\n    <th>aceptacion</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let item of servicios\">\n    <td> {{ item.fecha_creacion | date }} </td>\n    <td> {{ item.fecha_entrega | date }} </td>\n    <td> {{ item.analista }} </td>\n    <td> {{ item.cliente }} </td>\n    <td> {{ item.lugar_desarrollo }} </td>\n    <td>\n      <div class=\"form-group text-center\">\n        <button class=\"btn btn-info text-center\" (click)=\"verDetalle(mdServicio, item)\">\n          <i class=\"fa fa-eye\"></i>\n          Ver detalle\n        </button>\n      </div>\n    </td>\n    <td>\n      <div [ngSwitch]=\"item.estado\">\n        <div *ngSwitchCase=\"'cargado'\">\n          <span class=\"badge badge-pill service-loaded\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'asignado'\">\n          <span class=\"badge badge-pill service-asigned\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'aceptado'\">\n          <span class=\"badge badge-pill service-acepted\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'proceso'\">\n          <span class=\"badge badge-pill service-process\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'completado'\">\n          <span class=\"badge badge-pill service-finished\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'alerta'\">\n          <span class=\"badge badge-pill  badge-danger\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'finalizado'\">\n          <span class=\"badge badge-pill  badge-success\"> {{ item.estado }} </span>\n        </div>\n      </div>\n\n    </td>\n    <td>\n      <button (click)=\"agregarInformacion()\" *ngIf=\"item.estado == 'aceptado'\" class=\"btn btn-warning btn-sm\">\n        Informe\n      </button>\n    </td>\n    <td>\n      <div>\n        <button [disabled]=\"(item.estado == 'aceptado')\" class=\"btn btn-primary btn-sm text-center mb-1 ml-2 mr-2\" (click)=\"aceptarServicio(item)\">\n          <i class=\"fa fa-check\"></i>\n          Aceptar\n        </button>\n        <button [disabled]=\"(item.estado == 'aceptado')\" class=\"btn btn-danger btn-sm text-center ml-2 mr-2\" (click)=\"rechazarServicio(mdRechazarServicio, item)\">\n          <i class=\"fa fa-times\"></i>\n          Rechazar\n        </button>\n      </div>\n    </td>\n  </tr>\n  </tbody>\n</table>\n\n<ng-template #mdRechazarServicio let-modal>\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\" id=\"exampleModalVerticalLabel\">\n      observaciones de rechazo\n    </h5>\n    <button type=\"button\" class=\"close\" (click)=\"modal.close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"card-body\">\n    <div class=\"form-group\">\n      <label for=\"justificacionRechazo\">¿Porque rechaza el servicio?</label>\n      <textarea class=\"form-control\"\n                id=\"justificacionRechazo\" rows=\"4\"\n                placeholder=\"Describa los motivos de rechazo del servicio\" [formControl]=\"justificacionRechazo\"></textarea>\n    </div>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-primary\" [disabled]=\"justificacionRechazo.invalid\" (click)=\"guardarRechazo()\">\n      <i class=\"fa fa-save\"></i>\n      Guardar justificacion\n    </button>\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"modal.close()\">\n      <i class=\"fa fa-times\"></i>\n      Cerrar</button>\n  </div>\n\n</ng-template>\n\n<ng-template #mdServicio let-modal>\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\">\n      Servicio ESP\n    </h5>\n    <button type=\"button\" class=\"close\" (click)=\"modal.close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <ngb-tabset>\n      <ngb-tab title=\"Evaluado\" id=\"evaluado\">\n        <ng-template ngbTabContent>\n\n        </ng-template>\n      </ngb-tab>\n      <ngb-tab title=\"Programacion\" id=\"programacion\">\n        <ng-template ngbTabContent>\n          <app-programacion></app-programacion>\n        </ng-template>\n      </ngb-tab>\n      <ngb-tab title=\"Seguimiento\" id=\"seguimiento\">\n        <ng-template ngbTabContent>\n          <app-seguimiento></app-seguimiento>\n        </ng-template>\n      </ngb-tab>\n      <ngb-tab title=\"Viaticos\" id=\"viaticos\">\n        <ng-template ngbTabContent>\n          <app-viaticos></app-viaticos>\n        </ng-template>\n      </ngb-tab>\n    </ngb-tabset>\n  </div>\n  <div class=\"card-footer\"></div>\n\n</ng-template>\n"
+module.exports = "<table class=\"table table-bordered table-hover table-sm\">\n  <thead>\n  <tr class=\"text-capitalize\">\n    <th>fecha creación</th>\n    <th>fecha entrega</th>\n    <th>analista</th>\n    <th>cliente</th>\n    <th>lugar de desarrollo</th>\n    <th>Servicio</th>\n    <th>estado</th>\n    <th>informe</th>\n    <th>aceptacion</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let item of servicios\">\n    <td> {{ item.fecha_creacion | date }} </td>\n    <td> {{ item.fecha_entrega | date }} </td>\n    <td> {{ item.analista_esp.nombre }} </td>\n    <td> {{ item.centro_costo.cliente.nombre }} </td>\n    <td> {{ item.lugar_desarrollo }} </td>\n    <td>\n      <div class=\"form-group text-center\">\n        <button class=\"btn btn-sm btn-info text-center\" (click)=\"verDetalle(mdServicio, item)\">\n          <i class=\"fa fa-eye\"></i>\n          Ver detalle\n        </button>\n      </div>\n    </td>\n    <td>\n      <div [ngSwitch]=\"item.vsd.estado\">\n        <div *ngSwitchCase=\"'cargado'\">\n          <span class=\"badge badge-pill service-loaded\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'asignado'\">\n          <span class=\"badge badge-pill service-asigned\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'aceptado'\">\n          <span class=\"badge badge-pill service-acepted\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'proceso'\">\n          <span class=\"badge badge-pill service-process\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'completado'\">\n          <span class=\"badge badge-pill service-finished\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'alerta'\">\n          <span class=\"badge badge-pill  badge-danger\"> {{ item.estado }} </span>\n        </div>\n        <div *ngSwitchCase=\"'finalizado'\">\n          <span class=\"badge badge-pill  badge-success\"> {{ item.estado }} </span>\n        </div>\n      </div>\n\n    </td>\n    <td>\n      <button (click)=\"agregarInformacion(item)\" *ngIf=\"item.vsd.estado == 'aceptado'\" class=\"btn btn-warning btn-sm\">\n        Informe\n      </button>\n    </td>\n    <td>\n      <div>\n        <button [disabled]=\"(item.vsd.estado == 'aceptado')\" class=\"btn btn-primary btn-sm text-center mb-1 ml-2 mr-2\" (click)=\"aceptarServicio(item)\">\n          <i class=\"fa fa-check\"></i>\n          Aceptar\n        </button>\n        <button [disabled]=\"(item.vsd.estado == 'aceptado')\" class=\"btn btn-danger btn-sm text-center ml-2 mr-2\" (click)=\"rechazarServicio(mdRechazarServicio, item)\">\n          <i class=\"fa fa-times\"></i>\n          Rechazar\n        </button>\n      </div>\n    </td>\n  </tr>\n  </tbody>\n</table>\n\n<ng-template #mdRechazarServicio let-modal>\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\" id=\"exampleModalVerticalLabel\">\n      observaciones de rechazo\n    </h5>\n    <button type=\"button\" class=\"close\" (click)=\"modal.close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"card-body\">\n    <div class=\"form-group\">\n      <label for=\"justificacionRechazo\">¿Porque rechaza el servicio?</label>\n      <textarea class=\"form-control\"\n                id=\"justificacionRechazo\" rows=\"4\"\n                placeholder=\"Describa los motivos de rechazo del servicio\" [formControl]=\"justificacionRechazo\"></textarea>\n    </div>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-primary\" [disabled]=\"justificacionRechazo.invalid\" (click)=\"guardarRechazo()\">\n      <i class=\"fa fa-save\"></i>\n      Guardar justificacion\n    </button>\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"modal.close()\">\n      <i class=\"fa fa-times\"></i>\n      Cerrar</button>\n  </div>\n\n</ng-template>\n\n<ng-template #mdServicio let-modal>\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\">\n      Servicio ESP\n    </h5>\n    <button type=\"button\" class=\"close\" (click)=\"modal.close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <ngb-tabset>\n      <ngb-tab title=\"Evaluado\" id=\"evaluado\">\n        <ng-template ngbTabContent>\n            <div class=\"card-body\">\n                <fieldset disabled>\n                  <div class=\"row\">\n                    <div class=\"col-md-6\">\n                      <!--evaluado-->\n                      <div class=\"form-group\">\n                        <label for=\"m-evaluado\">Nombre del evaluado</label>\n                        <input type=\"text\" id=\"m-evaluado\" class=\"form-control\" [(ngModel)]=\"selectedItem.evaluado.evaluado\">\n                      </div>\n              \n                      <!--tipo documento-->\n                      <div class=\"form-group\">\n                        <label for=\"m-tipoDocumento\">Tipo de documento</label>\n                        <select class=\"form-control\" [(ngModel)]=\"selectedItem.evaluado.tipo_documento\" id=\"m-tipoDocumento\">\n                          <option value=\"cc\">C.C. Cedula</option>\n                          <option value=\"ti\">T.I. Tarjeta de identidad</option>\n                          <option value=\"ce\">C.E. Cedula de extrangeria</option>\n                          <option value=\"pa\">P.A. Pasaporte</option>\n                          <option value=\"pep\">P.E.P. Permiso especial de permanencia</option>\n                        </select>\n                      </div>\n              \n                      <!--documento-->\n                      <div class=\"form-group\">\n                        <label for=\"m-documento\">Numero de documento</label>\n                        <input type=\"number\" class=\"form-control\" id=\"m-documento\"  [(ngModel)]=\"selectedItem.evaluado.documento\">\n                      </div>\n              \n                      <!--lugar desarrollo-->\n                      <div class=\"form-group\">\n                        <label for=\"m-ciudad\">Lugar de desarrollo</label>\n                        <input type=\"text\" class=\"form-control\" id=\"m-ciudad\"  [(ngModel)]=\"selectedItem.lugar_desarrollo\">\n                      </div>\n              \n                      <!--telefono-->\n                      <div class=\"form-group\">\n                        <label for=\"m-telefono\">Telefono</label>\n                        <input type=\"number\" class=\"form-control\" id=\"m-telefono\"  [(ngModel)]=\"selectedItem.evaluado.telefono\">\n                      </div>\n              \n                    </div>\n                    <div class=\"col-md-6\">\n              \n                      <!--email-->\n                      <div class=\"form-group\">\n                        <label for=\"m-email\">Email</label>\n                        <input type=\"email\" class=\"form-control\" id=\"m-email\"  [(ngModel)]=\"selectedItem.evaluado.email\">\n                      </div>\n              \n                      <!--cargo-->\n                      <div class=\"form-group\">\n                          <label for=\"m-email\">Cargo</label>\n                          <input type=\"text\" class=\"form-control\" id=\"m-email\"  [(ngModel)]=\"selectedItem.evaluado.cargo\">\n                        </div>\n              \n                      <!--observaciones-->\n                      <div class=\"form-group\">\n                        <label for=\"m-obs\">Observaciones</label>\n                        <textarea\n                          rows=\"3\"\n                          class=\"form-control\"\n                          id=\"m-obs\"\n                          [(ngModel)]=\"selectedItem.observaciones\">\n                            </textarea>\n                      </div>\n              \n                      <!-- tipo servicio -->\n                      <div class=\"form-group\">\n                        <ng-container [ngSwitch]=\"selectedItem.tipoServicio\">\n                          <div *ngSwitchCase=\"'esp'\">\n                            <label>Tipo de esp</label>\n                            <div class=\"d-block\">\n                              <span class=\"badge badge-success\">{{ selectedItem.tipo_esp }}</span>\n                            </div>\n                          </div>\n                          <div *ngSwitchCase=\"'pol'\">\n                            <label>Tipo de poligrafia</label>\n                            <div class=\"d-block\">\n                              <span class=\"badge badge-success\">{{ selectedItem.tipo_poligrafia }}</span>\n                            </div>\n                          </div>\n                        </ng-container>\n                      </div>\n              \n                      <!-- anexo -->\n                      <div class=\"form-group\" *ngIf=\"selectedItem.anexo\">\n                        <div class=\"d-block\">\n                          <a [href]=\"makeFileUrl(selectedItem.anexo)\">\n                            <i class=\"fa fa-file\"></i>\n                            {{ selectedItem.anexo }}\n                          </a>\n                        </div>\n                        <label>Anexo</label>\n                      </div>\n                    </div>\n                  </div>\n                </fieldset>\n              </div>\n        </ng-template>\n      </ngb-tab>\n      <ngb-tab title=\"Programacion\" id=\"programacion\">\n        <ng-template ngbTabContent>\n          <app-programacion ></app-programacion>\n        </ng-template>\n      </ngb-tab>\n      <ngb-tab title=\"Seguimiento\" id=\"seguimiento\">\n        <ng-template ngbTabContent>\n          <app-seguimiento></app-seguimiento>\n        </ng-template>\n      </ngb-tab>\n      <ngb-tab title=\"Viaticos\" id=\"viaticos\">\n        <ng-template ngbTabContent>\n          <app-viaticos></app-viaticos>\n        </ng-template>\n      </ngb-tab>\n    </ngb-tabset>\n  </div>\n  <div class=\"card-footer\"></div>\n\n</ng-template>\n"
 
 /***/ }),
 
@@ -379,6 +424,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../services/data.service */ "./src/app/services/data.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_freelance_freelance_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/freelance/freelance.service */ "./src/app/pages/control/services/freelance/freelance.service.ts");
+/* harmony import */ var _services_login_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../services/login.service */ "./src/app/services/login.service.ts");
+/* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ "./src/app/services/auth/auth.service.ts");
+/* harmony import */ var _services_vsd_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../services/vsd.service */ "./src/app/services/vsd.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -398,8 +447,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
+
 var FreelanceComponent = /** @class */ (function () {
-    function FreelanceComponent(dataService, fb, store, modalService, helper, http, router) {
+    function FreelanceComponent(dataService, fb, store, modalService, helper, http, router, freelanceService, authService, loginService, vsdService) {
         this.dataService = dataService;
         this.fb = fb;
         this.store = store;
@@ -407,15 +460,20 @@ var FreelanceComponent = /** @class */ (function () {
         this.helper = helper;
         this.http = http;
         this.router = router;
+        this.freelanceService = freelanceService;
+        this.authService = authService;
+        this.loginService = loginService;
+        this.vsdService = vsdService;
         this.justificacionRechazo = this.fb.control('', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required);
         this.servicios = [];
     }
     FreelanceComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.store.select(_store_selectors__WEBPACK_IMPORTED_MODULE_4__["getServicios"]).subscribe(function (state) {
-            _this.servicios = state.filter(function (value) { return value.tipoServicio === 'esp' && value.estado !== 'rechazado'; });
-            // this.servicios = state;
-            _this.dataService.setServicios(state);
+            _this.servicios = state;
+            _this.servicios.forEach(function (value) {
+                value['vsd'] = value.actividades.filter(function (act) { return act.actividad_id === 2; })[0];
+            });
         });
         this.store.dispatch(new _store_actions_servicios_actions__WEBPACK_IMPORTED_MODULE_5__["FetchServicios"]());
     };
@@ -423,41 +481,40 @@ var FreelanceComponent = /** @class */ (function () {
         return this.helper.makeFileUrl(fileName);
     };
     FreelanceComponent.prototype.verDetalle = function (content, item) {
-        console.log(item);
+        this.selectedItem = item;
+        this.freelanceService.setEsp(item);
         var modalRef = this.modalService.open(content, { size: 'lg' });
-        modalRef.componentInstance.servicio = item;
-    };
-    FreelanceComponent.prototype.verActividades = function (item) {
     };
     FreelanceComponent.prototype.aceptarServicio = function (item) {
         var data = {
-            estado: 'aceptado',
-            freelanceId: 1,
+            actividad_aplicada_id: item.vsd.id,
         };
-        var route = this.helper.route('esp', item.id);
-        this.http.put(route, data).subscribe(function (value) {
-            window.location.reload();
-        });
-        // item.estado = 'aceptado';
-        // this.dataService.setServicios(this.servicios);
+        this.freelanceService.aceptarVisitaDom(item.id, data).subscribe(function () { return item.vsd.estado = 'aceptado'; }, function () { return alert('Ocurrio un error, intente mas tarde'); });
     };
     FreelanceComponent.prototype.rechazarServicio = function (content, item) {
         this.modalRef = this.modalService.open(content);
         this.selectedItem = item;
     };
     FreelanceComponent.prototype.guardarRechazo = function () {
-        this.modalRef.close();
+        var _this = this;
         var data = {
             estado: 'rechazado',
-            freelanceId: 1,
+            justificacion_rechazo: this.justificacionRechazo.value,
+            freelance_id: this.authService.getUser().user.id,
         };
-        var route = this.helper.route('esp', this.selectedItem.id);
-        this.http.put(route, data).subscribe(function (value) {
-            window.location.reload();
+        this.freelanceService.rechazarVisitaDom(this.selectedItem.id, data).subscribe(function () {
+            _this.modalRef.close();
+            _this.servicios.splice(_this.servicios.indexOf(_this.selectedItem), 1);
+        }, function () {
+            alert('Ocurrio un error, intente mas tarde');
         });
     };
-    FreelanceComponent.prototype.agregarInformacion = function () {
-        this.router.navigate(['../freelance/informe/programacion']);
+    FreelanceComponent.prototype.agregarInformacion = function (item) {
+        var _this = this;
+        this.vsdService.loadVsd(item.id).subscribe(function (response) {
+            _this.vsdService.setVsd(response.id);
+            _this.router.navigate(['/informe/estudio-seguridad']);
+        });
     };
     FreelanceComponent.prototype.navigateToInfo = function () {
     };
@@ -472,7 +529,11 @@ var FreelanceComponent = /** @class */ (function () {
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"],
             _services_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
+            _services_freelance_freelance_service__WEBPACK_IMPORTED_MODULE_10__["FreelanceService"],
+            _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_12__["AuthService"],
+            _services_login_service__WEBPACK_IMPORTED_MODULE_11__["LoginService"],
+            _services_vsd_service__WEBPACK_IMPORTED_MODULE_13__["VsdService"]])
     ], FreelanceComponent);
     return FreelanceComponent;
 }());
@@ -488,7 +549,7 @@ var FreelanceComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-11 mx-auto m-4\">\r\n  <div class=\"card border-0\">\r\n    <div class=\"card-header bg-white\">\r\n      <i class=\"fa fa-calendar\"></i>\r\n      Programación\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <form [formGroup]=\"form\" *ngIf=\"!isLoadData\">\r\n        <div class=\"form-group row\">\r\n          <label for=\"fecha\" class=\"col-form-label col-md-3\">\r\n            Fecha de visita\r\n          </label>\r\n          <input type=\"date\" class=\"form-control col-md-9\" id=\"fecha\" formControlName=\"fecha\">\r\n        </div>\r\n        <div class=\"form-group row\">\r\n          <label for=\"hora\" class=\"col-form-label col-md-3\">\r\n            Hora de visita\r\n          </label>\r\n          <input type=\"time\" class=\"form-control col-md-9\" id=\"hora\" formControlName=\"hora\">\r\n        </div>\r\n      </form>\r\n      <fieldset *ngIf=\"isLoadData\" disabled>\r\n        <div class=\"form-group row\">\r\n          <label class=\"col-form-label col-md-3\">\r\n            Fecha de visita\r\n          </label>\r\n          <input type=\"date\" class=\"form-control col-md-9\" [(ngModel)]=\"data.fecha\">\r\n        </div>\r\n        <div class=\"form-group row\">\r\n          <label class=\"col-form-label col-md-3\">\r\n            Hora de visita\r\n          </label>\r\n          <input type=\"time\" class=\"form-control col-md-9\" [(ngModel)]=\"data.hora\">\r\n        </div>\r\n        <div class=\"form-group row\" *ngIf=\"data.motivo\">\r\n          <label class=\"col-form-label col-md-3\">\r\n            Motivo de visita\r\n          </label>\r\n          <input type=\"time\" class=\"form-control col-md-9\" [(ngModel)]=\"data.motivo\">\r\n        </div>\r\n      </fieldset>\r\n    </div>\r\n    <div class=\"card-footer bg-white\">\r\n      <button *ngIf=\"!isLoadData\" class=\"btn btn-outline-primary mr-2\"\r\n              (click)=\"programar()\">Programar visita\r\n      </button>\r\n      <button *ngIf=\"isLoadData\" class=\"btn btn-outline-secondary\"\r\n              (click)=\"open(mdReprog)\">Reprogramar visita\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<ng-template #mdReprog let-modal>\r\n  <div class=\"modal-header\">\r\n    <h3 class=\"card-title\">Reprogramar</h3>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <form [formGroup]=\"form\">\r\n      <div class=\"form-group\">\r\n        <label for=\"repFecha\">Fecha</label>\r\n        <input type=\"date\" id=\"repFecha\" class=\"form-control\" formControlName=\"fecha\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"repHora\">Hora</label>\r\n        <input type=\"time\" id=\"repHora\" class=\"form-control\" formControlName=\"hora\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"motivo\">Motivo</label>\r\n        <textarea id=\"motivo\" rows=\"4\" class=\"form-control\" placeholder=\"Escriba el motivo de reprogramacion\" formControlName=\"motivo\"></textarea>\r\n      </div>\r\n    </form>\r\n  </div>\r\n  <div class=\"card-footer\">\r\n    <button type=\"button\" class=\"btn btn-outline-dark\"\r\n            (click)=\"close(modal)\">Save</button>\r\n  </div>\r\n</ng-template>\r\n"
+module.exports = "<div class=\"col-md-11 mx-auto m-4\">\r\n  <div class=\"card border-0\">\r\n    <div class=\"card-header bg-white\">\r\n      <i class=\"fa fa-calendar\"></i>\r\n      Programación\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <form [formGroup]=\"form\" *ngIf=\"!isLoadData\">\r\n        <div class=\"form-group row\">\r\n          <label for=\"fecha\" class=\"col-form-label col-md-3\">\r\n            Fecha de visita\r\n          </label>\r\n          <input type=\"date\" class=\"form-control col-md-9\" id=\"fecha\" formControlName=\"fecha\">\r\n        </div>\r\n        <div class=\"form-group row\">\r\n          <label for=\"hora\" class=\"col-form-label col-md-3\">\r\n            Hora de visita\r\n          </label>\r\n          <input type=\"time\" class=\"form-control col-md-9\" id=\"hora\" formControlName=\"hora\">\r\n        </div>\r\n      </form>\r\n      <fieldset *ngIf=\"isLoadData\" disabled>\r\n        <div class=\"form-group row\">\r\n          <label class=\"col-form-label col-md-3\">\r\n            Fecha de visita\r\n          </label>\r\n          <input type=\"datetime-local\" class=\"form-control col-md-9\" [(ngModel)]=\"data.fecha\">\r\n        </div>\r\n        <div class=\"form-group row\">\r\n          <label class=\"col-form-label col-md-3\">\r\n            Hora de visita\r\n          </label>\r\n          <input type=\"time\" class=\"form-control col-md-9\" [(ngModel)]=\"data.hora\">\r\n        </div>\r\n        <div class=\"form-group row\" *ngIf=\"data.motivo\">\r\n          <label class=\"col-form-label col-md-3\">\r\n            Motivo de visita\r\n          </label>\r\n          <input type=\"time\" class=\"form-control col-md-9\" [(ngModel)]=\"data.motivo\">\r\n        </div>\r\n      </fieldset>\r\n    </div>\r\n    <div class=\"card-footer bg-white\">\r\n      <button *ngIf=\"!isLoadData\" class=\"btn btn-outline-primary mr-2\"\r\n              (click)=\"programar()\">Programar visita\r\n      </button>\r\n      <button *ngIf=\"isLoadData\" class=\"btn btn-outline-secondary\"\r\n              (click)=\"open(mdReprog)\">Reprogramar visita\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<ng-template #mdReprog let-modal>\r\n  <div class=\"modal-header\">\r\n    <h3 class=\"card-title\">Reprogramar</h3>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <form [formGroup]=\"form\">\r\n      <div class=\"form-group\">\r\n        <label for=\"repFecha\">Fecha</label>\r\n        <input type=\"date\" id=\"repFecha\" class=\"form-control\" formControlName=\"fecha\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"repHora\">Hora</label>\r\n        <input type=\"time\" id=\"repHora\" class=\"form-control\" formControlName=\"hora\">\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <label for=\"motivo\">Motivo</label>\r\n        <textarea id=\"motivo\" rows=\"4\" class=\"form-control\" placeholder=\"Escriba el motivo de reprogramacion\" formControlName=\"motivo\"></textarea>\r\n      </div>\r\n    </form>\r\n  </div>\r\n  <div class=\"card-footer\">\r\n    <button type=\"button\" class=\"btn btn-outline-dark\"\r\n            (click)=\"close(modal)\">Save</button>\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -506,6 +567,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _services_freelance_programacion_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/freelance/programacion.service */ "./src/app/pages/control/services/freelance/programacion.service.ts");
+/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/data.service */ "./src/app/pages/control/services/data.service.ts");
+/* harmony import */ var _services_freelance_freelance_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/freelance/freelance.service */ "./src/app/pages/control/services/freelance/freelance.service.ts");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -530,11 +593,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var ProgramacionComponent = /** @class */ (function () {
-    function ProgramacionComponent(fb, modalService, programacionService) {
+    function ProgramacionComponent(fb, modalService, programacionService, dataService, freelanceService) {
         this.fb = fb;
         this.modalService = modalService;
         this.programacionService = programacionService;
+        this.dataService = dataService;
+        this.freelanceService = freelanceService;
         this.form = this.fb.group({
             fecha: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             hora: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
@@ -543,17 +610,25 @@ var ProgramacionComponent = /** @class */ (function () {
     }
     ProgramacionComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.programacionService.get().subscribe(function (response) {
-            _this.data = response;
-            _this.isLoadData = true;
+        var espId = this.freelanceService.getEsp().id;
+        this.dataService.getVsd(espId).subscribe(function (response) {
+            _this.vsdId = response.id;
+            _this.programacionService.get(_this.vsdId).subscribe(function (response) {
+                _this.data = response;
+                _this.isLoadData = true;
+            });
         });
     };
     ProgramacionComponent.prototype.programar = function () {
         var data = this.form.value;
-        console.log(data);
+        this.programacionService.guardar(this.vsdId, data).subscribe(function () {
+            alert('Programación creada con exito');
+            window.location.reload();
+        }, function () { return alert('Ocurrio un error, intente mas tarde'); });
     };
     ProgramacionComponent.prototype.reprogramar = function () {
         var data = __assign({ id: this.data.id }, this.form.value);
+        this.programacionService.actualizar(this.vsdId, data).subscribe(function () { return alert('Programación actualizada con exito'); }, function () { return alert('Ocurrio un error, intente mas tarde'); });
     };
     ProgramacionComponent.prototype.open = function (content) {
         this.form.addControl('motivo', this.fb.control('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required));
@@ -569,7 +644,9 @@ var ProgramacionComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"],
-            _services_freelance_programacion_service__WEBPACK_IMPORTED_MODULE_3__["ProgramacionService"]])
+            _services_freelance_programacion_service__WEBPACK_IMPORTED_MODULE_3__["ProgramacionService"],
+            _services_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"],
+            _services_freelance_freelance_service__WEBPACK_IMPORTED_MODULE_5__["FreelanceService"]])
     ], ProgramacionComponent);
     return ProgramacionComponent;
 }());
@@ -723,7 +800,7 @@ var ViaticosComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid mt-3\">\n  <div class=\"card mb-3\">\n    <div class=\"card-header\">\n      <i class=\"fas fa-table\"></i>\n      Control de gestión\n    </div>\n    <div class=\"card-body\">\n      <div class=\"table-responsive\">\n        <router-outlet></router-outlet>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container-fluid mt-3\">\n  <div class=\"card mb-3\">\n    <div class=\"card-header\">\n      <i class=\"fas fa-table\"></i> Control de gestión\n    </div>\n    <div class=\"card-body\">\n      <div class=\"table-responsive\">\n        <ng-container [ngSwitch]=\"rol\">\n          <app-cliente *ngSwitchCase=\"'CLI'\"></app-cliente>\n          <app-freelance *ngSwitchCase=\"'FRCE'\"></app-freelance>\n          <app-analista-esp *ngSwitchCase=\"'AESP'\"></app-analista-esp>\n          <app-analista-esp *ngSwitchCase=\"'ADG'\"></app-analista-esp>\n          <div *ngSwitchDefault class=\"alert alert-danger\">\n            <p class=\"text-danger\">\n              No tiene permisos para acceder a esta sección\n            </p>\n          </div>\n        </ng-container>\n        <router-outlet></router-outlet>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -738,6 +815,10 @@ module.exports = "<div class=\"container-fluid mt-3\">\n  <div class=\"card mb-3
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainComponent", function() { return MainComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_login_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/login.service */ "./src/app/services/login.service.ts");
+/* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ "./src/app/services/auth/auth.service.ts");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _store_actions_servicios_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store/actions/servicios.actions */ "./src/app/pages/control/store/actions/servicios.actions.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -748,19 +829,99 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var MainComponent = /** @class */ (function () {
-    function MainComponent() {
+    function MainComponent(authService, loginService, store) {
+        this.authService = authService;
+        this.loginService = loginService;
+        this.store = store;
     }
     MainComponent.prototype.ngOnInit = function () {
+        // this.rol = this.loginService.rol.codigo;
+        this.rol = this.authService.getUser().user.rol.codigo;
+        console.log(this.rol);
+    };
+    MainComponent.prototype.ngOnDestroy = function () {
+        this.store.dispatch(new _store_actions_servicios_actions__WEBPACK_IMPORTED_MODULE_4__["RemoveServicios"]());
     };
     MainComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-main',
             template: __webpack_require__(/*! ./main.component.html */ "./src/app/pages/control/components/main/main.component.html")
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _services_login_service__WEBPACK_IMPORTED_MODULE_1__["LoginService"],
+            _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"]])
     ], MainComponent);
     return MainComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/control/components/modal-servicio/modal-servicio.component.html":
+/*!***************************************************************************************!*\
+  !*** ./src/app/pages/control/components/modal-servicio/modal-servicio.component.html ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"modal-header\">\n  <h5 class=\"modal-title\">Detalle del servicio</h5>\n  <button type=\"button\" class=\"close\" (click)=\"activeModal.close()\">\n    <span>&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <fieldset disabled>\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <!--evaluado-->\n        <div class=\"form-group\">\n          <label for=\"m-evaluado\">Nombre del evaluado</label>\n          <input type=\"text\" id=\"m-evaluado\" class=\"form-control\" [(ngModel)]=\"servicio.evaluado.evaluado\">\n        </div>\n\n        <!--tipo documento-->\n        <div class=\"form-group\">\n          <label for=\"m-tipoDocumento\">Tipo de documento</label>\n          <select class=\"form-control\" [(ngModel)]=\"servicio.evaluado.tipo_documento\" id=\"m-tipoDocumento\">\n            <option value=\"cc\">C.C. Cedula</option>\n            <option value=\"ti\">T.I. Tarjeta de identidad</option>\n            <option value=\"ce\">C.E. Cedula de extrangeria</option>\n            <option value=\"pa\">P.A. Pasaporte</option>\n            <option value=\"pep\">P.E.P. Permiso especial de permanencia</option>\n          </select>\n        </div>\n\n        <!--documento-->\n        <div class=\"form-group\">\n          <label for=\"m-documento\">Numero de documento</label>\n          <input type=\"number\" class=\"form-control\" id=\"m-documento\"  [(ngModel)]=\"servicio.evaluado.documento\">\n        </div>\n\n        <!--lugar desarrollo-->\n        <div class=\"form-group\">\n          <label for=\"m-ciudad\">Lugar de desarrollo</label>\n          <input type=\"text\" class=\"form-control\" id=\"m-ciudad\"  [(ngModel)]=\"servicio.lugar_desarrollo\">\n        </div>\n\n        <!--telefono-->\n        <div class=\"form-group\">\n          <label for=\"m-telefono\">Telefono</label>\n          <input type=\"number\" class=\"form-control\" id=\"m-telefono\"  [(ngModel)]=\"servicio.evaluado.telefono\">\n        </div>\n\n      </div>\n      <div class=\"col-md-6\">\n\n        <!--email-->\n        <div class=\"form-group\">\n          <label for=\"m-email\">Email</label>\n          <input type=\"email\" class=\"form-control\" id=\"m-email\"  [(ngModel)]=\"servicio.evaluado.email\">\n        </div>\n\n        <!--cargo-->\n        <div class=\"form-group\">\n            <label for=\"m-email\">Cargo</label>\n            <input type=\"text\" class=\"form-control\" id=\"m-email\"  [(ngModel)]=\"servicio.evaluado.cargo\">\n          </div>\n\n        <!--observaciones-->\n        <div class=\"form-group\">\n          <label for=\"m-obs\">Observaciones</label>\n          <textarea\n            rows=\"3\"\n            class=\"form-control\"\n            id=\"m-obs\"\n            [(ngModel)]=\"servicio.observaciones\">\n              </textarea>\n        </div>\n\n        <!-- tipo servicio -->\n        <div class=\"form-group\">\n          <ng-container [ngSwitch]=\"servicio.tipoServicio\">\n            <div *ngSwitchCase=\"'esp'\">\n              <label>Tipo de esp</label>\n              <div class=\"d-block\">\n                <span class=\"badge badge-success\">{{ servicio.tipo_esp }}</span>\n              </div>\n            </div>\n            <div *ngSwitchCase=\"'pol'\">\n              <label>Tipo de poligrafia</label>\n              <div class=\"d-block\">\n                <span class=\"badge badge-success\">{{ servicio.tipo_poligrafia }}</span>\n              </div>\n            </div>\n          </ng-container>\n        </div>\n\n        <!-- anexo -->\n        <div class=\"form-group\" *ngIf=\"servicio.anexo\">\n          <div class=\"d-block\">\n            <a [href]=\"makeFileUrl(servicio.anexo)\">\n              <i class=\"fa fa-file\"></i>\n              {{ servicio.anexo }}\n            </a>\n          </div>\n          <label>Anexo</label>\n        </div>\n      </div>\n    </div>\n  </fieldset>\n</div>\n<div class=\"modal-footer\">\n  <button class=\"btn btn-secondary\" (click)=\"activeModal.close()\">\n    <i class=\"fa fa-close\"></i>\n    Cerrar\n  </button>\n</div>\n\n\n\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/control/components/modal-servicio/modal-servicio.component.ts":
+/*!*************************************************************************************!*\
+  !*** ./src/app/pages/control/components/modal-servicio/modal-servicio.component.ts ***!
+  \*************************************************************************************/
+/*! exports provided: ModalServicioComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalServicioComponent", function() { return ModalServicioComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _services_helper_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/helper.service */ "./src/app/services/helper.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ModalServicioComponent = /** @class */ (function () {
+    function ModalServicioComponent(activeModal, helper) {
+        this.activeModal = activeModal;
+        this.helper = helper;
+    }
+    ModalServicioComponent.prototype.makeFileUrl = function (fileName) {
+        return this.helper.makeFileUrl(fileName);
+    };
+    ModalServicioComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ModalServicioComponent.prototype, "servicio", void 0);
+    ModalServicioComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-detalle-servicio-modal',
+            template: __webpack_require__(/*! ./modal-servicio.component.html */ "./src/app/pages/control/components/modal-servicio/modal-servicio.component.html")
+        }),
+        __metadata("design:paramtypes", [_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbActiveModal"],
+            _services_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"]])
+    ], ModalServicioComponent);
+    return ModalServicioComponent;
 }());
 
 
@@ -780,9 +941,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _components_main_main_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/main/main.component */ "./src/app/pages/control/components/main/main.component.ts");
-/* harmony import */ var _components_cliente_cliente_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/cliente/cliente.component */ "./src/app/pages/control/components/cliente/cliente.component.ts");
-/* harmony import */ var _components_freelance_freelance_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/freelance/freelance.component */ "./src/app/pages/control/components/freelance/freelance.component.ts");
-/* harmony import */ var _components_analista_esp_analista_esp_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/analista-esp/analista-esp.component */ "./src/app/pages/control/components/analista-esp/analista-esp.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -792,20 +950,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
-
-
 var routes = [
     {
         path: '',
         component: _components_main_main_component__WEBPACK_IMPORTED_MODULE_2__["MainComponent"],
-        children: [
-            { path: 'cl', component: _components_cliente_cliente_component__WEBPACK_IMPORTED_MODULE_3__["ClienteComponent"] },
-            { path: 'frc', component: _components_freelance_freelance_component__WEBPACK_IMPORTED_MODULE_4__["FreelanceComponent"] },
-            { path: 'aesp', component: _components_analista_esp_analista_esp_component__WEBPACK_IMPORTED_MODULE_5__["AnalistaEspComponent"] },
-        ]
-    },
-    { path: '', redirectTo: 'cl', pathMatch: 'full' }
+    }
 ];
 var ControlRoutingModule = /** @class */ (function () {
     function ControlRoutingModule() {
@@ -846,19 +995,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _control_routing_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./control-routing.module */ "./src/app/pages/control/control-routing.module.ts");
 /* harmony import */ var _store_reducers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/reducers */ "./src/app/pages/control/store/reducers/index.ts");
 /* harmony import */ var _store_effects__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/effects */ "./src/app/pages/control/store/effects/index.ts");
-/* harmony import */ var _components_detalle_servicio_detalle_servicio_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/detalle-servicio/detalle-servicio.component */ "./src/app/pages/control/components/detalle-servicio/detalle-servicio.component.ts");
+/* harmony import */ var _components_modal_servicio_modal_servicio_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/modal-servicio/modal-servicio.component */ "./src/app/pages/control/components/modal-servicio/modal-servicio.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
 /* harmony import */ var _components_detalle_actividades_detalle_actividades_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/detalle-actividades/detalle-actividades.component */ "./src/app/pages/control/components/detalle-actividades/detalle-actividades.component.ts");
 /* harmony import */ var _components_freelance_programacion_programacion_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/freelance/programacion/programacion.component */ "./src/app/pages/control/components/freelance/programacion/programacion.component.ts");
 /* harmony import */ var _components_freelance_seguimiento_seguimiento_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/freelance/seguimiento/seguimiento.component */ "./src/app/pages/control/components/freelance/seguimiento/seguimiento.component.ts");
 /* harmony import */ var _components_freelance_viaticos_viaticos_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/freelance/viaticos/viaticos.component */ "./src/app/pages/control/components/freelance/viaticos/viaticos.component.ts");
+/* harmony import */ var _components_administrador_administrador_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/administrador/administrador.component */ "./src/app/pages/control/components/administrador/administrador.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -890,11 +1041,12 @@ var ControlModule = /** @class */ (function () {
                 _components_freelance_freelance_component__WEBPACK_IMPORTED_MODULE_6__["FreelanceComponent"],
                 _components_analista_esp_analista_esp_component__WEBPACK_IMPORTED_MODULE_7__["AnalistaEspComponent"],
                 _components_filtro_filtro_component__WEBPACK_IMPORTED_MODULE_8__["FiltroComponent"],
-                _components_detalle_servicio_detalle_servicio_component__WEBPACK_IMPORTED_MODULE_13__["DetalleServicioComponent"],
+                _components_modal_servicio_modal_servicio_component__WEBPACK_IMPORTED_MODULE_13__["ModalServicioComponent"],
                 _components_detalle_actividades_detalle_actividades_component__WEBPACK_IMPORTED_MODULE_16__["DetalleActividadesComponent"],
                 _components_freelance_programacion_programacion_component__WEBPACK_IMPORTED_MODULE_17__["ProgramacionComponent"],
                 _components_freelance_seguimiento_seguimiento_component__WEBPACK_IMPORTED_MODULE_18__["SeguimientoComponent"],
                 _components_freelance_viaticos_viaticos_component__WEBPACK_IMPORTED_MODULE_19__["ViaticosComponent"],
+                _components_administrador_administrador_component__WEBPACK_IMPORTED_MODULE_20__["AdministradorComponent"],
             ],
             imports: [
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_15__["NgbModule"],
@@ -907,7 +1059,7 @@ var ControlModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_14__["ReactiveFormsModule"]
             ],
             entryComponents: [
-                _components_detalle_servicio_detalle_servicio_component__WEBPACK_IMPORTED_MODULE_13__["DetalleServicioComponent"],
+                _components_modal_servicio_modal_servicio_component__WEBPACK_IMPORTED_MODULE_13__["ModalServicioComponent"],
                 _components_detalle_actividades_detalle_actividades_component__WEBPACK_IMPORTED_MODULE_16__["DetalleActividadesComponent"],
             ],
         })
@@ -933,6 +1085,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _shared_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/services */ "./src/app/pages/shared/services/index.ts");
+/* harmony import */ var _services_helper_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/helper.service */ "./src/app/services/helper.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -948,14 +1102,30 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var DataService = /** @class */ (function () {
-    function DataService(espService, investigacionService, poligrafiaService) {
+    function DataService(espService, investigacionService, poligrafiaService, http, helper) {
         this.espService = espService;
         this.investigacionService = investigacionService;
         this.poligrafiaService = poligrafiaService;
+        this.http = http;
+        this.helper = helper;
     }
     DataService.prototype.fetchServicios = function () {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["forkJoin"])(this.espService.fetch()).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) { return data.flat(); }));
+    };
+    DataService.prototype.getVsd = function (espId) {
+        var url = this.helper.route(['esp', 'vsd'], espId);
+        return this.http.get(url);
+    };
+    DataService.prototype.asignarVisitaDom = function (actId, payload) {
+        var url = this.helper.route('actividad', actId);
+        return this.http.put(url, payload);
+    };
+    DataService.prototype.getFreelances = function () {
+        var url = this.helper.route('freelance');
+        return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (value) { return value.data; }));
     };
     DataService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -963,9 +1133,69 @@ var DataService = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_shared_services__WEBPACK_IMPORTED_MODULE_3__["EspService"],
             _shared_services__WEBPACK_IMPORTED_MODULE_3__["InvestigacionService"],
-            _shared_services__WEBPACK_IMPORTED_MODULE_3__["PoligrafiaService"]])
+            _shared_services__WEBPACK_IMPORTED_MODULE_3__["PoligrafiaService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"],
+            _services_helper_service__WEBPACK_IMPORTED_MODULE_4__["HelperService"]])
     ], DataService);
     return DataService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/control/services/freelance/freelance.service.ts":
+/*!***********************************************************************!*\
+  !*** ./src/app/pages/control/services/freelance/freelance.service.ts ***!
+  \***********************************************************************/
+/*! exports provided: FreelanceService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FreelanceService", function() { return FreelanceService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _services_helper_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/helper.service */ "./src/app/services/helper.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var FreelanceService = /** @class */ (function () {
+    function FreelanceService(http, helper) {
+        this.http = http;
+        this.helper = helper;
+    }
+    FreelanceService.prototype.setEsp = function (esp) {
+        localStorage.setItem('esp', JSON.stringify(esp));
+    };
+    FreelanceService.prototype.getEsp = function () {
+        return JSON.parse(localStorage.getItem('esp'));
+    };
+    FreelanceService.prototype.aceptarVisitaDom = function (espId, data) {
+        var url = this.helper.route(['esp', 'vsd'], espId);
+        return this.http.post(url, data);
+    };
+    FreelanceService.prototype.rechazarVisitaDom = function (espId, data) {
+        var url = this.helper.route(['esp', 'vsd'], espId);
+        return this.http.post(url, data);
+    };
+    FreelanceService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _services_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"]])
+    ], FreelanceService);
+    return FreelanceService;
 }());
 
 
@@ -1006,9 +1236,17 @@ var ProgramacionService = /** @class */ (function () {
         this.http = http;
         this.helper = helper;
     }
-    ProgramacionService.prototype.get = function () {
-        var url = this.helper.route('', 2);
+    ProgramacionService.prototype.get = function (vsdId) {
+        var url = this.helper.route(['vsd', 'programacion'], 2);
         return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return data.data; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function () { return rxjs__WEBPACK_IMPORTED_MODULE_4__["EMPTY"]; }));
+    };
+    ProgramacionService.prototype.guardar = function (vsdId, payload) {
+        var url = this.helper.route(['vsd', 'programacion'], vsdId);
+        return this.http.post(url, payload);
+    };
+    ProgramacionService.prototype.actualizar = function (programacionId, payload) {
+        var url = this.helper.route('programacion', programacionId);
+        return this.http.put(url, payload);
     };
     ProgramacionService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

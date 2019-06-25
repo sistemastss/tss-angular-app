@@ -283,7 +283,7 @@ var InfoPersonalComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-header\">\n  <h4 class=\"text-center\">Estudio de seguridad</h4>\n</div>\n<div class=\"card-body\">\n\n  <div class=\"form-group border-bottom\">\n    <h5 class=\"text-center text-uppercase\">\n      Sanchez aguilar jenifer lynay\n    </h5>\n    <h6 class=\"text-center\">\n      123123\n    </h6>\n  </div>\n\n  <div *ngIf=\"!dataLoaded\">\n  <div class=\"form-group row\">\n    <label class=\"col-form-label col-md-3\" for=\"image\">Cargar imagen del evaluado</label>\n    <div class=\"col-md-9\">\n      <input id=\"image\" type=\"file\" class=\"form-control-file\" (change)=\"setImagenEvaluado($event)\">\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <label class=\"col-form-label col-md-3\" for=\"logoEmpresa\">Cargar logo de la empresa</label>\n    <div class=\"col-md-9\">\n      <input id=\"logoEmpresa\" type=\"file\" class=\"form-control-file\" (change)=\"setLogoCliente($event)\">\n    </div>\n  </div>\n  </div>\n\n  <div>\n    <div class=\"form-group\">\n      <label>Foto del evaluado</label><br>\n      <img class=\"img-fluid\" [src]=\"makeFileUrl(data.fotoEvaluado)\" alt=\"\">\n    </div>\n\n    <div class=\"form-group\">\n      <label>Logo del cliente</label><br>\n      <img class=\"img-fluid\" [src]=\"makeFileUrl(data.logoCliente)\" alt=\"\">\n    </div>\n  </div>\n\n</div>\n<div class=\"card-footer text-right\">\n  <button class=\"btn btn-primary\" (click)=\"saveAll()\" *ngIf=\"!dataLoaded\">Guardar</button>\n</div>\n\n"
+module.exports = "<div class=\"card-header\">\n  <h4 class=\"text-center\">Estudio de seguridad</h4>\n</div>\n<div class=\"card-body\">\n\n  <div class=\"form-group border-bottom\">\n    <h5 class=\"text-center text-uppercase\">\n      Sanchez aguilar jenifer lynay\n    </h5>\n    <h6 class=\"text-center\">\n      123123\n    </h6>\n  </div>\n\n  <div *ngIf=\"!dataLoaded\">\n  <div class=\"form-group row\">\n    <label class=\"col-form-label col-md-3\" for=\"image\">Cargar imagen del evaluado</label>\n    <div class=\"col-md-9\">\n      <input id=\"image\" type=\"file\" class=\"form-control-file\" (change)=\"setImagenEvaluado($event)\">\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <label class=\"col-form-label col-md-3\" for=\"logoEmpresa\">Cargar logo de la empresa</label>\n    <div class=\"col-md-9\">\n      <input id=\"logoEmpresa\" type=\"file\" class=\"form-control-file\" (change)=\"setLogoCliente($event)\">\n    </div>\n  </div>\n  </div>\n\n  <div>\n    <div class=\"form-group\">\n      <label>Foto del evaluado</label><br>\n      <img class=\"img-fluid\" [src]=\"makeFileUrl(data.foto_evaluado)\" alt=\"\">\n    </div>\n\n    <div class=\"form-group\">\n      <label>Logo del cliente</label><br>\n      <img class=\"img-fluid\" [src]=\"makeFileUrl(data.logo_cliente)\" alt=\"\">\n    </div>\n  </div>\n\n</div>\n<div class=\"card-footer text-right\">\n  <button class=\"btn btn-primary\" (click)=\"saveAll()\" *ngIf=\"!dataLoaded\">Guardar</button>\n</div>\n\n"
 
 /***/ }),
 
@@ -301,6 +301,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_helper_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../services/helper.service */ "./src/app/services/helper.service.ts");
 /* harmony import */ var _services_informe_estudio_seguridad_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/informe/estudio-seguridad.service */ "./src/app/pages/modules/informe/services/informe/estudio-seguridad.service.ts");
+/* harmony import */ var _services_vsd_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../services/vsd.service */ "./src/app/services/vsd.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -349,14 +350,16 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var EstudioSeguridadComponent = /** @class */ (function () {
-    function EstudioSeguridadComponent(router, helper, estudioSeguridad) {
+    function EstudioSeguridadComponent(vsd, router, helper, estudioSeguridad) {
+        this.vsd = vsd;
         this.router = router;
         this.helper = helper;
         this.estudioSeguridad = estudioSeguridad;
         this.data = {
-            fotoEvaluado: null,
-            logoCliente: null,
+            foto_evaluado: null,
+            logo_cliente: null,
         };
         this.dataLoaded = false;
     }
@@ -386,7 +389,7 @@ var EstudioSeguridadComponent = /** @class */ (function () {
                         return [4 /*yield*/, this.helper.readFile(file)];
                     case 1:
                         base64 = _a.sent();
-                        this.data.fotoEvaluado = {
+                        this.data.foto_evaluado = {
                             file_name: file.name,
                             blob: base64
                         };
@@ -411,7 +414,7 @@ var EstudioSeguridadComponent = /** @class */ (function () {
                         return [4 /*yield*/, this.helper.readFile(file)];
                     case 1:
                         base64 = _a.sent();
-                        this.data.logoCliente = {
+                        this.data.logo_cliente = {
                             file_name: file.name,
                             blob: base64
                         };
@@ -421,7 +424,10 @@ var EstudioSeguridadComponent = /** @class */ (function () {
         });
     };
     EstudioSeguridadComponent.prototype.saveAll = function () {
-        this.estudioSeguridad.save(this.data, 1).subscribe(function (response) { return console.log(response); }, function (error) { return console.log(error); });
+        var vsdId = this.vsd.getVsd();
+        this.estudioSeguridad.save(this.data, vsdId).subscribe(function (response) {
+            swal('Datos guardados con exito', '', 'success');
+        }, function (error) { return console.log(error); });
     };
     EstudioSeguridadComponent.prototype.makeFileUrl = function (fileName) {
         return this.helper.makeFileUrl(fileName);
@@ -431,7 +437,8 @@ var EstudioSeguridadComponent = /** @class */ (function () {
             selector: 'app-estudio-seguridad',
             template: __webpack_require__(/*! ./estudio-seguridad.component.html */ "./src/app/pages/modules/informe/components/estudio-seguridad/estudio-seguridad.component.html")
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+        __metadata("design:paramtypes", [_services_vsd_service__WEBPACK_IMPORTED_MODULE_4__["VsdService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _services_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"],
             _services_informe_estudio_seguridad_service__WEBPACK_IMPORTED_MODULE_3__["EstudioSeguridadService"]])
     ], EstudioSeguridadComponent);
@@ -2313,11 +2320,11 @@ var EstudioSeguridadService = /** @class */ (function () {
         this.helper = helper;
     }
     EstudioSeguridadService.prototype.get = function (vsdId) {
-        var route = this.helper.route('informe/vsd', vsdId);
+        var route = this.helper.route(['vsd', 'informe'], vsdId);
         return this.http.get(route);
     };
     EstudioSeguridadService.prototype.save = function (payload, vsdId) {
-        var route = this.helper.route('informe/vsd', vsdId);
+        var route = this.helper.route(['vsd', 'informe'], vsdId);
         return this.http.post(route, payload);
     };
     EstudioSeguridadService = __decorate([

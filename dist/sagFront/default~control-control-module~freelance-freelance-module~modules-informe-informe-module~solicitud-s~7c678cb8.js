@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~control-control-module~freelance-freelance-module~modules-informe-informe-module~pages-pages~861db219"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~control-control-module~freelance-freelance-module~modules-informe-informe-module~solicitud-s~7c678cb8"],{
 
 /***/ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js":
 /*!***********************************************************************!*\
@@ -11825,4 +11825,4 @@ var NgbModule = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~control-control-module~freelance-freelance-module~modules-informe-informe-module~pages-pages~861db219.js.map
+//# sourceMappingURL=default~control-control-module~freelance-freelance-module~modules-informe-informe-module~solicitud-s~7c678cb8.js.map

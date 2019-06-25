@@ -212,18 +212,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _evaluacion_financiera_evaluacion_financiera_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./evaluacion-financiera/evaluacion-financiera.component */ "./src/app/pages/actividades/evaluacion-financiera/evaluacion-financiera.component.ts");
 /* harmony import */ var _dictamen_grafologico_dictamen_grafologico_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./dictamen-grafologico/dictamen-grafologico.component */ "./src/app/pages/actividades/dictamen-grafologico/dictamen-grafologico.component.ts");
 /* harmony import */ var _consolidado_consolidado_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./consolidado/consolidado.component */ "./src/app/pages/actividades/consolidado/consolidado.component.ts");
-/* harmony import */ var _nav_bar_nav_bar_module__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../nav-bar/nav-bar.module */ "./src/app/pages/nav-bar/nav-bar.module.ts");
-/* harmony import */ var _asignar_funcionario_asignar_funcionario_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./asignar-funcionario/asignar-funcionario.component */ "./src/app/pages/actividades/asignar-funcionario/asignar-funcionario.component.ts");
-/* harmony import */ var ngx_permissions__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ngx-permissions */ "./node_modules/ngx-permissions/ngx-permissions.umd.js");
-/* harmony import */ var ngx_permissions__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(ngx_permissions__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var _datos_personales_datos_personales_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./datos-personales/datos-personales.component */ "./src/app/pages/actividades/datos-personales/datos-personales.component.ts");
+/* harmony import */ var _asignar_funcionario_asignar_funcionario_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./asignar-funcionario/asignar-funcionario.component */ "./src/app/pages/actividades/asignar-funcionario/asignar-funcionario.component.ts");
+/* harmony import */ var ngx_permissions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ngx-permissions */ "./node_modules/ngx-permissions/ngx-permissions.umd.js");
+/* harmony import */ var ngx_permissions__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(ngx_permissions__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _datos_personales_datos_personales_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./datos-personales/datos-personales.component */ "./src/app/pages/actividades/datos-personales/datos-personales.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -269,16 +267,15 @@ var ActividadesModule = /** @class */ (function () {
                 _evaluacion_financiera_evaluacion_financiera_component__WEBPACK_IMPORTED_MODULE_17__["EvaluacionFinancieraComponent"],
                 _dictamen_grafologico_dictamen_grafologico_component__WEBPACK_IMPORTED_MODULE_18__["DictamenGrafologicoComponent"],
                 _consolidado_consolidado_component__WEBPACK_IMPORTED_MODULE_19__["ConsolidadoComponent"],
-                _asignar_funcionario_asignar_funcionario_component__WEBPACK_IMPORTED_MODULE_21__["AsignarFuncionarioComponent"],
-                _datos_personales_datos_personales_component__WEBPACK_IMPORTED_MODULE_23__["DatosPersonalesComponent"]
+                _asignar_funcionario_asignar_funcionario_component__WEBPACK_IMPORTED_MODULE_20__["AsignarFuncionarioComponent"],
+                _datos_personales_datos_personales_component__WEBPACK_IMPORTED_MODULE_22__["DatosPersonalesComponent"]
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _actividades_routing_module__WEBPACK_IMPORTED_MODULE_2__["ActividadesRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"],
-                _nav_bar_nav_bar_module__WEBPACK_IMPORTED_MODULE_20__["NavBarModule"],
-                ngx_permissions__WEBPACK_IMPORTED_MODULE_22__["NgxPermissionsModule"].forChild()
+                ngx_permissions__WEBPACK_IMPORTED_MODULE_21__["NgxPermissionsModule"].forChild()
             ],
             exports: [
                 _historial_judicial_historial_judicial_component__WEBPACK_IMPORTED_MODULE_3__["HistorialJudicialComponent"]
@@ -446,7 +443,7 @@ var ConsolidadoComponent = /** @class */ (function () {
             datosInforme: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
                 encabezado: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](false, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
                 fotoEval: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](false, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
-                logoCliente: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](false, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
+                logo_cliente: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](false, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
                 nucleoFamiliar: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](false, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
                 verificacionAcademica: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](false, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
                 verificacionLaboral: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](false, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
