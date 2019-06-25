@@ -25,11 +25,11 @@ export class SolicitudPoligrafiaComponent implements OnInit {
       documento     : [ '', [ Validators.required, Validators.minLength(6) ] ],
       telefono      : [ '', [ Validators.required, Validators.minLength(7) ] ],
       email         : [ '', [ Validators.required, Validators.email ] ],
-      cargo         : [ '', Validators.required, Validators.email],
+      cargo         : [ '', Validators.required],
     }),
     lugar_desarrollo : [ '', Validators.required ],
     contexto        : [ '', Validators.required ],
-    tipoPoligrafia  : [ '', Validators.required ],
+    tipo_poligrafia  : [ '', Validators.required ],
     anexo           : '',
   });
 
@@ -61,7 +61,7 @@ export class SolicitudPoligrafiaComponent implements OnInit {
       },
       lugar_desarrollo: 'Bogota',
       contexto: 'contexto',
-      tipoPoligrafia: 'pre-empleo',
+      tipo_poligrafia: 'pre-empleo',
       anexo: ''
     });
 

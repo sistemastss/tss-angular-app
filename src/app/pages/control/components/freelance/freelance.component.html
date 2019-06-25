@@ -6,7 +6,7 @@
     <th>analista</th>
     <th>cliente</th>
     <th>lugar de desarrollo</th>
-    <th>evaluado</th>
+    <th>Servicio</th>
     <th>estado</th>
     <th>informe</th>
     <th>aceptacion</th>
@@ -16,19 +16,19 @@
   <tr *ngFor="let item of servicios">
     <td> {{ item.fecha_creacion | date }} </td>
     <td> {{ item.fecha_entrega | date }} </td>
-    <td> {{ item.analista }} </td>
-    <td> {{ item.cliente }} </td>
+    <td> {{ item.analista_esp.nombre }} </td>
+    <td> {{ item.centro_costo.cliente.nombre }} </td>
     <td> {{ item.lugar_desarrollo }} </td>
     <td>
       <div class="form-group text-center">
-        <button class="btn btn-info text-center" (click)="verDetalle(mdServicio, item)">
+        <button class="btn btn-sm btn-info text-center" (click)="verDetalle(mdServicio, item)">
           <i class="fa fa-eye"></i>
           Ver detalle
         </button>
       </div>
     </td>
     <td>
-      <div [ngSwitch]="item.estado">
+      <div [ngSwitch]="item.vsd.estado">
         <div *ngSwitchCase="'cargado'">
           <span class="badge badge-pill service-loaded"> {{ item.estado }} </span>
         </div>
@@ -54,17 +54,17 @@
 
     </td>
     <td>
-      <button (click)="agregarInformacion()" *ngIf="item.estado == 'aceptado'" class="btn btn-warning btn-sm">
+      <button (click)="agregarInformacion(item)" *ngIf="item.vsd.estado == 'aceptado'" class="btn btn-warning btn-sm">
         Informe
       </button>
     </td>
     <td>
       <div>
-        <button [disabled]="(item.estado == 'aceptado')" class="btn btn-primary btn-sm text-center mb-1 ml-2 mr-2" (click)="aceptarServicio(item)">
+        <button [disabled]="(item.vsd.estado == 'aceptado')" class="btn btn-primary btn-sm text-center mb-1 ml-2 mr-2" (click)="aceptarServicio(item)">
           <i class="fa fa-check"></i>
           Aceptar
         </button>
-        <button [disabled]="(item.estado == 'aceptado')" class="btn btn-danger btn-sm text-center ml-2 mr-2" (click)="rechazarServicio(mdRechazarServicio, item)">
+        <button [disabled]="(item.vsd.estado == 'aceptado')" class="btn btn-danger btn-sm text-center ml-2 mr-2" (click)="rechazarServicio(mdRechazarServicio, item)">
           <i class="fa fa-times"></i>
           Rechazar
         </button>
@@ -116,12 +116,109 @@
     <ngb-tabset>
       <ngb-tab title="Evaluado" id="evaluado">
         <ng-template ngbTabContent>
-
+            <div class="card-body">
+                <fieldset disabled>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <!--evaluado-->
+                      <div class="form-group">
+                        <label for="m-evaluado">Nombre del evaluado</label>
+                        <input type="text" id="m-evaluado" class="form-control" [(ngModel)]="selectedItem.evaluado.evaluado">
+                      </div>
+              
+                      <!--tipo documento-->
+                      <div class="form-group">
+                        <label for="m-tipoDocumento">Tipo de documento</label>
+                        <select class="form-control" [(ngModel)]="selectedItem.evaluado.tipo_documento" id="m-tipoDocumento">
+                          <option value="cc">C.C. Cedula</option>
+                          <option value="ti">T.I. Tarjeta de identidad</option>
+                          <option value="ce">C.E. Cedula de extrangeria</option>
+                          <option value="pa">P.A. Pasaporte</option>
+                          <option value="pep">P.E.P. Permiso especial de permanencia</option>
+                        </select>
+                      </div>
+              
+                      <!--documento-->
+                      <div class="form-group">
+                        <label for="m-documento">Numero de documento</label>
+                        <input type="number" class="form-control" id="m-documento"  [(ngModel)]="selectedItem.evaluado.documento">
+                      </div>
+              
+                      <!--lugar desarrollo-->
+                      <div class="form-group">
+                        <label for="m-ciudad">Lugar de desarrollo</label>
+                        <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="selectedItem.lugar_desarrollo">
+                      </div>
+              
+                      <!--telefono-->
+                      <div class="form-group">
+                        <label for="m-telefono">Telefono</label>
+                        <input type="number" class="form-control" id="m-telefono"  [(ngModel)]="selectedItem.evaluado.telefono">
+                      </div>
+              
+                    </div>
+                    <div class="col-md-6">
+              
+                      <!--email-->
+                      <div class="form-group">
+                        <label for="m-email">Email</label>
+                        <input type="email" class="form-control" id="m-email"  [(ngModel)]="selectedItem.evaluado.email">
+                      </div>
+              
+                      <!--cargo-->
+                      <div class="form-group">
+                          <label for="m-email">Cargo</label>
+                          <input type="text" class="form-control" id="m-email"  [(ngModel)]="selectedItem.evaluado.cargo">
+                        </div>
+              
+                      <!--observaciones-->
+                      <div class="form-group">
+                        <label for="m-obs">Observaciones</label>
+                        <textarea
+                          rows="3"
+                          class="form-control"
+                          id="m-obs"
+                          [(ngModel)]="selectedItem.observaciones">
+                            </textarea>
+                      </div>
+              
+                      <!-- tipo servicio -->
+                      <div class="form-group">
+                        <ng-container [ngSwitch]="selectedItem.tipoServicio">
+                          <div *ngSwitchCase="'esp'">
+                            <label>Tipo de esp</label>
+                            <div class="d-block">
+                              <span class="badge badge-success">{{ selectedItem.tipo_esp }}</span>
+                            </div>
+                          </div>
+                          <div *ngSwitchCase="'pol'">
+                            <label>Tipo de poligrafia</label>
+                            <div class="d-block">
+                              <span class="badge badge-success">{{ selectedItem.tipo_poligrafia }}</span>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+              
+                      <!-- anexo -->
+                      <div class="form-group" *ngIf="selectedItem.anexo">
+                        <div class="d-block">
+                          <a [href]="makeFileUrl(selectedItem.anexo)">
+                            <i class="fa fa-file"></i>
+                            {{ selectedItem.anexo }}
+                          </a>
+                        </div>
+                        <label>Anexo</label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="Programacion" id="programacion">
         <ng-template ngbTabContent>
-          <app-programacion></app-programacion>
+          <app-programacion ></app-programacion>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="Seguimiento" id="seguimiento">

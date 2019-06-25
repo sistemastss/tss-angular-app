@@ -3,7 +3,7 @@ import { File } from '../../../@models/file.interface';
 
 export interface Esp {
   evaluado: Evaluado;
-  lugar_esarrollo: string;
+  lugar_desarrollo: string;
   observaciones: string;
   tipo_esp: string;
   anexo?: File;

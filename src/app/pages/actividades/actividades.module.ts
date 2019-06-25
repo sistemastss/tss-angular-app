@@ -18,7 +18,6 @@ import { PruebaPsicotecnicaComponent } from './prueba-psicotecnica/prueba-psicot
 import { EvaluacionFinancieraComponent } from './evaluacion-financiera/evaluacion-financiera.component';
 import { DictamenGrafologicoComponent } from './dictamen-grafologico/dictamen-grafologico.component';
 import { ConsolidadoComponent } from './consolidado/consolidado.component';
-import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { AsignarFuncionarioComponent } from './asignar-funcionario/asignar-funcionario.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
@@ -49,7 +48,6 @@ import { DatosPersonalesComponent } from './datos-personales/datos-personales.co
     ActividadesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NavBarModule,
     NgxPermissionsModule.forChild()
   ],
   exports: [

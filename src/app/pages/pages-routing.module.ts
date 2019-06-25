@@ -1,33 +1,39 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PagesComponent } from './pages.component';
 import { ControlGuard } from './control/guards/control.guard';
+import { MainComponent } from './main.component';
 
 const routes: Routes = [
   { path: '',
-    component: PagesComponent,
+    component: MainComponent,
     children: [
       { path: 'nuevo-servicio',
-        loadChildren: './solicitud-servicio/solicitud-servicio.module#SolicitudServicioModule'
+        loadChildren: './solicitud-servicio/solicitud-servicio.module#SolicitudServicioModule',
+        data: { breadcrumb: 'Nuevo servicio' },
       },
       { path: 'actividades',
-        loadChildren: './actividades/actividades.module#ActividadesModule'
+        loadChildren: './actividades/actividades.module#ActividadesModule',
+        data: { breadcrumb: 'Actividades' },
       },
       {
         path: 'investigacion',
-        loadChildren: './investigacion/investigacion.module#InvestigacionModule'
+        loadChildren: './investigacion/investigacion.module#InvestigacionModule',
+        data: { breadcrumb: 'Investigacion' },
       },
       {
         path: 'perfil',
-        loadChildren: './perfil/perfil.module#PerfilModule'
+        loadChildren: './perfil/perfil.module#PerfilModule',
+        data: { breadcrumb: 'Perfil' },
       },
       {
         path: 'freelance',
-        loadChildren: './freelance/freelance.module#FreelanceModule'
+        loadChildren: './freelance/freelance.module#FreelanceModule',
+        data: { breadcrumb: 'Freelance' },
       },
       {
         path: 'dashboard',
         loadChildren: './control/control.module#ControlModule',
+        data: { breadcrumb: 'Dashboard', }
         // canActivate: [ControlGuard]
       },
       {

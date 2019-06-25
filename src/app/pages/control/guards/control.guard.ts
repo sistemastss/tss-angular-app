@@ -19,12 +19,16 @@ export class ControlGuard implements CanActivate {
     const rol = this.rolService.rol;
 
     switch (rol) {
-      case 'cls':
-        this.router.navigate(['./dashboard/cls']);
+      case 'CLS':
+        this.router.navigate(['./dashboard/1']);
         return true;
 
-      case 'frce':
-        this.router.navigate(['./dashboard/frce']);
+      case 'FRCE':
+        this.router.navigate(['./dashboard/2']);
+        return true;
+
+      case 'AESP':
+        this.router.navigate(['./dashboard/2']);
         return true;
 
     }

@@ -6,14 +6,14 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: './pages/pages.module#PagesModule',
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
-  { path: '**', redirectTo: 'pages' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { EspActionTypes } from '../actions/esp.actions';
 import { Store } from '@ngrx/store';
@@ -25,6 +25,7 @@ export class EspEffects {
       tap(() => this.redirect()),
       switchMap(() => EMPTY),
     )),
+    catchError(() => swal('Ocurrio un error!', 'Intente mas tarde', 'error'))
   );
 
   constructor(

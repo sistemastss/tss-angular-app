@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ServicioState } from '../../store/states';
-import { NgbModal, NgbModalRef, NgbTabContent } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from '../../../../services/helper.service';
 import { getServicios } from '../../store/selectors';
 import { FetchServicios } from '../../store/actions/servicios.actions';
-import { DetalleServicioComponent } from '../detalle-servicio/detalle-servicio.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../../../services/data.service';
 import { Router } from '@angular/router';
+import { FreelanceService } from '../../services/freelance/freelance.service';
+import { LoginService } from '../../../../services/login.service';
+import { AuthService } from '../../../../services/auth/auth.service';
+import { VsdService } from '../../../../services/vsd.service';
 
 @Component({
   selector: 'app-freelance',
@@ -33,15 +36,20 @@ export class FreelanceComponent implements OnInit {
     private helper: HelperService,
     private http: HttpClient,
     private router: Router,
+    private freelanceService: FreelanceService,
+    private authService: AuthService,
+    private loginService: LoginService,
+    private vsdService: VsdService,
   ) { }
 
   ngOnInit() {
 
     this.store.select(getServicios).subscribe(
       state => {
-        this.servicios = state.filter(value => value.tipoServicio === 'esp' && value.estado !== 'rechazado');
-        // this.servicios = state;
-        this.dataService.setServicios(state);
+        this.servicios = state;
+        this.servicios.forEach(value => {
+          value['vsd'] = value.actividades.filter(act => act.actividad_id === 2)[0];
+        });
       }
     );
     this.store.dispatch(new FetchServicios());
@@ -52,52 +60,49 @@ export class FreelanceComponent implements OnInit {
   }
 
   verDetalle(content, item: any) {
-    console.log(item);
+    this.selectedItem = item;
+    this.freelanceService.setEsp(item);
     const modalRef = this.modalService.open(content, { size: 'lg' });
-    modalRef.componentInstance.servicio = item;
-  }
-
-  verActividades(item: any) {
-
   }
 
   aceptarServicio(item: any) {
     const data = {
-      estado: 'aceptado',
-      freelanceId: 1,
+      actividad_aplicada_id: item.vsd.id,
     };
-    const route = this.helper.route('esp', item.id);
-    this.http.put(route, data).subscribe(value => {
-      window.location.reload();
-    });
-
-    // item.estado = 'aceptado';
-
-    // this.dataService.setServicios(this.servicios);
+    this.freelanceService.aceptarVisitaDom(item.id, data).subscribe(
+      () => item.vsd.estado = 'aceptado',
+      () => alert('Ocurrio un error, intente mas tarde')
+    );
   }
 
   rechazarServicio(content, item) {
     this.modalRef = this.modalService.open(content);
-
     this.selectedItem  = item;
-
   }
 
   guardarRechazo() {
-
-    this.modalRef.close();
     const data = {
       estado: 'rechazado',
-      freelanceId: 1,
+      justificacion_rechazo: this.justificacionRechazo.value,
+      freelance_id: this.authService.getUser().user.id,
     };
-    const route = this.helper.route('esp', this.selectedItem.id);
-    this.http.put(route, data).subscribe(value => {
-      window.location.reload();
-    });
+    
+    this.freelanceService.rechazarVisitaDom(this.selectedItem.id, data).subscribe(
+      () => {
+        this.modalRef.close();
+        this.servicios.splice(this.servicios.indexOf(this.selectedItem), 1);
+      },
+      () => {
+        alert('Ocurrio un error, intente mas tarde')
+      }
+    );
   }
 
-  agregarInformacion() {
-    this.router.navigate(['../freelance/informe/programacion']);
+  agregarInformacion(item) {
+    this.vsdService.loadVsd(item.id).subscribe((response: any) => {
+      this.vsdService.setVsd(response.id);
+      this.router.navigate(['/informe/estudio-seguridad']);
+    });
   }
 
   navigateToInfo() {

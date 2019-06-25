@@ -14,22 +14,22 @@ export class UsuarioService {
 
 
   get() {
-    const url = this.helper.route('usuario');
+    const url = this.helper.route('usuarios');
     return this.http.get(url);
   }
 
   crear(payload) {
-    const url = this.helper.route('usuario');
+    const url = this.helper.route('usuarios');
     return this.http.post(url, payload);
   }
 
   editar(payload, id) {
-    const url = this.helper.route('usuario', id);
+    const url = this.helper.route('usuarios', id);
     return this.http.put(url, payload);
   }
 
   eliminar(id) {
-    const url = this.helper.route('usuario');
+    const url = this.helper.route('usuarios', id);
     return this.http.delete(url);
   }
 }

@@ -375,6 +375,12 @@
             <input type="text" class="form-control" id="m-ciudad"  [(ngModel)]="detalle.lugar_desarrollo">
           </div>
 
+          <!--cargo-->
+          <div class="form-group">
+            <label for="m-email">Cargo</label>
+            <input type="text" class="form-control" id="m-cargo"  [(ngModel)]="detalle.evaluado.cargo">
+          </div>
+
         </div>
         <div class="col-md-6">
 
@@ -415,7 +421,7 @@
               <label>Anexo</label>
               <div class="d-block">
                 <i class="fa fa-file"></i>
-                {{ detalle.anexo.fileName }}
+                {{ detalle.anexo.file_name }}
               </div>
             </div>
           </div>
@@ -482,5 +488,10 @@
 </ng-template>
 
 <ng-template #mdTerminos let-modal>
+  <div class="modal-header">
+    <h4>Terminos y condiciones</h4>
+  </div>
+  <div class="modal-body">
 
+  </div>
 </ng-template>

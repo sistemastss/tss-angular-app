@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { HelperService } from '../../../../services/helper.service';
 import { CrearCentroCosto } from '../../store/actions/centro-costo.actions';
 import { CentroCostoState } from '../../store/reducers/centro-costo.reducer';
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-centro-costo',
@@ -16,7 +17,7 @@ export class CentroCostoComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   form = this.fb.group({
-    cliente_id               : [ '' ],
+    usuario_id               : '',
     solicitante              : [ '', Validators.required ],
     telefono_solicitante     : [ '', Validators.required ],
     email_solicitante        : [ '', Validators.required ],
@@ -34,13 +35,14 @@ export class CentroCostoComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store<CentroCostoState>,
+    private authService: AuthService,
     private helper: HelperService,
     private fb: FormBuilder,
   ) {}
 
   ngOnInit() {
     this.form.setValue({
-        cliente_id: '6',
+        usuario_id: '6',
         solicitante: 'alguien',
         telefono_solicitante: 12334323,
         email_solicitante: 'styven21121@gmail.com',
@@ -53,9 +55,8 @@ export class CentroCostoComponent implements OnInit {
       }
     );
 
-
-    const userId = 6;
-    this.form.get('cliente_id').patchValue(userId);
+    const userId = this.authService.getUser().user.id;
+    this.form.get('usuario_id').patchValue(userId);
   }
 
   async cargarArchivo(event) {
@@ -91,7 +92,7 @@ export class CentroCostoComponent implements OnInit {
     }
 
     const numeroOrden = this.fb.control('', [Validators.required, Validators.min(0)]);
-    const anexo = this.fb.control('', Validators.required);
+    const anexo = this.fb.control('');
 
     this.form.addControl('numero_orden', numeroOrden);
     this.form.addControl('anexo', anexo);

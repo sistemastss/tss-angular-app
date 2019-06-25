@@ -1,34 +1,37 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {config} from '../@models/app-settings';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { config } from '../@models/app-settings';
+import { HelperService } from './helper.service';
+import { AuthService } from './auth/auth.service';
+import { ReplaySubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(public http: HttpClient) {
-  }
+  private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
+  public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
-  login(username: string, password: string) {
-    const url = config.api + '/login';
-    const data = {
-      username,
-      password
-    };
-    return this.http.post(url, data, config.httpOpts).pipe(
-      map(value => {
-        console.log(value);
-        localStorage.setItem('currentUser', JSON.stringify(value));
-        return value;
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService,
+    private helper: HelperService,
+  ) { }
+
+  login(credentials: {email: string, contrasena: string}) {
+    const url = this.helper.route('login');
+
+    return this.http.post(url, credentials, config.httpOpts).pipe(
+      tap(user => {
+        this.auth.saveUser(user);
       })
     );
   }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    window.location.reload();
+  deauth() {
+    this.auth.destroyUser();
   }
 
   get rol() {
@@ -43,5 +46,10 @@ export class LoginService {
 
   get user() {
     return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  get userId() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    return user.id;
   }
 }

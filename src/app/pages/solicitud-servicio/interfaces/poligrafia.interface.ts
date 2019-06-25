@@ -3,8 +3,8 @@ import { Evaluado } from './evaluado.interface';
 
 export interface Poligrafia {
   evaluado: Evaluado;
-  lugarDesarrollo: string;
+  lugar_desarrollo: string;
   contexto: string;
-  tipoPoligrafia: string;
+  tipo_poligrafia: string;
   anexo?: File;
 }

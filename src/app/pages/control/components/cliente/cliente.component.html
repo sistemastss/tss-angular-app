@@ -12,29 +12,29 @@
   </thead>
   <tbody>
   <tr *ngFor="let item of servicios">
-    <td> {{ item.centroCosto.id }} </td>
-    <td> {{ item.fechaCreacion | date }} </td>
+    <td> {{ item.centro_costo.id }} </td>
+    <td> {{ item.fecha_creacion | date }} </td>
     <td> {{ item.lugar_desarrollo }} </td>
-    <td> {{ item.centroCosto.solicitante }} </td>
+    <td> {{ item.centro_costo.solicitante }} </td>
     <td>
-      <div *ngIf="item.tipoServicio === 'esp'" >
+      <div *ngIf="item.tipo_servicio === 'esp'" >
         <div class="form-group text-center">
-          <button class="btn btn-info text-center" (click)="verDetalle(item)">
+          <button class="btn btn-sm btn-info text-center" (click)="verDetalle(item)">
             <i class="fa fa-eye"></i>
             ESP
           </button>
         </div>
       </div>
-      <div *ngIf="item.tipoServicio === 'inv'" >
+      <div *ngIf="item.tipo_servicio === 'inv'" >
         <div class="form-group text-center">
           <div class="form-group text-center">
             INVESTIGACION
           </div>
         </div>
       </div>
-      <div *ngIf="item.tipoServicio === 'pol'">
+      <div *ngIf="item.tipo_servicio === 'pol'">
         <div class="form-group text-center">
-          <button class="btn btn-info text-center" (click)="verDetalle(item)">
+          <button class="btn btn-sm btn-info text-center" (click)="verDetalle(item)">
             <i class="fa fa-eye"></i>
             POLIGRAFIA
           </button>
@@ -51,7 +51,7 @@
 
     <td>
 
-      <div *ngIf="item.tipoServicio == 'pol' || item.tipoServicio == 'inv'">
+      <div *ngIf="item.tipo_servicio == 'pol' || item.tipo_servicio == 'inv'">
         <div [ngSwitch]="item.estado">
           <span *ngSwitchCase="'proceso'" class="badge badge badge-warning">{{ item.estado }} </span>
           <span *ngSwitchCase="'completado'" class="badge badge badge-warning"> {{ item.estado }} </span>
@@ -62,10 +62,10 @@
         </div>
       </div>
 
-      <div *ngIf="item.tipoServicio == 'esp'">
+      <div *ngIf="item.tipo_servicio == 'esp'">
         <div [ngSwitch]="item.estado">
-          <button *ngSwitchCase="'proceso'" class="btn btn-sm btn-warning">
-            <i class="fa fas-exclamation"></i>
+          <button *ngSwitchCase="'proceso'" class="btn btn-sm btn-warning" (click)="verActividades(item)">
+            <i class="fa fas-eye"></i>
             {{ item.estado }} </button>
           <button *ngSwitchCase="'completado'" class="btn btn-sm btn-warning"> {{ item.estado }} </button>
           <button *ngSwitchCase="'alerta'" class="btn btn-sm btn-danger" placement="top" ngbTooltip="Comunicarse con Tss">

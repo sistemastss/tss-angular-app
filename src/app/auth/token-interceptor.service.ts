@@ -3,12 +3,15 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpResponse, HttpErrorResponse, HttpHeaders
+  HttpInterceptor,
+  HttpResponse,
+  HttpErrorResponse
 } from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {LoginService} from '../services/login.service';
-import {tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +19,26 @@ import {Router} from '@angular/router';
 export class TokenInterceptorService implements HttpInterceptor {
 
   constructor(
-    private auth: LoginService,
+    private auth: AuthService,
     private router: Router
   ) { }
 
-  config = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-
-      // Authorization: `Bearer ${this.auth.token}`
-    })
-  };
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = req.clone(this.config);
-    return next.handle(req).pipe(
-      tap(
-        (event: HttpEvent<any>) => {
+
+    const headersConfig = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+
+    const user = this.auth.getUser();
+
+    if (user) {
+      headersConfig['Authorization'] = `Bearer ${user.token}`;
+    }
+
+    const request = req.clone({ setHeaders: headersConfig });
+    return next.handle(request).pipe(
+      tap((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
             // do stuff with response if you want
             console.log('http success');
@@ -42,8 +48,7 @@ export class TokenInterceptorService implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
               // redirect to the login route
-              this.router.navigate(['/login']);
-              // or show a modal
+              this.router.navigate(['/login']).then(() => swal('Token caducado!', 'Por favor inicie sesión nuevamente!', 'error'));
             }
           }
         }

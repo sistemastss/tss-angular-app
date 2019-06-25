@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, Validators} from '@angular/forms';
 import { LoginService} from '../../services/login.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import swal from 'sweetalert';
+
 
 
 @Component({
@@ -12,59 +14,30 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  returnUrl;
-
-  form = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  });
+  form = this.fb.group({
+    email: ['', Validators.email],
+    password: '',
+  }, Validators.required);
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     public loginService: LoginService,
-    private route: ActivatedRoute,
-    public formBuilder: FormBuilder,
   ) {}
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit() {
-    /*const params = this.formGroup.value;
-    console.log(params);
-    this.login.login({
-      'crear': params.email,
-      'contrasena': params.contrasena
-    }).subscribe(
-      res => console.log(res),
-      err => console.log(err));
-    */
+    const credentials = this.form.value;
 
-    // this.onLogin.emit({'login': true});
-    /*const login = {
-      isLogin: true
-    };
-
-    localStorage.setItem('app', JSON.stringify(login));
-
-    this.goToSection('home');
-
-    window.location.reload();
-  }
-
-  goToSection(route) {
-    this.route.navigate([route]);
-  }*/
-
-    const user = this.form.get('username').value;
-    const password = this.form.get('password').value;
-
-    this.loginService.login(user, password).subscribe(
-      value => {
-        this.router.navigate([this.returnUrl]).then(() => window.location.reload());
-      },
-      error => console.log(error)
+    this.loginService.login(credentials).subscribe(
+      () => this.router.navigate(['/']),
+      () => swal(
+        'ocurrio un error!',
+        'Datos incorrectos o el usuario no existe!',
+        'error'
+      )
     );
   }
 }

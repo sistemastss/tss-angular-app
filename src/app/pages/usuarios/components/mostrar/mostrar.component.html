@@ -1,6 +1,8 @@
 <div class="card">
   <div class="card-header">
-    Usuarios creados
+    <h4>Usuarios creados</h4>
+    <button routerLink="/usuarios/crear" class="float-right btn btn-success"><i class="fa fa-plus"></i>
+    Crear Usuario</button>
   </div>
   <div class="card-body">
     <table class="table table-bordered">
@@ -21,10 +23,9 @@
         <td>{{ usuario.documento }}</td>
         <td>{{ usuario.ciudad }}</td>
         <td>{{ usuario.email }}</td>
-        <td>{{ usuario.rol_id }}</td>
+        <td>{{ usuario.rol.rol }}</td>
         <td>
           <button (click)="verDetalle(content, usuario)" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>Ver detalle</button>
-          <button (click)="editar(usuario)" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i>Editar</button>
         </td>
       </tr>
 
@@ -61,8 +62,13 @@
       </div>
       <div class="form-group">
         <label for="tipo_documento">tipo de documento</label>
-        <select formControlName="tipo_documento" id="tipo_documento" class="form-control">
-          <option value=""></option>
+        <select class="form-control" formControlName="tipo_documento" id="tipo_documento">
+          <option [selected]="true">Seleccione una opcion</option>
+          <option value="cc">C.C. Cedula</option>
+          <option value="ti">T.I. Tarjeta de identidad</option>
+          <option value="ce">C.E. Cedula de extrangeria</option>
+          <option value="pa">P.A. Pasaporte</option>
+          <option value="pep">P.E.P. Permiso especial de permanencia</option>
         </select>
       </div>
       <div class="form-group">
@@ -74,8 +80,11 @@
         <input formControlName="ciudad" type="text" class="form-control" id="ciudad" placeholder="Ingrese la ciudad de residencia">
       </div>
       <div class="form-group">
-        <label for="rol">Rol</label>
-        <select formControlName="rol_id" name="" id="rol" class="form-control"></select>
+        <label for="ciudad">Rol</label>
+        <select formControlName="rol_id" name="" id="rol" class="form-control">
+          <option [selected]="true">Seleccione una opcion</option>
+          <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.rol }}</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="email">Correo electronico</label>

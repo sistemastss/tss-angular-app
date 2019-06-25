@@ -6,7 +6,53 @@
           <h4 class="text-center">Perfil</h4>
         </div>
         <div class="card-body">
-          <fieldset disabled>
+          <fieldset [disabled]="true" [formGroup]="form">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre completo">
+            </div>
+            <div class="form-group">
+              <label for="direccion">Direccion</label>
+              <input formControlName="direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese la direccion de residencia">
+            </div>
+            <div class="form-group">
+              <label for="telefono">Telefono</label>
+              <input formControlName="telefono" type="number" class="form-control" id="telefono" placeholder="Ingrese el telefono">
+            </div>
+            <div class="form-group">
+              <label for="celular">Celular</label>
+              <input formControlName="celular" type="text" class="form-control" id="celular" placeholder="Ingrese el numero de celular">
+            </div>
+            <div class="form-group">
+              <label for="tipo_documento">tipo de documento</label>
+              <select class="form-control" formControlName="tipo_documento" id="tipo_documento">
+                <option [selected]="true">Seleccione una opcion</option>
+                <option value="cc">C.C. Cedula</option>
+                <option value="ti">T.I. Tarjeta de identidad</option>
+                <option value="ce">C.E. Cedula de extrangeria</option>
+                <option value="pa">P.A. Pasaporte</option>
+                <option value="pep">P.E.P. Permiso especial de permanencia</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="documento">Documento</label>
+              <input formControlName="documento" type="text" class="form-control" id="documento" placeholder="Ingrese el numero de documento de identificación">
+            </div>
+            <div class="form-group">
+              <label for="ciudad">Ciudad</label>
+              <input formControlName="ciudad" type="text" class="form-control" id="ciudad" placeholder="Ingrese la ciudad de residencia">
+            </div>
+            <div class="form-group">
+              <label for="rol">Rol</label>
+              <input formControlName="rol" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electronico</label>
+              <input formControlName="email" type="email" class="form-control" id="email" placeholder="Ingrese el correo electronico">
+            </div>
+          </fieldset>
+          <!--<fieldset disabled>
+
             <div class="form-group">
               <label for="formGroupExampleInput">Nombre / Razon social</label>
               <input type="text" class="form-control" id="formGroupExampleInput">
@@ -53,7 +99,7 @@
             </div>
 
 
-          </fieldset>
+          </fieldset>-->
         </div>
       </div>
     </div>

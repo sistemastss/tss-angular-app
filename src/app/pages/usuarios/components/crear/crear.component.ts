@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
+import { RolService } from '../../services/rol.service';
 
 @Component({
   selector: 'app-crear',
@@ -19,18 +20,23 @@ export class CrearComponent implements OnInit {
     ciudad  : '',
     rol_id  : '',
     email : '',
-    contrasena  : '',
+    password  : '',
   }, Validators.required);
+
+  roles = [];
 
   constructor(
     private fb: FormBuilder,
-    private usuarioService: UsuarioService
+    private rolService: RolService,
+    private usuarioService: UsuarioService,
   ) { }
 
   ngOnInit() {
+    this.rolService.get().subscribe((response: any) => this.roles = response);
   }
 
   crear() {
-    this.usuarioService.crear(this.form.value).subscribe(res => alert('Usuario creado con exito'));
+    this.usuarioService.crear(this.form.value)
+      .subscribe(res => swal('Exito!', 'Usuario creado exitosamente!', 'success'));
   }
 }

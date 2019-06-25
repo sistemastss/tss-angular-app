@@ -1,6 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,24 +7,9 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
 
-  currentRoute: string;
-
-  showNav = false;
-
-  constructor(
-    // private permissionsService: NgxPermissionsService,
-    private router: Router,
-    private route: ActivatedRoute,
-    // private loginService: LoginService,
-    private http: HttpClient
-  ) { this.getUrl(); }
-
-  ngOnInit(): void {
-    // const permissions = [this.loginService.rol['codigo']];
-    // this.permissionsService.loadPermissions(permissions);
+  constructor() {
   }
 
-  getUrl() {
-
+  ngOnInit(): void {
   }
 }

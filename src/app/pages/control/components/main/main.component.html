@@ -1,11 +1,21 @@
 <div class="container-fluid mt-3">
   <div class="card mb-3">
     <div class="card-header">
-      <i class="fas fa-table"></i>
-      Control de gestión
+      <i class="fas fa-table"></i> Control de gestión
     </div>
     <div class="card-body">
       <div class="table-responsive">
+        <ng-container [ngSwitch]="rol">
+          <app-cliente *ngSwitchCase="'CLI'"></app-cliente>
+          <app-freelance *ngSwitchCase="'FRCE'"></app-freelance>
+          <app-analista-esp *ngSwitchCase="'AESP'"></app-analista-esp>
+          <app-analista-esp *ngSwitchCase="'ADG'"></app-analista-esp>
+          <div *ngSwitchDefault class="alert alert-danger">
+            <p class="text-danger">
+              No tiene permisos para acceder a esta sección
+            </p>
+          </div>
+        </ng-container>
         <router-outlet></router-outlet>
       </div>
     </div>

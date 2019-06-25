@@ -25,21 +25,6 @@
             </button>
           </div>
         </div>
-        <div *ngIf="item.tipo_servicio === 'inv'" >
-          <div class="form-group text-center">
-            <div class="form-group text-center">
-              INVESTIGACION
-            </div>
-          </div>
-        </div>
-        <div *ngIf="item.tipo_servicio === 'pol'">
-          <div class="form-group text-center">
-            <button class="btn btn-info text-center" (click)="verDetalle(item)">
-              <i class="fa fa-eye"></i>
-              POLIGRAFIA
-            </button>
-          </div>
-        </div>
       </td>
       <td>
         <div class="form-group text-center">
@@ -50,31 +35,16 @@
         </div>
       </td>
       <td>
-
-        <div *ngIf="item.tipo_servicio == 'pol' || item.tipo_servicio == 'inv'">
-          <div [ngSwitch]="item.estado">
-            <span *ngSwitchCase="'proceso'" class="badge badge badge-warning">{{ item.estado }} </span>
-            <span *ngSwitchCase="'completado'" class="badge badge badge-warning"> {{ item.estado }} </span>
-            <span *ngSwitchCase="'alerta'" class="badge badge badge-danger" placement="top" ngbTooltip="Comunicarse con Tss">
-              {{ item.estado }}
-            </span>
-            <span *ngSwitchCase="'finalizado'" class="badge badge badge-success"> {{ item.estado }} </span>
-          </div>
+        <div [ngSwitch]="item.estado">
+          <button *ngSwitchCase="'proceso'" class="btn btn-sm btn-warning">
+            <i class="fa fas-exclamation"></i>
+            {{ item.estado }} </button>
+          <button *ngSwitchCase="'completado'" class="btn btn-sm btn-warning"> {{ item.estado }} </button>
+          <button *ngSwitchCase="'alerta'" class="btn btn-sm btn-danger" placement="top" ngbTooltip="Comunicarse con Tss">
+            {{ item.estado }}
+          </button>
+          <button *ngSwitchCase="'finalizado'" class="btn btn-sm btn-success"> {{ item.estado }} </button>
         </div>
-
-        <div *ngIf="item.tipo_servicio == 'esp'">
-          <div [ngSwitch]="item.estado">
-            <button *ngSwitchCase="'proceso'" class="btn btn-sm btn-warning">
-              <i class="fa fas-exclamation"></i>
-              {{ item.estado }} </button>
-            <button *ngSwitchCase="'completado'" class="btn btn-sm btn-warning"> {{ item.estado }} </button>
-            <button *ngSwitchCase="'alerta'" class="btn btn-sm btn-danger" placement="top" ngbTooltip="Comunicarse con Tss">
-              {{ item.estado }}
-            </button>
-            <button *ngSwitchCase="'finalizado'" class="btn btn-sm btn-success"> {{ item.estado }} </button>
-          </div>
-        </div>
-
       </td>
       <td>
 
@@ -97,7 +67,7 @@
         <div class="row">
           <div class="col-sm-6">
             <span>Actividad</span>
-          </div>
+          </div>  
           <div class="col-sm-6 text-right">
             <span>Estado</span>
           </div>
@@ -106,7 +76,12 @@
       <li class="list-group-item" *ngFor="let actividad of actividades">
         <div class="row">
           <div class="col-sm-6">
-            <a >{{ actividad.nombre }}</a>
+            <div *ngIf="actividad.codigo === 'VDS'; else sinLink;">
+                <button class="btn btn-link" (click)="open(mdFreelance, actividad)">{{ actividad.nombre }}</button>
+            </div>
+            <ng-template #sinLink>
+                <a >{{ actividad.nombre }}</a>
+            </ng-template>
           </div>
           <div class="col-sm-6 text-right">
             <div [ngSwitch]="actividad.estado">
@@ -141,3 +116,26 @@
     <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
   </div>
 </ng-template>
+
+
+<ng-template #mdFreelance let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Actividades Aplicadas</h5>
+    <button type="button" class="close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="freelance">Seleccionar freelance</label>
+      <select name="freelance" id="freelance" class="form-control" [(ngModel)]="freelanceModel.freelance_id">
+        <option [selected]="true">Seleccione una opcion</option>
+        <option *ngFor="let item of freelances" [value]="item.id">{{ item.nombre }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline-primary" [disabled]="freelanceModel.freelance_id == 0" (click)="asignarFreelance()">Asignar Visita domiciliaria</button>
+  </div>
+</ng-template>
+

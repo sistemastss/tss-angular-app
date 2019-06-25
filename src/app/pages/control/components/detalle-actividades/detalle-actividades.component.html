@@ -24,27 +24,45 @@
           </a>
         </div>
         <div class="col-sm-6 text-right">
-          <div [ngSwitch]="actividad.estado">
-            <div *ngSwitchCase="'cargado'">
-              <span class="badge badge-pill service-loaded"> {{ actividad.estado }} </span>
+          <div *ngIf="rol !== 'CLI'">
+            <div [ngSwitch]="actividad.estado">
+              <div *ngSwitchCase="'cargado'">
+                <span class="badge badge-pill service-loaded"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'asignado'">
+                <span class="badge badge-pill service-asigned"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'aceptado'">
+                <span class="badge badge-pill service-acepted"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'proceso'">
+                <span class="badge badge-pill service-process"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'completado'">
+                <span class="badge badge-pill service-finished"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'alerta'">
+                <span class="badge badge-pill  badge-danger"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'finalizado'">
+                <span class="badge badge-pill  badge-success"> {{ actividad.estado }} </span>
+              </div>
             </div>
-            <div *ngSwitchCase="'asignado'">
-              <span class="badge badge-pill service-asigned"> {{ actividad.estado }} </span>
-            </div>
-            <div *ngSwitchCase="'aceptado'">
-              <span class="badge badge-pill service-acepted"> {{ actividad.estado }} </span>
-            </div>
-            <div *ngSwitchCase="'proceso'">
-              <span class="badge badge-pill service-process"> {{ actividad.estado }} </span>
-            </div>
-            <div *ngSwitchCase="'completado'">
-              <span class="badge badge-pill service-finished"> {{ actividad.estado }} </span>
-            </div>
-            <div *ngSwitchCase="'alerta'">
-              <span class="badge badge-pill  badge-danger"> {{ actividad.estado }} </span>
-            </div>
-            <div *ngSwitchCase="'finalizado'">
-              <span class="badge badge-pill  badge-success"> {{ actividad.estado }} </span>
+          </div>
+          <div *ngIf="rol === 'CLI'">
+            <div [ngSwitch]="actividad.estado">
+              <div *ngSwitchCase="'cargado'">
+                <span class="badge badge-pill service-loaded"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'completado'">
+                <span class="badge badge-pill service-finished"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchCase="'alerta'">
+                <span class="badge badge-pill  badge-danger"> {{ actividad.estado }} </span>
+              </div>
+              <div *ngSwitchDefault>
+                <span class="badge badge-pill service-process"> Proceso </span>
+              </div>
             </div>
           </div>
         </div>

@@ -15,11 +15,21 @@ export class ProgramacionService {
     private helper: HelperService,
   ) { }
 
-  get() {
-    const url = this.helper.route('', 2);
+  get(vsdId) {
+    const url = this.helper.route(['vsd', 'programacion'], 2);
     return this.http.get(url).pipe(
       map((data: any) => data.data),
       catchError(() => EMPTY),
     );
+  }
+
+  guardar(vsdId, payload) {
+    const url = this.helper.route(['vsd', 'programacion'], vsdId);
+    return this.http.post(url, payload);
+  }
+
+  actualizar(programacionId, payload) {
+    const url = this.helper.route('programacion', programacionId);
+    return this.http.put(url, payload);
   }
 }

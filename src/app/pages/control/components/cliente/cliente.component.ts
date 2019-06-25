@@ -5,7 +5,9 @@ import { Store } from '@ngrx/store';
 import { ServicioState } from '../../store/states';
 import { getServicios } from '../../store/selectors';
 import { FetchServicios } from '../../store/actions/servicios.actions';
-import { DetalleServicioComponent } from '../detalle-servicio/detalle-servicio.component';
+import { ModalServicioComponent } from '../modal-servicio/modal-servicio.component';
+import { EspService } from 'src/app/pages/shared/services';
+import { DetalleActividadesComponent } from '../detalle-actividades/detalle-actividades.component';
 
 @Component({
   selector: 'app-cliente',
@@ -20,6 +22,7 @@ export class ClienteComponent implements OnInit {
     private store: Store<ServicioState>,
     private modalService: NgbModal,
     private helper: HelperService,
+    private espService: EspService,
   ) { }
 
   ngOnInit() {
@@ -34,11 +37,17 @@ export class ClienteComponent implements OnInit {
   }
 
   verDetalle(item: any) {
-    const modalRef = this.modalService.open(DetalleServicioComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(ModalServicioComponent, { size: 'lg' });
     modalRef.componentInstance.servicio = item;
   }
 
   verActividades(item: any) {
-    
+    this.espService.getActividades(item.id).subscribe(
+      response => {
+        const modalRef = this.modalService.open(DetalleActividadesComponent);
+        modalRef.componentInstance.actividades = response;
+      },
+      () => alert('Este servicio no tiene actividades')
+    );
   }
 }

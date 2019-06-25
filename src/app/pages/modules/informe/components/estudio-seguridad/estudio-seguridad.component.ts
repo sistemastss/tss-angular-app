@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { File } from '../../../../../@models/file.interface';
 import { HelperService } from '../../../../../services/helper.service';
 import { EstudioSeguridadService } from '../../services/informe/estudio-seguridad.service';
+import { VsdService } from '../../../../../services/vsd.service';
 
 @Component({
   selector: 'app-estudio-seguridad',
@@ -13,12 +14,13 @@ export class EstudioSeguridadComponent implements OnInit {
   servicio: any;
 
   data = {
-    fotoEvaluado: null,
-    logoCliente: null,
+    foto_evaluado: null,
+    logo_cliente: null,
   };
   dataLoaded = false;
 
   constructor(
+    private vsd: VsdService,
     private router: Router,
     private helper: HelperService,
     private estudioSeguridad: EstudioSeguridadService,
@@ -47,7 +49,7 @@ export class EstudioSeguridadComponent implements OnInit {
 
     const base64 = await this.helper.readFile(file);
 
-    this.data.fotoEvaluado = {
+    this.data.foto_evaluado = {
       file_name: file.name,
       blob: base64
     };
@@ -65,7 +67,7 @@ export class EstudioSeguridadComponent implements OnInit {
 
     const base64 = await this.helper.readFile(file);
 
-    this.data.logoCliente = {
+    this.data.logo_cliente = {
       file_name: file.name,
       blob: base64
     };
@@ -73,8 +75,11 @@ export class EstudioSeguridadComponent implements OnInit {
   }
 
   saveAll() {
-    this.estudioSeguridad.save(this.data, 1).subscribe(
-      response => console.log(response),
+    const vsdId = this.vsd.getVsd();
+    this.estudioSeguridad.save(this.data, vsdId).subscribe(
+      response => {
+        swal('Datos guardados con exito', '', 'success')
+      },
       error => console.log(error)
     );
   }

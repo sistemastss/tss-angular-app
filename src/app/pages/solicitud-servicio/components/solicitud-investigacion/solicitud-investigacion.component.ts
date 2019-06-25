@@ -56,11 +56,18 @@ export class SolicitudInvestigacionComponent implements OnInit {
   }
 
   async cargarArchivo(event, editar = false) {
+    const size = 3000000;
     const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
     const file = event.target.files[0];
 
     if (!allowedExtensions.test(file.name)) {
       alert('Archivo no valido');
+      event.target.value = '';
+      return;
+    }
+
+    if (file.size > size) {
+      alert('El archivo no debe superar los 3MB');
       event.target.value = '';
       return;
     }

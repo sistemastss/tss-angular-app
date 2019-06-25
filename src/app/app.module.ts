@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ActividadesService } from './services/actividades.service';
-import { NavBarModule} from './pages/nav-bar/nav-bar.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { MailServiceService } from './services/mail-service.service';
 import { StoreModule } from '@ngrx/store';
@@ -26,11 +25,10 @@ import { EffectsModule } from '@ngrx/effects';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NavBarModule,
     NgxPermissionsModule.forRoot(),
-    EffectsModule.forRoot([]),
-    // Specify your library as an import
+    //Ngrx
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [

@@ -38,7 +38,7 @@ export class ConsolidadoComponent implements OnInit {
     datosInforme                  : new FormGroup({
       encabezado              : new FormControl(false, Validators.required),
       fotoEval                : new FormControl(false, Validators.required),
-      logoCliente             : new FormControl(false, Validators.required),
+      logo_cliente             : new FormControl(false, Validators.required),
       nucleoFamiliar          : new FormControl(false, Validators.required),
       verificacionAcademica   : new FormControl(false, Validators.required),
       verificacionLaboral     : new FormControl(false, Validators.required),

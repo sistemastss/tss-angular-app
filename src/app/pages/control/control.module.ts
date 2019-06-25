@@ -11,13 +11,14 @@ import { RouterModule } from '@angular/router';
 import { ControlRoutingModule } from './control-routing.module';
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
-import { DetalleServicioComponent } from './components/detalle-servicio/detalle-servicio.component';
+import { ModalServicioComponent } from './components/modal-servicio/modal-servicio.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleActividadesComponent } from './components/detalle-actividades/detalle-actividades.component';
 import { ProgramacionComponent } from './components/freelance/programacion/programacion.component';
 import { SeguimientoComponent } from './components/freelance/seguimiento/seguimiento.component';
 import { ViaticosComponent } from './components/freelance/viaticos/viaticos.component';
+import { AdministradorComponent } from './components/administrador/administrador.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +27,12 @@ import { ViaticosComponent } from './components/freelance/viaticos/viaticos.comp
     FreelanceComponent,
     AnalistaEspComponent,
     FiltroComponent,
-    DetalleServicioComponent,
+    ModalServicioComponent,
     DetalleActividadesComponent,
     ProgramacionComponent,
     SeguimientoComponent,
     ViaticosComponent,
+    AdministradorComponent,
   ],
   imports: [
     NgbModule,
@@ -43,7 +45,7 @@ import { ViaticosComponent } from './components/freelance/viaticos/viaticos.comp
     ReactiveFormsModule
   ],
   entryComponents: [
-    DetalleServicioComponent,
+    ModalServicioComponent,
     DetalleActividadesComponent,
   ],
 })

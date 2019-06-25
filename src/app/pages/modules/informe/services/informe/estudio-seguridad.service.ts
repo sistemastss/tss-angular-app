@@ -13,13 +13,13 @@ export class EstudioSeguridadService {
   ) { }
 
   get(vsdId) {
-    const route = this.helper.route('informe/vsd',  vsdId);
+    const route = this.helper.route(['vsd', 'informe'],  vsdId);
     return this.http.get(route);
 
   }
 
   save(payload, vsdId) {
-    const route = this.helper.route('informe/vsd',  vsdId);
+    const route = this.helper.route(['vsd', 'informe'],  vsdId);
     return this.http.post(route, payload);
   }
 }
